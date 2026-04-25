@@ -1,18 +1,40 @@
 body {
-  display: flex;
-  justify-content: center;   /* 水平置中 */
-  align-items: center;       /* 垂直置中 */
-  height: 100vh;
   margin: 0;
-  background-color: #57a0e6;
+  height: 100vh;
+  background-color: #5aa4e8;
   color: white;
+  font-family: Arial, sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;   /* 讓內容上下排列 */
+  align-items: center;      /* 水平置中 */
+  gap: 20px;                /* 每個元素間距 */
+}
+
+h1 {
+  font-size: 48px;
+  margin: 0;
+}
+
+p {
+  font-size: 22px;
+  margin: 0;
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #43b84b;
   color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 10px;
-  font-size: 18px;
+  border-radius: 12px;
+  padding: 15px 28px;
+  font-size: 24px;
+  cursor: pointer;
 }
