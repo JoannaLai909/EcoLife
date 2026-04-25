@@ -56,7 +56,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 60px;
+  padding-left: 20px;
 }
 
 h1 {
@@ -96,9 +96,8 @@ button:hover {
 }
 
 .gacha-img {
-  width: 800px;
-  position: absolute;
-  left: 40px;
-  top: 45%;
-  transform: translateY(-50%);
+  width: 520px;
+  max-width: 90%;
+  height: auto;
+  position: static;
 }
