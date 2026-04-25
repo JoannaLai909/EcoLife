@@ -88,9 +88,9 @@ button:hover {
 }
 
 .gacha-img {
-  width: 600px;
+  width: 800px;
   position: absolute;
-  left: 80px;
+  left: 70px;
   top: 50%;
   transform: translateY(-50%);
 }
