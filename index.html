@@ -40,24 +40,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>EcoLife</title>
+  <title>EcoLife Simulator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="entrance-page">
+  <div class="entrance-page">   
+    <div class="wave-svg">
+        <svg viewBox="0 0 200 100" preserveAspectRatio="none">
+            <path d="M 100 0 Q 40 30 100 50 Q 160 70 100 100 L 0 100 L 0 0 Z" />
+        </svg>
+    </div>
+
     <div class="left-area">
-      <img class="gacha-img" src="image/B40559B2-7620-4976-BF33-F1A0011318EE.png">
+        <img src="image/B40559B2-7620-4976-BF33-F1A0011318EE.png" class="gacha-img">
     </div>
 
     <div class="right-area">
-      <h1>EcoLife<br>Simulator</h1>
+      <h1>
+        EcoLife <br>
+        Simulator
+      </h1>
+
       <p>Play and learn sustainability</p>
+
       <button id="startBtn">START!!!</button>
     </div>
-  </div>
 
+  </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
