@@ -43,19 +43,6 @@ body {
   justify-content: center;
 }
 
-.gacha-img {
-  width: 360px;
-  position: absolute;
-  left: 70px;
-  top: 35px;
-}
-
-.lottery-img {
-  width: 260px;
-  position: absolute;
-  right: 40px;
-  bottom: 70px;
-}
 
 .right-area {
   display: flex;
@@ -98,4 +85,12 @@ button {
 button:hover {
   transform: scale(1.05);
   background: #0f2d4d;
+}
+
+.gacha-img {
+  width: 350px;
+  position: absolute;
+  left: 80px;
+  top: 50%;
+  transform: translateY(-50%);
 }
