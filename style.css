@@ -1,8 +1,11 @@
 body {
-  background-color: #0f2a44;
+  display: flex;
+  justify-content: center;   /* 水平置中 */
+  align-items: center;       /* 垂直置中 */
+  height: 100vh;
+  margin: 0;
+  background-color: #57a0e6;
   color: white;
-  text-align: center;
-  font-family: Arial;
 }
 
 button {
