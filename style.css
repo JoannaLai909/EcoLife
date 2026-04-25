@@ -90,7 +90,7 @@ button:hover {
 .gacha-img {
   width: 800px;
   position: absolute;
-  left: 60px;
+  left: 40px;
   top: 45%;
   transform: translateY(-50%);
 }
