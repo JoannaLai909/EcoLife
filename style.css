@@ -1,40 +1,101 @@
-body {
-  margin: 0;
-  height: 100vh;
-  background-color: #5aa4e8;
-  color: white;
-  font-family: Arial, sans-serif;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+* {
+  box-sizing: border-box;
 }
 
-.container {
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.entrance-page {
+  width: 100vw;
+  height: 100vh;
+  background: #9ed8f2;
+  position: relative;
   display: flex;
-  flex-direction: column;   /* ⭐ 這行是關鍵 */
+}
+
+/* 左邊深藍區塊 */
+.entrance-page::before {
+  content: "";
+  position: absolute;
+  left: -120px;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background: #279bd3;
+  border-radius: 0 50% 50% 0;
+  z-index: 0;
+}
+
+.left-area,
+.right-area {
+  position: relative;
+  z-index: 1;
+  width: 50%;
+  height: 100%;
+}
+
+.left-area {
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  gap: 20px;
+}
+
+.gacha-img {
+  width: 360px;
+  position: absolute;
+  left: 70px;
+  top: 35px;
+}
+
+.lottery-img {
+  width: 260px;
+  position: absolute;
+  right: 40px;
+  bottom: 70px;
+}
+
+.right-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 40px;
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 72px;
+  line-height: 1.1;
   margin: 0;
+  color: #004aad;
+  font-weight: 900;
+  font-style: italic;
+  text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.15);
 }
 
 p {
-  font-size: 22px;
-  margin: 0;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: italic;
+  margin: 35px 0 70px;
 }
 
 button {
-  background-color: #0e56a7;
+  width: 230px;
+  padding: 18px 0;
+  background: #173e68;
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 15px 28px;
-  font-size: 24px;
+  border-radius: 14px;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: italic;
   cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #0f2d4d;
 }
