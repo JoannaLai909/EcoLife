@@ -91,6 +91,6 @@ button:hover {
   width: 800px;
   position: absolute;
   left: 60px;
-  top: 30%;
+  top: 45%;
   transform: translateY(-50%);
 }
