@@ -11,12 +11,12 @@ body {
 }
 
 .container {
-  text-align: center;
-
   display: flex;
-  flex-direction: column;   /* 讓內容上下排列 */
-  align-items: center;      /* 水平置中 */
-  gap: 20px;                /* 每個元素間距 */
+  flex-direction: column;   /* ⭐ 這行是關鍵 */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
 }
 
 h1 {
