@@ -99,5 +99,5 @@ button:hover {
   max-width: 90%;
   height: auto;
   position: static;
-  transform: translateY(-100px);
+  transform: translateY(-90px);
 }
