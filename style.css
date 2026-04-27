@@ -58,6 +58,16 @@ body {
   padding-left: 10px;
 }
 
+.title-line1 {
+  display: block;
+  transform: translateX(40px);  
+}
+
+.title-line2 {
+  display: block;
+  transform: translateX(-20px); 
+}
+
 h1 {
   font-size: 100px;
   line-height: 1.1;
