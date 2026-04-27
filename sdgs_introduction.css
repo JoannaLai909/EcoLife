@@ -179,24 +179,18 @@ body {
     backdrop-filter: blur(5px);
 }
 
-#nextBtn {
-  align-self: center;
-  margin-top: 18px;
+.next-btn {
   width: 190px;
-  padding: 16px 0;
+  height: 60px;
   border: none;
-  border-radius: 14px;
-  background: #004aad;
+  border-radius: 16px;
+  background: #0054bd;
   color: white;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  font-style: italic;
   cursor: pointer;
-  box-shadow: 0 6px 0 #00357c;
-}
-
-#nextBtn:hover {
-  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+  font-family: "Ahkio-Regular", sans-serif;
 }
 
 /* Responsive Adjustments */
