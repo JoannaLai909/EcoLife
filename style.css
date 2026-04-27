@@ -50,8 +50,6 @@ body {
 }
 
 
-
-
 .right-area {
   flex: 0.70;
   display: flex;
@@ -101,4 +99,5 @@ button:hover {
   max-width: 90%;
   height: auto;
   position: static;
+  transform: translateY(-80px);
 }
