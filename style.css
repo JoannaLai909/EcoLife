@@ -60,17 +60,17 @@ body {
 
 .title-line1 {
   display: block;
-  transform: translateX(-50px);  
+  transform: translateX(-60px);  
 }
 
 .title-line2 {
   display: block;
-  transform: translateX(40px); 
+  transform: translateX(30px); 
 }
 
 h1 {
   font-size: 100px;
-  line-height: 0.8;
+  line-height: 0.5;
   margin: 0;
   color: #004aad;
   font-weight: 900;
