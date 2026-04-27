@@ -107,9 +107,53 @@ button:hover {
 }
 
 .gacha-img {
-  width: 800px;
-  max-width: 90%;
+  width: 42vw;
+  max-width: 800px;
+  min-width: 350px;
   height: auto;
-  position: static;
-  transform: translateY(-85px);
+  transform: translateY(-50px);
+}
+
+@media (max-width: 900px) {
+  .entrance-page {
+    flex-direction: column;
+  }
+
+  .left-area,
+  .right-area {
+    flex: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .left-area {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .right-area {
+    padding-left: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .gacha-img {
+    width: 60%;
+    min-width: 250px;
+    transform: translateY(-20px);
+  }
+
+  h1 {
+    font-size: 42px;
+    line-height: 1;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  button {
+    width: 180px;
+    font-size: 20px;
+  }
 }
