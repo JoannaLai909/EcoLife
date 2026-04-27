@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How to Play</title>
 
+  <link href="https://db.onlinewebfonts.com/c/b7c46534c8a2d55edd840bf49383777d?family=Ahkio-Regular" rel="stylesheet">
+  <link rel="stylesheet" href="rules.css">
+</head>
+
+<body>
+
+<div class="rules-page">
+
+  <div class="blue-shape"></div>
+
+  <section class="left-content">
+    <h1>How to Play</h1>
+    <h2>Game Rules</h2>
+
+    <p>
+      Follow the steps to start your EcoLife journey.
+      Make choices, manage resources, and achieve your SDG goals.
+    </p>
+
+    <div class="decor-line">
+      <span></span>
+      ✦
+      <span></span>
+    </div>
+  </section>
+
+  <section class="right-content">
+
+    <div class="step-card blue">
+      <div class="num">01</div>
+      <div class="icon">🪪</div>
+      <div class="line"></div>
+      <div>
+        <h3>Enter Your Name</h3>
+        <p>Start by entering your name to begin your journey.</p>
+      </div>
+    </div>
+
+    <div class="step-card green">
+      <div class="num">02</div>
+      <div class="icon">🌍</div>
+      <div class="line"></div>
+      <div>
+        <h3>Choose Your Theme</h3>
+        <p>Select a sustainability theme and set your SDG goals.</p>
+      </div>
+    </div>
+
+    <div class="step-card purple">
+      <div class="num">03</div>
+      <div class="icon">💰</div>
+      <div class="line"></div>
+      <div>
+        <h3>Manage Resources</h3>
+        <p>You will have limited money and stamina each day.</p>
+      </div>
+    </div>
+
+    <div class="step-card orange">
+      <div class="num">04</div>
+      <div class="icon">🧭</div>
+      <div class="line"></div>
+      <div>
+        <h3>Make Decisions</h3>
+        <p>Your actions affect SDG progress, money, and stamina.</p>
+      </div>
+    </div>
+
+    <div class="step-card red">
+      <div class="num">05</div>
+      <div class="icon">🏆</div>
+      <div class="line"></div>
+      <div>
+        <h3>Reach the Ending</h3>
+        <p>Complete your goals and discover how your choices shape the world.</p>
+      </div>
+    </div>
+
+    <div class="start-area">
+      <h3>Ready to Start?</h3>
+      <input type="text" id="playerName" placeholder="Enter your name...">
+      <button class="next-btn" id="startBtn">START GAME!</button>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+document.getElementById("startBtn").addEventListener("click", function() {
+  const name = document.getElementById("playerName").value.trim();
+
+  if (name === "") {
+    alert("Please enter your name.");
+    return;
+  }
+
+  localStorage.setItem("username", name);
+
+  window.location.href = "page3.html";
+});
+</script>
+
+</body>
+</html>
