@@ -1,1 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SDGs Icons Interaction</title>
+    <link href="https://db.onlinewebfonts.com/c/b7c46534c8a2d55edd840bf49383777d?family=Ahkio-Regular" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            /* 全局套用 Ahkio-Regular 字體 */
+            font-family: 'Ahkio-Regular', sans-serif;
+            background: #77BEEE;
+            color: #0a2540;
+            padding: 2rem 1.5rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 4rem; /* Ahkio 字體通常較大，這裡調大一些 */
+            font-weight: normal;
+            background: linear-gradient(135deg, #1e3c72, #2b5f8a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .hero p {
+            font-size: 1.4rem;
+            color: #2c5575;
+            margin-top: 0.2rem;
+            letter-spacing: 1px;
+        }
+
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 180px));
+            justify-content: center;
+            gap: 2.5rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .sdg-icon {
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .sdg-icon:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .sdg-icon img {
+            width: 160px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .icon-label {
+            margin-top: 0.8rem;
+            font-size: 1.1rem;
+            color: #2c5575;
+            background: transparent;
+            display: inline-block;
+        }
+
+        /* Popup Styles */
+        .sdg-popup {
+            position: fixed;
+            z-index: 2000;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 0;
+            max-width: 350px;
+            width: max-content;
+            min-width: 260px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s;
+            pointer-events: auto;
+        }
+        .sdg-popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .popup-inner {
+            padding: 1.5rem;
+            position: relative;
+        }
+        .popup-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid #e9f0f5;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .popup-icon {
+            background: #eef2ff;
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .popup-icon img {
+            width: 42px;
+            height: auto;
+        }
+        .popup-title {
+            font-size: 1.6rem;
+            color: #0a2f44;
+            line-height: 1;
+        }
+        .popup-sub {
+            font-size: 1.1rem;
+            color: #4f7ea0;
+            margin-top: 4px;
+        }
+        .popup-desc {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            color: #1f3e54;
+        }
+        .close-popup {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f0f4f9;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            color: #3a6d8c;
+            font-family: Arial, sans-serif; /* 叉叉符號用系統字體避免跑版 */
+        }
+
+        .info-tip {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: #1e3c72;
+            background: rgba(255, 255, 255, 0.5);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 700px) {
+            .sdg-grid {
+                gap: 1.2rem;
+                grid-template-columns: repeat(auto-fill, minmax(100px, 110px));
+            }
+            .sdg-icon img {
+                width: 100px;
+            }
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <h1>SDGs</h1>
+        <p>SUSTAINABLE DEVELOPMENT GOALS</p>
+    </div>
+
+    <div class="sdg-grid" id="sdgGrid"></div>
+
+    <div class="info-tip">
+        ✨ Tap any icon to see details
+    </div>
+</div>
+
+<div id="sdgPopup" class="sdg-popup">
+    <div class="popup-inner">
+        <button class="close-popup" id="closePopupBtn">✕</button>
+        <div class="popup-header">
+            <div class="popup-icon" id="popupIcon">
+                <img src="" alt="" id="popupImg">
+            </div>
+            <div>
+                <div class="popup-title" id="popupTitle"></div>
+                <div class="popup-sub" id="popupSub"></div>
+            </div>
+        </div>
+        <div class="popup-desc" id="popupDesc"></div>
+    </div>
+</div>
+
+<script>
+    // 數據已全部更新為英文
+    const sdgData = [
+        { id: 1, title: "No Poverty", description: "End poverty in all its forms everywhere. Ensure equal rights to economic resources, basic services, and social protection.", iconFile: "IMAGE/goal1.png" },
+        { id: 2, title: "Zero Hunger", description: "End hunger, achieve food security and improved nutrition, and promote sustainable agriculture for all.", iconFile: "IMAGE/goal2.png" },
+        { id: 3, title: "Good Health and Well-Being", description: "Ensure healthy lives and promote well-being for all at all ages, reducing mortality and ending epidemics.", iconFile: "IMAGE/goal3.png" },
+        { id: 4, title: "Quality Education", description: "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.", iconFile: "IMAGE/goal4.png" },
+        { id: 5, title: "Gender Equality", description: "Achieve gender equality and empower all women and girls by eliminating discrimination and violence.", iconFile: "IMAGE/goal5.png" },
+        { id: 6, title: "Clean Water and Sanitation", description: "Ensure availability and sustainable management of water and sanitation for all people worldwide.", iconFile: "IMAGE/goal6.png" },
+        { id: 7, title: "Affordable and Clean Energy", description: "Ensure access to affordable, reliable, sustainable, and modern energy for all globally.", iconFile: "IMAGE/goal7.png" },
+        { id: 8, title: "Decent Work and Economic Growth", description: "Promote sustained, inclusive, and sustainable economic growth, full employment, and decent work for all.", iconFile: "IMAGE/goal8.png" },
+        { id: 9, title: "Industry, Innovation and Infrastructure", description: "Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.", iconFile: "IMAGE/goal9.png" },
+        { id: 10, title: "Reduced Inequalities", description: "Reduce inequality within and among countries by promoting social, economic, and political inclusion.", iconFile: "IMAGE/goal10.png" },
+        { id: 11, title: "Sustainable Cities and Communities", description: "Make cities and human settlements inclusive, safe, resilient, and sustainable for all inhabitants.", iconFile: "IMAGE/goal11.png" },
+        { id: 12, title: "Responsible Consumption and Production", description: "Ensure sustainable consumption and production patterns through efficient resource use and waste reduction.", iconFile: "IMAGE/goal12.png" },
+        { id: 13, title: "Climate Action", description: "Take urgent action to combat climate change and its impacts by strengthening resilience and awareness.", iconFile: "IMAGE/goal13.png" },
+        { id: 14, title: "Life Below Water", description: "Conserve and sustainably use the oceans, seas, and marine resources for sustainable development.", iconFile: "IMAGE/goal14.png" },
+        { id: 15, title: "Life on Land", description: "Protect, restore, and promote sustainable use of terrestrial ecosystems and halt biodiversity loss.", iconFile: "IMAGE/goal15.png" },
+        { id: 16, title: "Peace, Justice and Strong Institutions", description: "Promote peaceful and inclusive societies, provide access to justice, and build effective institutions.", iconFile: "IMAGE/goal16.png" },
+        { id: 17, title: "Partnerships for the Goals", description: "Strengthen the means of implementation and revitalize the global partnership for sustainable development.", iconFile: "IMAGE/goal17.png" }
+    ];
+
+    const gridContainer = document.getElementById('sdgGrid');
+    const popup = document.getElementById('sdgPopup');
+    const popupImg = document.getElementById('popupImg');
+    const popupTitleElem = document.getElementById('popupTitle');
+    const popupSubElem = document.getElementById('popupSub');
+    const popupDescElem = document.getElementById('popupDesc');
+    const closeBtn = document.getElementById('closePopupBtn');
+
+    function updatePopupContent(goal) {
+        popupImg.src = goal.iconFile;
+        popupImg.alt = goal.title;
+        popupTitleElem.innerText = `Goal ${goal.id}`;
+        popupSubElem.innerText = goal.title;
+        popupDescElem.innerText = goal.description;
+    }
+
+    function showPopupNearElement(element, goalData) {
+        updatePopupContent(goalData);
+        const rect = element.getBoundingClientRect();
+        
+        let leftPos = rect.right + 20;
+        let topPos = rect.top + (rect.height / 2) - (popup.offsetHeight / 2);
+
+        if (leftPos + 350 > window.innerWidth) {
+            leftPos = rect.left - 370;
+        }
+        if (leftPos < 10) leftPos = (window.innerWidth - popup.offsetWidth) / 2;
+        if (topPos < 10) topPos = 10;
+        
+        popup.style.left = leftPos + 'px';
+        popup.style.top = topPos + 'px';
+        popup.classList.add('active');
+    }
+
+    function buildIconGrid() {
+        gridContainer.innerHTML = '';
+        sdgData.forEach(goal => {
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = 'sdg-icon';
+            
+            const img = document.createElement('img');
+            img.src = goal.iconFile;
+            img.alt = goal.title;
+
+            const labelSpan = document.createElement('div');
+            labelSpan.className = 'icon-label';
+            labelSpan.innerText = `Goal ${goal.id}`;
+            
+            iconWrapper.appendChild(img);
+            iconWrapper.appendChild(labelSpan);
+
+            iconWrapper.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showPopupNearElement(iconWrapper, goal);
+            });
+
+            gridContainer.appendChild(iconWrapper);
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.sdg-popup') && !e.target.closest('.sdg-icon')) {
+            popup.classList.remove('active');
+        }
+    });
+
+    closeBtn.addEventListener('click', () => popup.classList.remove('active'));
+    window.addEventListener('resize', () => popup.classList.remove('active'));
+
+    buildIconGrid();
+</script>
+</body>
+</html>
