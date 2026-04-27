@@ -7,6 +7,7 @@ body {
   font-family: "Ahkio-Regular", Arial, sans-serif;
   background: #dff4ff;
   overflow-x: hidden;
+  letter-spacing: 2.5px;
 }
 
 .purpose-page {
@@ -52,6 +53,7 @@ body {
   font-style: italic;
   font-weight: 900;
   color: #004aad;
+  text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.15);
 }
 
 .left-panel h2 {
