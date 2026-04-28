@@ -27,7 +27,7 @@ body {
 .left-content {
   width: 40%;
   z-index: 1;
-  padding-left: 140px;
+  padding-left: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
