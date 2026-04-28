@@ -84,6 +84,7 @@ body {
   color: #004aad;
   font-family: "Ahkio-Regular", sans-serif;
   margin: 0 0 30px;
+  align-items: center;
 }
 
 .step-card {
