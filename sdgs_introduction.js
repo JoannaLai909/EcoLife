@@ -9,7 +9,7 @@ window.onscroll = function() {
     button.style.display = "none"; // 隱藏按鈕
   }
 };
-
+}
 document.getElementById("nextBtn").addEventListener("click", function () {
   window.location.href = "purpose.html";
 });
