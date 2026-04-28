@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SDGs Interactive Map</title>
+    <link href="https://db.onlinewebfonts.com/c/b7c46534c8a2d55edd840bf49383777d?family=Ahkio-Regular" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="container">
+    <div class="hero">
+        <h1>SDGs</h1>
+        <p>SUSTAINABLE DEVELOPMENT GOALS</p>
+        <button class="cta-button" onclick="document.getElementById('sdgGrid').scrollIntoView({behavior: 'smooth'})">
+            Explore the Goals
+        </button>
+    </div>
+
+    <div class="sdg-grid" id="sdgGrid"></div>
+
+    <div class="info-tip">
+        ✨ Tap any icon to see details
+    </div>
+</div>
+
+<div id="sdgPopup" class="sdg-popup">
+    <div class="popup-inner">
+        <button class="close-popup" id="closePopupBtn">✕</button>
+        <div class="popup-header">
+            <div class="popup-icon" id="popupIcon">
+                <img src="" alt="" id="popupImg">
+            </div>
+            <div>
+                <div class="popup-title" id="popupTitle"></div>
+                <div class="popup-sub" id="popupSub"></div>
+            </div>
+        </div>
+        <div class="popup-desc" id="popupDesc"></div>
+    </div>
+</div>
+
+<button id="nextBtn" onclick="window.location.href='purpose.html'">
+    NEXT 
+</button>
+
+<script>
+    const sdgData = [
+        { id: 1, title: "No Poverty", description: "End poverty in all its forms everywhere. Ensure equal rights to economic resources, basic services, and social protection.", iconFile: "IMAGE/goal1.png" },
+        { id: 2, title: "Zero Hunger", description: "End hunger, achieve food security and improved nutrition, and promote sustainable agriculture for all.", iconFile: "IMAGE/goal2.png" },
+        { id: 3, title: "Good Health and Well-Being", description: "Ensure healthy lives and promote well-being for all at all ages, reducing mortality and ending epidemics.", iconFile: "IMAGE/goal3.png" },
+        { id: 4, title: "Quality Education", description: "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.", iconFile: "IMAGE/goal4.png" },
+        { id: 5, title: "Gender Equality", description: "Achieve gender equality and empower all women and girls by eliminating discrimination and violence.", iconFile: "IMAGE/goal5.png" },
+        { id: 6, title: "Clean Water and Sanitation", description: "Ensure availability and sustainable management of water and sanitation for all people worldwide.", iconFile: "IMAGE/goal6.png" },
+        { id: 7, title: "Affordable and Clean Energy", description: "Ensure access to affordable, reliable, sustainable, and modern energy for all globally.", iconFile: "IMAGE/goal7.png" },
+        { id: 8, title: "Decent Work and Economic Growth", description: "Promote sustained, inclusive, and sustainable economic growth, full employment, and decent work for all.", iconFile: "IMAGE/goal8.png" },
+        { id: 9, title: "Industry, Innovation and Infrastructure", description: "Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.", iconFile: "IMAGE/goal9.png" },
+        { id: 10, title: "Reduced Inequalities", description: "Reduce inequality within and among countries by promoting social, economic, and political inclusion.", iconFile: "IMAGE/goal10.png" },
+        { id: 11, title: "Sustainable Cities and Communities", description: "Make cities and human settlements inclusive, safe, resilient, and sustainable for all inhabitants.", iconFile: "IMAGE/goal11.png" },
+        { id: 12, title: "Responsible Consumption and Production", description: "Ensure sustainable consumption and production patterns through efficient resource use and waste reduction.", iconFile: "IMAGE/goal12.png" },
+        { id: 13, title: "Climate Action", description: "Take urgent action to combat climate change and its impacts by strengthening resilience and awareness.", iconFile: "IMAGE/goal13.png" },
+        { id: 14, title: "Life Below Water", description: "Conserve and sustainably use the oceans, seas, and marine resources for sustainable development.", iconFile: "IMAGE/goal14.png" },
+        { id: 15, title: "Life on Land", description: "Protect, restore, and promote sustainable use of terrestrial ecosystems and halt biodiversity loss.", iconFile: "IMAGE/goal15.png" },
+        { id: 16, title: "Peace, Justice and Strong Institutions", description: "Promote peaceful and inclusive societies, provide access to justice, and build effective institutions.", iconFile: "IMAGE/goal16.png" },
+        { id: 17, title: "Partnerships for the Goals", description: "Strengthen the means of implementation and revitalize the global partnership for sustainable development.", iconFile: "IMAGE/goal17.png" }
+    ];
+
+    const gridContainer = document.getElementById('sdgGrid');
+    const popup = document.getElementById('sdgPopup');
+    const popupImg = document.getElementById('popupImg');
+    const popupTitleElem = document.getElementById('popupTitle');
+    const popupSubElem = document.getElementById('popupSub');
+    const popupDescElem = document.getElementById('popupDesc');
+    const closeBtn = document.getElementById('closePopupBtn');
+
+    function updatePopupContent(goal) {
+        popupImg.src = goal.iconFile;
+        popupImg.alt = goal.title;
+        popupTitleElem.innerText = `Goal ${goal.id}`;
+        popupSubElem.innerText = goal.title;
+        popupDescElem.innerText = goal.description;
+    }
+
+    function showPopupNearElement(element, goalData) {
+        updatePopupContent(goalData);
+        const rect = element.getBoundingClientRect();
+        let leftPos = rect.right + 20;
+        let topPos = rect.top + (rect.height / 2) - (popup.offsetHeight / 2);
+
+        if (leftPos + 350 > window.innerWidth) {
+            leftPos = rect.left - 370;
+        }
+        if (leftPos < 10) leftPos = (window.innerWidth - popup.offsetWidth) / 2;
+        if (topPos < 10) topPos = 10;
+        
+        popup.style.left = leftPos + 'px';
+        popup.style.top = topPos + 'px';
+        popup.classList.add('active');
+    }
+
+    function buildIconGrid() {
+        gridContainer.innerHTML = '';
+        sdgData.forEach(goal => {
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = 'sdg-icon';
+            const img = document.createElement('img');
+            img.src = goal.iconFile;
+            img.alt = goal.title;
+            const labelSpan = document.createElement('div');
+            labelSpan.className = 'icon-label';
+            labelSpan.innerText = `Goal ${goal.id}`;
+            iconWrapper.appendChild(img);
+            iconWrapper.appendChild(labelSpan);
+            iconWrapper.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showPopupNearElement(iconWrapper, goal);
+            });
+            gridContainer.appendChild(iconWrapper);
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.sdg-popup') && !e.target.closest('.sdg-icon')) {
+            popup.classList.remove('active');
+        }
+    });
+
+    closeBtn.addEventListener('click', () => popup.classList.remove('active'));
+    window.addEventListener('resize', () => popup.classList.remove('active'));
+    buildIconGrid();
+</script>
+</body>
+</html>
