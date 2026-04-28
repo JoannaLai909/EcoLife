@@ -20,11 +20,12 @@ body {
   left: -320px;
   top: -80px;
   width: 900px;
-  height: calc(100% + 160px); 
-  min-height: 100vh; 
+  height: 150%; 
+  min-height: 120vh; 
   background: #2fa1d8;
   border-radius: 50%;
   z-index: 0;
+  transform: scaleY(1.1); 
   transform-origin: top;
 }
 
