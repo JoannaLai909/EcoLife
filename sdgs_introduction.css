@@ -193,8 +193,8 @@ body {
 /* --- THE NEXT BUTTON STYLE --- */
 #nextBtn {
   position: fixed;
-  bottom: 100px;
-  right: 20px;
+  bottom: 120px;
+  right: 25px;
   width: 180px;
   padding: 16px 0;
   background: #004aad;
