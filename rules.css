@@ -94,6 +94,11 @@ body {
   box-shadow: 0 8px 18px rgba(0,0,0,0.08);
 }
 
+.step-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
 .num {
   width: 52px;
   height: 52px;
