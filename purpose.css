@@ -171,7 +171,7 @@ body {
   color: white;
   font-size: 28px;
   font-weight: bold;
-  font-style: italic;
+  font-family: "Ahkio-Regular", sans-serif;
   cursor: pointer;
   box-shadow: 0 6px 0 #00357c;
 }
