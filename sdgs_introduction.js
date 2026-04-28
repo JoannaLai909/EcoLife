@@ -1,7 +1,7 @@
 // 當頁面滾動時觸發
 window.onscroll = function() {
   let button = document.getElementById("nextBtn");
-  if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
+  if (document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
     button.style.display = "block"; // 顯示按鈕
   } else {
     button.style.display = "none"; // 隱藏按鈕
