@@ -12,6 +12,7 @@ body {
   min-height: 100vh;   
   position: relative;
   display: flex;
+  overflow: hidden; 
 }
 
 .blue-shape {
@@ -19,10 +20,12 @@ body {
   left: -320px;
   top: -80px;
   width: 900px;
-  height: 100%;
+  height: calc(100% + 160px); 
+  min-height: 100vh; 
   background: #2fa1d8;
   border-radius: 50%;
   z-index: 0;
+  transform-origin: top;
 }
 
 .left-content {
@@ -243,5 +246,127 @@ body {
 #startBtn:active {
   transform: translateY(3px) scale(1.02);
   box-shadow: 0 3px 0 #00357c;
+}
+
+
+@media (max-width: 1024px) {
+  .left-content {
+    padding-left: 50px;
+  }
+  .left-content h1 {
+    font-size: 72px;
+  }
+  .right-content {
+    padding-right: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rules-page {
+    flex-direction: column; 
+    overflow-x: hidden;
+  }
+
+  .blue-shape {
+   
+    width: 150%;
+    height: 400px;
+    left: -25%;
+    top: -150px;
+    border-radius: 0 0 50% 50%;
+  }
+
+  .left-content {
+    width: 100%;
+    padding: 60px 30px 20px;
+    align-items: center; 
+    text-align: center;
+  }
+
+  .left-content h1 {
+    font-size: 60px;
+    margin-bottom: 15px;
+  }
+
+  .left-content h2 {
+    font-size: 32px;
+  }
+
+  .left-content p {
+    width: 100%; 
+    font-size: 20px;
+  }
+
+  .decor-line {
+    display: none; 
+  }
+
+  .right-content {
+    width: 100%;
+    padding: 20px 20px 80px;
+  }
+
+  
+  .step-card {
+    grid-template-columns: 50px 60px 2px 1fr; 
+    padding: 0 15px;
+    height: auto;
+    min-height: 90px;
+    padding: 15px;
+  }
+
+  .num {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .icon {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }
+
+  .step-card h3 {
+    font-size: 20px;
+    margin-left: 15px;
+  }
+
+  .step-card p {
+    font-size: 16px;
+    margin-left: 15px;
+  }
+
+  .divider-text {
+    font-size: 24px;
+  }
+
+  #playerName {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  #startBtn {
+    width: 100%;
+    max-width: 220px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 375px) {
+  .left-content h1 {
+    font-size: 48px;
+  }
+  .step-card {
+    grid-template-columns: 1fr; 
+    justify-items: center;
+    text-align: center;
+  }
+  .line {
+    display: none; 
+  }
+  .step-card h3, .step-card p {
+    margin-left: 0;
+  }
 }
 
