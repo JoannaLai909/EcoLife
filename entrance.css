@@ -98,7 +98,7 @@ button {
   border-radius: 14px;
   font-size: 30px;
   font-weight: bold;
-  font-style: italic;
+  font-family: "Ahkio-Regular", sans-serif;
   cursor: pointer;
 }
 
