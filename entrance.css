@@ -115,13 +115,12 @@ button:active {
 }
 
 .gacha-img {
-  width: 80%; 
-  max-width: 800px;
-  min-width: 350px;
-  height: auto;
-  margin: 0 auto; 
+  width: 100%; 
+  max-width: 800px;  
+  height: auto;  
+  object-fit: contain; 
   display: block;
-
+  margin: 0 auto;  
 }
 
 @media (max-width: 900px) {
