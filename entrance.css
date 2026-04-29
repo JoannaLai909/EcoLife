@@ -115,17 +115,18 @@ button:active {
 }
 
 .gacha-img {
-  width: 80%;
+  width: 80%; 
   max-width: 800px;
   min-width: 350px;
   height: auto;
-  transform: translateY(-50px); 
-}
+  margin: 0 auto; 
+  display: block;
 
+}
 
 @media (max-width: 900px) {
   .entrance-page {
-    flex-direction: column;
+    flex-direction: column; 
     height: auto;
     min-height: 100vh;
   }
@@ -140,13 +141,14 @@ button:active {
 
   .left-area,
   .right-area {
-    flex: 1;
+    flex: 1; 
   }
 
   .gacha-img {
-    width: 90%;
-    min-width: unset;
-    transform: translateY(0); 
+    width: 90%; 
+    max-width: 100%; 
+    height: auto;
+    transform: none; 
   }
 
   .title-line1, 
@@ -177,7 +179,6 @@ button:active {
     margin-bottom: 50px; 
   }
 }
-
 
 @media (max-width: 380px) {
   h1 {
