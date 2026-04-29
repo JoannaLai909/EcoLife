@@ -115,14 +115,14 @@ button:active {
 }
 
 .gacha-img {
-  width: 80%; /* 調整圖片大小，確保它在手機畫面中適應 */
+  width: 80%;
   max-width: 800px;
   min-width: 350px;
   height: auto;
-  transform: translateY(-50px);  /* 可根據需要微調 */
+  transform: translateY(-50px); 
 }
 
-/* 手機版佈局 */
+
 @media (max-width: 900px) {
   .entrance-page {
     flex-direction: column;
@@ -146,7 +146,7 @@ button:active {
   .gacha-img {
     width: 90%;
     min-width: unset;
-    transform: translateY(0); /* 改成居中顯示 */
+    transform: translateY(0); 
   }
 
   .title-line1, 
@@ -178,7 +178,7 @@ button:active {
   }
 }
 
-/* 手機螢幕尺寸小於 380px */
+
 @media (max-width: 380px) {
   h1 {
     font-size: 42px;
