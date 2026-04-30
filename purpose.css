@@ -186,18 +186,66 @@ body {
   transform: scale(1.05);
 }
 
-/* 響應式 */
-@media (max-width: 900px) {
+/* 平板版 */
+@media (max-width: 1200px) {
   .purpose-page {
-    flex-direction: column;
+    overflow-x: hidden;
   }
 
-  .left-panel,
+  .left-panel {
+    width: 40%;
+    padding-left: 70px;
+  }
+
+  .left-panel h1 {
+    font-size: 70px;
+  }
+
+  .left-panel h2 {
+    font-size: 26px;
+  }
+
+  .left-panel p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
   .right-panel {
-    width: 100%;
-    padding: 40px;
-    text-align: center;
-    align-items: center;
+    width: 60%;
+    padding: 40px 50px 40px 20px;
+  }
+
+  .card {
+    padding: 20px 24px;
+    gap: 18px;
+  }
+
+  .card h3 {
+    font-size: 24px;
+  }
+
+  .card p {
+    font-size: 16px;
+  }
+
+  .icon {
+    min-width: 70px;
+    height: 70px;
+    font-size: 34px;
+  }
+
+  .num {
+    min-width: 52px;
+    height: 52px;
+    font-size: 18px;
+  }
+}
+
+/* 手機版 */
+@media (max-width: 768px) {
+  .purpose-page {
+    flex-direction: column;
+    overflow: visible;
   }
 
   .purpose-page::before {
@@ -207,16 +255,46 @@ body {
     top: -120px;
   }
 
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    padding: 40px 28px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .left-panel {
+    justify-content: flex-start;
+  }
+
   .left-panel h1 {
     font-size: 56px;
+  }
+
+  .left-panel h2 {
+    font-size: 24px;
+  }
+
+  .left-panel p {
+    font-size: 17px;
+  }
+
+  .right-panel {
+    padding-top: 10px;
+  }
+
+  .you-will {
+    margin: 0 0 20px 0;
+    font-size: 28px;
   }
 
   .card {
     flex-direction: column;
     text-align: center;
+    width: 100%;
   }
 
-  .right-panel {
-    padding: 20px 30px 60px;
+  #nextBtn {
+    margin-bottom: 40px;
   }
 }
