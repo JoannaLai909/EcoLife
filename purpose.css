@@ -241,6 +241,57 @@ body {
   }
 }
 
+/* 平板版：iPad 橫向也會吃到 */
+@media (max-width: 1400px) {
+  .left-panel {
+    width: 42%;
+    padding-left: 80px;
+  }
+
+  .right-panel {
+    width: 58%;
+    padding: 40px 70px 40px 20px;
+  }
+
+  .left-panel h1 {
+    font-size: 70px;
+  }
+
+  .left-panel h2 {
+    font-size: 26px;
+  }
+
+  .left-panel p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .card {
+    padding: 20px 24px;
+    gap: 18px;
+  }
+
+  .card h3 {
+    font-size: 24px;
+  }
+
+  .card p {
+    font-size: 16px;
+  }
+
+  .icon {
+    min-width: 70px;
+    height: 70px;
+    font-size: 34px;
+  }
+
+  .num {
+    min-width: 52px;
+    height: 52px;
+    font-size: 18px;
+  }
+}
+
 /* 手機版 */
 @media (max-width: 768px) {
   .purpose-page {
@@ -261,10 +312,6 @@ body {
     padding: 40px 28px;
     text-align: center;
     align-items: center;
-  }
-
-  .left-panel {
-    justify-content: flex-start;
   }
 
   .left-panel h1 {
@@ -292,9 +339,5 @@ body {
     flex-direction: column;
     text-align: center;
     width: 100%;
-  }
-
-  #nextBtn {
-    margin-bottom: 40px;
   }
 }
