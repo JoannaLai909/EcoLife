@@ -1,3 +1,3 @@
 document.getElementById("startBtn").addEventListener("click", function() {
-  window.location.href = "sdgs_introduction.html";
+  window.location.href = "rules.html";
 });
