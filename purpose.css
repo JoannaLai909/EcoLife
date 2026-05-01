@@ -186,37 +186,66 @@ body {
   transform: scale(1.05);
 }
 
-/* 響應式 */
-@media (max-width: 900px) {
+/* 平板 + 手機：改成上下排列 */
+@media (max-width: 1400px) {
   .purpose-page {
     flex-direction: column;
+    overflow: visible;
+  }
+
+  .purpose-page::before {
+    width: 600px;
+    height: 600px;
+    left: -280px;
+    top: -180px;
   }
 
   .left-panel,
   .right-panel {
     width: 100%;
-    padding: 40px;
+    padding: 40px 80px;
     text-align: center;
     align-items: center;
   }
 
-  .purpose-page::before {
-    width: 420px;
-    height: 420px;
-    left: -220px;
-    top: -120px;
+  .left-panel {
+    justify-content: flex-start;
+    padding-top: 70px;
   }
 
   .left-panel h1 {
-    font-size: 56px;
+    font-size: 72px;
   }
 
-  .card {
-    flex-direction: column;
-    text-align: center;
+  .left-panel h2 {
+    font-size: 30px;
+  }
+
+  .left-panel p {
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .decor-line {
+    justify-content: center;
   }
 
   .right-panel {
-    padding: 20px 30px 60px;
+    padding-top: 10px;
+    padding-bottom: 60px;
+  }
+
+  .you-will {
+    margin: 0 0 25px 0;
+    font-size: 34px;
+  }
+
+  .card {
+    width: 85%;
+    max-width: 760px;
+  }
+
+  #nextBtn {
+    margin-top: 25px;
   }
 }
