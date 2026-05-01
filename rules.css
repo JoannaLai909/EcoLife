@@ -17,16 +17,65 @@ body {
 
 .blue-shape {
   position: absolute;
-  left: -320px;
-  top: -80px;
-  width: 900px;
-  height: 150%; 
-  min-height: 120vh; 
-  background: #2fa1d8;
+  left: -300px;
+  top: -100px;
+  width: 800px;
+  height: 130%;
+
+  background: radial-gradient(circle at 30% 50%, #2fa1d8, #6ec6e8);
   border-radius: 50%;
+  opacity: 0.9;
+
   z-index: 0;
-  transform: scaleY(1.1); 
-  transform-origin: top;
+}
+
+.blue-shape::after {
+  content: "";
+  position: absolute;
+  left: 120px;
+  top: 80px;
+  width: 600px;
+  height: 100%;
+
+  background: radial-gradient(circle, #1c7fb3, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.45;
+}
+
+.bg-dots {
+  position: absolute;
+  top: 18%;
+  left: 18%;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.65;
+  z-index: 0;
+}
+
+.bg-dots::before {
+  content: "";
+  position: absolute;
+  top: 90px;
+  left: 180px;
+  width: 9px;
+  height: 9px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.45;
+}
+
+.bg-dots::after {
+  content: "";
+  position: absolute;
+  top: 220px;
+  left: 60px;
+  width: 11px;
+  height: 11px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.35;
 }
 
 .left-content {
@@ -100,11 +149,12 @@ body {
   padding: 0 35px;
   box-sizing: border-box;
   box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
 }
 
-.step-card:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+.step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
 }
 
 .num {
@@ -132,7 +182,7 @@ body {
 .line {
   width: 3px;
   height: 70px;
-  background: #d8eef9;
+  background: linear-gradient(to bottom, #d8eef9, #2fa1d8);
   border-radius: 10px;
 }
 
