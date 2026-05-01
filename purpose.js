@@ -1,3 +1,3 @@
 document.getElementById("nextBtn").addEventListener("click", function () {
-  window.location.href = "rules.html";
+  window.location.href = "entrance.html";
 });
