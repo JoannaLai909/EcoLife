@@ -127,9 +127,14 @@ p {
 .info-section {
   min-height: 100vh;
   padding: 120px 10%;
-  background: #dff5ff;
+  background: linear-gradient(
+    to bottom,
+    #9ed8f2 0%,
+    #eaf7ff 100%
+  );
   text-align: center;
 }
+
 
 #purpose {
   background: #eaf7ff;
