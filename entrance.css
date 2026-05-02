@@ -19,7 +19,7 @@ body {
   background: #9ed8f2;
   position: relative;
   display: flex;
-  overflow: hidden;
+  overflow: visible;
   height: auto;
 }
 
