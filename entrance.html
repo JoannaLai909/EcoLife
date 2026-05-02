@@ -8,61 +8,82 @@
 
 <body>
 
-  <div class="entrance-page"> 
-    <nav class="navbar">
-        <div class="nav-links">
-            <a href="#purpose">Purpose</a>
-            <a href="#sdgs">SDGs</a>
+    <div class="entrance-page"> 
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="#purpose">Purpose</a>
+                <a href="#sdgs">SDGs</a>
+            </div>
+            <a href="game.html" class="start-btn">Start Game</a>
+        </nav> 
+
+        <div class="wave-svg">
+            <svg viewBox="0 0 200 100" preserveAspectRatio="none">
+                <path d="M 100 0 Q 40 30 100 50 Q 160 70 100 100 L 0 100 L 0 0 Z" />
+            </svg>
         </div>
-        <a href="game.html" class="start-btn">Start Game</a>
-    </nav> 
 
-    <div class="wave-svg">
-        <svg viewBox="0 0 200 100" preserveAspectRatio="none">
-            <path d="M 100 0 Q 40 30 100 50 Q 160 70 100 100 L 0 100 L 0 0 Z" />
-        </svg>
+        <div class="left-area">
+            <img src="image/image1.png" class="gacha-img">
+        </div>
+
+        <div class="right-area">
+            <h1>
+                <span class="title-line1">EcoLife</span><br>
+                <span class="title-line2">Simulator</span>
+            </h1><br>
+        
+        <p>Play and learn sustainability</p>
+
+        </div>
+
+        <div class="bottom-wave">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path fill="#eaf7ff"
+                    d="M0,80 C300,150 1100,0 1440,80 L1440,150 L0,150 Z">
+                </path>
+            </svg>
+        </div>
+
     </div>
 
-    <div class="left-area">
-        <img src="image/image1.png" class="gacha-img">
-    </div>
+    <section id="purpose" class="info-section">
+        <h2>Purpose</h2>
+        <p>
+            EcoLife Simulator helps users understand how daily choices can affect people,
+            the environment, and the future.
+        </p>
+        <a href="purpose.html" class="more-btn">
+            Learn More →
+        </a>
+    </section>
 
-    <div class="right-area">
-        <h1>
-            <span class="title-line1">EcoLife</span><br>
-            <span class="title-line2">Simulator</span>
-        </h1><br>
-      
-      <p>Play and learn sustainability</p>
+    <section id="sdgs" class="info-section">
+        <h2>SDGs Introduction</h2>
+        <p>
+            Explore the 17 Sustainable Development Goals and learn how each goal connects
+            to real-life decisions.
+        </p>
+        <div class="sdg-grid" id="sdgGrid"></div>
+        <a href="sdgs_introduction.html" class="more-btn">
+            View Details →
+        </a>
+    </section>
 
-    </div>
+    <script>
+        window.addEventListener("scroll", function() {
+            const sections = document.querySelectorAll(".info-section");
 
-  </div>
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
 
-  <section id="purpose" class="info-section">
-    <h2>Purpose</h2>
-    <p>
-        EcoLife Simulator helps users understand how daily choices can affect people,
-        the environment, and the future.
-    </p>
-    <a href="purpose.html" class="more-btn">
-        Learn More →
-    </a>
-  </section>
-
-  <section id="sdgs" class="info-section">
-    <h2>SDGs Introduction</h2>
-    <p>
-        Explore the 17 Sustainable Development Goals and learn how each goal connects
-        to real-life decisions.
-    </p>
-    <div class="sdg-grid" id="sdgGrid"></div>
-    <a href="sdgs_introduction.html" class="more-btn">
-        View Details →
-    </a>
-  </section>
-  
-  <script src="entrance.js"></script>
-  <script src="sdgs_introduction.js"></script>
+                if (rect.top < window.innerHeight - 100) {
+                section.classList.add("show");
+                }
+            });
+        });
+</script>
+    <script src="entrance.js"></script>
+    <script src="sdgs_introduction.js"></script>
 </body>
 </html>
