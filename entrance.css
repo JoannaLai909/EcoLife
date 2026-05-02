@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -77,7 +81,7 @@ h1 {
   font-weight: 900;
   font-family: "Ahkio-Regular", sans-serif;
   text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.15);
-  letter-spacing: 3.5 px;
+  letter-spacing: 3.5px;
 }
 
 p {
@@ -89,29 +93,25 @@ p {
   letter-spacing: 2.5px;
 }
 
-button {
-  width: 230px;
-  padding: 18px 0;
-  background: #173e68;
+.start-btn {
+  text-decoration: none;
   color: white;
-  border: none;
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  padding: 10px 22px;
   border-radius: 14px;
-  font-size: 30px;
+  font-size: 18px;
   font-weight: bold;
-  font-family: "Ahkio-Regular", sans-serif;
-  cursor: pointer;
-  box-shadow: 0 6px 0 #0d2540; 
-  transition: all 0.1s ease;
+  box-shadow: 0 5px 0 #c85c00;
+  transition: all 0.15s ease;
 }
 
-button:hover {
-  transform: scale(1.05);
-  background: #0f2d4d;
+.start-btn:hover {
+  transform: translateY(-2px) scale(1.05);
 }
 
-button:active {
-  transform: translateY(3px) scale(1.02);
-  box-shadow: 0 3px 0 #0d2540;
+.start-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #c85c00;
 }
 
 .gacha-img {
@@ -122,6 +122,67 @@ button:active {
   transform: translateY(-30px); 
   display: block;
   margin: 0 auto; 
+}
+
+.info-section {
+  min-height: 100vh;
+  padding: 120px 10%;
+  background: #dff5ff;
+  text-align: center;
+}
+
+#purpose {
+  background: #eaf7ff;
+}
+
+#purpose h2 {
+  font-size: 64px;
+  color: #004aad;
+  margin-bottom: 30px;
+}
+
+#purpose p {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 28px;
+  line-height: 1.7;
+  color: #10233f;
+}
+
+#sdgs {
+  background: #dff5ff;
+}
+
+#sdgs h2 {
+  font-size: 64px;
+  color: #004aad;
+  margin-bottom: 20px;
+}
+
+#sdgs p {
+  font-size: 22px;
+  color: #333;
+}
+
+.sdg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.sdg-icon {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sdg-icon img {
+  width: 100%;
+  max-width: 100px;
+}
+
+.sdg-icon:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 900px) {
