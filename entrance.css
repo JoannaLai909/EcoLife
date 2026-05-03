@@ -128,7 +128,7 @@ p {
   min-height: 100vh;
   padding: 120px 10%;
   text-align: center;
-  background: #9ed8f2
+  background: #9ed8f2;
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.6s ease;
