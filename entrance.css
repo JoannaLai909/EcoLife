@@ -131,8 +131,7 @@ p {
   text-align: center;
   background: #9ed8f2;
   opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.6s ease;
+  transform: none;
 }
 
 .info-section.show {
@@ -216,6 +215,14 @@ p {
   box-shadow: 
     0 20px 50px rgba(0, 74, 173, 0.15),
     inset 0 0 0 1px rgba(255,255,255,0.4);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.info-section.show .info-box {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .info-box:hover {
