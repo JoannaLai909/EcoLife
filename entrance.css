@@ -21,6 +21,7 @@ body {
   display: flex;
   overflow: visible;
   height: auto;
+  padding-top: 80px;
 }
 
 .wave-svg {
@@ -215,6 +216,7 @@ p {
   box-shadow: 
     0 20px 50px rgba(0, 74, 173, 0.15),
     inset 0 0 0 1px rgba(255,255,255,0.4);
+
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.6s ease;
@@ -226,12 +228,7 @@ p {
 }
 
 .info-box:hover {
-  transform: translateY(-6px);
-  transition: 0.3s;
-}
-
-.info-section {
-  padding: 140px 10%;
+  transform: translateY(-6px) scale(1.01);
 }
 
 @keyframes gachaEnter {
