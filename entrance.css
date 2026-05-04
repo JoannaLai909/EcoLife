@@ -231,14 +231,26 @@ p {
 
 
 @keyframes gachaEnter {
-  from {
+  0% {
     opacity: 0;
     transform: translateY(80px) scale(0.9);
   }
 
-  to {
+  60% {
     opacity: 1;
-    transform: translateY(-30px) scale(1);
+    transform: translateY(-20px) scale(1.05); 
+  }
+
+  75% {
+    transform: translateY(8px) scale(0.97);  
+  }
+
+  85% {
+    transform: translateY(-10px) scale(1.02); 
+  }
+
+  100% {
+    transform: translateY(-30px) scale(1); 
   }
 }
 
