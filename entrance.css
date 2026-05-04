@@ -98,10 +98,17 @@ p {
   text-decoration: none;
   color: white;
   background: linear-gradient(135deg, #ff7a18, #ffb347);
+
   padding: 10px 22px;
   border-radius: 14px;
+
   font-size: 18px;
   font-weight: bold;
+
+  display: flex;              
+  align-items: center;       
+  justify-content: center;   
+
   box-shadow: 0 5px 0 #c85c00;
   transition: all 0.15s ease;
 }
