@@ -300,21 +300,25 @@ p {
 
 .navbar {
   position: fixed;
-  top: 25px;
-  right: 40px;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
   z-index: 999;
 
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 30px;
 
-  padding: 12px 20px;
-  border-radius: 20px;
+  padding: 18px 60px;
 
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
 
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0, 74, 173, 0.12);
+
+  border-radius: 0;
 }
 
 .nav-links {
