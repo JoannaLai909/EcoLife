@@ -202,6 +202,26 @@ p {
   color: #333;
 }
 
+#features {
+  margin-top: -80px;
+  padding-top: 160px;
+  background: #9ed8f2;
+}
+
+#features h2 {
+  font-size: 64px;
+  color: #004aad;
+  margin-bottom: 30px;
+}
+
+#features p {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 28px;
+  line-height: 1.7;
+  color: #10233f;
+}
+
 .more-btn {
   position: relative;
   z-index: 10;
