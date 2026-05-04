@@ -231,6 +231,27 @@ p {
   transform: translateY(-6px) scale(1.01);
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;  
+  right: 0;   
+  width: 100%;  
+
+  z-index: 999;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 60px;
+
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 6px 20px rgba(0, 74, 173, 0.12);
+}
+
 @keyframes gachaEnter {
   from {
     opacity: 0;
