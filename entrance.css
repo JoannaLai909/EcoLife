@@ -313,6 +313,10 @@ p {
   transform: translateY(0);
 }
 
+.info-section.show .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 @keyframes gachaEnter {
   from {

@@ -95,9 +95,10 @@
                 See how your decisions impact the world around you.
             </p>
         </div>
+    </section>
 
     <script>
-        window.addEventListener("scroll", function() {
+        function revealSections() {
             const sections = document.querySelectorAll(".info-section");
 
             sections.forEach(section => {
@@ -107,9 +108,11 @@
                 section.classList.add("show");
                 }
             });
-        });
-</script>
+        }
+
+        window.addEventListener("scroll", revealSections);
+        window.addEventListener("load", revealSections);
+    </script>
     <script src="entrance.js"></script>
-    <script src="sdgs_introduction.js"></script>
 </body>
 </html>
