@@ -282,6 +282,7 @@ p {
 }
 
 .sdgs-text {
+    text-align: left;
   min-width: 360px;
   margin-left: -40px;
 }
