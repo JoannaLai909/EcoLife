@@ -278,7 +278,7 @@ p {
   max-width: none;
   overflow: visible;
   height: auto;
-  transform: translateX(-60px);
+  transform: translateX(-30px);
 }
 
 .sdgs-text {
