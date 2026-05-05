@@ -14,11 +14,9 @@ function revealOnScroll() {
     const elementTop = el.getBoundingClientRect().top;
 
     if (elementTop < windowHeight * 0.75 && elementTop > 0) {
-      el.classList.add("show");   // 進來 → 顯示
-    } else {
-      el.classList.remove("show"); // 離開 → 重置 
+      el.classList.remove("show");   // 先移掉
+      void el.offsetWidth;           //  強制重繪
+      el.classList.add("show");      // 再加回來 → 重播動畫
     }
   });
 }
-
-window.addEventListener("scroll", revealOnScroll);
