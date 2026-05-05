@@ -4,53 +4,59 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Ahkio-Regular', sans-serif;
     background: #77BEEE;
     color: #0a2540;
-    padding: 2rem 1.5rem 3rem;
     min-height: 100vh;
+    padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 1.5rem) 7rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 1400px;
-    width: 100%;
+    width: min(100%, 1400px);
     margin: 0 auto;
 }
 
+/* ================= HERO ================= */
+
 .hero {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .hero h1 {
-    font-size: 4.5rem;
+    font-size: clamp(3rem, 10vw, 4.8rem);
     font-weight: normal;
     background: linear-gradient(135deg, #1e3c72, #2b5f8a);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.15);
-    letter-spacing: 3px;
+    letter-spacing: clamp(1px, 0.7vw, 3px);
 }
 
 .hero p {
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 3.5vw, 1.4rem);
     color: #2c5575;
-    margin-top: 0.2rem;
+    margin-top: 0.3rem;
     letter-spacing: 1px;
-    font-family: "Ahkio-Regular", sans-serif;
 }
 
-/* Explore Button */
+/* ================= EXPLORE BUTTON ================= */
+
 .cta-button {
     margin-top: 1.5rem;
-    padding: 12px 30px;
+    padding: clamp(10px, 2vw, 12px) clamp(22px, 5vw, 30px);
     font-family: 'Ahkio-Regular', sans-serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
     color: #ffffff;
     background: #1e3c72;
     border: none;
@@ -65,19 +71,24 @@ body {
     transform: translateY(-3px);
 }
 
-/* Large Icon Grid */
+/* ================= SDG GRID ================= */
+
 .sdg-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 180px));
-    justify-content: center;
-    gap: 3rem 2.5rem;
-    margin: 3.5rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    justify-items: center;
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+    margin: clamp(2rem, 5vw, 3.5rem) auto;
+    width: 100%;
 }
 
 .sdg-icon {
+    width: 100%;
+    max-width: 180px;
     cursor: pointer;
     text-align: center;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.2s ease;
 }
 
 .sdg-icon:hover {
@@ -85,31 +96,38 @@ body {
 }
 
 .sdg-icon img {
-    width: 160px;
+    width: clamp(95px, 13vw, 160px);
     height: auto;
     display: block;
     margin: 0 auto;
     object-fit: contain;
-    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+}
+
+.icon-title {
+    margin-top: 0.4rem;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    color: #0a2540;
+    line-height: 1.25;
 }
 
 .icon-label {
-    margin-top: 1rem;
-    font-size: 1.2rem;
+    margin-top: 0.8rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
     color: #2c5575;
     font-style: italic;
 }
 
-/* Popup Window Styles */
+/* ================= POPUP ================= */
+
 .sdg-popup {
     position: fixed;
-    z-index: 2000;
+    z-index: 5000;
     background: #ffffff;
-    border-radius: 28px;
+    border-radius: clamp(18px, 4vw, 28px);
     padding: 0;
+    width: min(90vw, 350px);
     max-width: 350px;
-    width: max-content;
-    min-width: 260px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
     opacity: 0;
     visibility: hidden;
@@ -122,14 +140,14 @@ body {
 }
 
 .popup-inner {
-    padding: 1.5rem;
+    padding: clamp(1rem, 4vw, 1.5rem);
     position: relative;
 }
 
 .popup-header {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: clamp(10px, 3vw, 15px);
     border-bottom: 2px solid #e9f0f5;
     padding-bottom: 0.8rem;
     margin-bottom: 1rem;
@@ -137,8 +155,8 @@ body {
 
 .popup-icon {
     background: #eef2ff;
-    width: 55px;
-    height: 55px;
+    width: clamp(45px, 12vw, 55px);
+    height: clamp(45px, 12vw, 55px);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -147,29 +165,30 @@ body {
 }
 
 .popup-icon img {
-    width: 42px;
+    width: clamp(34px, 9vw, 42px);
+    height: auto;
 }
 
 .popup-title {
-    font-size: 1.7rem;
+    font-size: clamp(1.25rem, 4vw, 1.7rem);
     color: #0a2f44;
 }
 
 .popup-sub {
-    font-size: 1.2rem;
+    font-size: clamp(0.95rem, 3vw, 1.2rem);
     color: #4f7ea0;
 }
 
 .popup-desc {
-    font-size: 1.1rem;
-    line-height: 1.4;
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+    line-height: 1.5;
     color: #1f3e54;
 }
 
 .close-popup {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 12px;
+    right: 12px;
     background: #f0f4f9;
     border-radius: 50%;
     width: 30px;
@@ -180,63 +199,128 @@ body {
     cursor: pointer;
     border: none;
     font-family: Arial, sans-serif;
+    font-size: 16px;
 }
+
+/* ================= INFO TIP ================= */
 
 .info-tip {
     text-align: center;
-    margin-top: 2rem;
-    font-size: 1.2rem;
+    margin: 2rem auto 0;
+    font-size: clamp(0.95rem, 3vw, 1.2rem);
     color: #1e3c72;
     background: rgba(255, 255, 255, 0.5);
     padding: 0.6rem 1.8rem;
     border-radius: 40px;
     backdrop-filter: blur(5px);
+    width: fit-content;
+    max-width: 90%;
 }
 
-/* --- THE BACK BUTTON STYLE --- */
-#backBtn {
-  position: fixed;
-  bottom: 120px;
-  right: 25px;
-  width: 180px;
-  padding: 16px 0;
-  background: #004aad;
-  color: white;
-  border: none;
-  border-radius: 14px;
-  font-size: 28px;
-  font-weight: bold;
-  font-family: "Ahkio-Regular", sans-serif;
-  cursor: pointer;
-  box-shadow: 0 6px 0 #00357c;
-  display: none; /* 初始隱藏 */
+/* ================= BACK BUTTON ================= */
+
+#nextBtn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: clamp(120px, 28vw, 180px);
+    padding: clamp(10px, 3vw, 16px) 0;
+    background: #004aad;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: bold;
+    font-family: "Ahkio-Regular", sans-serif;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #00357c;
+    display: none;
+    z-index: 6000;
 }
 
-#backBtn:hover {
+#nextBtn:hover {
     transform: scale(1.05);
 }
 
-#backBtn:active {
+#nextBtn:active {
     transform: translateY(3px) scale(1.02);
     box-shadow: 0 3px 0 #00357c;
 }
 
-/* Responsive adjustments */
-@media (max-width: 700px) {
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 900px;
+    }
+
     .sdg-grid {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 120px));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
+}
+
+/* Phone */
+@media (max-width: 700px) {
+    body {
+        padding: 1rem 0.8rem 6rem;
+    }
+
+    .hero {
+        margin-top: 0.5rem;
+    }
+
+    .sdg-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.4rem 0.6rem;
+    }
+
+    .sdg-icon {
+        max-width: 110px;
+    }
+
     .sdg-icon img {
-        width: 110px;
+        width: 90px;
     }
-    #backBtn {
-        width: 150px;
-        font-size: 22px;
+
+    .sdg-icon:hover {
+        transform: translateY(-5px) scale(1.03);
+    }
+
+    .icon-title {
+        font-size: 0.75rem;
+    }
+
+    .info-tip {
+        margin-bottom: 1.5rem;
+    }
+
+    #nextBtn {
         bottom: 20px;
-        right: 20px;
+        right: 16px;
+        width: 120px;
+        font-size: 20px;
     }
+}
+
+/* Small Phone */
+@media (max-width: 420px) {
+    .sdg-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .hero h1 {
-        font-size: 3rem;
+        text-shadow: 3px 4px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    .popup-header {
+        align-items: flex-start;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1400px) {
+    .sdg-grid {
+        grid-template-columns: repeat(6, 180px);
     }
 }
