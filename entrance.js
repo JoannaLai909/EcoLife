@@ -23,10 +23,8 @@ function revealOnScroll() {
   });
 }
 
-window.addEventListener("scroll", revealOnScroll);
-
-function revealOnScroll() {
-  const sections = document.querySelectorAll(".info-section, .feature-section");
+function revealSections() {
+  const sections = document.querySelectorAll(".info-section, .visualfeedback-section");
 
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
@@ -37,4 +35,4 @@ function revealOnScroll() {
   });
 }
 
-window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("scroll", revealSections);
