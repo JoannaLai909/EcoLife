@@ -674,7 +674,7 @@ p {
   top: 10px;
   left: 50%; 
   right: auto;              
-  transform: translateX(-50%);
+  transform: translateX(-80%);
 }
 
 .tiger-bottom {
