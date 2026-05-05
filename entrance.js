@@ -13,8 +13,10 @@ function revealOnScroll() {
     const windowHeight = window.innerHeight;
     const elementTop = el.getBoundingClientRect().top;
 
-    if (elementTop < windowHeight * 0.75) {
-      el.classList.add("show");
+    if (elementTop < windowHeight * 0.75 && elementTop > 0) {
+      el.classList.add("show");   // 進來 → 顯示
+    } else {
+      el.classList.remove("show"); // 離開 → 重置 
     }
   });
 }
