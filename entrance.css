@@ -205,6 +205,8 @@ p {
 }
 
 .dropdown-content {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 120%;
   left: 0;
@@ -222,6 +224,16 @@ p {
   transform: translateY(10px);
 
   transition: all 0.2s ease;
+}
+
+.dropdown-content a {
+  display: block;          /* ⭐ 佔整行 */
+  padding: 12px 20px;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background: #f0f6ff;
 }
 
 /* 用 active 控制 */
