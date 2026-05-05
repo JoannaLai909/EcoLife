@@ -204,6 +204,33 @@ p {
   color: #333;
 }
 
+.dropdown-content {
+  position: absolute;
+  top: 120%;
+  left: 0;
+
+  background: white;
+  border-radius: 10px;
+  padding: 10px 0;
+
+  min-width: 180px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  transition: all 0.2s ease;
+}
+
+/* 用 active 控制 */
+.dropdown-content.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .visualfeedback-section {
   min-height: 100vh;
   background: #9ed8f2;

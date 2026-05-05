@@ -36,3 +36,18 @@ function revealSections() {
 }
 
 window.addEventListener("scroll", revealSections);
+
+const featureBtn = document.getElementById("featureBtn");
+const featureMenu = document.getElementById("featureMenu");
+
+featureBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  featureMenu.classList.toggle("active");
+});
+
+/* 點其他地方自動關閉 */
+document.addEventListener("click", function (e) {
+  if (!featureBtn.contains(e.target) && !featureMenu.contains(e.target)) {
+    featureMenu.classList.remove("active");
+  }
+});
