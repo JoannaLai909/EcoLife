@@ -189,6 +189,8 @@ p {
 
 #sdgs {
   background: #9ed8f2;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #sdgs h2 {
@@ -262,7 +264,7 @@ p {
   grid-template-columns: 1.6fr 1fr;
   align-items: center;
   gap: 40px;
-  max-width: 1300px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -272,8 +274,9 @@ p {
 }
 
 .sdgs-img img {
-  width: 100%;
-  max-width: 1200px;
+  width: 120%;
+  max-width: none;
+  overflow: visible;
   height: auto;
   transform: translateX(-50px);
 }
