@@ -272,6 +272,7 @@ p {
   display: flex;
   justify-content: center;
   animation: gachaEnter 1s cubic-bezier(.18,.89,.32,1.28) forwards;
+  transition-delay: 0.2s;
 }
 
 .sdgs-img img {
@@ -287,6 +288,7 @@ p {
   min-width: 360px;
   margin-left: -40px;
   padding-right: 80px;
+  transition-delay: 0.4s;
 }
 
 .sdgs-text h2 {
@@ -299,6 +301,17 @@ p {
   font-size: 22px;
   color: #333;
   line-height: 1.6;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
