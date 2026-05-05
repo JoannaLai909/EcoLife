@@ -292,13 +292,13 @@ p {
 .dropdown-content {
   position: absolute;
 
-  top: calc(100% + 30px);  /* 貼 navbar 底 + 一點點距離 */
+  top: calc(100% + 29px);  /* 貼 navbar 底 + 一點點距離 */
   right: 0;               /*  對齊 Features 右邊 */
 
   display: flex;
   flex-direction: column;
 
-  background: white;
+  background: rgba(255, 255, 255, 0.35);;
   border-radius: 12px;
   padding: 12px 0;
 
