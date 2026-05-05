@@ -268,6 +268,7 @@ p {
 }
 
 .sdgs-img img {
+  flex: 1.2;
   width: 100%;
   max-width: 500px;
   transform: scale(1.2); 
