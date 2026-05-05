@@ -204,7 +204,7 @@ p {
   color: #333;
 }
 
-.feature-section {
+.visualfeedback-section {
   min-height: 100vh;
   background: #9ed8f2;
   display: flex;
@@ -213,7 +213,7 @@ p {
   overflow: hidden;
 }
 
-.feature-section::before {
+.visualfeedback-section::before {
   content: "";
   position: absolute;
   left: -280px;
@@ -225,32 +225,32 @@ p {
   z-index: 0;
 }
 
-.feature-left,
-.feature-right {
+.visualfeedback-section .feature-left,
+.visualfeedback-section .feature-right {
   position: relative;
   z-index: 1;
 }
 
-.feature-left {
+.visualfeedback-section .feature-left {
   width: 42%;
   padding-left: 90px;
   color: #004aad;
 }
 
-.feature-left h2 {
+.visualfeedback-section .feature-left h2 {
   font-size: 70px;
   line-height: 1.1;
   margin: 0 0 70px;
   color: #004aad;
 }
 
-.feature-left p {
+.visualfeedback-section .feature-left p {
   font-size: 24px;
   line-height: 1.6;
   color: #00406f;
 }
 
-.feature-right {
+.visualfeedback-section .feature-right {
   width: 58%;
   display: flex;
   justify-content: center;
