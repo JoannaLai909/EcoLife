@@ -22,7 +22,7 @@
 
           <div id="featureMenu" class="dropdown-content">
             <a href="#visualfeedback">Visual Feedback</a>
-            <a href="#decision">Decision Making</a>
+            <a href="#replayability">Replayability</a>
             <a href="#ending">Multiple Endings</a>
           </div>
         </div>
@@ -70,73 +70,90 @@
     </div>
   </section>
 
-  <section id="sdgs" class="info-section">
-    <div class="sdgs-container">
+    <section id="sdgs" class="info-section">
+        <div class="sdgs-container">
 
-      <div class="sdgs-img reveal">
-        <img src="image/SDGS (1).png" alt="SDGs">
-      </div>
+        <div class="sdgs-img reveal">
+            <img src="image/SDGS (1).png" alt="SDGs">
+        </div>
 
-      <div class="sdgs-text reveal">
-        <h2>SDGs Introduction</h2>
+        <div class="sdgs-text reveal">
+            <h2>SDGs Introduction</h2>
+            <p>
+            Explore the 17 Sustainable Development Goals and learn how each goal connects to real-life decisions.
+            </p>
+
+            <a href="sdgs_introduction.html" class="more-btn">
+            View Details →
+            </a>
+        </div>
+
+        </div>
+    </section>
+
+    <section id="visualfeedback" class="visualfeedback-section">
+
+        <div class="visualfeedback-left">
+        <h2>Visual<br>feedback</h2>
         <p>
-          Explore the 17 Sustainable Development Goals and learn how each goal connects to real-life decisions.
+            We use progress bars to show<br>
+            real-time SDG advancement,<br>
+            so users can clearly see their<br>
+            progress.
         </p>
-
-        <a href="sdgs_introduction.html" class="more-btn">
-          View Details →
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="visualfeedback" class="visualfeedback-section">
-
-    <div class="visualfeedback-left">
-      <h2>Visual<br>feedback</h2>
-      <p>
-        We use progress bars to show<br>
-        real-time SDG advancement,<br>
-        so users can clearly see their<br>
-        progress.
-      </p>
-    </div>
-
-    <div class="visualfeedback-right">
-      <div class="bar-chart">
-
-        <div class="legend">
-          <span><i class="dot blue"></i> goal1</span>
-          <span><i class="dot purple"></i> goal7</span>
-          <span><i class="dot orange"></i> goal13</span>
-          <span><i class="dot yellow"></i> goal15</span>
         </div>
 
-        <div class="bar-row">
-          <span class="label">goal1</span>
-          <div class="bar blue-bar" style="width: 55%;"></div>
+        <div class="visualfeedback-right">
+        <div class="bar-chart">
+
+            <div class="legend">
+            <span><i class="dot blue"></i> goal1</span>
+            <span><i class="dot purple"></i> goal7</span>
+            <span><i class="dot orange"></i> goal13</span>
+            <span><i class="dot yellow"></i> goal15</span>
+            </div>
+
+            <div class="bar-row">
+            <span class="label">goal1</span>
+            <div class="bar blue-bar" style="width: 55%;"></div>
+            </div>
+
+            <div class="bar-row">
+            <span class="label">goal7</span>
+            <div class="bar purple-bar" style="width: 30%;"></div>
+            </div>
+
+            <div class="bar-row">
+            <span class="label">goal13</span>
+            <div class="bar orange-bar" style="width: 82%;"></div>
+            </div>
+
+            <div class="bar-row">
+            <span class="label">goal15</span>
+            <div class="bar yellow-bar" style="width: 45%;"></div>
+            </div>
+
+        </div>
         </div>
 
-        <div class="bar-row">
-          <span class="label">goal7</span>
-          <div class="bar purple-bar" style="width: 30%;"></div>
+    </section>
+
+    <section id="replayability" class="replay-section">
+        <div class="replay-text">
+            <h2>Replayability</h2>
+            <p>
+            Different strategies will lead to<br>
+            different endings, encouraging<br>
+            users to try again.
+            </p>
         </div>
 
-        <div class="bar-row">
-          <span class="label">goal13</span>
-          <div class="bar orange-bar" style="width: 82%;"></div>
+        <div class="tiger-area">
+            <img src="image/tiger_ending_1_transparent.png" class="tiger tiger-top">
+            <img src="image/tiger_ending_2_transparent.png" class="tiger tiger-bottom">
+            <img src="image/tiger_ending_3_transparent.png" class="tiger tiger-right">
         </div>
-
-        <div class="bar-row">
-          <span class="label">goal15</span>
-          <div class="bar yellow-bar" style="width: 45%;"></div>
-        </div>
-
-      </div>
-    </div>
-
-  </section>
+    </section>
 
   <script>
     function revealSections() {
