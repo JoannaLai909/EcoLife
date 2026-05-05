@@ -278,11 +278,12 @@ p {
   max-width: none;
   overflow: visible;
   height: auto;
-  transform: translateX(-50px);
+  transform: translateX(-40px);
 }
 
 .sdgs-text {
   min-width: 360px;
+  padding-right: 30px;
 }
 
 .sdgs-text h2 {
