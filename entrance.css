@@ -296,7 +296,7 @@ p {
 .dropdown-content {
   position: absolute;
 
-  top: calc(100% + 25px);  /* 貼 navbar 底 + 一點點距離 */
+  top: calc(100% + 23px);  /* 貼 navbar 底 + 一點點距離 */
   right: -30px;               /*  對齊 Features 右邊 */
 
   display: flex;
