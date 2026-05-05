@@ -1,5 +1,5 @@
 window.onscroll = function() {
-  let button = document.getElementById("nextBtn");
+  let button = document.getElementById("backBtn");
 
   if (button) {
     if (document.documentElement.scrollTop > 400) {
@@ -10,7 +10,7 @@ window.onscroll = function() {
   }
 };
 
-let btn = document.getElementById("nextBtn");
+let btn = document.getElementById("backBtn");
 
 if (btn) {
   btn.addEventListener("click", function () {
