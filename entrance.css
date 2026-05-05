@@ -204,32 +204,41 @@ p {
   color: #333;
 }
 
-.dropdown-content {
+.dropdown {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 120%;
-  left: 0;
+  align-items: center;
+}
+
+.dropdown-content {
+  width: 100%;
+  max-width: 200px;
+
+  display: flex;
+  flex-direction: column;
 
   background: white;
   border-radius: 10px;
-  padding: 10px 0;
-
-  min-width: 180px;
+  margin-top: 10px;
 
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
+  max-height: 0;           /* ⭐ 收起來 */
+  overflow: hidden;
 
-  transition: all 0.2s ease;
+  transition: max-height 0.3s ease;
+}
+
+/* 展開 */
+.dropdown-content.active {
+  max-height: 300px;      /* ⭐ 展開 */
 }
 
 .dropdown-content a {
-  display: block;          /* ⭐ 佔整行 */
-  padding: 12px 20px;
-  text-align: left;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: #004aad;
 }
 
 .dropdown-content a:hover {
