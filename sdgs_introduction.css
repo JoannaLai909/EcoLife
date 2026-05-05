@@ -65,7 +65,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* Large Icon Grid */
+/* SDGs Icon Grid */
 .sdg-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 180px));
@@ -90,7 +90,7 @@ body {
     display: block;
     margin: 0 auto;
     object-fit: contain;
-    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
 }
 
 .icon-label {
@@ -100,7 +100,7 @@ body {
     font-style: italic;
 }
 
-/* Popup Window Styles */
+/* Popup Window */
 .sdg-popup {
     position: fixed;
     z-index: 2000;
@@ -193,23 +193,25 @@ body {
     backdrop-filter: blur(5px);
 }
 
-/* --- THE NEXT BUTTON STYLE --- */
+/* BACK Button */
 #nextBtn {
-  position: fixed;
-  bottom: 120px;
-  right: 25px;
-  width: 180px;
-  padding: 16px 0;
-  background: #004aad;
-  color: white;
-  border: none;
-  border-radius: 14px;
-  font-size: 28px;
-  font-weight: bold;
-  font-family: "Ahkio-Regular", sans-serif;
-  cursor: pointer;
-  box-shadow: 0 6px 0 #00357c;
-  display: none; /* 初始隱藏 */
+    position: fixed;
+    bottom: 120px;
+    right: 25px;
+    width: 180px;
+    padding: 16px 0;
+    background: #004aad;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: "Ahkio-Regular", sans-serif;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #00357c;
+    display: block;
+    z-index: 3000;
+    transition: 0.25s;
 }
 
 #nextBtn:hover {
@@ -221,22 +223,112 @@ body {
     box-shadow: 0 3px 0 #00357c;
 }
 
-/* Responsive adjustments */
+/* Tablet */
+@media (max-width: 1000px) {
+    .sdg-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 150px));
+        gap: 2rem;
+    }
+
+    .sdg-icon img {
+        width: 130px;
+    }
+
+    .hero h1 {
+        font-size: 3.8rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Mobile */
 @media (max-width: 700px) {
+    body {
+        padding: 1.5rem 1rem 6rem;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .cta-button {
+        font-size: 1.2rem;
+        padding: 10px 24px;
+    }
+
     .sdg-grid {
         grid-template-columns: repeat(auto-fill, minmax(110px, 120px));
         gap: 1.5rem;
+        margin: 2.5rem 0;
     }
+
     .sdg-icon img {
         width: 110px;
     }
+
+    .icon-label {
+        font-size: 1rem;
+        margin-top: 0.7rem;
+    }
+
+    .info-tip {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+        margin-bottom: 2rem;
+    }
+
     #nextBtn {
         width: 150px;
+        padding: 13px 0;
         font-size: 22px;
         bottom: 20px;
         right: 20px;
     }
-    .hero h1 {
-        font-size: 3rem;
+
+    .sdg-popup {
+        width: calc(100% - 32px);
+        max-width: none;
+        min-width: 0;
+        left: 16px !important;
+        right: 16px;
+        top: 50% !important;
+        transform: translateY(-50%);
+    }
+
+    .popup-inner {
+        padding: 1.3rem;
+    }
+
+    .popup-header {
+        gap: 12px;
+        padding-right: 28px;
+    }
+
+    .popup-title {
+        font-size: 1.4rem;
+    }
+
+    .popup-sub {
+        font-size: 1rem;
+    }
+
+    .popup-desc {
+        font-size: 1rem;
+    }
+
+    .popup-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .popup-icon img {
+        width: 36px;
     }
 }
