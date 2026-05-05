@@ -218,24 +218,28 @@ p {
 
 .dropdown-content {
   position: absolute;
-  top: 100%;
-  right: 0;
+
+  top: calc(100% + 8px);  /* ⭐ 貼 navbar 底 + 一點點距離 */
+  right: 0;               /* ⭐ 對齊 Features 右邊 */
 
   display: flex;
   flex-direction: column;
 
   background: white;
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 12px 0;
-  min-width: 240px;
 
-  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  min-width: 220px;
+
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 
+  transform: translateY(5px);
   transition: all 0.2s ease;
+
   z-index: 1000;
 }
 
@@ -243,7 +247,7 @@ p {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 .dropdown-content a {
