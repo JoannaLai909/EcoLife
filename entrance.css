@@ -243,6 +243,7 @@ p {
 }
 
 .nav-links a {
+  display: flex;
   text-decoration: none;
   color: #004aad;
   font-size: 25px;
@@ -288,6 +289,7 @@ p {
   font-weight: bold;
   font-size: 25px;
   color: #004aad;
+  display: flex;
   align-items: center; 
 }
 
