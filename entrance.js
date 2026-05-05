@@ -24,3 +24,17 @@ function revealOnScroll() {
 }
 
 window.addEventListener("scroll", revealOnScroll);
+
+function revealOnScroll() {
+  const sections = document.querySelectorAll(".info-section, .feature-section");
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+
+    if (rect.top < window.innerHeight * 0.75) {
+      section.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
