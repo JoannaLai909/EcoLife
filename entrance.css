@@ -271,6 +271,7 @@ p {
 .sdgs-img {
   display: flex;
   justify-content: center;
+  animation: gachaEnter 1s cubic-bezier(.18,.89,.32,1.28) forwards;
 }
 
 .sdgs-img img {
