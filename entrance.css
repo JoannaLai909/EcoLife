@@ -225,32 +225,32 @@ p {
   z-index: 0;
 }
 
-.visualfeedback-section .feature-left,
-.visualfeedback-section .feature-right {
+.visualfeedback-section .visualfeedback-left,
+.visualfeedback-section .visualfeedback-right {
   position: relative;
   z-index: 1;
 }
 
-.visualfeedback-section .feature-left {
+.visualfeedback-section .visualfeedback-left {
   width: 42%;
   padding-left: 90px;
   color: #004aad;
 }
 
-.visualfeedback-section .feature-left h2 {
+.visualfeedback-section .visualfeedback-left h2 {
   font-size: 70px;
   line-height: 1.1;
   margin: 0 0 70px;
   color: #004aad;
 }
 
-.visualfeedback-section .feature-left p {
+.visualfeedback-section .visualfeedback-left p {
   font-size: 24px;
   line-height: 1.6;
   color: #00406f;
 }
 
-.visualfeedback-section .feature-right {
+.visualfeedback-section .visualfeedback-right {
   width: 58%;
   display: flex;
   justify-content: center;
