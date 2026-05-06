@@ -21,7 +21,7 @@ body {
 .entrance-page {
   width: 100%;
   min-height: 120vh;
-  background: #9ed8f2;
+  background: #B9E5F8;
   position: relative;
   display: flex;
   overflow: hidden;
@@ -92,6 +92,20 @@ p {
   font-family: "Ahkio-Regular", sans-serif;
   margin: 35px 0 70px;
   letter-spacing: 2.5px;
+}
+
+/*wave border*/
+.wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+}
+
+.wave-container svg {
+  width: 100%;
+  height: auto;
 }
 
 .start-btn {
