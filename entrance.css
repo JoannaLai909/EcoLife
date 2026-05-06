@@ -88,7 +88,7 @@ h1 {
 p {
   color: white;
   font-size: 33px;
-  font-weight: bold;
+  font-weight: lighter;
   font-family: "Ahkio-Regular", sans-serif;
   margin: 35px 0 70px;
   letter-spacing: 2.5px;
@@ -157,7 +157,7 @@ p {
   min-height: 70vh;
   margin-top: -80px;
   padding-top: 160px;
-  background: #f5f5f5;;
+  background: #E0E0E0;;
 }
 
 #why .info-box {
@@ -218,6 +218,7 @@ p {
 }
 
 #sdgs p {
+  font-weight: lighter;
   font-size: 22px;
   color: #333;
 }
@@ -265,7 +266,7 @@ p {
   text-decoration: none;
   color: #004aad;
   font-size: 25px;
-  font-weight: bold;
+  font-weight: lighter;
   letter-spacing: 1px;
   position: relative;
   align-items: center;
@@ -487,6 +488,7 @@ p {
 
 .visualfeedback-left p {
   font-size: 24px;
+  font-weight: lighter;
   line-height: 1.6;
   color: #00406f;
 }
@@ -506,7 +508,7 @@ p {
   justify-content: center;
   gap: 28px;
   margin-bottom: 25px;
-  font-weight: bold;
+  font-weight: lighter;
   letter-spacing: 1.5px;
 }
 
@@ -542,7 +544,7 @@ p {
 
 .label {
   width: 70px;
-  font-weight: bold;
+  font-weight: lighter;
   letter-spacing: 1.5px;
 }
 
@@ -597,7 +599,7 @@ p {
 ========================= */
 
 .info-box {
-  background: #ffffff;    /* 或是你的皺紙圖 */
+  background: #ffffff;   
   padding: 60px 80px;     
   border-radius: 4px;     
   text-align: left;       
