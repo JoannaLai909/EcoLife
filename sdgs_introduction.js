@@ -60,7 +60,7 @@ const sdgData = [
         title: "Industry, Innovation and Infrastructure",
         description: "Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.",
         iconFile: "image/goal9_0.png",
-        color: "#9CBAE0"
+        color: "#FD6925"
     },
     {
         id: 10,
