@@ -278,7 +278,7 @@ function updateShowcase(goal) {
   document.getElementById("showGoalTitle").innerText = `Goal ${goal.id}`;
   document.getElementById("showGoalDesc").innerText = goal.description;
   document.getElementById("showMoreBtn").href = `https://sdgs.un.org/goals/goal${goal.id}`;
-
+  document.getElementById("sdgShowcase").classList.add("active");
   const relatedGoals = document.getElementById("relatedGoals");
   relatedGoals.innerHTML = "";
 

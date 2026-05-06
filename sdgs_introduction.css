@@ -118,6 +118,14 @@ body {
     font-style: italic;
 }
 
+.sdg-showcase {
+  display: none;
+}
+
+.sdg-showcase.active {
+  display: grid;
+}
+
 /* ================= POPUP ================= */
 
 .sdg-popup {
