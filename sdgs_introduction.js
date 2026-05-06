@@ -219,9 +219,6 @@ function buildIconGrid() {
         iconWrapper.addEventListener("click", function (e) {
             e.stopPropagation();
             updateShowcase(goal);
-            document.getElementById("sdgShowcase").scrollIntoView({
-            behavior: "smooth"
-            });
         });
 
         gridContainer.appendChild(iconWrapper);
@@ -279,19 +276,16 @@ function updateShowcase(goal) {
   document.getElementById("showGoalDesc").innerText = goal.description;
   document.getElementById("showMoreBtn").href = `https://sdgs.un.org/goals/goal${goal.id}`;
   document.getElementById("sdgShowcase").classList.add("active");
-  const relatedGoals = document.getElementById("relatedGoals");
-  relatedGoals.innerHTML = "";
 
-  sdgData
-    .filter(item => item.id !== goal.id)
-    .slice(0, 2)
-    .forEach(item => {
-      const img = document.createElement("img");
-      img.src = item.iconFile;
-      img.alt = item.title;
-      relatedGoals.appendChild(img);
-    });
 }
+
+document.getElementById("sdgShowcase").addEventListener("click", function () {
+  this.classList.remove("active");
+});
+
+document.querySelector(".sdg-card").addEventListener("click", function (e) {
+  e.stopPropagation();
+});
 
 /* Back to entrance page */
 nextBtn.addEventListener("click", function () {
