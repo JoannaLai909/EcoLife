@@ -296,6 +296,7 @@ body {
 }
 
 .sdg-card p {
+  font-family: Arial, sans-serif;
   font-size: 22px;
   line-height: 1.5;
   font-weight: lighter;
