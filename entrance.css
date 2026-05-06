@@ -305,7 +305,7 @@ p {
 
 .drop-btn {
   cursor: pointer;
-  font-weight: bold;
+  font-weight: lighter;
   font-size: 25px;
   color: #004aad;
   display: flex;
