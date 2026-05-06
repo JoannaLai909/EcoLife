@@ -20,7 +20,7 @@ body {
 
 .entrance-page {
   width: 100%;
-  min-height: 100vh;
+  min-height: 120vh;
   background: #9ed8f2;
   position: relative;
   display: flex;
