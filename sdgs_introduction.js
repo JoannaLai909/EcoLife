@@ -3,103 +3,120 @@ const sdgData = [
         id: 1,
         title: "No Poverty",
         description: "End poverty in all its forms everywhere. Ensure equal rights to economic resources, basic services, and social protection.",
-        iconFile: "image/goal1_0.png"
+        iconFile: "image/goal1_0.png",
+        color: "#E5243B"
     },
     {
         id: 2,
         title: "Zero Hunger",
         description: "End hunger, achieve food security and improved nutrition, and promote sustainable agriculture for all.",
-        iconFile: "image/goal2_0.png"
+        iconFile: "image/goal2_0.png",
+        color: "#DDA63A"
     },
     {
         id: 3,
         title: "Good Health and Well-Being",
         description: "Ensure healthy lives and promote well-being for all at all ages, reducing mortality and ending epidemics.",
-        iconFile: "image/goal3_0.png"
+        iconFile: "image/goal3_0.png",
+        color: "#4C9F38"
     },
     {
         id: 4,
         title: "Quality Education",
         description: "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.",
-        iconFile: "image/goal4_0.png"
+        iconFile: "image/goal4_0.png",
+        color: "#C5192D"
     },
     {
         id: 5,
         title: "Gender Equality",
         description: "Achieve gender equality and empower all women and girls by eliminating discrimination and violence.",
-        iconFile: "image/goal5_0.png"
+        iconFile: "image/goal5_0.png",
+        color: "#FF3A21"
     },
     {
         id: 6,
         title: "Clean Water and Sanitation",
         description: "Ensure availability and sustainable management of water and sanitation for all people worldwide.",
-        iconFile: "image/goal6_0.png"
+        iconFile: "image/goal6_0.png",
+        color: "#26BDE2"
     },
     {
         id: 7,
         title: "Affordable and Clean Energy",
         description: "Ensure access to affordable, reliable, sustainable, and modern energy for all globally.",
-        iconFile: "image/goal7_0.png"
+        iconFile: "image/goal7_0.png",
+        color: "#FCC30B"
     },
     {
         id: 8,
         title: "Decent Work and Economic Growth",
         description: "Promote sustained, inclusive, and sustainable economic growth, full employment, and decent work for all.",
-        iconFile: "image/goal8_0.png"
+        iconFile: "image/goal8_0.png",
+        color: "#A21942"
     },
     {
         id: 9,
         title: "Industry, Innovation and Infrastructure",
         description: "Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.",
-        iconFile: "image/goal9_0.png"
+        iconFile: "image/goal9_0.png",
+        color: "#9CBAE0"
     },
     {
         id: 10,
         title: "Reduced Inequalities",
         description: "Reduce inequality within and among countries by promoting social, economic, and political inclusion.",
-        iconFile: "image/goal10_0.png"
+        iconFile: "image/goal10_0.png",
+        color: "#DD1367"
     },
     {
         id: 11,
         title: "Sustainable Cities and Communities",
         description: "Make cities and human settlements inclusive, safe, resilient, and sustainable for all inhabitants.",
-        iconFile: "image/goal11_0.png"
+        iconFile: "image/goal11_0.png",
+        color: "#FD6925"
     },
     {
         id: 12,
         title: "Responsible Consumption and Production",
         description: "Ensure sustainable consumption and production patterns through efficient resource use and waste reduction.",
-        iconFile: "image/goal12_0.png"
+        iconFile: "image/goal12_0.png",
+        color: "#BF8B2E"
     },
     {
         id: 13,
         title: "Climate Action",
         description: "Take urgent action to combat climate change and its impacts by strengthening resilience and awareness.",
-        iconFile: "image/goal13_0.png"
+        iconFile: "image/goal13_0.png",
+        color: "#3F7E44"
     },
     {
         id: 14,
         title: "Life Below Water",
         description: "Conserve and sustainably use the oceans, seas, and marine resources for sustainable development.",
-        iconFile: "image/goal14_0.png"
+        iconFile: "image/goal14_0.png",
+        color: "#0A97D9"
     },
     {
         id: 15,
         title: "Life on Land",
         description: "Protect, restore, and promote sustainable use of terrestrial ecosystems and halt biodiversity loss.",
-        iconFile: "image/goal15_0.png"
+        iconFile: "image/goal15_0.png",
+        color: "#56C02B"
     },
     {
         id: 16,
         title: "Peace, Justice and Strong Institutions",
         description: "Promote peaceful and inclusive societies, provide access to justice, and build effective institutions.",
-        iconFile: "image/goal16_0.png"
+        iconFile: "image/goal16_0.png",
+        color: "#00689D"
     },
     {
         id: 17,
         title: "Partnerships for the Goals",
         description: "Strengthen the means of implementation and revitalize the global partnership for sustainable development.",
-        iconFile: "image/goal17_0.png"
+        iconFile: "image/goal17_0.png",
+        color: "#19486A"
     }
 ];
 
@@ -271,12 +288,23 @@ function observeInfoTip() {
 }
 
 function updateShowcase(goal) {
-  document.getElementById("showGoalNumber").innerText = goal.id;
-  document.getElementById("showGoalTitle").innerText = `Goal ${goal.id}`;
-  document.getElementById("showGoalDesc").innerText = goal.description;
-  document.getElementById("showMoreBtn").href = `https://sdgs.un.org/goals/goal${goal.id}`;
-  document.getElementById("sdgShowcase").classList.add("active");
 
+  document.getElementById("showGoalNumber").innerText = goal.id;
+
+  document.getElementById("showGoalTitle").innerText =
+    `Goal ${goal.id}`;
+
+  document.getElementById("showGoalDesc").innerText =
+    goal.description;
+
+  document.getElementById("showMoreBtn").href =
+    `https://sdgs.un.org/goals/goal${goal.id}`;
+
+  document.querySelector(".sdg-card").style.background =
+    goal.color;
+
+  document.getElementById("sdgShowcase")
+    .classList.add("active");
 }
 
 document.getElementById("sdgShowcase").addEventListener("click", function () {
@@ -286,6 +314,7 @@ document.getElementById("sdgShowcase").addEventListener("click", function () {
 document.querySelector(".sdg-card").addEventListener("click", function (e) {
   e.stopPropagation();
 });
+
 
 /* Back to entrance page */
 nextBtn.addEventListener("click", function () {
