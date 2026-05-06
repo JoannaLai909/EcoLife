@@ -218,7 +218,10 @@ function buildIconGrid() {
 
         iconWrapper.addEventListener("click", function (e) {
             e.stopPropagation();
-            showPopupNearElement(iconWrapper, goal);
+            updateShowcase(goal);
+            document.getElementById("sdgShowcase").scrollIntoView({
+            behavior: "smooth"
+            });
         });
 
         gridContainer.appendChild(iconWrapper);
@@ -268,6 +271,26 @@ function observeInfoTip() {
     });
 
     observer.observe(infoTip);
+}
+
+function updateShowcase(goal) {
+  document.getElementById("showGoalNumber").innerText = goal.id;
+  document.getElementById("showGoalTitle").innerText = `Goal ${goal.id}`;
+  document.getElementById("showGoalDesc").innerText = goal.description;
+  document.getElementById("showMoreBtn").href = `https://sdgs.un.org/goals/goal${goal.id}`;
+
+  const relatedGoals = document.getElementById("relatedGoals");
+  relatedGoals.innerHTML = "";
+
+  sdgData
+    .filter(item => item.id !== goal.id)
+    .slice(0, 2)
+    .forEach(item => {
+      const img = document.createElement("img");
+      img.src = item.iconFile;
+      img.alt = item.title;
+      relatedGoals.appendChild(img);
+    });
 }
 
 /* Back to entrance page */

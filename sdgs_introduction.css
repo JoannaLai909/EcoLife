@@ -247,6 +247,59 @@ body {
     box-shadow: 0 3px 0 #00357c;
 }
 
+.sdg-showcase {
+  min-height: 520px;
+  margin-top: 60px;
+  background: #2f9b4f;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.showcase-info {
+  color: white;
+  padding: 40px;
+}
+
+.goal-number {
+  font-size: 52px;
+  opacity: 0.45;
+}
+
+.showcase-info h2 {
+  font-size: 34px;
+  margin: 20px 0;
+}
+
+.showcase-info p {
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.show-more-btn {
+  display: block;
+  margin-top: 35px;
+  border: 2px solid white;
+  padding: 18px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.related-goals {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 70px;
+  padding: 40px;
+}
+
+.related-goals img {
+  width: 220px;
+}
+
 /* ================= RESPONSIVE ================= */
 
 /* Tablet */
