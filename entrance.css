@@ -148,6 +148,7 @@ p {
 }
 
 #why {
+  min-height: 80vh;
   margin-top: -80px;
   padding-top: 160px;
   background: #bfecff;
@@ -168,6 +169,7 @@ p {
 }
 
 #purpose {
+  min-height: 80vh;
   margin-top: -80px;
   padding-top: 160px;
   background: #9ed8f2;
