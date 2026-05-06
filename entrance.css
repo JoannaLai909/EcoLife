@@ -94,19 +94,6 @@ p {
   letter-spacing: 2.5px;
 }
 
-/*wave border*/
-.wave-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  line-height: 0;
-}
-
-.wave-container svg {
-  width: 100%;
-  height: auto;
-}
 
 .start-btn {
   text-decoration: none;
