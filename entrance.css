@@ -668,25 +668,25 @@ p {
 }
 
 .tiger {
-  position: absolute;
-  width: 260px;
+  width: 18vw;      
+  max-width: 260px;
+  min-width: 140px;
 }
 
 .tiger-top {
-  top: 10px;
-  left: 50%; 
-  right: auto;              
-  transform: translateX(-60%);
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .tiger-bottom {
-  bottom: 20px;
-  left: 70px;
+  bottom: 5%;
+  left: clamp(10%, 15%, 20%);
 }
 
 .tiger-right {
-  bottom: 40px;
-  right: 100px;
+  bottom: 8%;
+  right: clamp(5%, 10%, 15%);
 }
 
 /* =========================
@@ -798,6 +798,18 @@ p {
   .sdgs-text p {
     font-size: 20px;
   }
+
+    .tiger-area {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .tiger {
+    position: static;
+    width: 120px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -826,5 +838,19 @@ p {
 
   p {
     font-size: 20px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .tiger-top {
+    top: 20px;
+  }
+
+  .tiger-bottom {
+    bottom: 30px;
+  }
+
+  .tiger-right {
+    bottom: 40px;
   }
 }
