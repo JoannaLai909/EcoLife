@@ -668,25 +668,30 @@ p {
 }
 
 .tiger {
-  width: 18vw;      
+  position: absolute;
+
+  width: 18vw;
   max-width: 260px;
-  min-width: 140px;
+  min-width: 180px;
 }
 
+/* 上面 */
 .tiger-top {
   top: 5%;
   left: 50%;
   transform: translateX(-50%);
 }
 
+/* 左下 */
 .tiger-bottom {
-  bottom: 5%;
-  left: clamp(10%, 15%, 20%);
+  bottom: 8%;
+  left: 15%;
 }
 
+/* 右下 */
 .tiger-right {
-  bottom: 8%;
-  right: clamp(5%, 10%, 15%);
+  bottom: 10%;
+  right: 10%;
 }
 
 /* =========================
@@ -799,8 +804,21 @@ p {
     font-size: 20px;
   }
 
-    .tiger-area {
+  .replay-section {
+    flex-direction: column;
+    padding: 80px 30px;
+  }
+
+  .replay-text {
+    width: 100%;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .tiger-area {
+    width: 100%;
     height: auto;
+
     display: flex;
     justify-content: center;
     gap: 20px;
