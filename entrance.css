@@ -253,6 +253,7 @@ p {
   color: #000;
   font-weight: bold;
   font-size: 30px;
+  text-decoration: none;
 }
 
 .nav-links {
