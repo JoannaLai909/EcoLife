@@ -113,17 +113,46 @@ const closeBtn = document.getElementById("closePopupBtn");
 const exploreBtn = document.getElementById("exploreBtn");
 const nextBtn = document.getElementById("nextBtn");
 
-function updatePopupContent(goal) {
+async function fetchGoalTargets(goalId) {
+    const url = `https://unstats.un.org/SDGAPI/v1/sdg/Goal/${goalId}/Target/List`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch SDG targets");
+    }
+
+    return await response.json();
+}
+
+async function updatePopupContent(goal) {
     popupImg.src = goal.iconFile;
     popupImg.alt = goal.title;
 
     popupTitleElem.innerText = `Goal ${goal.id}`;
     popupSubElem.innerText = goal.title;
-    popupDescElem.innerText = goal.description;
+    popupDescElem.innerHTML = "Loading official SDG data...";
+
+    try {
+        const targets = await fetchGoalTargets(goal.id);
+
+        popupDescElem.innerHTML = targets
+            .slice(0, 4)
+            .map(target => `
+                <p>
+                    <strong>${target.code}</strong><br>
+                    ${target.title}
+                </p>
+            `)
+            .join("");
+
+    } catch (error) {
+        popupDescElem.innerText = goal.description;
+    }
 }
 
-function showPopupNearElement(element, goalData) {
-    updatePopupContent(goalData);
+async function showPopupNearElement(element, goalData) {
+    await updatePopupContent(goalData);
 
     popup.classList.add("active");
 
