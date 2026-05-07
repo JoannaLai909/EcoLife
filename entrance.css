@@ -184,7 +184,9 @@ p {
   min-height: 80vh;
   margin-top: -80px;
   padding-top: 160px;
-  background: #eef7ff;
+  background-image: url('image/paper2.png');
+  background-size: cover;
+  background-position: center;
 }
 
 #purpose h2 {
