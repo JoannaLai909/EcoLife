@@ -184,14 +184,14 @@ p {
   min-height: 80vh;
   margin-top: -80px;
   padding-top: 160px;
-  background-image: url('image/paper2.png');
+  background: #ffffff;
   background-size: cover;
   background-position: center;
 }
 
 #purpose h2 {
   font-size: 64px;
-  color: #004aad;
+  color: #7CFF75;
   margin-bottom: 30px;
 }
 
@@ -200,11 +200,19 @@ p {
   margin: 0 auto;
   font-size: 28px;
   line-height: 1.7;
-  color: #10233f;
+  color: white;
 }
 
 #purpose .info-box {
-  background-color: #ffffff;
+
+  background-image: url('image/paper2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 80px;
+  color: white;
 }
 
 #sdgs {
