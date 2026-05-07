@@ -205,7 +205,7 @@ p {
 
 #purpose .info-box {
 
-  background-image: url('image/paper2.png');
+  background: #bfecff;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: transparent;
