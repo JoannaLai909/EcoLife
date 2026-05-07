@@ -21,7 +21,7 @@ body {
 .entrance-page {
   width: 100%;
   min-height: 120vh;
-  background: #9ed8f2;
+  background: #B9E5F8;
   position: relative;
   display: flex;
   overflow: hidden;
@@ -88,11 +88,12 @@ h1 {
 p {
   color: white;
   font-size: 33px;
-  font-weight: bold;
+  font-weight: lighter;
   font-family: "Ahkio-Regular", sans-serif;
   margin: 35px 0 70px;
   letter-spacing: 2.5px;
 }
+
 
 .start-btn {
   text-decoration: none;
@@ -134,12 +135,17 @@ p {
 ========================= */
 
 .info-section {
-  min-height: 100vh;
-  padding: 120px 10%;
-  text-align: center;
-  background: #9ed8f2;
-  opacity: 1;
-  transform: none;
+  min-height: auto;      
+  padding: 80px 0;       
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;    
+  margin: 0 auto;
 }
 
 .info-section.show {
@@ -151,7 +157,13 @@ p {
   min-height: 70vh;
   margin-top: -80px;
   padding-top: 160px;
-  background: #bfecff;
+  background: #E0E0E0;;
+}
+
+#why .info-box {
+  background-image: url('image/paper.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 #why h2 {
@@ -172,21 +184,35 @@ p {
   min-height: 80vh;
   margin-top: -80px;
   padding-top: 160px;
-  background: #9ed8f2;
+  background: #ffffff;
+  background-size: cover;
+  background-position: center;
 }
 
 #purpose h2 {
   font-size: 64px;
-  color: #004aad;
+  color: #7CFF75;
   margin-bottom: 30px;
 }
 
 #purpose p {
   max-width: 850px;
   margin: 0 auto;
-  font-size: 28px;
+  font-size: 29px;
   line-height: 1.7;
-  color: #10233f;
+  color: white;
+}
+
+#purpose .info-box {
+
+  background: #bfecff;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 80px;
+  color: white;
 }
 
 #sdgs {
@@ -202,6 +228,7 @@ p {
 }
 
 #sdgs p {
+  font-weight: lighter;
   font-size: 22px;
   color: #333;
 }
@@ -236,6 +263,7 @@ p {
   color: #000;
   font-weight: bold;
   font-size: 30px;
+  text-decoration: none;
 }
 
 .nav-links {
@@ -249,7 +277,7 @@ p {
   text-decoration: none;
   color: #004aad;
   font-size: 25px;
-  font-weight: bold;
+  font-weight: lighter;
   letter-spacing: 1px;
   position: relative;
   align-items: center;
@@ -288,7 +316,7 @@ p {
 
 .drop-btn {
   cursor: pointer;
-  font-weight: bold;
+  font-weight: lighter;
   font-size: 25px;
   color: #004aad;
   display: flex;
@@ -471,6 +499,7 @@ p {
 
 .visualfeedback-left p {
   font-size: 24px;
+  font-weight: lighter;
   line-height: 1.6;
   color: #00406f;
 }
@@ -490,7 +519,7 @@ p {
   justify-content: center;
   gap: 28px;
   margin-bottom: 25px;
-  font-weight: bold;
+  font-weight: lighter;
   letter-spacing: 1.5px;
 }
 
@@ -526,7 +555,7 @@ p {
 
 .label {
   width: 70px;
-  font-weight: bold;
+  font-weight: lighter;
   letter-spacing: 1.5px;
 }
 
@@ -581,23 +610,41 @@ p {
 ========================= */
 
 .info-box {
+  background: #ffffff;   
+  padding: 60px 80px;     
+  border-radius: 4px;     
+  text-align: left;       
+  
+  
+  box-shadow: 0 10px 30px rgba(0, 74, 173, 0.05); 
+  
+  opacity: 1;             
+  transform: none;       
+}
+
+.info-box h2 {
+  font-size: 42px;
+  color: #004aad;
+  margin-bottom: 30px;
   position: relative;
-  z-index: 1;
-  max-width: 1000px;
-  margin: 80px auto;
-  padding: 60px;
+  display: inline-block; /* 讓橫線寬度跟著標題走 */
+}
 
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(16px);
+.info-box h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 50px;
+  height: 4px;
+  background: #ff7a18;
+}
 
-  box-shadow:
-    0 20px 50px rgba(0, 74, 173, 0.15),
-    inset 0 0 0 1px rgba(255,255,255,0.4);
 
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease;
-  border-radius: 14px;
+.info-box p {
+  font-size: 18px;       
+  line-height: 1.8;
+  margin-top: 20px;
 }
 
 .info-section.show .info-box {
