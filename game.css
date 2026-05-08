@@ -34,7 +34,7 @@ body{
 .day-box,
 .goal-box,
 .status-box{
-    background:white;
+    background: rgba(255, 255, 255, 0.35);
     padding:14px 26px;
     border-radius:18px;
     box-shadow:0 8px 20px rgba(0,0,0,0.12);
