@@ -46,6 +46,51 @@ body{
     gap:18px;
 }
 
+.game-menu{
+    position:relative;
+}
+
+#menuBtn{
+    border:none;
+    background:#114bb8;
+    color:white;
+    padding:14px 22px;
+    border-radius:14px;
+    font-family:"Ahkio-Regular";
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 5px 0 #0b347f;
+}
+
+.menu-panel{
+    display:none;
+    position:absolute;
+    right:0;
+    top:120%;
+    background:white;
+    border-radius:18px;
+    padding:15px;
+    min-width:180px;
+    box-shadow:0 12px 25px rgba(0,0,0,0.2);
+    z-index:999;
+}
+
+.menu-panel.active{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.menu-panel button{
+    border:none;
+    background:#e9f4ff;
+    padding:12px;
+    border-radius:12px;
+    font-family:"Ahkio-Regular";
+    cursor:pointer;
+    font-size:18px;
+}
+
 /* MAIN */
 
 .main-content{
