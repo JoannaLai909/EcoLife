@@ -9,7 +9,7 @@ body{
     background:#a9d8f0;
     width:100vw;
     height:100vh;
-    overflow:hidden;
+    overflow:auto;
 }
 
 .game-page{
@@ -187,9 +187,10 @@ body{
 }
 
 .category-container{
-    transform: scale(0.92);
     width:700px;
     max-width:70%;
+    max-height:85vh;
+    overflow-y:auto;
     background:white;
     border-radius:35px;
     padding:10px 24px 24px;
