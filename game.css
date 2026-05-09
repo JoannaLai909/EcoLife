@@ -46,49 +46,71 @@ body{
     gap:18px;
 }
 
-.game-menu{
-    position:relative;
+.menu-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
 }
 
-#menuBtn{
-    border:none;
-    background:#114bb8;
-    color:white;
-    padding:14px 22px;
-    border-radius:14px;
-    font-family:"Ahkio-Regular";
-    font-size:20px;
-    cursor:pointer;
-    box-shadow:0 5px 0 #0b347f;
+.menu-modal.active {
+  display: flex;
 }
 
-.menu-panel{
-    display:none;
-    position:absolute;
-    right:0;
-    top:120%;
-    background:white;
-    border-radius:18px;
-    padding:15px;
-    min-width:180px;
-    box-shadow:0 12px 25px rgba(0,0,0,0.2);
-    z-index:999;
+.menu-card {
+  width: 360px;
+  max-width: 90%;
+  background: white;
+  border-radius: 28px;
+  padding: 35px;
+
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
 }
 
-.menu-panel.active{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+.menu-card h2 {
+  color: #114bb8;
+  font-size: 36px;
+  margin-bottom: 25px;
 }
 
-.menu-panel button{
-    border:none;
-    background:#e9f4ff;
-    padding:12px;
-    border-radius:12px;
-    font-family:"Ahkio-Regular";
-    cursor:pointer;
-    font-size:18px;
+.menu-card button,
+#menuBtn {
+  font-family: "Ahkio-Regular";
+  cursor: pointer;
+}
+
+.menu-card button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: #e9f4ff;
+  color: #114bb8;
+
+  font-size: 22px;
+}
+
+.menu-card button:hover {
+  background: #d3eaff;
+  transform: translateY(-2px);
+}
+
+#menuBtn {
+  border: none;
+  background: #114bb8;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-size: 20px;
 }
 
 /* MAIN */

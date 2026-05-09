@@ -15,167 +15,178 @@
 
 <body>
 
-<div class="game-page">
+    <div class="game-page">
 
-    <!-- TOP BAR -->
-    <header class="top-bar">
+        <!-- TOP BAR -->
+        <header class="top-bar">
 
-        <div class="day-box">
-            DAY 1
-        </div>
-
-        <div class="goal-box">
-            Goal 14 Score ≥ 100
-        </div>
-
-        <div class="status-box">
-
-            <div class="status-item">
-                💰 100
+            <div class="day-box">
+                DAY 1
             </div>
 
-            <div class="status-item">
-                ⚡ 80
+            <div class="goal-box">
+                Goal 14 Score ≥ 100
             </div>
 
-        </div>
+            <div class="status-box">
 
-        <div class="game-menu">
+                <div class="status-item">
+                    💰 100
+                </div>
 
-            <button id="menuBtn">
-                ☰ Menu
-            </button>
+                <div class="status-item">
+                    ⚡ 80
+                </div>
 
-            <div class="menu-panel" id="menuPanel">
+            </div>
 
-                <button id="pauseBtn">
-                    Pause
+            <div class="game-menu">
+
+                <button id="menuBtn">
+                    ☰ Menu
                 </button>
 
-                <button id="restartBtn">
-                    Restart
-                </button>
+                <div class="menu-panel" id="menuPanel">
 
-                <button id="homeBtn">
-                    Home
-                </button>
+                    <button id="pauseBtn">
+                        Pause
+                    </button>
 
-            </div>
+                    <button id="restartBtn">
+                        Restart
+                    </button>
 
-        </div>
-
-    </header>
-
-    <!-- MAIN -->
-    <main class="main-content">
-
-        <!-- LEFT -->
-        <section class="scenario-section">
-
-            <div class="scenario-text">
-
-                <h2>Weekend Activity</h2>
-
-                <p>
-                    Your friend invites you to join
-                    a beach cleanup activity.
-                    What will you do?
-                </p>
-
-            </div>
-
-            <!-- CHOICES：要放在 scenario-section 裡面 -->
-            <section class="choices-section">
-
-                <div class="choice-card">
-
-                    <h3>Beach Cleanup</h3>
-
-                    <p>
-                        Help protect marine life.
-                    </p>
-
-                    <div class="effects">
-                        ⚡ -15 <br>
-                        🌍 Goal14 +10
-                    </div>
+                    <button id="homeBtn">
+                        Home
+                    </button>
 
                 </div>
 
-                <div class="choice-card">
+            </div>
 
-                    <h3>Tree Planting</h3>
+        </header>
+
+        <!-- MAIN -->
+        <main class="main-content">
+
+            <!-- LEFT -->
+            <section class="scenario-section">
+
+                <div class="scenario-text">
+
+                    <h2>Weekend Activity</h2>
 
                     <p>
-                        Join a community planting event.
+                        Your friend invites you to join
+                        a beach cleanup activity.
+                        What will you do?
                     </p>
-
-                    <div class="effects">
-                        ⚡ -10 <br>
-                        🌍 Goal13 +8
-                    </div>
 
                 </div>
 
-                <div class="choice-card">
+                <section class="choices-section">
 
-                    <h3>Buy Eco Products</h3>
+                    <div class="choice-card">
 
-                    <p>
-                        Support sustainable products.
-                    </p>
+                        <h3>Beach Cleanup</h3>
 
-                    <div class="effects">
-                        💰 -20 <br>
-                        🌍 Goal12 +5
+                        <p>
+                            Help protect marine life.
+                        </p>
+
+                        <div class="effects">
+                            ⚡ -15 <br>
+                            🌍 Goal14 +10
+                        </div>
+
                     </div>
 
-                </div>
+                    <div class="choice-card">
+
+                        <h3>Tree Planting</h3>
+
+                        <p>
+                            Join a community planting event.
+                        </p>
+
+                        <div class="effects">
+                            ⚡ -10 <br>
+                            🌍 Goal13 +8
+                        </div>
+
+                    </div>
+
+                    <div class="choice-card">
+
+                        <h3>Buy Eco Products</h3>
+
+                        <p>
+                            Support sustainable products.
+                        </p>
+
+                        <div class="effects">
+                            💰 -20 <br>
+                            🌍 Goal12 +5
+                        </div>
+
+                    </div>
+
+                </section>
 
             </section>
 
-        </section>
+            <!-- RIGHT -->
+            <aside class="progress-panel">
 
-        <!-- RIGHT -->
-        <aside class="progress-panel">
+                <h3>SDG Progress</h3>
 
-            <h3>SDG Progress</h3>
+                <div class="progress-item">
 
-            <div class="progress-item">
+                    <span>Goal 7</span>
 
-                <span>Goal 7</span>
+                    <div class="bar">
+                        <div class="fill fill7"></div>
+                    </div>
 
-                <div class="bar">
-                    <div class="fill fill7"></div>
                 </div>
 
-            </div>
+                <div class="progress-item">
 
-            <div class="progress-item">
+                    <span>Goal 13</span>
 
-                <span>Goal 13</span>
+                    <div class="bar">
+                        <div class="fill fill13"></div>
+                    </div>
 
-                <div class="bar">
-                    <div class="fill fill13"></div>
                 </div>
 
-            </div>
+                <div class="progress-item">
 
-            <div class="progress-item">
+                    <span>Goal 14</span>
 
-                <span>Goal 14</span>
+                    <div class="bar">
+                        <div class="fill fill14"></div>
+                    </div>
 
-                <div class="bar">
-                    <div class="fill fill14"></div>
                 </div>
 
-            </div>
+            </aside>
 
-        </aside>
+        </main>
 
-    </main>
+        <div class="menu-modal" id="menuModal">
+                <div class="menu-card">
+                    <h2>Game Menu</h2>
+                    <button id="pauseBtn">Pause</button>
+                    <button id="restartBtn">Restart</button>
+                    <button id="homeBtn">Home</button>
+                    <button id="closeMenuBtn">Continue</button>
+                </div>
+        </div>
 
-</div>
+    </div>
+
+    <script src="game.js"></script>
 
 </body>
 </html>
