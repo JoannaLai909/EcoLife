@@ -187,8 +187,8 @@ body{
 }
 
 .category-container{
-    width:850px;
-    max-width:88%;
+    width:800px;
+    max-width:85%;
     background:white;
     border-radius:35px;
     padding:35px;
@@ -226,7 +226,7 @@ body{
     background:#eef7ff;
     border-radius:24px;
     padding:18px;
-    min-height:175px;
+    min-height:165px;
     cursor:pointer;
     transition:0.25s;
     display:flex;
