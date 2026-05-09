@@ -186,13 +186,11 @@ body{
 }
 
 .category-container{
-    width:700px;
-    max-width:70%;
-    max-height:85vh;
-    overflow-y:auto;
+    width:760px;
+    max-width:82%;
     background:white;
     border-radius:35px;
-    padding:10px 24px 24px;
+    padding:16px 22px;
     text-align:center;
     box-shadow:0 25px 60px rgba(0,0,0,0.3);
 }
@@ -227,8 +225,8 @@ body{
 .category-card {
     background:#eef7ff;
     border-radius:22px;
-    padding:14px;
-    min-height:120px;
+    padding:10px;
+    min-height:95px;
     cursor:pointer;
     transition:0.25s;
     display:flex;
