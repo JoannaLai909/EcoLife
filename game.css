@@ -187,6 +187,7 @@ body{
 }
 
 .category-container{
+    transform: scale(0.92);
     width:700px;
     max-width:70%;
     background:white;
