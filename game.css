@@ -224,11 +224,13 @@ body{
     font-size:24px;
     margin-bottom:12px;
     color:#114bb8;
+    letter-spacing: 1.2px;
 }
 
 .choice-card p{
     font-size:18px;
     line-height:1.4;
+    letter-spacing: 1.1px;
     margin-bottom:16px;
 }
 
