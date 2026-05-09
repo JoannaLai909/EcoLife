@@ -113,6 +113,52 @@ body{
   font-size: 20px;
 }
 
+/* TUTORIAL */
+/* TUTORIAL */
+.tutorial-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    padding-bottom: 40px;
+    z-index: 99999;
+}
+
+.tutorial-box {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.tutorial-tiger {
+    width: 220px;
+}
+
+.tutorial-dialog {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    width: 420px;
+    font-size: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+#nextTutorialBtn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 14px;
+    background: #114bb8;
+    color: white;
+    font-family: "Ahkio-Regular";
+    font-size: 20px;
+    cursor: pointer;
+}
+
 /* MAIN */
 
 .main-content{

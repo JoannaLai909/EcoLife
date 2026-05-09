@@ -19,3 +19,27 @@ document.getElementById("restartBtn").addEventListener("click", () => {
 document.getElementById("homeBtn").addEventListener("click", () => {
   window.location.href = "entrance.html";
 });
+    
+const tutorialTexts = [
+    "Welcome to EcoLife Simulator!",
+    "Your choices affect sustainability.",
+    "Watch your SDG progress carefully!",
+    "Try to reach the target score!"
+];
+
+let tutorialStep = 0;
+const tutorialText =
+document.getElementById("tutorialText");
+const nextTutorialBtn =
+document.getElementById("nextTutorialBtn");
+nextTutorialBtn.addEventListener("click", () => {
+    tutorialStep++;
+    if(tutorialStep < tutorialTexts.length){
+        tutorialText.innerText =
+        tutorialTexts[tutorialStep];
+    } else {
+        document
+        .getElementById("tutorialOverlay")
+        .style.display = "none";
+    }
+});
