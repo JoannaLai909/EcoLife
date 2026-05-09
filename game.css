@@ -147,6 +147,22 @@ body{
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
+.tutorial-dialog.pop {
+    animation: dialogPop 0.28s ease;
+}
+
+@keyframes dialogPop {
+    0%{
+        transform: scale(0.9);
+    }
+    60%{
+        transform: scale(1.05);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 #nextTutorialBtn {
     margin-top: 20px;
     padding: 12px 24px;
@@ -157,6 +173,74 @@ body{
     font-family: "Ahkio-Regular";
     font-size: 20px;
     cursor: pointer;
+}
+
+/* CATEGORY */
+.category-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99998;
+}
+
+.category-container{
+    width:1000px;
+    max-width:90%;
+    background:white;
+    border-radius:35px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 25px 60px rgba(0,0,0,0.3);
+}
+
+.category-container h2{
+    font-size:48px;
+    color:#114bb8;
+    margin-bottom:40px;
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.category-card{
+    background:#eef7ff;
+    border-radius:24px;
+    padding:35px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.category-card:hover{
+    transform:translateY(-8px) scale(1.03);
+    background:#dceeff;
+}
+
+.category-icon{
+    font-size:54px;
+    margin-bottom:18px;
+}
+
+.category-card h3{
+    font-size:30px;
+    color:#114bb8;
+    margin-bottom:15px;
+}
+
+.category-card p{
+    font-size:18px;
+    line-height:1.5;
+    color:#333;
+}
+
+.random-card{
+    grid-column:span 2;
+    background:#ffe9c7;
 }
 
 /* MAIN */

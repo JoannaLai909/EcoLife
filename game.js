@@ -28,18 +28,22 @@ const tutorialTexts = [
 ];
 
 let tutorialStep = 0;
-const tutorialText =
-document.getElementById("tutorialText");
-const nextTutorialBtn =
-document.getElementById("nextTutorialBtn");
+const tutorialText = document.getElementById("tutorialText");
+const nextTutorialBtn = document.getElementById("nextTutorialBtn");
 nextTutorialBtn.addEventListener("click", () => {
     tutorialStep++;
     if(tutorialStep < tutorialTexts.length){
-        tutorialText.innerText =
-        tutorialTexts[tutorialStep];
+        tutorialText.innerText = tutorialTexts[tutorialStep];
+        const dialog = document.querySelector(".tutorial-dialog");
+        dialog.classList.remove("pop");
+        void dialog.offsetWidth;
+        dialog.classList.add("pop");
     } else {
         document
         .getElementById("tutorialOverlay")
         .style.display = "none";
+        document
+        .getElementById("categoryOverlay")
+        .style.display = "flex";
     }
 });
