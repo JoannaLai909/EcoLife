@@ -187,11 +187,11 @@ body{
 }
 
 .category-container{
-    width:800px;
-    max-width:85%;
+    width:700px;
+    max-width:70%;
     background:white;
     border-radius:35px;
-    padding:20px 28px;
+    padding:18px 24px;
     text-align:center;
     box-shadow:0 25px 60px rgba(0,0,0,0.3);
 }
