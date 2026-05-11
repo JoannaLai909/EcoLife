@@ -1,3 +1,5 @@
+/* TUTORIAL */
+
 const tutorialTexts = [
     "Welcome to EcoLife Simulator!",
     "In this game, your daily choices will affect money, energy, and SDG progress.",
@@ -10,6 +12,9 @@ let tutorialStep = 0;
 const tutorialText = document.getElementById("tutorialText");
 const nextTutorialBtn = document.getElementById("nextTutorialBtn");
 const tutorialDialog = document.querySelector(".tutorial-dialog");
+
+const tutorialCard = document.getElementById("tutorialCard");
+const categoryContainer = document.getElementById("categoryContainer");
 
 nextTutorialBtn.addEventListener("click", () => {
     tutorialStep++;
@@ -26,6 +31,112 @@ nextTutorialBtn.addEventListener("click", () => {
         }
 
     } else {
-        window.location.href = "game.html";
+        tutorialCard.style.display = "none";
+        categoryContainer.style.display = "block";
     }
+});
+
+/* CATEGORY RANDOM FUNCTION */
+
+const categoryCards = document.querySelectorAll(".category-card");
+
+const categories = {
+    Environment: {
+        icon: "🌱",
+        title: "Environment",
+        description: "Climate, nature, and sustainability.",
+        goalText: "Goal 13 Score ≥ 100",
+        scenarioTitle: "Weekend Activity",
+        scenarioText: "Your friend invites you to join a beach cleanup activity. What will you do?"
+    },
+
+    Society: {
+        icon: "🏙",
+        title: "Society",
+        description: "Equality, education, and well-being.",
+        goalText: "Goal 3 Score ≥ 100",
+        scenarioTitle: "Community Activity",
+        scenarioText: "Your school is organizing a community support event. What will you do?"
+    },
+
+    Development: {
+        icon: "💡",
+        title: "Development",
+        description: "Innovation, energy, and cities.",
+        goalText: "Goal 9 Score ≥ 100",
+        scenarioTitle: "Innovation Challenge",
+        scenarioText: "Your city wants to improve sustainable technology. What will you do?"
+    },
+
+    Global: {
+        icon: "🤝",
+        title: "Global",
+        description: "Peace and partnerships.",
+        goalText: "Goal 17 Score ≥ 100",
+        scenarioTitle: "Global Cooperation",
+        scenarioText: "Your team joins an international sustainability project. What will you do?"
+    }
+};
+
+function selectCategory(categoryName) {
+    const selectedCategory = categories[categoryName];
+
+    if (!selectedCategory) {
+        return;
+    }
+
+    localStorage.setItem("selectedCategory", categoryName);
+    localStorage.setItem("goalText", selectedCategory.goalText);
+    localStorage.setItem("scenarioTitle", selectedCategory.scenarioTitle);
+    localStorage.setItem("scenarioText", selectedCategory.scenarioText);
+
+    window.location.href = "game.html";
+}
+
+function selectRandomCategory() {
+    const categoryNames = Object.keys(categories);
+    const randomIndex = Math.floor(Math.random() * categoryNames.length);
+
+    const randomCategoryName = categoryNames[randomIndex];
+    const randomCategory = categories[randomCategoryName];
+
+    const randomCard = document.querySelector(".random-card");
+
+    randomCard.classList.add("random-picked");
+
+    randomCard.innerHTML = `
+        <div class="category-icon">
+            ${randomCategory.icon}
+        </div>
+
+        <h3>${randomCategory.title}</h3>
+
+        <p>
+            ${randomCategory.description}
+        </p>
+    `;
+
+    categoryCards.forEach((card) => {
+        card.classList.remove("selected-card");
+
+        if (card.dataset.category === randomCategoryName) {
+            card.classList.add("selected-card");
+        }
+    });
+
+    setTimeout(() => {
+        selectCategory(randomCategoryName);
+    }, 2500);
+}
+
+categoryCards.forEach((card) => {
+    card.addEventListener("click", () => {
+        const categoryName = card.dataset.category;
+
+        if (categoryName === "Random") {
+            selectRandomCategory();
+        } else {
+            selectCategory(categoryName);
+        }
+    });
 });

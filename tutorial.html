@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>EcoLife Tutorial</title>
 
     <link href="https://db.onlinewebfonts.com/c/b7c46534c8a2d55edd840bf49383777d?family=Ahkio-Regular" rel="stylesheet">
@@ -13,11 +15,13 @@
 
     <div class="tutorial-page">
 
-        <div class="tutorial-card">
+        <!-- TUTORIAL CARD -->
+        <div class="tutorial-card" id="tutorialCard">
 
             <img src="image/tutorial-tiger.png" class="tutorial-tiger">
 
             <div class="tutorial-dialog">
+
                 <p id="tutorialText">
                     Welcome to EcoLife Simulator!
                 </p>
@@ -25,6 +29,94 @@
                 <button id="nextTutorialBtn">
                     Next
                 </button>
+
+            </div>
+
+        </div>
+
+        <!-- CATEGORY SECTION -->
+        <div class="category-container" id="categoryContainer">
+
+            <h2 class="category-title">
+                Choose Your SDG Journey
+            </h2>
+
+            <p class="category-subtitle">
+                Each path focuses on different Sustainable Development Goals.
+            </p>
+
+            <div class="category-grid">
+
+                <div class="category-card" data-category="Environment">
+
+                    <div class="category-icon">
+                        🌱
+                    </div>
+
+                    <h3>Environment</h3>
+
+                    <p>
+                        Climate, nature, and sustainability.
+                    </p>
+
+                </div>
+
+                <div class="category-card" data-category="Society">
+
+                    <div class="category-icon">
+                        🏙
+                    </div>
+
+                    <h3>Society</h3>
+
+                    <p>
+                        Equality, education, and well-being.
+                    </p>
+
+                </div>
+
+                <div class="category-card" data-category="Development">
+
+                    <div class="category-icon">
+                        💡
+                    </div>
+
+                    <h3>Development</h3>
+
+                    <p>
+                        Innovation, energy, and cities.
+                    </p>
+
+                </div>
+
+                <div class="category-card" data-category="Global">
+
+                    <div class="category-icon">
+                        🤝
+                    </div>
+
+                    <h3>Global</h3>
+
+                    <p>
+                        Peace and partnerships.
+                    </p>
+
+                </div>
+
+                <div class="category-card random-card" data-category="Random">
+
+                    <div class="category-icon">
+                        🎲
+                    </div>
+
+                    <h3>Random</h3>
+
+                    <p>
+                        Let fate choose your journey.
+                    </p>
+
+                </div>
+
             </div>
 
         </div>
