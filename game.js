@@ -115,6 +115,31 @@ const categoryGoals = {
     Global: ["goal16", "goal17"]
 };
 
+const goalColors = {
+
+    goal1: "#E5243B",
+    goal2: "#DDA63A",
+    goal3: "#4C9F38",
+    goal4: "#C5192D",
+    goal5: "#FF3A21",
+
+    goal6: "#26BDE2",
+    goal7: "#FCC30B",
+    goal8: "#A21942",
+    goal9: "#FD6925",
+    goal10: "#DD1367",
+
+    goal11: "#FD9D24",
+    goal12: "#BF8B2E",
+    goal13: "#3F7E44",
+    goal14: "#0A97D9",
+    goal15: "#56C02B",
+
+    goal16: "#00689D",
+    goal17: "#19486A"
+
+};
+
 const activeGoals = categoryGoals[selectedCategory];
 
 const filteredEvents = events.filter(event => {
@@ -165,8 +190,9 @@ function loadEvent() {
         card.addEventListener("click", () => {
 
             money += choice.money;
-
             energy += choice.energy;
+            money = Math.max(0, money);
+            energy = Math.max(0, energy);
 
             for(let key in choice){
 
@@ -196,25 +222,18 @@ function loadEvent() {
 
 }
 
-function updateProgress(){
+function updateProgress() {
+    activeGoals.forEach(goal => {
+        const fill = document.getElementById(`${goal}Fill`);
 
-    document.getElementById("fill7")
-    .style.width =
-    `${sdgScores.goal7 || 0}%`;
-
-    document.getElementById("fill13")
-    .style.width =
-    `${sdgScores.goal13 || 0}%`;
-
-    document.getElementById("fill14")
-    .style.width =
-    `${sdgScores.goal14 || 0}%`;
-
+        if (fill) {
+            fill.style.width =
+                `${Math.min(sdgScores[goal] || 0, 100)}%`;
+        }
+    });
 }
 
 function nextDay(){
-
-    day++;
 
     currentEvent++;
 
@@ -225,10 +244,34 @@ function nextDay(){
         return;
     }
 
+    day++;
+
     loadEvent();
 
 }
 
-loadEvent();
 
+
+function renderProgressBars() {
+    const progressList = document.getElementById("progressList");
+
+    progressList.innerHTML = "";
+
+    activeGoals.forEach(goal => {
+        progressList.innerHTML += `
+            <div class="progress-item">
+                <span>${goal.replace("goal", "Goal ")}</span>
+
+                <div class="bar">
+                        <div class="fill" id="${goal}Fill" style="background:${goalColors[goal]}"></div>
+                </div>
+            </div>
+        `;
+    });
+}
+
+renderProgressBars();
+loadEvent();
 updateProgress();
+
+
