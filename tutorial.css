@@ -26,49 +26,70 @@ body {
 
 /* TUTORIAL */
 
-.tutorial-card {
-    display: flex;
-    align-items: center;
-    gap: 35px;
-
-    background: white;
-    padding: 40px 55px;
-    border-radius: 35px;
-
-    box-shadow:
-        0 30px 70px rgba(0,0,0,0.35),
-        0 0 120px rgba(255,255,255,0.18);
+.tutorial-scene{
+    display:flex;
+    align-items:center;
+    gap:40px;
 }
 
-.tutorial-tiger {
-    width: 230px;
+.tutorial-tiger{
+    width:260px;
+    filter:drop-shadow(0 16px 12px rgba(0,0,0,0.25));
 }
 
 .tutorial-dialog {
     width: 420px;
 }
 
-.tutorial-dialog p {
-    font-size: 28px;
-    line-height: 1.5;
-    color: #111;
-    margin-bottom: 28px;
+.speech-bubble p{
+    font-size:30px;
+    line-height:1.45;
+    text-align:center;
+    margin-bottom:34px;
+}
+
+.speech-bubble{
+    position:relative;
+    width:620px;
+    min-height:260px;
+    background:white;
+    border-radius:35px;
+    padding:55px 70px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 30px 70px rgba(0,0,0,0.35);
+}
+
+.speech-bubble::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-55px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:0;
+    height:0;
+
+    border-top:28px solid transparent;
+    border-bottom:28px solid transparent;
+    border-right:58px solid white;
 }
 
 #nextTutorialBtn {
     padding: 14px 34px;
-
     border: none;
     border-radius: 16px;
-
     background: #114bb8;
     color: white;
-
     font-family: "Ahkio-Regular";
     font-size: 22px;
-
     cursor: pointer;
-
     box-shadow: 0 6px 0 #0b347f;
 }
 
