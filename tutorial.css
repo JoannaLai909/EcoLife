@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Ahkio-Regular";
+    background: #a9d8f0;
+}
+
+.tutorial-page {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #a9d8f0;
+}
+
+.tutorial-card {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    background: white;
+    padding: 40px 55px;
+    border-radius: 35px;
+
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+.tutorial-tiger {
+    width: 230px;
+}
+
+.tutorial-dialog {
+    width: 420px;
+}
+
+.tutorial-dialog p {
+    font-size: 28px;
+    line-height: 1.5;
+    color: #111;
+    margin-bottom: 28px;
+}
+
+#nextTutorialBtn {
+    padding: 14px 34px;
+
+    border: none;
+    border-radius: 16px;
+
+    background: #114bb8;
+    color: white;
+
+    font-family: "Ahkio-Regular";
+    font-size: 22px;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 0 #0b347f;
+}
+
+#nextTutorialBtn:hover {
+    transform: translateY(-2px);
+}
+
+.tutorial-dialog.pop {
+    animation: dialogPop 0.28s ease;
+}
+
+@keyframes dialogPop {
+    0% {
+        transform: scale(0.9);
+    }
+
+    60% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
