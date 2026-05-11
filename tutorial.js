@@ -9,7 +9,7 @@ let tutorialStep = 0;
 
 const tutorialText = document.getElementById("tutorialText");
 const nextTutorialBtn = document.getElementById("nextTutorialBtn");
-const tutorialDialog = document.querySelector(".tutorial-dialog");
+const tutorialDialog = document.querySelector(".speech-bubble");
 
 nextTutorialBtn.addEventListener("click", () => {
     tutorialStep++;
