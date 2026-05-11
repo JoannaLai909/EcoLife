@@ -17,7 +17,9 @@ body {
     justify-content: center;
     align-items: center;
 
-    background: #a9d8f0;
+    background:
+        radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 45%),
+        rgba(45, 75, 95, 0.55);
 }
 
 .tutorial-card {
@@ -29,7 +31,9 @@ body {
     padding: 40px 55px;
     border-radius: 35px;
 
-    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.35),
+        0 0 120px rgba(255,255,255,0.18);
 }
 
 .tutorial-tiger {
