@@ -279,19 +279,19 @@ body {
     border-radius: 999px;
 }
 
-.fill7 {
-    width: 70%;
-    background: #FCC30B;
+#fill7{
+    width:0%;
+    background:#FCC30B;
 }
 
-.fill13 {
-    width: 55%;
-    background: #3F7E44;
+#fill13{
+    width:0%;
+    background:#3F7E44;
 }
 
-.fill14 {
-    width: 80%;
-    background: #0A97D9;
+#fill14{
+    width:0%;
+    background:#0A97D9;
 }
 
 /* RESPONSIVE */

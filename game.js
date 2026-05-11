@@ -1,50 +1,88 @@
 const events = [
+
     {
-        title: "Beach Cleanup",
+        category: "Environment",
+
+        title: "顏萱的淨灘邀約",
+
         description:
-        "Your friend invites you to join a beach cleanup activity.",
+        "顏萱揪你週末一起去淨灘。",
+
         choices: [
+
             {
-                text: "Join the cleanup",
-                energy: -15,
+                text: "跟她一起去",
                 money: 0,
-                goal14: +10
+                energy: -20,
+                goal14: 10
             },
+
             {
-                text: "Stay home",
-                energy: +10,
+                text: "昨天熬夜太累，想休息",
                 money: 0,
+                energy: 8,
                 goal14: -5
+            },
+
+            {
+                text: "不行我要去打工",
+                money: 13,
+                energy: -9,
+                goal8: 5
             }
+
         ]
     },
+
     {
-        title: "Reusable Cup",
+        category: "Environment",
+
+        title: "凱咪的環保杯",
+
         description:
-        "A cafe offers a discount if you bring your own cup.",
+        "凱咪發現你買飲料沒帶杯子。",
+
         choices: [
+
             {
-                text: "Bring reusable cup",
-                energy: 0,
-                money: +5,
-                goal12: +10
+                text: "回宿舍拿",
+                money: 5,
+                energy: -12,
+                goal12: 8
             },
+
             {
-                text: "Use disposable cup",
-                energy: 0,
+                text: "直接買",
                 money: 0,
-                goal12: -5
+                energy: 2,
+                goal12: -3
+            },
+
+            {
+                text: "算了不喝了",
+                money: 50,
+                energy: -5,
+                goal12: 5
             }
+
         ]
     }
+
 ];
 
 let currentEvent = 0;
 let day = 1;
 let money = 100;
 let energy = 80;
-let goal12 = 0;
-let goal14 = 0;
+let sdgScores = {
+
+    goal7: 0,
+    goal8: 0,
+    goal12: 0,
+    goal13: 0,
+    goal14: 0
+
+};
 
 const menuBtn = document.getElementById("menuBtn");
 const menuModal = document.getElementById("menuModal");
@@ -67,9 +105,26 @@ document.getElementById("homeBtn").addEventListener("click", () => {
 });
 
 
+const selectedCategory =
+    localStorage.getItem("selectedCategory") || "Environment";
+
+const categoryGoals = {
+    Environment: ["goal6", "goal12", "goal13", "goal14", "goal15"],
+    Society: ["goal1", "goal2", "goal3", "goal4", "goal5", "goal10"],
+    Development: ["goal7", "goal8", "goal9", "goal11"],
+    Global: ["goal16", "goal17"]
+};
+
+const activeGoals = categoryGoals[selectedCategory];
+
+const filteredEvents = events.filter(event => {
+    return event.category === selectedCategory;
+});
+
+
 function loadEvent() {
 
-    const event = events[currentEvent];
+    const event = filteredEvents[currentEvent];
 
     document.getElementById("scenarioTitle")
     .innerText = event.title;
@@ -113,13 +168,23 @@ function loadEvent() {
 
             energy += choice.energy;
 
-            if(choice.goal12){
-                goal12 += choice.goal12;
+            for(let key in choice){
+
+                if(key.startsWith("goal")){
+
+                    if(!sdgScores[key]){
+
+                        sdgScores[key] = 0;
+
+                    }
+
+                    sdgScores[key] += choice[key];
+
+                }
+
             }
 
-            if(choice.goal14){
-                goal14 += choice.goal14;
-            }
+            updateProgress();
 
             nextDay();
 
@@ -131,13 +196,29 @@ function loadEvent() {
 
 }
 
+function updateProgress(){
+
+    document.getElementById("fill7")
+    .style.width =
+    `${sdgScores.goal7 || 0}%`;
+
+    document.getElementById("fill13")
+    .style.width =
+    `${sdgScores.goal13 || 0}%`;
+
+    document.getElementById("fill14")
+    .style.width =
+    `${sdgScores.goal14 || 0}%`;
+
+}
+
 function nextDay(){
 
     day++;
 
     currentEvent++;
 
-    if(currentEvent >= events.length){
+    if(currentEvent >= filteredEvents.length){
 
         alert("Game Finished!");
 
@@ -149,3 +230,5 @@ function nextDay(){
 }
 
 loadEvent();
+
+updateProgress();
