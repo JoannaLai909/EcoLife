@@ -167,9 +167,32 @@
             </aside>
 
         </main>
-    
-        <div class="category-overlay" id="categoryOverlay">
 
+        <!-- TUTORIAL OVERLAY -->
+        <div class="tutorial-overlay" id="tutorialOverlay">
+
+            <div class="tutorial-box">
+
+                <img src="image/tutorial-tiger.png" class="tutorial-tiger">
+
+                <div class="tutorial-dialog">
+
+                    <p id="tutorialText">
+                        Welcome to EcoLife Simulator!
+                    </p>
+
+                    <button id="nextTutorialBtn">
+                        Next
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CATEGORY OVERLAY -->
+        <div class="category-overlay" id="categoryOverlay">
 
             <div class="category-container">
 
@@ -183,7 +206,7 @@
 
                 <div class="category-grid">
 
-                    <div class="category-card">
+                    <div class="category-card" data-category="Environment">
 
                         <div class="category-icon">
                             🌱
@@ -197,7 +220,7 @@
 
                     </div>
 
-                    <div class="category-card">
+                    <div class="category-card" data-category="Society">
 
                         <div class="category-icon">
                             🏙
@@ -211,7 +234,7 @@
 
                     </div>
 
-                    <div class="category-card">
+                    <div class="category-card" data-category="Development">
 
                         <div class="category-icon">
                             💡
@@ -225,7 +248,7 @@
 
                     </div>
 
-                    <div class="category-card">
+                    <div class="category-card" data-category="Global">
 
                         <div class="category-icon">
                             🤝
@@ -239,7 +262,7 @@
 
                     </div>
 
-                    <div class="category-card random-card">
+                    <div class="category-card random-card" data-category="Random">
 
                         <div class="category-icon">
                             🎲
@@ -258,7 +281,6 @@
             </div>
 
         </div>
-
 
     </div>
 
