@@ -169,6 +169,7 @@ body {
     align-items: center;
 }
 
+
 .category-card:hover {
     transform: translateY(-8px) scale(1.03);
     background: #dceeff;
