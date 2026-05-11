@@ -117,20 +117,26 @@ body{
 .tutorial-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
+
+    background: rgba(45, 75, 95, 0.45);
 
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 
-    padding-bottom: 40px;
     z-index: 99999;
+
+    backdrop-filter: blur(4px);
 }
 
 .tutorial-box {
     display: flex;
-    align-items: flex-end;
-    gap: 20px;
+    align-items: center;
+    gap: 28px;
+    background: white;
+    padding: 35px 45px;
+    border-radius: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
 }
 
 .tutorial-tiger {
@@ -138,7 +144,7 @@ body{
 }
 
 .tutorial-dialog {
-    background: white;
+    background: transparent;
     padding: 30px;
     border-radius: 25px;
     width: 420px;
