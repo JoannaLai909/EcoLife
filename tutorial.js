@@ -11,7 +11,7 @@ let tutorialStep = 0;
 
 const tutorialText = document.getElementById("tutorialText");
 const nextTutorialBtn = document.getElementById("nextTutorialBtn");
-const tutorialDialog = document.querySelector(".speech-bubble");
+const tutorialDialog = document.querySelector(".tutorial-dialog");
 
 const tutorialCard = document.getElementById("tutorialCard");
 const categoryContainer = document.getElementById("categoryContainer");
@@ -36,7 +36,8 @@ nextTutorialBtn.addEventListener("click", () => {
     }
 });
 
-/* CATEGORY RANDOM FUNCTION */
+
+/* CATEGORY DATA */
 
 const categoryCards = document.querySelectorAll(".category-card");
 
@@ -78,6 +79,9 @@ const categories = {
     }
 };
 
+
+/* SELECT NORMAL CATEGORY */
+
 function selectCategory(categoryName) {
     const selectedCategory = categories[categoryName];
 
@@ -92,6 +96,9 @@ function selectCategory(categoryName) {
 
     window.location.href = "game.html";
 }
+
+
+/* SELECT RANDOM CATEGORY */
 
 function selectRandomCategory() {
     const categoryNames = Object.keys(categories);
@@ -109,7 +116,9 @@ function selectRandomCategory() {
             ${randomCategory.icon}
         </div>
 
-        <h3>${randomCategory.title}</h3>
+        <h3>
+            ${randomCategory.title}
+        </h3>
 
         <p>
             ${randomCategory.description}
@@ -128,6 +137,9 @@ function selectRandomCategory() {
         selectCategory(randomCategoryName);
     }, 2500);
 }
+
+
+/* CLICK CATEGORY CARD */
 
 categoryCards.forEach((card) => {
     card.addEventListener("click", () => {
