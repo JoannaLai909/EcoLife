@@ -219,3 +219,86 @@ categoryCards.forEach((card) => {
         }
     });
 });
+
+function loadEvent() {
+
+    const event = events[currentEvent];
+
+    document.getElementById("scenarioTitle")
+    .innerText = event.title;
+
+    document.getElementById("scenarioDescription")
+    .innerText = event.description;
+
+    document.getElementById("dayBox")
+    .innerText = `DAY ${day}`;
+
+    document.getElementById("moneyBox")
+    .innerText = `💰 ${money}`;
+
+    document.getElementById("energyBox")
+    .innerText = `⚡ ${energy}`;
+
+    const choicesSection =
+    document.getElementById("choicesSection");
+
+    choicesSection.innerHTML = "";
+
+    event.choices.forEach(choice => {
+
+        const card =
+        document.createElement("div");
+
+        card.classList.add("choice-card");
+
+        card.innerHTML = `
+            <h3>${choice.text}</h3>
+
+            <div class="effects">
+                💰 ${choice.money} <br>
+                ⚡ ${choice.energy}
+            </div>
+        `;
+
+        card.addEventListener("click", () => {
+
+            money += choice.money;
+
+            energy += choice.energy;
+
+            if(choice.goal12){
+                goal12 += choice.goal12;
+            }
+
+            if(choice.goal14){
+                goal14 += choice.goal14;
+            }
+
+            nextDay();
+
+        });
+
+        choicesSection.appendChild(card);
+
+    });
+
+}
+
+function nextDay(){
+
+    day++;
+
+    currentEvent++;
+
+    if(currentEvent >= events.length){
+
+        alert("Game Finished!");
+
+        return;
+    }
+
+    loadEvent();
+
+}
+
+loadEvent();
