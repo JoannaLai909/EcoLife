@@ -1,3 +1,51 @@
+const events = [
+    {
+        title: "Beach Cleanup",
+        description:
+        "Your friend invites you to join a beach cleanup activity.",
+        choices: [
+            {
+                text: "Join the cleanup",
+                energy: -15,
+                money: 0,
+                goal14: +10
+            },
+            {
+                text: "Stay home",
+                energy: +10,
+                money: 0,
+                goal14: -5
+            }
+        ]
+    },
+    {
+        title: "Reusable Cup",
+        description:
+        "A cafe offers a discount if you bring your own cup.",
+        choices: [
+            {
+                text: "Bring reusable cup",
+                energy: 0,
+                money: +5,
+                goal12: +10
+            },
+            {
+                text: "Use disposable cup",
+                energy: 0,
+                money: 0,
+                goal12: -5
+            }
+        ]
+    }
+];
+
+let currentEvent = 0;
+let day = 1;
+let money = 100;
+let energy = 80;
+let goal12 = 0;
+let goal14 = 0;
+
 const menuBtn = document.getElementById("menuBtn");
 const menuModal = document.getElementById("menuModal");
 const closeMenuBtn = document.getElementById("closeMenuBtn");
