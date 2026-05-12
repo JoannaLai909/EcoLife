@@ -1,3 +1,13 @@
+const selectedCategory =
+    localStorage.getItem("selectedCategory") || "Environment";
+
+const categoryGoals = {
+    Environment: ["goal6", "goal12", "goal13", "goal14", "goal15"],
+    Society: ["goal1", "goal2", "goal3", "goal4", "goal5", "goal10"],
+    Development: ["goal7", "goal8", "goal9", "goal11"],
+    Global: ["goal16", "goal17"]
+};
+
 let events = [];
 
 if(selectedCategory === "Environment"){
@@ -59,15 +69,6 @@ document.getElementById("homeBtn").addEventListener("click", () => {
 });
 
 
-const selectedCategory =
-    localStorage.getItem("selectedCategory") || "Environment";
-
-const categoryGoals = {
-    Environment: ["goal6", "goal12", "goal13", "goal14", "goal15"],
-    Society: ["goal1", "goal2", "goal3", "goal4", "goal5", "goal10"],
-    Development: ["goal7", "goal8", "goal9", "goal11"],
-    Global: ["goal16", "goal17"]
-};
 
 const goalColors = {
 
