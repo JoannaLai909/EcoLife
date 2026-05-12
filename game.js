@@ -1,74 +1,28 @@
-const events = [
+let events = [];
 
-    {
-        category: "Environment",
+if(selectedCategory === "Environment"){
 
-        title: "顏萱的淨灘邀約",
+    events = environmentEvents;
 
-        description:
-        "顏萱揪你週末一起去淨灘。",
+}
 
-        choices: [
+else if(selectedCategory === "Society"){
 
-            {
-                text: "跟她一起去",
-                money: 0,
-                energy: -20,
-                goal14: 10
-            },
+    events = societyEvents;
 
-            {
-                text: "昨天熬夜太累，想休息",
-                money: 0,
-                energy: 8,
-                goal14: -5
-            },
+}
 
-            {
-                text: "不行我要去打工",
-                money: 13,
-                energy: -9,
-                goal8: 5
-            }
+else if(selectedCategory === "Development"){
 
-        ]
-    },
+    events = developmentEvents;
 
-    {
-        category: "Environment",
+}
 
-        title: "凱咪的環保杯",
+else if(selectedCategory === "Global"){
 
-        description:
-        "凱咪發現你買飲料沒帶杯子。",
+    events = globalEvents;
 
-        choices: [
-
-            {
-                text: "回宿舍拿",
-                money: 5,
-                energy: -12,
-                goal12: 8
-            },
-
-            {
-                text: "直接買",
-                money: 0,
-                energy: 2,
-                goal12: -3
-            },
-
-            {
-                text: "算了不喝了",
-                money: 50,
-                energy: -5,
-                goal12: 5
-            }
-
-        ]
-    }
-
-];
+}
 
 let currentEvent = 0;
 let day = 1;
@@ -142,14 +96,10 @@ const goalColors = {
 
 const activeGoals = categoryGoals[selectedCategory];
 
-const filteredEvents = events.filter(event => {
-    return event.category === selectedCategory;
-});
-
 
 function loadEvent() {
 
-    const event = filteredEvents[currentEvent];
+    const event = events[currentEvent];
 
     document.getElementById("scenarioTitle")
     .innerText = event.title;
@@ -237,7 +187,7 @@ function nextDay(){
 
     currentEvent++;
 
-    if(currentEvent >= filteredEvents.length){
+    if(currentEvent >= events.length){
 
         alert("Game Finished!");
 
