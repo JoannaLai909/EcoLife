@@ -678,6 +678,516 @@ const environmentEvents = [
             }
 
         ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "宿舍垃圾分類",
+
+        description:
+        "宿舍最近開始嚴格執行垃圾分類。",
+
+        choices: [
+
+            {
+                text: "認真分類",
+                money: 0,
+                energy: -10,
+                goal12: 10
+            },
+
+            {
+                text: "隨便亂丟",
+                money: 0,
+                energy: 5,
+                goal12: -8
+            },
+
+            {
+                text: "幫室友一起分",
+                money: 0,
+                energy: -20,
+                goal12: 12
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "凱咪的二手衣",
+
+        description:
+        "凱咪邀你去二手市集逛逛。",
+
+        choices: [
+
+            {
+                text: "買二手衣",
+                money: -150,
+                energy: -5,
+                goal12: 10
+            },
+
+            {
+                text: "只逛不買",
+                money: 0,
+                energy: 5,
+                goal12: 2
+            },
+
+            {
+                text: "直接買新品",
+                money: -500,
+                energy: 10,
+                goal12: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "顏萱的省電計畫",
+
+        description:
+        "顏萱想統計宿舍哪些電器最耗電。",
+
+        choices: [
+
+            {
+                text: "一起記錄",
+                money: 20,
+                energy: -15,
+                goal13: 10
+            },
+
+            {
+                text: "覺得太麻煩",
+                money: 0,
+                energy: 5,
+                goal13: -3
+            },
+
+            {
+                text: "直接拔別人插頭",
+                money: 0,
+                energy: -10,
+                goal13: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "千千的剩食便當",
+
+        description:
+        "便利商店正在賣即期便當。",
+
+        choices: [
+
+            {
+                text: "買即期便當",
+                money: 50,
+                energy: 5,
+                goal12: 10
+            },
+
+            {
+                text: "買最新鮮的",
+                money: -120,
+                energy: 10,
+                goal12: -5
+            },
+
+            {
+                text: "乾脆不吃",
+                money: 100,
+                energy: -20,
+                goal3: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "柔苡的環保吸管",
+
+        description:
+        "柔苡買了新的環保吸管組。",
+
+        choices: [
+
+            {
+                text: "跟著買",
+                money: -80,
+                energy: -2,
+                goal12: 8
+            },
+
+            {
+                text: "直接用店家吸管",
+                money: 0,
+                energy: 5,
+                goal12: -5
+            },
+
+            {
+                text: "直接不用吸管",
+                money: 0,
+                energy: -3,
+                goal12: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "校園野餐日",
+
+        description:
+        "學生會舉辦低碳野餐活動。",
+
+        choices: [
+
+            {
+                text: "自備餐具參加",
+                money: -50,
+                energy: -10,
+                goal13: 10
+            },
+
+            {
+                text: "買一堆免洗餐具",
+                money: -30,
+                energy: 8,
+                goal12: -8
+            },
+
+            {
+                text: "不想曬太陽",
+                money: 0,
+                energy: 10,
+                goal13: -3
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "安娜的環保社",
+
+        description:
+        "安娜邀你加入環保社團。",
+
+        choices: [
+
+            {
+                text: "加入社團",
+                money: -100,
+                energy: -25,
+                goal13: 12
+            },
+
+            {
+                text: "偶爾參加活動",
+                money: 0,
+                energy: -8,
+                goal13: 5
+            },
+
+            {
+                text: "直接拒絕",
+                money: 0,
+                energy: 8,
+                goal13: -4
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "冷氣忘記關",
+
+        description:
+        "教室冷氣下課後忘了關。",
+
+        choices: [
+
+            {
+                text: "回去關掉",
+                money: 0,
+                energy: -10,
+                goal13: 10
+            },
+
+            {
+                text: "反正不是我開的",
+                money: 0,
+                energy: 5,
+                goal13: -5
+            },
+
+            {
+                text: "順便多吹一下",
+                money: 0,
+                energy: 10,
+                goal13: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "宿舍回收箱",
+
+        description:
+        "宿舍回收箱最近常常被亂丟垃圾。",
+
+        choices: [
+
+            {
+                text: "重新整理分類",
+                money: 0,
+                energy: -20,
+                goal12: 12
+            },
+
+            {
+                text: "貼提醒紙條",
+                money: -10,
+                energy: -5,
+                goal12: 5
+            },
+
+            {
+                text: "當作沒看到",
+                money: 0,
+                energy: 5,
+                goal12: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "師皇家的綠色通勤",
+
+        description:
+        "師皇家想挑戰一週不騎機車上課。",
+
+        choices: [
+
+            {
+                text: "一起搭公車",
+                money: -30,
+                energy: -15,
+                goal13: 10
+            },
+
+            {
+                text: "繼續騎機車",
+                money: -100,
+                energy: 15,
+                goal13: -8
+            },
+
+            {
+                text: "走路去學校",
+                money: 20,
+                energy: -25,
+                goal13: 12
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "校園植樹活動",
+
+        description:
+        "學校正在舉辦植樹活動。",
+
+        choices: [
+
+            {
+                text: "一起種樹",
+                money: 0,
+                energy: -30,
+                goal15: 15
+            },
+
+            {
+                text: "拍照打卡就走",
+                money: 0,
+                energy: 5,
+                goal15: -2
+            },
+
+            {
+                text: "覺得太累不去",
+                money: 0,
+                energy: 12,
+                goal15: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "松義霖的省水挑戰",
+
+        description:
+        "松義霖想挑戰一週節約用水。",
+
+        choices: [
+
+            {
+                text: "一起挑戰",
+                money: 30,
+                energy: -10,
+                goal6: 12
+            },
+
+            {
+                text: "正常用水就好",
+                money: 0,
+                energy: 5,
+                goal6: -2
+            },
+
+            {
+                text: "洗超久熱水澡",
+                money: -80,
+                energy: 20,
+                goal6: -10
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "昕昕的環保購物袋",
+
+        description:
+        "昕昕提醒你超市塑膠袋要收費。",
+
+        choices: [
+
+            {
+                text: "使用購物袋",
+                money: 5,
+                energy: -2,
+                goal12: 8
+            },
+
+            {
+                text: "直接買塑膠袋",
+                money: -5,
+                energy: 5,
+                goal12: -5
+            },
+
+            {
+                text: "徒手抱回宿舍",
+                money: 0,
+                energy: -15,
+                goal12: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "環保餐廳",
+
+        description:
+        "附近新開了一家主打低碳飲食的餐廳。",
+
+        choices: [
+
+            {
+                text: "去支持看看",
+                money: -180,
+                energy: 8,
+                goal13: 10
+            },
+
+            {
+                text: "還是吃速食",
+                money: -120,
+                energy: 15,
+                goal13: -5
+            },
+
+            {
+                text: "自己煮泡麵",
+                money: -50,
+                energy: -5,
+                goal12: 2
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        title: "垃圾減量挑戰",
+
+        description:
+        "班上正在比賽誰一週製造最少垃圾。",
+
+        choices: [
+
+            {
+                text: "努力減少垃圾",
+                money: 10,
+                energy: -20,
+                goal12: 15
+            },
+
+            {
+                text: "作弊偷偷亂丟",
+                money: 0,
+                energy: 5,
+                goal12: -10
+            },
+
+            {
+                text: "覺得太麻煩放棄",
+                money: 0,
+                energy: 10,
+                goal12: -5
+            }
+
+        ]
     }
 
 ];

@@ -12,27 +12,35 @@ let events = [];
 
 if(selectedCategory === "Environment"){
 
-    events = environmentEvents;
+    events = [...environmentEvents];
 
 }
 
 else if(selectedCategory === "Society"){
 
-    events = societyEvents;
+    events = [...societyEvents];
 
 }
 
 else if(selectedCategory === "Development"){
 
-    events = developmentEvents;
+    events = [...developmentEvents];
 
 }
 
 else if(selectedCategory === "Global"){
 
-    events = globalEvents;
+    events = [...globalEvents];
 
 }
+
+/* RANDOM SHUFFLE */
+
+events.sort(() => Math.random() - 0.5);
+
+/* ONLY PLAY 10 EVENTS */
+
+events = events.slice(0, 10);
 
 let currentEvent = 0;
 let day = 1;
