@@ -515,6 +515,463 @@ const societyEvents = [
             }
 
         ]
+    },
+
+    {
+        category: "Society",
+
+        title: "凱咪的校園陪伴計畫",
+
+        description:
+        "凱咪邀你一起參加陪伴弱勢兒童的週末活動。",
+
+        choices: [
+            {
+                text: "一起去陪小朋友",
+                money: 0,
+                energy: -22,
+                goal4: 12,
+                goal10: 6
+            },
+            {
+                text: "捐一些文具就好",
+                money: -80,
+                energy: -3,
+                goal4: 7
+            },
+            {
+                text: "週末想睡覺",
+                money: 0,
+                energy: 15,
+                goal10: -3
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "安娜的社福募款",
+
+        description:
+        "安娜正在幫社福機構募款，問你要不要支持。",
+
+        choices: [
+            {
+                text: "捐一點錢支持",
+                money: -100,
+                energy: 0,
+                goal1: 10
+            },
+            {
+                text: "幫她分享貼文",
+                money: 0,
+                energy: -5,
+                goal1: 5
+            },
+            {
+                text: "滑過當沒看到",
+                money: 0,
+                energy: 5,
+                goal1: -3
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "柔苡的健康提醒",
+
+        description:
+        "柔苡發現你最近每天熬夜，提醒你要好好照顧身體。",
+
+        choices: [
+            {
+                text: "今晚早點睡",
+                money: 0,
+                energy: 20,
+                goal3: 8
+            },
+            {
+                text: "繼續熬夜趕作業",
+                money: 0,
+                energy: -25,
+                goal4: 6,
+                goal3: -6
+            },
+            {
+                text: "買能量飲硬撐",
+                money: -60,
+                energy: 8,
+                goal3: -5
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "千千的共餐活動",
+
+        description:
+        "千千邀你參加社區共餐，陪獨居長者吃飯聊天。",
+
+        choices: [
+            {
+                text: "一起去幫忙",
+                money: 0,
+                energy: -20,
+                goal3: 6,
+                goal10: 10
+            },
+            {
+                text: "買水果請她帶去",
+                money: -100,
+                energy: -2,
+                goal3: 5
+            },
+            {
+                text: "我社恐不去",
+                money: 0,
+                energy: 10,
+                goal10: -3
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "師皇家的學習小組",
+
+        description:
+        "師皇家想成立期中考互助讀書會。",
+
+        choices: [
+            {
+                text: "加入並分享筆記",
+                money: 0,
+                energy: -18,
+                goal4: 12
+            },
+            {
+                text: "只參加不發言",
+                money: 0,
+                energy: -8,
+                goal4: 4
+            },
+            {
+                text: "自己讀比較快",
+                money: 0,
+                energy: 5,
+                goal4: -2
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "顏萱的無障礙地圖",
+
+        description:
+        "顏萱想整理校園無障礙設施地圖。",
+
+        choices: [
+            {
+                text: "陪她實地調查",
+                money: 0,
+                energy: -20,
+                goal10: 12
+            },
+            {
+                text: "幫忙整理表格",
+                money: 0,
+                energy: -8,
+                goal10: 6
+            },
+            {
+                text: "覺得用不到",
+                money: 0,
+                energy: 5,
+                goal10: -5
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "松義霖的急救課",
+
+        description:
+        "松義霖報名了 CPR 急救課，問你要不要一起去。",
+
+        choices: [
+            {
+                text: "一起去學急救",
+                money: -50,
+                energy: -15,
+                goal3: 12
+            },
+            {
+                text: "看線上影片學",
+                money: 0,
+                energy: -5,
+                goal3: 5
+            },
+            {
+                text: "我應該用不到吧",
+                money: 0,
+                energy: 5,
+                goal3: -4
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "昕昕的免費家教",
+
+        description:
+        "昕昕想幫附近國中生做免費數學家教。",
+
+        choices: [
+            {
+                text: "一起幫忙教",
+                money: 0,
+                energy: -25,
+                goal4: 15
+            },
+            {
+                text: "幫她出題目",
+                money: 0,
+                energy: -10,
+                goal4: 7
+            },
+            {
+                text: "數學我也不會",
+                money: 0,
+                energy: 8,
+                goal4: -3
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "安娜的平權討論",
+
+        description:
+        "安娜邀你參加一場性別平權議題討論會。",
+
+        choices: [
+            {
+                text: "參加並認真聽",
+                money: 0,
+                energy: -12,
+                goal5: 10
+            },
+            {
+                text: "先查資料再決定",
+                money: 0,
+                energy: -5,
+                goal5: 5
+            },
+            {
+                text: "覺得太敏感不想碰",
+                money: 0,
+                energy: 5,
+                goal5: -4
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "柔苡的午餐分享",
+
+        description:
+        "柔苡發現有同學忘記帶錢吃午餐。",
+
+        choices: [
+            {
+                text: "請他吃一餐",
+                money: -80,
+                energy: 0,
+                goal2: 8
+            },
+            {
+                text: "借他一點錢",
+                money: -50,
+                energy: -2,
+                goal1: 5,
+                goal2: 5
+            },
+            {
+                text: "裝作沒聽到",
+                money: 0,
+                energy: 5,
+                goal2: -4
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "千千的偏鄉物資箱",
+
+        description:
+        "千千想募集書本與生活用品寄到偏鄉學校。",
+
+        choices: [
+            {
+                text: "整理物資一起寄",
+                money: -100,
+                energy: -20,
+                goal4: 8,
+                goal10: 8
+            },
+            {
+                text: "捐幾本舊書",
+                money: 0,
+                energy: -5,
+                goal4: 6
+            },
+            {
+                text: "東西留著比較安心",
+                money: 0,
+                energy: 5,
+                goal10: -3
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "凱咪的反歧視貼文",
+
+        description:
+        "凱咪看到社群上有人散播歧視言論。",
+
+        choices: [
+            {
+                text: "理性留言提醒",
+                money: 0,
+                energy: -12,
+                goal10: 10
+            },
+            {
+                text: "私訊朋友討論",
+                money: 0,
+                energy: -5,
+                goal10: 5
+            },
+            {
+                text: "跟著開玩笑",
+                money: 0,
+                energy: 3,
+                goal10: -8
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "師皇家的營養早餐",
+
+        description:
+        "師皇家說你最近都不吃早餐，會影響健康。",
+
+        choices: [
+            {
+                text: "買健康早餐",
+                money: -70,
+                energy: 12,
+                goal3: 8
+            },
+            {
+                text: "喝咖啡撐過去",
+                money: -50,
+                energy: 5,
+                goal3: -4
+            },
+            {
+                text: "不吃省錢",
+                money: 50,
+                energy: -10,
+                goal3: -6
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "顏萱的校園安全巡查",
+
+        description:
+        "顏萱發現校園夜間照明不足，想回報學校。",
+
+        choices: [
+            {
+                text: "一起整理問題地點",
+                money: 0,
+                energy: -15,
+                goal10: 6,
+                goal3: 5
+            },
+            {
+                text: "幫忙寫回報信",
+                money: 0,
+                energy: -8,
+                goal10: 5
+            },
+            {
+                text: "反正我不晚上出門",
+                money: 0,
+                energy: 5,
+                goal10: -3
+            }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        title: "松義霖的公益路跑",
+
+        description:
+        "松義霖邀你參加為弱勢兒童募款的公益路跑。",
+
+        choices: [
+            {
+                text: "報名參加",
+                money: -300,
+                energy: -30,
+                goal3: 8,
+                goal1: 8
+            },
+            {
+                text: "只捐款不跑",
+                money: -150,
+                energy: 0,
+                goal1: 7
+            },
+            {
+                text: "我跑去吃宵夜",
+                money: -120,
+                energy: 8,
+                goal3: -5
+            }
+        ]
     }
 
 ];
