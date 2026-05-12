@@ -38,15 +38,7 @@ let currentEvent = 0;
 let day = 1;
 let money = 100;
 let energy = 80;
-let sdgScores = {
-
-    goal7: 0,
-    goal8: 0,
-    goal12: 0,
-    goal13: 0,
-    goal14: 0
-
-};
+let sdgScores = {};
 
 const menuBtn = document.getElementById("menuBtn");
 const menuModal = document.getElementById("menuModal");
@@ -97,8 +89,19 @@ const goalColors = {
 
 const activeGoals = categoryGoals[selectedCategory];
 
+const targetGoal =
+    activeGoals[
+        Math.floor(Math.random() * activeGoals.length)
+    ];
+
+const targetScore = 100;
+
 
 function loadEvent() {
+
+    document.getElementById("goalBox")
+    .innerText =
+    `${targetGoal.replace("goal", "Goal ")} Score ≥ ${targetScore}`;
 
     const event = events[currentEvent];
 
@@ -145,6 +148,14 @@ function loadEvent() {
             money = Math.max(0, money);
             energy = Math.max(0, energy);
 
+
+            if(money <= 0 || energy <= 0){
+                alert("Game Over!");
+                menuModal.classList.remove("active");
+                return;
+
+            }
+
             for(let key in choice){
 
                 if(key.startsWith("goal")){
@@ -161,7 +172,13 @@ function loadEvent() {
 
             }
 
-            updateProgress();
+            const isWin = updateProgress();
+
+            if(isWin){
+
+                return;
+
+            }
 
             nextDay();
 
@@ -174,14 +191,31 @@ function loadEvent() {
 }
 
 function updateProgress() {
-    activeGoals.forEach(goal => {
-        const fill = document.getElementById(`${goal}Fill`);
 
-        if (fill) {
+    activeGoals.forEach(goal => {
+
+        const fill =
+        document.getElementById(`${goal}Fill`);
+
+        if(fill){
+
             fill.style.width =
-                `${Math.min(sdgScores[goal] || 0, 100)}%`;
+            `${Math.min(sdgScores[goal] || 0, 100)}%`;
+
         }
+
     });
+
+    if((sdgScores[targetGoal] || 0) >= targetScore){
+
+        alert("You Win!");
+
+        return true;
+
+    }
+
+    return false;
+
 }
 
 function nextDay(){
