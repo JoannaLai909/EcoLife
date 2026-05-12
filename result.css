@@ -3,6 +3,7 @@ body{
     padding: 0;
     font-family: "Ahkio-Regular";
     background: #a8d3eb;
+    letter-spacing: 1.2px;
 }
 
 .result-page{
@@ -55,4 +56,5 @@ body{
     border-radius: 20px;
     cursor: pointer;
     font-family: "Ahkio-Regular", sans-serif;
+    letter-spacing: 1.2px;
 }
