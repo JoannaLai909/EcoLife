@@ -38,9 +38,9 @@ else if(selectedCategory === "Global"){
 
 events.sort(() => Math.random() - 0.5);
 
-/* ONLY PLAY 10 EVENTS */
+/* ONLY PLAY 15 EVENTS */
 
-events = events.slice(0, 10);
+events = events.slice(0, 15);
 
 let currentEvent = 0;
 let day = 1;
@@ -102,7 +102,12 @@ const targetGoal =
         Math.floor(Math.random() * activeGoals.length)
     ];
 
-const targetScore = 100;
+const possibleScores = [50, 60, 70, 80];
+
+const targetScore =
+    possibleScores[
+        Math.floor(Math.random() * possibleScores.length)
+    ];
 
 
 function loadEvent() {
