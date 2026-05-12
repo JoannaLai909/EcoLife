@@ -511,6 +511,524 @@ const developmentEvents = [
             }
 
         ]
+    },
+
+    {
+        category: "Development",
+
+        title: "智慧停車系統",
+
+        description:
+        "學校正在測試智慧停車 App。",
+
+        choices: [
+
+            {
+                text: "下載試用",
+                money: -20,
+                energy: -5,
+                goal11: 8,
+                goal9: 5
+            },
+
+            {
+                text: "還是亂停車",
+                money: 0,
+                energy: 5,
+                goal11: -6
+            },
+
+            {
+                text: "騎腳踏車來學校",
+                money: 20,
+                energy: -15,
+                goal11: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "AI 自習室",
+
+        description:
+        "圖書館新增 AI 自習室預約系統。",
+
+        choices: [
+
+            {
+                text: "研究新功能",
+                money: 0,
+                energy: -10,
+                goal9: 8
+            },
+
+            {
+                text: "用來搶熱門位子",
+                money: 0,
+                energy: 5,
+                goal9: -3
+            },
+
+            {
+                text: "直接去咖啡廳",
+                money: -120,
+                energy: 12,
+                goal11: -2
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "松義霖的創新提案",
+
+        description:
+        "松義霖想做一個校園節能 App。",
+
+        choices: [
+
+            {
+                text: "一起開發",
+                money: -50,
+                energy: -30,
+                goal9: 15,
+                goal7: 5
+            },
+
+            {
+                text: "只提供想法",
+                money: 0,
+                energy: -8,
+                goal9: 5
+            },
+
+            {
+                text: "覺得沒人會用",
+                money: 0,
+                energy: 8,
+                goal9: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "智慧販賣機",
+
+        description:
+        "校園導入能分析購買習慣的智慧販賣機。",
+
+        choices: [
+
+            {
+                text: "體驗新科技",
+                money: -30,
+                energy: -3,
+                goal9: 6
+            },
+
+            {
+                text: "擔心個資問題",
+                money: 0,
+                energy: -5,
+                goal16: 5
+            },
+
+            {
+                text: "亂按機器玩",
+                money: -10,
+                energy: 8,
+                goal9: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "柔苡的太陽能板",
+
+        description:
+        "柔苡想在社團展展示小型太陽能裝置。",
+
+        choices: [
+
+            {
+                text: "幫忙組裝",
+                money: -80,
+                energy: -18,
+                goal7: 12
+            },
+
+            {
+                text: "只負責拍照",
+                money: 0,
+                energy: -3,
+                goal7: 3
+            },
+
+            {
+                text: "感覺很無聊",
+                money: 0,
+                energy: 5,
+                goal7: -4
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "共享單車維修",
+
+        description:
+        "校園共享單車最近很多台壞掉。",
+
+        choices: [
+
+            {
+                text: "回報故障車輛",
+                money: 0,
+                energy: -5,
+                goal11: 8
+            },
+
+            {
+                text: "幫忙簡單維修",
+                money: -50,
+                energy: -20,
+                goal11: 12
+            },
+
+            {
+                text: "壞掉就算了",
+                money: 0,
+                energy: 5,
+                goal11: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "校園數位化",
+
+        description:
+        "學校開始推動無紙化行政流程。",
+
+        choices: [
+
+            {
+                text: "支持全面數位化",
+                money: 0,
+                energy: -8,
+                goal9: 8,
+                goal12: 5
+            },
+
+            {
+                text: "我還是喜歡紙本",
+                money: -20,
+                energy: 5,
+                goal12: -3
+            },
+
+            {
+                text: "亂印一堆文件",
+                money: -50,
+                energy: 3,
+                goal12: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "安娜的 3D 列印",
+
+        description:
+        "安娜想用 3D 列印做環保模型。",
+
+        choices: [
+
+            {
+                text: "幫忙建模",
+                money: -30,
+                energy: -20,
+                goal9: 10
+            },
+
+            {
+                text: "只幫忙上色",
+                money: -10,
+                energy: -5,
+                goal9: 3
+            },
+
+            {
+                text: "直接網購成品",
+                money: -300,
+                energy: 10,
+                goal9: -4
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "智慧宿舍",
+
+        description:
+        "宿舍正在測試自動節能照明系統。",
+
+        choices: [
+
+            {
+                text: "支持安裝",
+                money: -20,
+                energy: -3,
+                goal7: 8,
+                goal11: 5
+            },
+
+            {
+                text: "嫌燈太常自動關掉",
+                money: 0,
+                energy: 5,
+                goal7: -3
+            },
+
+            {
+                text: "偷偷拔感測器",
+                money: 20,
+                energy: -8,
+                goal7: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "凱咪的科技展",
+
+        description:
+        "凱咪邀你一起參加科技與永續展覽。",
+
+        choices: [
+
+            {
+                text: "認真參觀",
+                money: -50,
+                energy: -12,
+                goal9: 10
+            },
+
+            {
+                text: "只拍照打卡",
+                money: -10,
+                energy: 5,
+                goal9: 1
+            },
+
+            {
+                text: "直接回宿舍",
+                money: 0,
+                energy: 10,
+                goal9: -4
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "自動垃圾分類機",
+
+        description:
+        "學生團隊做出 AI 垃圾分類裝置。",
+
+        choices: [
+
+            {
+                text: "協助測試",
+                money: 0,
+                energy: -15,
+                goal9: 12,
+                goal12: 5
+            },
+
+            {
+                text: "亂丟測試極限",
+                money: 0,
+                energy: 8,
+                goal12: -6
+            },
+
+            {
+                text: "完全沒興趣",
+                money: 0,
+                energy: 5,
+                goal9: -3
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "昕昕的程式課",
+
+        description:
+        "昕昕推薦你修一門 AI 與永續發展課程。",
+
+        choices: [
+
+            {
+                text: "認真修課",
+                money: -100,
+                energy: -30,
+                goal4: 8,
+                goal9: 10
+            },
+
+            {
+                text: "只求低空飛過",
+                money: 0,
+                energy: -10,
+                goal4: -2
+            },
+
+            {
+                text: "直接退選",
+                money: 0,
+                energy: 12,
+                goal9: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "智慧公車系統",
+
+        description:
+        "城市導入即時智慧公車資訊。",
+
+        choices: [
+
+            {
+                text: "下載 App 使用",
+                money: -5,
+                energy: -3,
+                goal11: 8
+            },
+
+            {
+                text: "還是亂等車",
+                money: 0,
+                energy: -10,
+                goal11: -3
+            },
+
+            {
+                text: "直接搭 Uber",
+                money: -250,
+                energy: 15,
+                goal11: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "校園資料中心",
+
+        description:
+        "資訊中心正在升級節能伺服器。",
+
+        choices: [
+
+            {
+                text: "參加導覽活動",
+                money: 0,
+                energy: -12,
+                goal9: 8,
+                goal7: 5
+            },
+
+            {
+                text: "只想吹冷氣",
+                money: 0,
+                energy: 8,
+                goal7: -2
+            },
+
+            {
+                text: "覺得完全看不懂",
+                money: 0,
+                energy: 5,
+                goal9: -3
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "AI 自動翻譯耳機",
+
+        description:
+        "科技展正在展示 AI 即時翻譯耳機。",
+
+        choices: [
+
+            {
+                text: "體驗新科技",
+                money: -100,
+                energy: -5,
+                goal9: 8,
+                goal17: 3
+            },
+
+            {
+                text: "覺得沒必要",
+                money: 0,
+                energy: 5,
+                goal9: -3
+            },
+
+            {
+                text: "偷偷拿去玩遊戲",
+                money: 0,
+                energy: 10,
+                goal9: -5
+            }
+
+        ]
     }
 
 ];

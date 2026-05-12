@@ -440,6 +440,517 @@ const globalEvents = [
             }
 
         ]
+    },
+
+    {
+        category: "Development",
+
+        title: "校園 AI 助教",
+
+        description:
+        "學校正在測試 AI 助教系統。",
+
+        choices: [
+
+            {
+                text: "主動試用回饋",
+                money: 0,
+                energy: -15,
+                goal9: 10
+            },
+
+            {
+                text: "只拿來查答案",
+                money: 0,
+                energy: 5,
+                goal4: -5
+            },
+
+            {
+                text: "完全不用",
+                money: 0,
+                energy: 3,
+                goal9: -3
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "智慧回收機",
+
+        description:
+        "校園新增智慧回收機，可以自動分類垃圾。",
+
+        choices: [
+
+            {
+                text: "認真研究功能",
+                money: 5,
+                energy: -10,
+                goal9: 8,
+                goal11: 5
+            },
+
+            {
+                text: "亂塞進去",
+                money: 0,
+                energy: 3,
+                goal11: -5
+            },
+
+            {
+                text: "直接丟一般垃圾",
+                money: 0,
+                energy: 5,
+                goal11: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "宿舍智慧電表",
+
+        description:
+        "宿舍開始測試智慧電表系統。",
+
+        choices: [
+
+            {
+                text: "觀察用電變化",
+                money: 20,
+                energy: -5,
+                goal7: 10
+            },
+
+            {
+                text: "覺得很麻煩",
+                money: 0,
+                energy: 3,
+                goal7: -3
+            },
+
+            {
+                text: "偷偷接延長線",
+                money: 30,
+                energy: -8,
+                goal7: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "凱咪的程式競賽",
+
+        description:
+        "凱咪邀你參加智慧城市程式競賽。",
+
+        choices: [
+
+            {
+                text: "熬夜做專案",
+                money: 0,
+                energy: -35,
+                goal9: 15
+            },
+
+            {
+                text: "只幫忙做 PPT",
+                money: 0,
+                energy: -10,
+                goal9: 4
+            },
+
+            {
+                text: "直接放棄",
+                money: 0,
+                energy: 12,
+                goal9: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        title: "校園共享雨傘",
+
+        description:
+        "學校推出共享雨傘系統。",
+
+        choices: [
+
+            {
+                text: "使用後記得歸還",
+                money: -10,
+                energy: -3,
+                goal11: 8
+            },
+
+            {
+                text: "直接帶回家",
+                money: 50,
+                energy: 5,
+                goal11: -8
+            },
+
+            {
+                text: "淋雨回宿舍",
+                money: 0,
+                energy: -15,
+                goal3: -3
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "國際環保論壇",
+
+        description:
+        "教授推薦你參加聯合國青年環保論壇直播。",
+
+        choices: [
+
+            {
+                text: "認真參與討論",
+                money: 0,
+                energy: -15,
+                goal17: 10
+            },
+
+            {
+                text: "掛著當背景音",
+                money: 0,
+                energy: 3,
+                goal17: 2
+            },
+
+            {
+                text: "直接關掉",
+                money: 0,
+                energy: 8,
+                goal17: -4
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "國際災難募款",
+
+        description:
+        "某國發生重大地震，學校正在募款。",
+
+        choices: [
+
+            {
+                text: "捐款支持",
+                money: -200,
+                energy: 0,
+                goal17: 10
+            },
+
+            {
+                text: "分享募款資訊",
+                money: 0,
+                energy: -5,
+                goal17: 5
+            },
+
+            {
+                text: "覺得離我太遠",
+                money: 0,
+                energy: 5,
+                goal17: -3
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "跨國線上筆友",
+
+        description:
+        "你收到一個國外學生的交流邀請。",
+
+        choices: [
+
+            {
+                text: "認真交流文化",
+                money: 0,
+                energy: -10,
+                goal17: 8
+            },
+
+            {
+                text: "偶爾回訊息",
+                money: 0,
+                energy: -3,
+                goal17: 3
+            },
+
+            {
+                text: "直接已讀不回",
+                money: 0,
+                energy: 5,
+                goal17: -3
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "國際和平連署",
+
+        description:
+        "朋友邀你參與反戰和平連署。",
+
+        choices: [
+
+            {
+                text: "閱讀後參與",
+                money: 0,
+                energy: -8,
+                goal16: 10
+            },
+
+            {
+                text: "直接亂簽",
+                money: 0,
+                energy: -2,
+                goal16: -3
+            },
+
+            {
+                text: "完全不理",
+                money: 0,
+                energy: 5,
+                goal16: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "假新聞危機",
+
+        description:
+        "社群開始瘋傳一則未經查證的國際新聞。",
+
+        choices: [
+
+            {
+                text: "查證後再分享",
+                money: 0,
+                energy: -8,
+                goal16: 12
+            },
+
+            {
+                text: "直接轉發",
+                money: 0,
+                energy: 2,
+                goal16: -10
+            },
+
+            {
+                text: "當作沒看到",
+                money: 0,
+                energy: 5,
+                goal16: -2
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "公平貿易巧克力",
+
+        description:
+        "你發現公平貿易巧克力比較貴。",
+
+        choices: [
+
+            {
+                text: "支持公平貿易",
+                money: -80,
+                energy: 2,
+                goal17: 8
+            },
+
+            {
+                text: "買最便宜的",
+                money: 30,
+                energy: 0,
+                goal17: -5
+            },
+
+            {
+                text: "今天不吃甜食",
+                money: 50,
+                energy: -3,
+                goal17: 2
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "國際志工計畫",
+
+        description:
+        "學校正在招募海外教育志工。",
+
+        choices: [
+
+            {
+                text: "報名參加",
+                money: -500,
+                energy: -35,
+                goal17: 15
+            },
+
+            {
+                text: "幫忙宣傳",
+                money: 0,
+                energy: -8,
+                goal17: 6
+            },
+
+            {
+                text: "太麻煩了",
+                money: 0,
+                energy: 10,
+                goal17: -4
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "跨國合作黑客松",
+
+        description:
+        "你和外國學生一起參加 SDGs 黑客松。",
+
+        choices: [
+
+            {
+                text: "積極合作",
+                money: 0,
+                energy: -40,
+                goal17: 15
+            },
+
+            {
+                text: "只做自己的部分",
+                money: 0,
+                energy: -12,
+                goal17: 5
+            },
+
+            {
+                text: "全程擺爛",
+                money: 0,
+                energy: 15,
+                goal17: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "國際文化節",
+
+        description:
+        "學校正在舉辦國際文化交流節。",
+
+        choices: [
+
+            {
+                text: "體驗不同文化",
+                money: -100,
+                energy: -12,
+                goal17: 10
+            },
+
+            {
+                text: "只去吃免費食物",
+                money: 50,
+                energy: 3,
+                goal17: -2
+            },
+
+            {
+                text: "完全不參加",
+                money: 0,
+                energy: 8,
+                goal17: -4
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        title: "網路言論衝突",
+
+        description:
+        "你看到有人在留言區攻擊不同國家的文化。",
+
+        choices: [
+
+            {
+                text: "理性提醒對方",
+                money: 0,
+                energy: -10,
+                goal16: 10
+            },
+
+            {
+                text: "加入混戰",
+                money: 0,
+                energy: -20,
+                goal16: -10
+            },
+
+            {
+                text: "默默離開",
+                money: 0,
+                energy: 5,
+                goal16: -2
+            }
+
+        ]
     }
 
 ];
