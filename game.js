@@ -237,7 +237,23 @@ function nextDay(){
 
     if(currentEvent >= events.length){
 
-        alert("Game Finished!");
+        if((sdgScores[targetGoal] || 0) >= targetScore){
+
+            localStorage.setItem("resultType", "win");
+
+        }
+
+        else{
+
+            localStorage.setItem("resultType", "lose");
+
+        }
+
+        localStorage.setItem("money", money);
+
+        localStorage.setItem("energy", energy);
+
+        window.location.href = "result.html";
 
         return;
     }
