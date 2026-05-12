@@ -102,7 +102,7 @@ const targetGoal =
         Math.floor(Math.random() * activeGoals.length)
     ];
 
-const possibleScores = [50, 60, 70, 80];
+const possibleScores = [30, 40, 50, 60];
 
 const targetScore =
     possibleScores[
