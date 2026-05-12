@@ -158,7 +158,10 @@ function loadEvent() {
 
 
             if(money <= 0 || energy <= 0){
-                alert("Game Over!");
+                localStorage.setItem("resultType", "lose");
+                localStorage.setItem("money", money);
+                localStorage.setItem("energy", energy);
+                window.location.href = "result.html";
                 menuModal.classList.remove("active");
                 return;
 
@@ -216,8 +219,10 @@ function updateProgress() {
 
     if((sdgScores[targetGoal] || 0) >= targetScore){
 
-        alert("You Win!");
-
+        localStorage.setItem("resultType", "win");
+        localStorage.setItem("money", money);
+        localStorage.setItem("energy", energy);
+        window.location.href = "result.html";
         return true;
 
     }
