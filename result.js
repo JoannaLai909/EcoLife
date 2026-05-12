@@ -31,7 +31,7 @@ if(resultType === "win"){
 
 else{
 
-    resultTiger.src ="image/tiger_ending_1_transparent.png";
+    resultTiger.src ="image/tiger_ending_3_transparent.png";
 
     resultTitle.innerText =
     "Game Over";
