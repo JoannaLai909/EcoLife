@@ -37,19 +37,6 @@ function revealSections() {
 
 window.addEventListener("scroll", revealSections);
 
-const featureBtn = document.getElementById("featureBtn");
-const featureMenu = document.getElementById("featureMenu");
-
-featureBtn.addEventListener("click", function(e) {
-  e.preventDefault();
-  featureMenu.classList.toggle("active");
-});
-
-document.addEventListener("click", function(e) {
-  if (!featureBtn.contains(e.target) && !featureMenu.contains(e.target)) {
-    featureMenu.classList.remove("active");
-  }
-});
 
 const featureBtn = document.querySelector(".feature-btn");
 const subDropdown = document.querySelector(".sub-dropdown");
