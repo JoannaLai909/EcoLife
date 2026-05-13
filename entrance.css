@@ -778,6 +778,17 @@ p {
   right: 10%;
 }
 
+.about-page{
+    background: #9ed8f2;
+}
+
+.about-page {
+    background: #9ed8f2;
+}
+
+.first-section {
+    padding-top: 140px;
+}
 /* =========================
    Responsive
 ========================= */
