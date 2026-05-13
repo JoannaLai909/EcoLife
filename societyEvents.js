@@ -14,7 +14,7 @@ const societyEvents = [
                 text: "認真去聽",
                 money: 0,
                 energy: -10,
-                goal3: 12
+                goal3: 20
             },
 
             {
@@ -28,7 +28,7 @@ const societyEvents = [
                 text: "只去拿簽到分數",
                 money: 0,
                 energy: -3,
-                goal4: 2
+                goal4: 5
             }
 
         ]
@@ -48,14 +48,14 @@ const societyEvents = [
                 text: "耐心教她",
                 money: 0,
                 energy: -18,
-                goal4: 12
+                goal4: 20
             },
 
             {
                 text: "傳你自己的筆記給她",
                 money: 0,
                 energy: -5,
-                goal4: 6
+                goal4: 15
             },
 
             {
@@ -82,8 +82,8 @@ const societyEvents = [
                 text: "買一份支持",
                 money: -80,
                 energy: 0,
-                goal1: 8,
-                goal2: 8
+                goal1: 10,
+                goal2: 10
             },
 
             {
@@ -118,14 +118,14 @@ const societyEvents = [
                 text: "一起設計海報",
                 money: 0,
                 energy: -15,
-                goal5: 12
+                goal5: 15
             },
 
             {
                 text: "幫她找資料",
                 money: 0,
                 energy: -8,
-                goal5: 6
+                goal5: 10
             },
 
             {
@@ -152,14 +152,14 @@ const societyEvents = [
                 text: "主動把雜物移開",
                 money: 0,
                 energy: -8,
-                goal10: 10
+                goal10: 20
             },
 
             {
                 text: "通知助教處理",
                 money: 0,
                 energy: -3,
-                goal10: 6
+                goal10: 10
             },
 
             {
@@ -186,21 +186,21 @@ const societyEvents = [
                 text: "幫忙整理餐點",
                 money: 0,
                 energy: -12,
-                goal2: 10
+                goal2: 15
             },
 
             {
                 text: "幫忙聯絡社福單位",
                 money: 0,
                 energy: -8,
-                goal2: 8,
-                goal10: 3
+                goal2: 15,
+                goal10: 10
             },
 
             {
                 text: "自己先打包回家",
                 money: 50,
-                energy: 3,
+                energy: 5,
                 goal2: -5
             }
 
@@ -255,14 +255,14 @@ const societyEvents = [
                 text: "私訊關心被嘲笑的人",
                 money: 0,
                 energy: -8,
-                goal10: 8
+                goal10: 10
             },
 
             {
                 text: "在群組提醒大家尊重",
                 money: 0,
                 energy: -12,
-                goal10: 10
+                goal10: 15
             },
 
             {
@@ -288,14 +288,14 @@ const societyEvents = [
             {
                 text: "選均衡便當",
                 money: -90,
-                energy: 8,
-                goal3: 8
+                energy: 15,
+                goal3: 10
             },
 
             {
                 text: "繼續炸雞加珍奶",
                 money: -150,
-                energy: 15,
+                energy: 20,
                 goal3: -8
             },
 
@@ -358,15 +358,15 @@ const societyEvents = [
                 text: "報名帶活動",
                 money: -50,
                 energy: -30,
-                goal4: 15,
-                goal10: 5
+                goal4: 20,
+                goal10: 10
             },
 
             {
                 text: "捐二手童書",
                 money: -30,
                 energy: -5,
-                goal4: 8
+                goal4: 10
             },
 
             {
@@ -393,14 +393,14 @@ const societyEvents = [
                 text: "幫她做招生文宣",
                 money: 0,
                 energy: -15,
-                goal10: 8
+                goal10: 15
             },
 
             {
                 text: "推薦幾個朋友",
                 money: 0,
                 energy: -5,
-                goal10: 5
+                goal10: 10
             },
 
             {
@@ -427,15 +427,15 @@ const societyEvents = [
                 text: "支持並參與提案",
                 money: 0,
                 energy: -18,
-                goal5: 12,
-                goal10: 5
+                goal5: 15,
+                goal10: 10
             },
 
             {
                 text: "在社群分享資訊",
                 money: 0,
                 energy: -5,
-                goal5: 6
+                goal5: 10
             },
 
             {
@@ -462,14 +462,14 @@ const societyEvents = [
                 text: "主動關心她",
                 money: 0,
                 energy: -10,
-                goal3: 10
+                goal3: 15
             },
 
             {
                 text: "陪她去諮商中心",
                 money: 0,
                 energy: -18,
-                goal3: 15
+                goal3: 20
             },
 
             {
@@ -496,15 +496,15 @@ const societyEvents = [
                 text: "買一些物資捐出",
                 money: -150,
                 energy: -5,
-                goal1: 8,
-                goal2: 10
+                goal1: 10,
+                goal2: 15
             },
 
             {
                 text: "幫忙搬運分類",
                 money: 0,
                 energy: -25,
-                goal2: 12
+                goal2: 20
             },
 
             {
@@ -530,8 +530,8 @@ const societyEvents = [
                 text: "一起去陪小朋友",
                 money: 0,
                 energy: -22,
-                goal4: 12,
-                goal10: 6
+                goal4: 15,
+                goal10: 8
             },
             {
                 text: "捐一些文具就好",
@@ -543,7 +543,7 @@ const societyEvents = [
                 text: "週末想睡覺",
                 money: 0,
                 energy: 15,
-                goal10: -3
+                goal10: -5
             }
         ]
     },
@@ -561,13 +561,13 @@ const societyEvents = [
                 text: "捐一點錢支持",
                 money: -100,
                 energy: 0,
-                goal1: 10
+                goal1: 20
             },
             {
                 text: "幫她分享貼文",
                 money: 0,
                 energy: -5,
-                goal1: 5
+                goal1: 10
             },
             {
                 text: "滑過當沒看到",
@@ -622,14 +622,14 @@ const societyEvents = [
                 text: "一起去幫忙",
                 money: 0,
                 energy: -20,
-                goal3: 6,
-                goal10: 10
+                goal3: 10,
+                goal10: 15
             },
             {
                 text: "買水果請她帶去",
                 money: -100,
                 energy: -2,
-                goal3: 5
+                goal3: 20
             },
             {
                 text: "我社恐不去",
@@ -653,13 +653,13 @@ const societyEvents = [
                 text: "加入並分享筆記",
                 money: 0,
                 energy: -18,
-                goal4: 12
+                goal4: 18
             },
             {
                 text: "只參加不發言",
                 money: 0,
                 energy: -8,
-                goal4: 4
+                goal4: 8
             },
             {
                 text: "自己讀比較快",
@@ -683,13 +683,13 @@ const societyEvents = [
                 text: "陪她實地調查",
                 money: 0,
                 energy: -20,
-                goal10: 12
+                goal10: 15
             },
             {
                 text: "幫忙整理表格",
                 money: 0,
                 energy: -8,
-                goal10: 6
+                goal10: 10
             },
             {
                 text: "覺得用不到",
@@ -713,13 +713,13 @@ const societyEvents = [
                 text: "一起去學急救",
                 money: -50,
                 energy: -15,
-                goal3: 12
+                goal3: 20
             },
             {
                 text: "看線上影片學",
                 money: 0,
                 energy: -5,
-                goal3: 5
+                goal3: 10
             },
             {
                 text: "我應該用不到吧",
@@ -743,13 +743,13 @@ const societyEvents = [
                 text: "一起幫忙教",
                 money: 0,
                 energy: -25,
-                goal4: 15
+                goal4: 20
             },
             {
                 text: "幫她出題目",
                 money: 0,
                 energy: -10,
-                goal4: 7
+                goal4: 10
             },
             {
                 text: "數學我也不會",
@@ -773,13 +773,13 @@ const societyEvents = [
                 text: "參加並認真聽",
                 money: 0,
                 energy: -12,
-                goal5: 10
+                goal5: 15
             },
             {
                 text: "先查資料再決定",
                 money: 0,
                 energy: -5,
-                goal5: 5
+                goal5: 10
             },
             {
                 text: "覺得太敏感不想碰",
@@ -803,14 +803,14 @@ const societyEvents = [
                 text: "請他吃一餐",
                 money: -80,
                 energy: 0,
-                goal2: 8
+                goal2: 15
             },
             {
                 text: "借他一點錢",
                 money: -50,
                 energy: -2,
-                goal1: 5,
-                goal2: 5
+                goal1: 8,
+                goal2: 8
             },
             {
                 text: "裝作沒聽到",
@@ -832,22 +832,22 @@ const societyEvents = [
         choices: [
             {
                 text: "整理物資一起寄",
-                money: -100,
+                money: -80,
                 energy: -20,
-                goal4: 8,
-                goal10: 8
+                goal4: 15,
+                goal10: 15
             },
             {
                 text: "捐幾本舊書",
                 money: 0,
                 energy: -5,
-                goal4: 6
+                goal4: 10
             },
             {
                 text: "東西留著比較安心",
                 money: 0,
                 energy: 5,
-                goal10: -3
+                goal10: -5
             }
         ]
     },
@@ -892,10 +892,10 @@ const societyEvents = [
 
         choices: [
             {
-                text: "買健康早餐",
-                money: -70,
+                text: "叫乃辭請我吃",
+                money: 0,
                 energy: 12,
-                goal3: 8
+                goal3: 10
             },
             {
                 text: "喝咖啡撐過去",
@@ -926,19 +926,19 @@ const societyEvents = [
                 money: 0,
                 energy: -15,
                 goal10: 6,
-                goal3: 5
+                goal3: 20
             },
             {
                 text: "幫忙寫回報信",
                 money: 0,
                 energy: -8,
-                goal10: 5
+                goal10: 10
             },
             {
                 text: "反正我不晚上出門",
                 money: 0,
                 energy: 5,
-                goal10: -3
+                goal10: -5
             }
         ]
     },
@@ -954,16 +954,16 @@ const societyEvents = [
         choices: [
             {
                 text: "報名參加",
-                money: -300,
+                money: -100,
                 energy: -30,
-                goal3: 8,
-                goal1: 8
+                goal3: 15,
+                goal1: 15
             },
             {
                 text: "只捐款不跑",
                 money: -150,
                 energy: 0,
-                goal1: 7
+                goal1: 10
             },
             {
                 text: "我跑去吃宵夜",
