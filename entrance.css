@@ -358,7 +358,7 @@ p {
 .dropdown-content {
   position: absolute;
 
-  top: calc(100% + 30.5px);
+  top: calc(100% + 32.5px);
   right: -30px;
 
   display: flex;
