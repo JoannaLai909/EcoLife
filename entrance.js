@@ -50,3 +50,15 @@ document.addEventListener("click", function(e) {
     featureMenu.classList.remove("active");
   }
 });
+
+const featureBtn = document.querySelector(".feature-btn");
+const subDropdown = document.querySelector(".sub-dropdown");
+
+if (featureBtn && subDropdown) {
+    featureBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        subDropdown.classList.toggle("active");
+    });
+}
