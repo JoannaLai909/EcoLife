@@ -73,6 +73,19 @@ document.getElementById("homeBtn").addEventListener("click", () => {
   window.location.href = "entrance.html";
 });
 
+const shopBtn = document.getElementById("shopBtn");
+const shopOverlay = document.getElementById("shopOverlay");
+const shopCloseBtn = document.getElementById("shopCloseBtn");
+const shopBalance = document.getElementById("shopBalance");
+
+shopBtn.addEventListener("click", () => {
+    shopBalance.innerText = `💰 ${money}`;
+    shopOverlay.classList.add("shop-open");
+});
+
+shopCloseBtn.addEventListener("click", () => {
+    shopOverlay.classList.remove("shop-open");
+});
 
 
 const goalColors = {
