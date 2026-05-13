@@ -156,12 +156,12 @@ function loadEvent() {
                 ⚡ ${choice.energy}
             </div>
         `;
-        if(money + choice.money < 0){
-                card.style.opacity = "0.5";
-                card.style.pointerEvents = "none";
-        }
 
         card.addEventListener("click", () => {
+            if(money + choice.money < 0){
+                alert("Not enough money!");
+                return;
+            }
 
             money += choice.money;
             energy += choice.energy;
@@ -169,7 +169,7 @@ function loadEvent() {
             energy = Math.max(0, energy);
 
 
-            if(money <= 0 || energy <= 0){
+            if(energy <= 0){
                 localStorage.setItem("resultType", "lose");
                 localStorage.setItem("money", money);
                 localStorage.setItem("energy", energy);
