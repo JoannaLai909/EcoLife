@@ -44,6 +44,7 @@ events = events.slice(0, 15);
 
 let currentEvent = 0;
 let day = 1;
+let usedEventTitles = [];
 let actionsToday = 0;
 const maxActionsPerDay = 4;
 const maxDays = 21;
@@ -122,29 +123,31 @@ function loadEvent() {
 
     let availableEvents = events;
 
-    /* LOW MONEY EVENT */
-
-    if(money <= 100){
-
-        const moneyEvents =
-        events.filter(event =>
+    if(money <= 50){
+        const moneyEvents = events.filter(event =>
             event.type === "money"
         );
 
         if(moneyEvents.length > 0){
-
             availableEvents = moneyEvents;
-
         }
-
     }
 
-    /* RANDOM EVENT */
+    availableEvents = availableEvents.filter(event =>
+        !usedEventTitles.includes(event.title)
+    );
+
+    if(availableEvents.length === 0){
+        usedEventTitles = [];
+        availableEvents = events;
+    }
 
     const event =
     availableEvents[
         Math.floor(Math.random() * availableEvents.length)
     ];
+
+    usedEventTitles.push(event.title);
 
     document.getElementById("scenarioTitle")
     .innerText = event.title;
