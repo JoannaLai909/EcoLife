@@ -14,7 +14,7 @@ const environmentEvents = [
                 text: "跟她一起去",
                 money: 0,
                 energy: -20,
-                goal14: 10
+                goal14: 20
             },
 
             {
@@ -26,7 +26,7 @@ const environmentEvents = [
 
             {
                 text: "不行我要去打工",
-                money: 13,
+                money: 80,
                 energy: -9,
                 goal8: 5
             }
@@ -37,10 +37,10 @@ const environmentEvents = [
     {
         category: "Environment",
 
-        title: "師皇家的蔬食週",
+        title: "Judi 的蔬食週",
 
         description:
-        "師皇家提議這週午餐都吃素食來減碳。",
+        "Judi 提議這週午餐都吃素食來減碳。",
 
         choices: [
 
@@ -82,7 +82,7 @@ const environmentEvents = [
                 text: "回宿舍拿",
                 money: 5,
                 energy: -12,
-                goal12: 8
+                goal12: 15
             },
 
             {
@@ -116,7 +116,7 @@ const environmentEvents = [
                 text: "惜食一下",
                 money: 60,
                 energy: 5,
-                goal12: 10
+                goal12: 15
             },
 
             {
@@ -130,7 +130,7 @@ const environmentEvents = [
                 text: "拿去餵流浪貓",
                 money: 0,
                 energy: -5,
-                goal15: 5
+                goal15: 10
             }
 
         ]
@@ -150,7 +150,7 @@ const environmentEvents = [
                 text: "默默放回去",
                 money: 0,
                 energy: -3,
-                goal12: 8
+                goal12: 10
             },
 
             {
@@ -184,7 +184,7 @@ const environmentEvents = [
                 text: "被推坑買一個",
                 money: -250,
                 energy: -2,
-                goal12: 10
+                goal12: 15
             },
 
             {
@@ -218,7 +218,7 @@ const environmentEvents = [
                 text: "用內用杯",
                 money: 0,
                 energy: -5,
-                goal12: 8
+                goal12: 15
             },
 
             {
@@ -354,7 +354,7 @@ const environmentEvents = [
                 text: "騎 YouBike",
                 money: -5,
                 energy: -20,
-                goal13: 10
+                goal13: 15
             },
 
             {
@@ -422,7 +422,7 @@ const environmentEvents = [
                 text: "收集到滿再洗",
                 money: 20,
                 energy: -5,
-                goal12: 10
+                goal12: 15
             },
 
             {
@@ -456,7 +456,7 @@ const environmentEvents = [
                 text: "認真執行",
                 money: 5,
                 energy: -15,
-                goal6: 12
+                goal6: 15
             },
 
             {
@@ -490,7 +490,7 @@ const environmentEvents = [
                 text: "陪她做",
                 money: 0,
                 energy: -25,
-                goal12: 10
+                goal12: 12
             },
 
             {
@@ -524,7 +524,7 @@ const environmentEvents = [
                 text: "順手關燈",
                 money: 0,
                 energy: -2,
-                goal13: 8
+                goal13: 15
             },
 
             {
@@ -558,7 +558,7 @@ const environmentEvents = [
                 text: "一起挑戰",
                 money: 10,
                 energy: -10,
-                goal6: 10
+                goal6: 15
             },
 
             {
@@ -592,7 +592,7 @@ const environmentEvents = [
                 text: "拿去回收",
                 money: 5,
                 energy: -8,
-                goal12: 10
+                goal12: 15
             },
 
             {
@@ -626,7 +626,7 @@ const environmentEvents = [
                 text: "一起種",
                 money: -50,
                 energy: -25,
-                goal15: 12
+                goal15: 20
             },
 
             {
@@ -660,7 +660,7 @@ const environmentEvents = [
                 text: "衣服夠穿就好",
                 money: 0,
                 energy: 0,
-                goal12: 10
+                goal12: 15
             },
 
             {
@@ -694,7 +694,7 @@ const environmentEvents = [
                 text: "認真分類",
                 money: 0,
                 energy: -10,
-                goal12: 10
+                goal12: 20
             },
 
             {
@@ -728,14 +728,14 @@ const environmentEvents = [
                 text: "買二手衣",
                 money: -150,
                 energy: -5,
-                goal12: 10
+                goal12: 20
             },
 
             {
                 text: "只逛不買",
                 money: 0,
                 energy: 5,
-                goal12: 2
+                goal12: 5
             },
 
             {
@@ -762,7 +762,7 @@ const environmentEvents = [
                 text: "一起記錄",
                 money: 20,
                 energy: -15,
-                goal13: 10
+                goal13: 15
             },
 
             {
@@ -830,7 +830,7 @@ const environmentEvents = [
                 text: "跟著買",
                 money: -80,
                 energy: -2,
-                goal12: 8
+                goal12: 15
             },
 
             {
@@ -864,7 +864,7 @@ const environmentEvents = [
                 text: "自備餐具參加",
                 money: -50,
                 energy: -10,
-                goal13: 10
+                goal13: 20
             },
 
             {
@@ -898,7 +898,7 @@ const environmentEvents = [
                 text: "加入社團",
                 money: -100,
                 energy: -25,
-                goal13: 12
+                goal13: 15
             },
 
             {
@@ -932,7 +932,7 @@ const environmentEvents = [
                 text: "回去關掉",
                 money: 0,
                 energy: -10,
-                goal13: 10
+                goal13: 15
             },
 
             {
@@ -966,14 +966,14 @@ const environmentEvents = [
                 text: "重新整理分類",
                 money: 0,
                 energy: -20,
-                goal12: 12
+                goal12: 20
             },
 
             {
                 text: "貼提醒紙條",
                 money: -10,
                 energy: -5,
-                goal12: 5
+                goal12: 10
             },
 
             {
@@ -1000,7 +1000,7 @@ const environmentEvents = [
                 text: "一起搭公車",
                 money: -30,
                 energy: -15,
-                goal13: 10
+                goal13: 15
             },
 
             {
@@ -1014,7 +1014,7 @@ const environmentEvents = [
                 text: "走路去學校",
                 money: 20,
                 energy: -25,
-                goal13: 12
+                goal13: 20
             }
 
         ]
@@ -1034,7 +1034,7 @@ const environmentEvents = [
                 text: "一起種樹",
                 money: 0,
                 energy: -30,
-                goal15: 15
+                goal15: 20
             },
 
             {
@@ -1068,7 +1068,7 @@ const environmentEvents = [
                 text: "一起挑戰",
                 money: 30,
                 energy: -10,
-                goal6: 12
+                goal6: 20
             },
 
             {
@@ -1102,7 +1102,7 @@ const environmentEvents = [
                 text: "使用購物袋",
                 money: 5,
                 energy: -2,
-                goal12: 8
+                goal12: 15
             },
 
             {
@@ -1136,7 +1136,7 @@ const environmentEvents = [
                 text: "去支持看看",
                 money: -180,
                 energy: 8,
-                goal13: 10
+                goal13: 20
             },
 
             {
@@ -1150,7 +1150,7 @@ const environmentEvents = [
                 text: "自己煮泡麵",
                 money: -50,
                 energy: -5,
-                goal12: 2
+                goal12: 5
             }
 
         ]
