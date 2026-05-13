@@ -54,6 +54,7 @@ let sdgScores = {};
 const menuBtn = document.getElementById("menuBtn");
 const menuModal = document.getElementById("menuModal");
 const closeMenuBtn = document.getElementById("closeMenuBtn");
+const moneyPopup = document.getElementById("moneyPopup");
 
 menuBtn.addEventListener("click", () => {
   menuModal.classList.add("active");
@@ -159,7 +160,11 @@ function loadEvent() {
 
         card.addEventListener("click", () => {
             if(money + choice.money < 0){
-                alert("Not enough money!");
+                moneyPopup.classList.add("active");
+
+                setTimeout(() => {
+                    moneyPopup.classList.remove("active");
+                }, 1500);
                 return;
             }
 
