@@ -3,6 +3,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "凱咪的健康講座",
 
         description:
@@ -37,6 +39,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "顏萱的課業求救",
 
         description:
@@ -70,6 +74,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "系上公益便當",
 
@@ -107,6 +113,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "安娜的性別平等海報",
 
         description:
@@ -141,6 +149,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "柔苡的無障礙提醒",
 
         description:
@@ -174,6 +184,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "千千的剩食關懷",
 
@@ -210,6 +222,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "松義霖的志工時數",
 
         description:
@@ -243,6 +257,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "校園霸凌留言",
 
@@ -278,6 +294,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "健康午餐選擇",
 
         description:
@@ -311,6 +329,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "可云的獎學金資訊",
 
@@ -347,6 +367,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "國小閱讀營",
 
         description:
@@ -382,6 +404,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "安娜的社團招生",
 
         description:
@@ -415,6 +439,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "月經平權提案",
 
@@ -451,6 +477,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "宿舍室友情緒低落",
 
         description:
@@ -484,6 +512,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "食物銀行活動",
 
@@ -520,6 +550,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "凱咪的校園陪伴計畫",
 
         description:
@@ -551,6 +583,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "安娜的社福募款",
 
         description:
@@ -580,6 +614,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "柔苡的健康提醒",
 
@@ -612,6 +648,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "千千的共餐活動",
 
         description:
@@ -643,6 +681,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "師皇家的學習小組",
 
         description:
@@ -672,6 +712,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "顏萱的無障礙地圖",
 
@@ -703,6 +745,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "松義霖的急救課",
 
         description:
@@ -732,6 +776,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "昕昕的免費家教",
 
@@ -763,6 +809,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "安娜的平權討論",
 
         description:
@@ -792,6 +840,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "柔苡的午餐分享",
 
@@ -824,6 +874,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "千千的偏鄉物資箱",
 
         description:
@@ -855,6 +907,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "凱咪的反歧視貼文",
 
         description:
@@ -885,6 +939,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "乃辭的營養早餐",
 
         description:
@@ -914,6 +970,8 @@ const societyEvents = [
 
     {
         category: "Society",
+
+        type: "normal",
 
         title: "顏萱的校園安全巡查",
 
@@ -946,6 +1004,8 @@ const societyEvents = [
     {
         category: "Society",
 
+        type: "normal",
+
         title: "逸玲的公益路跑",
 
         description:
@@ -971,6 +1031,112 @@ const societyEvents = [
                 energy: 8,
                 goal3: -5
             }
+        ]
+    },
+
+    {
+        category: "Society",
+
+        type: "money",
+
+        title: "課輔家教",
+
+        description:
+        "學弟妹想找人幫忙複習考試，你可以接一小時家教。",
+
+        choices: [
+
+            {
+                text: "認真教完整堂",
+                money: 250,
+                energy: -25,
+                goal4: 12
+            },
+
+            {
+                text: "只幫忙解幾題",
+                money: 80,
+                energy: -8,
+                goal4: 5
+            },
+
+            {
+                text: "今天太累不接",
+                money: 0,
+                energy: 15
+            }
+
+        ]
+    },
+
+    {
+        category: "Society",
+
+        type: "money",
+
+        title: "社團活動工讀",
+
+        description:
+        "校慶活動缺人手，需要臨時工讀。",
+
+        choices: [
+
+            {
+                text: "從早忙到晚",
+                money: 500,
+                energy: -45,
+                goal8: 10
+            },
+
+            {
+                text: "只幫忙下午",
+                money: 200,
+                energy: -18,
+                goal8: 5
+            },
+
+            {
+                text: "直接裝沒看到訊息",
+                money: 0,
+                energy: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Society",
+
+        type: "money",
+
+        title: "陪讀計畫",
+
+        description:
+        "圖書館正在招募弱勢兒童陪讀志工。",
+
+        choices: [
+
+            {
+                text: "認真陪讀",
+                money: 180,
+                energy: -30,
+                goal4: 15,
+                goal10: 5
+            },
+
+            {
+                text: "只做簡單協助",
+                money: 80,
+                energy: -10,
+                goal4: 5
+            },
+
+            {
+                text: "今天想休息",
+                money: 0,
+                energy: 12
+            }
+
         ]
     }
 

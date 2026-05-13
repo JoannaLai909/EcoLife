@@ -3,6 +3,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "顏萱的淨灘邀約",
 
         description:
@@ -36,6 +38,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "Judi 的蔬食週",
 
@@ -71,6 +75,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "凱咪的環保杯",
 
         description:
@@ -104,6 +110,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "千千的惜食分享",
 
@@ -139,6 +147,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "柔苡的點餐建議",
 
         description:
@@ -172,6 +182,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "昕昕的自備餐盒",
 
@@ -207,6 +219,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "松義霖的咖啡癮",
 
         description:
@@ -240,6 +254,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "安娜的下午茶",
 
@@ -275,6 +291,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "團訂便當",
 
         description:
@@ -308,6 +326,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "生鮮挑選",
 
@@ -343,6 +363,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "YouBike 競速",
 
         description:
@@ -376,6 +398,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "柔苡的冷氣監督",
 
@@ -411,6 +435,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "千千的洗衣哲學",
 
         description:
@@ -444,6 +470,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "昕昕的省水妙招",
 
@@ -479,6 +507,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "安娜的舊物改造",
 
         description:
@@ -512,6 +542,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "師皇家的照明守則",
 
@@ -547,6 +579,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "顏萱的戰鬥澡",
 
         description:
@@ -580,6 +614,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "凱咪的廢電池",
 
@@ -615,6 +651,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "柔苡的植栽夢",
 
         description:
@@ -648,6 +686,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "快時尚特價",
 
@@ -683,6 +723,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "宿舍垃圾分類",
 
         description:
@@ -716,6 +758,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "凱咪的二手衣",
 
@@ -751,6 +795,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "顏萱的省電計畫",
 
         description:
@@ -784,6 +830,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "寶可夢千千的剩食便當",
 
@@ -819,6 +867,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "柔苡的環保吸管",
 
         description:
@@ -852,6 +902,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "校園野餐日",
 
@@ -887,6 +939,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "安娜的環保社",
 
         description:
@@ -920,6 +974,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "冷氣忘記關",
 
@@ -955,6 +1011,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "宿舍回收箱",
 
         description:
@@ -988,6 +1046,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "庫洛米可云的綠色通勤",
 
@@ -1023,6 +1083,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "校園植樹活動",
 
         description:
@@ -1056,6 +1118,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "松宜霖的省水挑戰",
 
@@ -1091,6 +1155,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "昕昕的環保購物袋",
 
         description:
@@ -1124,6 +1190,8 @@ const environmentEvents = [
 
     {
         category: "Environment",
+
+        type: "normal",
 
         title: "環保餐廳",
 
@@ -1159,6 +1227,8 @@ const environmentEvents = [
     {
         category: "Environment",
 
+        type: "normal",
+
         title: "垃圾減量挑戰",
 
         description:
@@ -1185,6 +1255,114 @@ const environmentEvents = [
                 money: 0,
                 energy: 10,
                 goal12: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        type: "money",
+
+        title: "校園二手市集",
+
+        description:
+        "你整理出一些用不到的衣服和小物，決定去二手市集擺攤。",
+
+        choices: [
+
+            {
+                text: "認真擺攤一下午",
+                money: 300,
+                energy: -30,
+                goal12: 15
+            },
+
+            {
+                text: "只賣幾樣東西",
+                money: 120,
+                energy: -12,
+                goal12: 8
+            },
+
+            {
+                text: "懶得整理",
+                money: 0,
+                energy: 10,
+                goal12: -2
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        type: "money",
+
+        title: "回收換點數",
+
+        description:
+        "便利商店推出寶特瓶回收換點數活動。",
+
+        choices: [
+
+            {
+                text: "收集一大袋去回收",
+                money: 80,
+                energy: -20,
+                goal12: 12
+            },
+
+            {
+                text: "只拿自己的去回收",
+                money: 20,
+                energy: -5,
+                goal12: 5
+            },
+
+            {
+                text: "直接丟一般垃圾",
+                money: 0,
+                energy: 5,
+                goal12: -8
+            }
+
+        ]
+    },
+
+    {
+        category: "Environment",
+
+        type: "money",
+
+        title: "環保市集工讀",
+
+        description:
+        "學生會正在徵環保市集的一日工讀生。",
+
+        choices: [
+
+            {
+                text: "工作一整天",
+                money: 450,
+                energy: -40,
+                goal8: 10,
+                goal12: 8
+            },
+
+            {
+                text: "只上半天班",
+                money: 180,
+                energy: -15,
+                goal8: 5
+            },
+
+            {
+                text: "太累了不去",
+                money: 0,
+                energy: 15
             }
 
         ]

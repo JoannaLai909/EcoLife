@@ -3,6 +3,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "國際交換生的邀請",
 
         description:
@@ -36,6 +38,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "網路上的仇恨留言",
 
@@ -71,6 +75,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "公平貿易咖啡",
 
         description:
@@ -104,6 +110,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "跨國合作專題",
 
@@ -139,6 +147,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "假新聞轉發",
 
         description:
@@ -172,6 +182,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "國際志工招募",
 
@@ -207,6 +219,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "戰爭新聞直播",
 
         description:
@@ -240,6 +254,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "國際連署活動",
 
@@ -275,6 +291,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "跨國線上會議",
 
         description:
@@ -308,6 +326,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "難民援助募款",
 
@@ -343,6 +363,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "國際文化週",
 
         description:
@@ -377,6 +399,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "國際論壇直播",
 
         description:
@@ -410,6 +434,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "國際合作比賽",
 
@@ -616,6 +642,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "國際環保論壇",
 
         description:
@@ -649,6 +677,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "國際災難募款",
 
@@ -684,6 +714,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "跨國線上筆友",
 
         description:
@@ -717,6 +749,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "國際和平連署",
 
@@ -752,6 +786,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "假新聞危機",
 
         description:
@@ -785,6 +821,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "公平貿易巧克力",
 
@@ -820,6 +858,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "國際志工計畫",
 
         description:
@@ -853,6 +893,8 @@ const globalEvents = [
 
     {
         category: "Global",
+
+        type: "normal",
 
         title: "跨國合作黑客松",
 
@@ -888,6 +930,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "國際文化節",
 
         description:
@@ -922,6 +966,8 @@ const globalEvents = [
     {
         category: "Global",
 
+        type: "normal",
+
         title: "網路言論衝突",
 
         description:
@@ -948,6 +994,111 @@ const globalEvents = [
                 money: 0,
                 energy: 5,
                 goal16: -2
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際活動翻譯工讀",
+
+        description:
+        "學校的國際交流活動需要臨時英文翻譯工讀生。",
+
+        choices: [
+
+            {
+                text: "接下整場翻譯",
+                money: 400,
+                energy: -35,
+                goal17: 12
+            },
+
+            {
+                text: "只幫忙接待一小時",
+                money: 120,
+                energy: -10,
+                goal17: 6
+            },
+
+            {
+                text: "英文太緊張不接",
+                money: 0,
+                energy: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際文化節攤位",
+
+        description:
+        "國際文化節正在招募攤位工作人員。",
+
+        choices: [
+
+            {
+                text: "負責整天攤位",
+                money: 350,
+                energy: -30,
+                goal17: 10
+            },
+
+            {
+                text: "只幫忙晚上",
+                money: 150,
+                energy: -12,
+                goal17: 5
+            },
+
+            {
+                text: "不想社交",
+                money: 0,
+                energy: 15
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "海外交換分享會",
+
+        description:
+        "國際處邀請你分享交換經驗。",
+
+        choices: [
+
+            {
+                text: "認真準備分享",
+                money: 250,
+                energy: -25,
+                goal17: 12
+            },
+
+            {
+                text: "簡單講一下",
+                money: 100,
+                energy: -8,
+                goal17: 5
+            },
+
+            {
+                text: "拒絕邀請",
+                money: 0,
+                energy: 10
             }
 
         ]

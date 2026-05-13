@@ -3,6 +3,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "松義霖的 AI 專題",
 
         description:
@@ -36,6 +38,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "智慧校園提案",
 
@@ -72,6 +76,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "凱咪的共享機車",
 
         description:
@@ -106,6 +112,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "校園太陽能計畫",
 
         description:
@@ -139,6 +147,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "安娜的創業夢",
 
@@ -175,6 +185,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "校園充電站",
 
         description:
@@ -210,6 +222,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "數位學習平台",
 
         description:
@@ -243,6 +257,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "昕昕的智慧家電",
 
@@ -278,6 +294,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "智慧交通測試",
 
         description:
@@ -311,6 +329,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "柔苡的黑客松",
 
@@ -346,6 +366,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "校園免費 Wi-Fi",
 
         description:
@@ -379,6 +401,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "AI 自動點名系統",
 
@@ -414,6 +438,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "宿舍電梯維修",
 
         description:
@@ -447,6 +473,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "校園機器人展",
 
@@ -482,6 +510,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "低碳智慧城市",
 
         description:
@@ -515,6 +545,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "智慧停車系統",
 
@@ -551,6 +583,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "AI 自習室",
 
         description:
@@ -584,6 +618,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "松義霖的創新提案",
 
@@ -620,6 +656,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "智慧販賣機",
 
         description:
@@ -653,6 +691,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "柔苡的太陽能板",
 
@@ -688,6 +728,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "共享單車維修",
 
         description:
@@ -721,6 +763,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "校園數位化",
 
@@ -757,6 +801,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "安娜的 3D 列印",
 
         description:
@@ -790,6 +836,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "智慧宿舍",
 
@@ -826,6 +874,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "凱咪的科技展",
 
         description:
@@ -859,6 +909,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "自動垃圾分類機",
 
@@ -895,6 +947,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "昕昕的程式課",
 
         description:
@@ -930,6 +984,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "智慧公車系統",
 
         description:
@@ -963,6 +1019,8 @@ const developmentEvents = [
 
     {
         category: "Development",
+
+        type: "normal",
 
         title: "校園資料中心",
 
@@ -999,6 +1057,8 @@ const developmentEvents = [
     {
         category: "Development",
 
+        type: "normal",
+
         title: "AI 自動翻譯耳機",
 
         description:
@@ -1026,6 +1086,112 @@ const developmentEvents = [
                 money: 0,
                 energy: 10,
                 goal9: -5
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        type: "money",
+
+        title: "幫社團架網站",
+
+        description:
+        "社團需要一個活動網站，問你能不能接案幫忙。",
+
+        choices: [
+
+            {
+                text: "接完整網站案",
+                money: 500,
+                energy: -45,
+                goal9: 15
+            },
+
+            {
+                text: "只做首頁",
+                money: 180,
+                energy: -18,
+                goal9: 8
+            },
+
+            {
+                text: "推薦別人接",
+                money: 0,
+                energy: 5,
+                goal9: 2
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        type: "money",
+
+        title: "修電腦打工",
+
+        description:
+        "同學電腦突然壞掉，問你能不能幫忙修。",
+
+        choices: [
+
+            {
+                text: "完整幫他處理",
+                money: 350,
+                energy: -30,
+                goal9: 12
+            },
+
+            {
+                text: "只幫忙重灌",
+                money: 120,
+                energy: -10,
+                goal9: 5
+            },
+
+            {
+                text: "叫他送修",
+                money: 0,
+                energy: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Development",
+
+        type: "money",
+
+        title: "AI 海報設計",
+
+        description:
+        "教授希望有人幫忙做 AI 研討會海報。",
+
+        choices: [
+
+            {
+                text: "接下全部設計",
+                money: 400,
+                energy: -35,
+                goal9: 10
+            },
+
+            {
+                text: "只幫忙排版",
+                money: 150,
+                energy: -12,
+                goal9: 5
+            },
+
+            {
+                text: "太麻煩不接",
+                money: 0,
+                energy: 15
             }
 
         ]

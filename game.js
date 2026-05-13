@@ -120,7 +120,31 @@ function loadEvent() {
     .innerText =
     `${targetGoal.replace("goal", "Goal ")} Score ≥ ${targetScore}`;
 
-    const event = events[currentEvent];
+    let availableEvents = events;
+
+    /* LOW MONEY EVENT */
+
+    if(money <= 100){
+
+        const moneyEvents =
+        events.filter(event =>
+            event.type === "money"
+        );
+
+        if(moneyEvents.length > 0){
+
+            availableEvents = moneyEvents;
+
+        }
+
+    }
+
+    /* RANDOM EVENT */
+
+    const event =
+    availableEvents[
+        Math.floor(Math.random() * availableEvents.length)
+    ];
 
     document.getElementById("scenarioTitle")
     .innerText = event.title;
