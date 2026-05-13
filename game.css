@@ -572,6 +572,7 @@ body {
     color: white;
 
     padding: 8px 18px;
+    margin-right: -4px;
     border-radius: 12px;
 
     font-family: "Ahkio-Regular";
