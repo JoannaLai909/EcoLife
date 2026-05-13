@@ -354,7 +354,7 @@ const globalEvents = [
                 text: "體驗不同文化",
                 money: -20,
                 energy: -10,
-                goal17: 10
+                goal17: 20
             },
 
             {
@@ -388,7 +388,7 @@ const globalEvents = [
                 text: "認真觀看",
                 money: 0,
                 energy: -8,
-                goal17: 8
+                goal17: 15
             },
 
             {
@@ -422,14 +422,14 @@ const globalEvents = [
                 text: "積極合作",
                 money: 0,
                 energy: -30,
-                goal17: 15
+                goal17: 20
             },
 
             {
                 text: "只做自己的部分",
                 money: 0,
                 energy: -10,
-                goal17: 3
+                goal17: 5
             },
 
             {
@@ -456,7 +456,7 @@ const globalEvents = [
                 text: "主動試用回饋",
                 money: 0,
                 energy: -15,
-                goal9: 10
+                goal9: 15
             },
 
             {
@@ -490,8 +490,8 @@ const globalEvents = [
                 text: "認真研究功能",
                 money: 5,
                 energy: -10,
-                goal9: 8,
-                goal11: 5
+                goal9: 12,
+                goal11: 10
             },
 
             {
@@ -525,7 +525,7 @@ const globalEvents = [
                 text: "觀察用電變化",
                 money: 20,
                 energy: -5,
-                goal7: 10
+                goal7: 15
             },
 
             {
@@ -593,7 +593,7 @@ const globalEvents = [
                 text: "使用後記得歸還",
                 money: -10,
                 energy: -3,
-                goal11: 8
+                goal11: 15
             },
 
             {
@@ -627,7 +627,7 @@ const globalEvents = [
                 text: "認真參與討論",
                 money: 0,
                 energy: -15,
-                goal17: 10
+                goal17: 20
             },
 
             {
@@ -729,7 +729,7 @@ const globalEvents = [
                 text: "閱讀後參與",
                 money: 0,
                 energy: -8,
-                goal16: 10
+                goal16: 20
             },
 
             {
@@ -763,7 +763,7 @@ const globalEvents = [
                 text: "查證後再分享",
                 money: 0,
                 energy: -8,
-                goal16: 12
+                goal16: 20
             },
 
             {
@@ -797,7 +797,7 @@ const globalEvents = [
                 text: "支持公平貿易",
                 money: -80,
                 energy: 2,
-                goal17: 8
+                goal17: 15
             },
 
             {
@@ -811,7 +811,7 @@ const globalEvents = [
                 text: "今天不吃甜食",
                 money: 50,
                 energy: -3,
-                goal17: 2
+                goal17: 5
             }
 
         ]
@@ -831,14 +831,14 @@ const globalEvents = [
                 text: "報名參加",
                 money: -500,
                 energy: -35,
-                goal17: 15
+                goal17: 20
             },
 
             {
                 text: "幫忙宣傳",
                 money: 0,
                 energy: -8,
-                goal17: 6
+                goal17: 10
             },
 
             {

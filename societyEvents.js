@@ -13,7 +13,7 @@ const societyEvents = [
             {
                 text: "認真去聽",
                 money: 0,
-                energy: -10,
+                energy: -15,
                 goal3: 20
             },
 
