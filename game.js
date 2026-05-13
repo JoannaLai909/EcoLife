@@ -44,6 +44,9 @@ events = events.slice(0, 15);
 
 let currentEvent = 0;
 let day = 1;
+let actionsToday = 0;
+const maxActionsPerDay = 4;
+const maxDays = 21;
 let money = 100;
 let energy = 80;
 let sdgScores = {};
@@ -152,6 +155,11 @@ function loadEvent() {
                 💰 ${choice.money} <br>
                 ⚡ ${choice.energy}
             </div>
+
+            if(money + choice.money < 0){
+                card.style.opacity = "0.5";
+                card.style.pointerEvents = "none";
+            }
         `;
 
         card.addEventListener("click", () => {
@@ -196,8 +204,19 @@ function loadEvent() {
 
             }
 
-            nextDay();
-
+            const isWin = updateProgress();
+            actionsToday++;
+            currentEvent++;
+            if(currentEvent >= events.length){
+                events.sort(() => Math.random() - 0.5);
+                currentEvent = 0;
+            }
+            if(actionsToday >= maxActionsPerDay || energy <= 0){
+                nextDay();
+            }
+            else{
+                loadEvent();
+            }
         });
 
         choicesSection.appendChild(card);
@@ -238,37 +257,28 @@ function updateProgress() {
 
 function nextDay(){
 
-    currentEvent++;
+    day++;
 
-    if(currentEvent >= events.length){
+    actionsToday = 0;
+
+    energy = 80;
+
+    if(day > maxDays){
 
         if((sdgScores[targetGoal] || 0) >= targetScore){
-
             localStorage.setItem("resultType", "win");
-
         }
 
         else{
-
             localStorage.setItem("resultType", "lose");
-
         }
-
         localStorage.setItem("money", money);
-
         localStorage.setItem("energy", energy);
-
         window.location.href = "result.html";
-
         return;
     }
-
-    day++;
-
     loadEvent();
-
 }
-
 
 
 function renderProgressBars() {
