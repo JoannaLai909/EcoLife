@@ -6,7 +6,7 @@ const globalEvents = [
         title: "國際交換生的邀請",
 
         description:
-        "交換生 Maya 想邀你一起參加國際文化交流活動。",
+        "交換生 Judi 想邀你一起參加國際文化交流活動。",
 
         choices: [
 
@@ -687,7 +687,7 @@ const globalEvents = [
         title: "跨國線上筆友",
 
         description:
-        "你收到一個國外學生的交流邀請。",
+        "你收到一個韓國留學生祝祝的交流邀請。",
 
         choices: [
 

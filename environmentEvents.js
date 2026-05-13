@@ -785,7 +785,7 @@ const environmentEvents = [
     {
         category: "Environment",
 
-        title: "千千的剩食便當",
+        title: "寶可夢千千的剩食便當",
 
         description:
         "便利商店正在賣即期便當。",
@@ -989,10 +989,10 @@ const environmentEvents = [
     {
         category: "Environment",
 
-        title: "師皇家的綠色通勤",
+        title: "庫洛米可云的綠色通勤",
 
         description:
-        "師皇家想挑戰一週不騎機車上課。",
+        "庫洛米可云想挑戰一週不騎機車上課。",
 
         choices: [
 
@@ -1057,10 +1057,10 @@ const environmentEvents = [
     {
         category: "Environment",
 
-        title: "松義霖的省水挑戰",
+        title: "松宜霖的省水挑戰",
 
         description:
-        "松義霖想挑戰一週節約用水。",
+        "松宜霖想挑戰一週節約用水。",
 
         choices: [
 

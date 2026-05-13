@@ -178,7 +178,7 @@ const societyEvents = [
         title: "千千的剩食關懷",
 
         description:
-        "千千想把活動剩下的餐點送給需要的人。",
+        "寶可夢千千想把活動剩下的餐點送給需要的人。",
 
         choices: [
 
@@ -247,7 +247,7 @@ const societyEvents = [
         title: "校園霸凌留言",
 
         description:
-        "你看到班群有人嘲笑同學的外表。",
+        "逸玲看到班群有人嘲笑同學的外表。",
 
         choices: [
 
@@ -312,10 +312,10 @@ const societyEvents = [
     {
         category: "Society",
 
-        title: "師皇家的獎學金資訊",
+        title: "可云的獎學金資訊",
 
         description:
-        "師皇家發現一個弱勢學生獎學金資訊，問你要不要幫忙分享。",
+        "庫洛米可云發現一個弱勢學生獎學金資訊，問你要不要幫忙分享。",
 
         choices: [
 
@@ -451,7 +451,7 @@ const societyEvents = [
     {
         category: "Society",
 
-        title: "宿舍室友低落",
+        title: "宿舍室友情緒低落",
 
         description:
         "你的室友最近看起來很低落，常常不說話。",
@@ -646,7 +646,7 @@ const societyEvents = [
         title: "師皇家的學習小組",
 
         description:
-        "師皇家想成立期中考互助讀書會。",
+        "右廷想成立期中考互助讀書會。",
 
         choices: [
             {
@@ -706,7 +706,7 @@ const societyEvents = [
         title: "松義霖的急救課",
 
         description:
-        "松義霖報名了 CPR 急救課，問你要不要一起去。",
+        "松宜霖報名了 CPR 急救課，問你要不要一起去。",
 
         choices: [
             {
@@ -827,7 +827,7 @@ const societyEvents = [
         title: "千千的偏鄉物資箱",
 
         description:
-        "千千想募集書本與生活用品寄到偏鄉學校。",
+        "寶可夢千千想募集書本與生活用品寄到偏鄉學校。",
 
         choices: [
             {
@@ -885,10 +885,10 @@ const societyEvents = [
     {
         category: "Society",
 
-        title: "師皇家的營養早餐",
+        title: "乃辭的營養早餐",
 
         description:
-        "師皇家說你最近都不吃早餐，會影響健康。",
+        "乃辭說你最近都不吃早餐，會影響健康。",
 
         choices: [
             {
@@ -946,10 +946,10 @@ const societyEvents = [
     {
         category: "Society",
 
-        title: "松義霖的公益路跑",
+        title: "逸玲的公益路跑",
 
         description:
-        "松義霖邀你參加為弱勢兒童募款的公益路跑。",
+        "逸玲邀你參加為弱勢兒童募款的公益路跑。",
 
         choices: [
             {

@@ -6,7 +6,7 @@ const developmentEvents = [
         title: "松義霖的 AI 專題",
 
         description:
-        "松義霖想找你一起做 AI 永續應用專題。",
+        "松宜霖想找你一起做 AI 永續應用專題。",
 
         choices: [
 
@@ -588,7 +588,7 @@ const developmentEvents = [
         title: "松義霖的創新提案",
 
         description:
-        "松義霖想做一個校園節能 App。",
+        "逸玲想做一個校園節能 App。",
 
         choices: [
 
@@ -760,7 +760,7 @@ const developmentEvents = [
         title: "安娜的 3D 列印",
 
         description:
-        "安娜想用 3D 列印做環保模型。",
+        "右廷想用 3D 列印做環保模型。",
 
         choices: [
 
