@@ -155,12 +155,11 @@ function loadEvent() {
                 💰 ${choice.money} <br>
                 ⚡ ${choice.energy}
             </div>
-
-            if(money + choice.money < 0){
+        `;
+        if(money + choice.money < 0){
                 card.style.opacity = "0.5";
                 card.style.pointerEvents = "none";
-            }
-        `;
+        }
 
         card.addEventListener("click", () => {
 
@@ -203,8 +202,6 @@ function loadEvent() {
                 return;
 
             }
-
-            const isWin = updateProgress();
             actionsToday++;
             currentEvent++;
             if(currentEvent >= events.length){
