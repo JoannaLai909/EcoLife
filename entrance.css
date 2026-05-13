@@ -389,6 +389,13 @@ p {
   transform: translateY(0);
 }
 
+.dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 .dropdown-content a {
   display: block;
   padding: 10px 18px;
