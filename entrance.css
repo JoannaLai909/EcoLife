@@ -104,6 +104,7 @@ p {
   letter-spacing: 1.2px;
   font-weight: bold;
   display: inline-flex;
+  width: fit-content;
   align-items: center;
   justify-content: center;
   box-shadow: 0 5px 0 #c85c00;
