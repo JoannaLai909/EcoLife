@@ -5,10 +5,10 @@ const developmentEvents = [
 
         type: "normal",
 
-        title: "松義霖的 AI 專題",
+        title: "千千的 AI 專題",
 
         description:
-        "松宜霖想找你一起做 AI 永續應用專題。",
+        "千千想找你一起做 AI 永續應用專題。",
 
         choices: [
 
@@ -479,7 +479,7 @@ const developmentEvents = [
         title: "校園機器人展",
 
         description:
-        "資訊系正在展出 AI 與機器人技術。",
+        "資工系正在展出 AI 與機器人技術。",
 
         choices: [
 
@@ -621,7 +621,7 @@ const developmentEvents = [
 
         type: "normal",
 
-        title: "松義霖的創新提案",
+        title: "逸玲的創新提案",
 
         description:
         "逸玲想做一個校園節能 App。",
@@ -803,7 +803,7 @@ const developmentEvents = [
 
         type: "normal",
 
-        title: "安娜的 3D 列印",
+        title: "右廷的 3D 列印",
 
         description:
         "右廷想用 3D 列印做環保模型。",
