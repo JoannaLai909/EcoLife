@@ -445,7 +445,13 @@ p {
 }
 
 .sub-dropdown.active .sub-dropdown-content {
-  display: flex;
+
+    display: flex;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
 }
 
 /* =========================
