@@ -105,7 +105,8 @@ p {
   font-weight: bold;
   display: inline-flex;
   width: fit-content;
-  align-self: center;
+  align-self: flex-start;
+  margin-left: 120px;
   justify-content: center;
   box-shadow: 0 5px 0 #c85c00;
   transition: all 0.15s ease;
