@@ -4364,7 +4364,7 @@ const societyEvents = [
 
         type: "normal",
 
-        title: "師皇家的學習小組",
+        title: "右廷的學習小組",
 
         description:
         "右廷想成立期中考互助讀書會。",

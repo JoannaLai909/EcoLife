@@ -8,46 +8,50 @@ const categoryGoals = {
     Global: ["goal16", "goal17"]
 };
 
-let events = [];
+const allEventPools = {
+    Environment: environmentEvents,
+    Society: societyEvents,
+    Development: developmentEvents,
+    Global: globalEvents
+};
 
-if (selectedCategory === "Environment") {
-    events = [...environmentEvents];
-}
+let allEvents = allEventPools[selectedCategory] || environmentEvents;
 
-else if (selectedCategory === "Society") {
-    events = [...societyEvents];
-}
-
-else if (selectedCategory === "Development") {
-    events = [...developmentEvents];
-}
-
-else if (selectedCategory === "Global") {
-    events = [...globalEvents];
-}
-
-/* RANDOM SHUFFLE */
-
-events.sort(() => Math.random() - 0.5);
-
-/* ONLY PLAY 15 EVENTS */
-
-events = events.slice(0, 15);
-
-let currentEvent = 0;
 let day = 1;
 let usedEventTitles = [];
 let actionsToday = 0;
+
 const maxActionsPerDay = 4;
 const maxDays = 21;
+
 let money = 100;
 let energy = 80;
 let sdgScores = {};
+
+
+/* ELEMENTS */
 
 const menuBtn = document.getElementById("menuBtn");
 const menuModal = document.getElementById("menuModal");
 const closeMenuBtn = document.getElementById("closeMenuBtn");
 const moneyPopup = document.getElementById("moneyPopup");
+
+const shopBtn = document.getElementById("shopBtn");
+const shopOverlay = document.getElementById("shopOverlay");
+const shopCloseBtn = document.getElementById("shopCloseBtn");
+const shopBalance = document.getElementById("shopBalance");
+
+const goalBox = document.getElementById("goalBox");
+const goalPopup = document.getElementById("goalPopup");
+const closeGoalPopupBtn = document.getElementById("closeGoalPopupBtn");
+
+const goalPopupNumber = document.getElementById("goalPopupNumber");
+const goalPopupTitle = document.getElementById("goalPopupTitle");
+const goalPopupSub = document.getElementById("goalPopupSub");
+const goalPopupDesc = document.getElementById("goalPopupDesc");
+
+
+/* MENU */
 
 menuBtn.addEventListener("click", () => {
     menuModal.classList.add("active");
@@ -65,10 +69,8 @@ document.getElementById("homeBtn").addEventListener("click", () => {
     window.location.href = "entrance.html";
 });
 
-const shopBtn = document.getElementById("shopBtn");
-const shopOverlay = document.getElementById("shopOverlay");
-const shopCloseBtn = document.getElementById("shopCloseBtn");
-const shopBalance = document.getElementById("shopBalance");
+
+/* SHOP */
 
 shopBtn.addEventListener("click", () => {
     shopBalance.innerText = `💰 ${money}`;
@@ -78,6 +80,9 @@ shopBtn.addEventListener("click", () => {
 shopCloseBtn.addEventListener("click", () => {
     shopOverlay.classList.remove("shop-open");
 });
+
+
+/* SDG COLORS */
 
 const goalColors = {
     goal1: "#E5243B",
@@ -102,12 +107,40 @@ const goalColors = {
     goal17: "#19486A"
 };
 
-const activeGoals = categoryGoals[selectedCategory];
+const activeGoals = categoryGoals[selectedCategory] || categoryGoals.Environment;
 
-const targetGoal =
-    activeGoals[
-        Math.floor(Math.random() * activeGoals.length)
-    ];
+
+/* CHECK WHETHER AN EVENT MATCHES A GOAL */
+
+function eventHasPositiveGoal(event, goalKey) {
+    return event.choices.some(choice => {
+        return typeof choice[goalKey] === "number" && choice[goalKey] > 0;
+    });
+}
+
+function eventHasMoneyGain(event) {
+    return event.choices.some(choice => {
+        return typeof choice.money === "number" && choice.money > 0;
+    });
+}
+
+
+/* PICK TARGET GOAL BASED ON ACTUAL EVENTS */
+
+const availableTargetGoals = activeGoals.filter(goal => {
+    return allEvents.some(event => eventHasPositiveGoal(event, goal));
+});
+
+let targetGoal;
+
+if (availableTargetGoals.length > 0) {
+    targetGoal =
+        availableTargetGoals[
+            Math.floor(Math.random() * availableTargetGoals.length)
+        ];
+} else {
+    targetGoal = activeGoals[0];
+}
 
 const possibleScores = [30, 40, 50, 60];
 
@@ -116,47 +149,81 @@ const targetScore =
         Math.floor(Math.random() * possibleScores.length)
     ];
 
-function loadEvent() {
+let targetEvents = allEvents.filter(event => {
+    return eventHasPositiveGoal(event, targetGoal);
+});
 
-    document.getElementById("goalBox").innerText =
+if (targetEvents.length === 0) {
+    targetEvents = [...allEvents];
+}
+
+
+/* UPDATE GOAL BOX */
+
+function updateGoalBox() {
+    goalBox.innerText =
         `${targetGoal.replace("goal", "Goal ")} Score ≥ ${targetScore}`;
+}
 
-    let availableEvents = events;
+
+/* GET EVENT WITHOUT REPEAT */
+
+function getNextEvent() {
+    let availableEvents = [...targetEvents];
 
     if (money <= 50) {
-        const moneyEvents = events.filter(event =>
-            event.type === "money"
-        );
+        const moneyEvents = targetEvents.filter(event => {
+            return event.type === "money" || eventHasMoneyGain(event);
+        });
 
         if (moneyEvents.length > 0) {
             availableEvents = moneyEvents;
         }
     }
 
-    availableEvents = availableEvents.filter(event =>
-        !usedEventTitles.includes(event.title)
-    );
+    availableEvents = availableEvents.filter(event => {
+        return !usedEventTitles.includes(event.title);
+    });
 
     if (availableEvents.length === 0) {
         usedEventTitles = [];
-        availableEvents = events;
+
+        availableEvents = [...targetEvents];
+
+        if (money <= 50) {
+            const moneyEvents = targetEvents.filter(event => {
+                return event.type === "money" || eventHasMoneyGain(event);
+            });
+
+            if (moneyEvents.length > 0) {
+                availableEvents = moneyEvents;
+            }
+        }
     }
 
-    const event =
-        availableEvents[
-            Math.floor(Math.random() * availableEvents.length)
-        ];
+    const randomIndex =
+        Math.floor(Math.random() * availableEvents.length);
 
-    usedEventTitles.push(event.title);
+    const selectedEvent = availableEvents[randomIndex];
+
+    usedEventTitles.push(selectedEvent.title);
+
+    return selectedEvent;
+}
+
+
+/* LOAD EVENT */
+
+function loadEvent() {
+    updateGoalBox();
+
+    const event = getNextEvent();
 
     document.getElementById("scenarioTitle").innerText = event.title;
-
     document.getElementById("scenarioDescription").innerText = event.description;
 
     document.getElementById("dayBox").innerText = `DAY ${day}`;
-
     document.getElementById("moneyBox").innerText = `💰 ${money}`;
-
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
     const choicesSection =
@@ -165,9 +232,7 @@ function loadEvent() {
     choicesSection.innerHTML = "";
 
     event.choices.forEach(choice => {
-
-        const card =
-            document.createElement("div");
+        const card = document.createElement("div");
 
         card.classList.add("choice-card");
 
@@ -175,23 +240,25 @@ function loadEvent() {
             <h3>${choice.text}</h3>
 
             <div class="effects">
-                💰 ${choice.money} <br>
-                ⚡ ${choice.energy}
+                💰 ${choice.money || 0} <br>
+                ⚡ ${choice.energy || 0}
             </div>
         `;
 
         card.addEventListener("click", () => {
-            if (money + choice.money < 0) {
+            if (money + (choice.money || 0) < 0) {
                 moneyPopup.classList.add("active");
 
                 setTimeout(() => {
                     moneyPopup.classList.remove("active");
                 }, 1500);
+
                 return;
             }
 
-            money += choice.money;
-            energy += choice.energy;
+            money += choice.money || 0;
+            energy += choice.energy || 0;
+
             money = Math.max(0, money);
             energy = Math.max(0, energy);
 
@@ -200,14 +267,11 @@ function loadEvent() {
                 localStorage.setItem("money", money);
                 localStorage.setItem("energy", energy);
                 window.location.href = "result.html";
-                menuModal.classList.remove("active");
                 return;
             }
 
             for (let key in choice) {
-
                 if (key.startsWith("goal")) {
-
                     if (!sdgScores[key]) {
                         sdgScores[key] = 0;
                     }
@@ -223,18 +287,10 @@ function loadEvent() {
             }
 
             actionsToday++;
-            currentEvent++;
-
-            if (currentEvent >= events.length) {
-                events.sort(() => Math.random() - 0.5);
-                currentEvent = 0;
-            }
 
             if (actionsToday >= maxActionsPerDay || energy <= 0) {
                 nextDay();
-            }
-
-            else {
+            } else {
                 loadEvent();
             }
         });
@@ -243,22 +299,21 @@ function loadEvent() {
     });
 }
 
+
+/* UPDATE PROGRESS */
+
 function updateProgress() {
-
     activeGoals.forEach(goal => {
-
         const fill =
             document.getElementById(`${goal}Fill`);
 
         if (fill) {
-
             fill.style.width =
                 `${Math.min(sdgScores[goal] || 0, 100)}%`;
         }
     });
 
     if ((sdgScores[targetGoal] || 0) >= targetScore) {
-
         localStorage.setItem("resultType", "win");
         localStorage.setItem("money", money);
         localStorage.setItem("energy", energy);
@@ -269,21 +324,18 @@ function updateProgress() {
     return false;
 }
 
+
+/* NEXT DAY */
+
 function nextDay() {
-
     day++;
-
     actionsToday = 0;
-
     energy = 80;
 
     if (day > maxDays) {
-
         if ((sdgScores[targetGoal] || 0) >= targetScore) {
             localStorage.setItem("resultType", "win");
-        }
-
-        else {
+        } else {
             localStorage.setItem("resultType", "lose");
         }
 
@@ -295,6 +347,9 @@ function nextDay() {
 
     loadEvent();
 }
+
+
+/* RENDER PROGRESS BARS */
 
 function renderProgressBars() {
     const progressList = document.getElementById("progressList");
@@ -314,20 +369,8 @@ function renderProgressBars() {
     });
 }
 
-renderProgressBars();
-loadEvent();
-updateProgress();
 
 /* GOAL INFO CLICK POPUP */
-
-const goalBox = document.getElementById("goalBox");
-const goalPopup = document.getElementById("goalPopup");
-const closeGoalPopupBtn = document.getElementById("closeGoalPopupBtn");
-
-const goalPopupNumber = document.getElementById("goalPopupNumber");
-const goalPopupTitle = document.getElementById("goalPopupTitle");
-const goalPopupSub = document.getElementById("goalPopupSub");
-const goalPopupDesc = document.getElementById("goalPopupDesc");
 
 const goalInfoData = {
     1: {
@@ -456,3 +499,10 @@ goalPopup.addEventListener("click", function (event) {
         closeGoalPopup();
     }
 });
+
+
+/* START GAME */
+
+renderProgressBars();
+loadEvent();
+updateProgress();
