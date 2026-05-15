@@ -5,19 +5,25 @@
 body {
   margin: 0;
   font-family: "Ahkio-Regular", Arial, sans-serif;
-  background: #dff4ff;
   overflow-x: hidden;
   letter-spacing: 1.5px;
+  background: #dff4ff;
 }
 
 .purpose-page {
   width: 100vw;
   min-height: 100vh;
-  background: #dff4ff;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: visible;
+
+  background-image:
+    linear-gradient(rgba(223, 244, 255, 0.72), rgba(223, 244, 255, 0.72)),
+    url("image/purpose-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* 左上藍色弧形背景 */
@@ -28,7 +34,7 @@ body {
   height: 600px;
   left: -280px;
   top: -180px;
-  background: #2b9fd4;
+  background: rgba(43, 159, 212, 0.78);
   border-radius: 50%;
   z-index: 0;
 }
