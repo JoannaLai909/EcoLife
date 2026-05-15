@@ -1195,6 +1195,348 @@ const developmentEvents = [
             }
 
         ]
+    },
+    {
+        category: "Development",
+        type: "normal",
+        title: "逸玲的開源專案",
+        description:
+            "逸玲在 GitHub 上發起一個永續能源資料視覺化的開源專案，邀你一起貢獻程式碼。",
+        choices: [
+            {
+                text: "認真寫幾個功能",
+                money: 0,
+                energy: -25,
+                goal9: 12,
+                goal7: 4
+            },
+            {
+                text: "回報一個 Bug 就好",
+                money: 0,
+                energy: -5,
+                goal9: 4
+            },
+            {
+                text: "按個星星收藏",
+                money: 0,
+                energy: 3,
+                goal9: -2
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "normal",
+        title: "校園廢熱回收提案",
+        description:
+            "工學院教授提出把資料中心廢熱拿來加熱熱水的計畫，需要學生志工協助調查。",
+        choices: [
+            {
+                text: "加入調查小組",
+                money: 0,
+                energy: -20,
+                goal7: 12,
+                goal9: 5
+            },
+            {
+                text: "填問卷支持",
+                money: 0,
+                energy: -3,
+                goal7: 4
+            },
+            {
+                text: "覺得跟我沒關係",
+                money: 0,
+                energy: 5,
+                goal7: -3
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "normal",
+        title: "右廷的無人機測試",
+        description:
+            "右廷參加無人機送貨系統的校園測試計畫，問你要不要一起記錄飛行數據。",
+        choices: [
+            {
+                text: "幫忙記錄分析",
+                money: 0,
+                energy: -18,
+                goal9: 10,
+                goal11: 5
+            },
+            {
+                text: "去看飛飛的就好",
+                money: 0,
+                energy: 5,
+                goal9: 1
+            },
+            {
+                text: "擔心砸到人，不去",
+                money: 0,
+                energy: 8,
+                goal11: -2
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "normal",
+        title: "數位碳足跡計算",
+        description:
+            "環境社發起活動，請同學用 App 記錄自己一週的碳足跡。",
+        choices: [
+            {
+                text: "認真記錄並減少排放",
+                money: 0,
+                energy: -12,
+                goal9: 8,
+                goal12: 6
+            },
+            {
+                text: "只記錄不改習慣",
+                money: 0,
+                energy: -3,
+                goal9: 3
+            },
+            {
+                text: "嫌麻煩不參加",
+                money: 0,
+                energy: 6,
+                goal12: -4
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "normal",
+        title: "千千的線上課程",
+        description:
+            "千千找到一門免費的 AI 倫理與永續發展線上課程，說不定對找實習很有幫助。",
+        choices: [
+            {
+                text: "每天撥時間認真修",
+                money: 0,
+                energy: -20,
+                goal4: 10,
+                goal9: 6
+            },
+            {
+                text: "下載影片但從不看",
+                money: 0,
+                energy: 2,
+                goal4: -2
+            },
+            {
+                text: "轉傳給別人就好",
+                money: 0,
+                energy: 4,
+                goal9: 0
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "normal",
+        title: "智慧路燈提案",
+        description:
+            "學生自治會計畫向學校爭取在校園小徑裝設感應式節能路燈。",
+        choices: [
+            {
+                text: "幫忙寫提案書",
+                money: 0,
+                energy: -22,
+                goal11: 12,
+                goal7: 5
+            },
+            {
+                text: "連署支持",
+                money: 0,
+                energy: -3,
+                goal11: 5
+            },
+            {
+                text: "懶得管學校的事",
+                money: 0,
+                energy: 6,
+                goal11: -4
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "normal",
+        title: "凱咪的二手電子市集",
+        description:
+            "凱咪想辦一個二手電子產品交換市集，讓舊設備延長使用壽命。",
+        choices: [
+            {
+                text: "幫忙籌辦活動",
+                money: -30,
+                energy: -25,
+                goal12: 12,
+                goal9: 5
+            },
+            {
+                text: "拿一台舊手機去換",
+                money: 50,
+                energy: -5,
+                goal12: 6
+            },
+            {
+                text: "直接買新的比較快",
+                money: -400,
+                energy: 5,
+                goal12: -6
+            }
+        ]
+    },
+
+    // ── MONEY ─────────────────────────────────
+
+    {
+        category: "Development",
+        type: "money",
+        title: "幫教授整理研究資料",
+        description:
+            "教授的 AI 研究有一大批問卷資料需要清理和整理，問你有沒有時間兼職處理。",
+        choices: [
+            {
+                text: "接下全部資料工作",
+                money: 420,
+                energy: -35,
+                goal9: 12
+            },
+            {
+                text: "只幫忙做前半段",
+                money: 160,
+                energy: -15,
+                goal9: 5
+            },
+            {
+                text: "推薦同學去接",
+                money: 0,
+                energy: 5,
+                goal9: 1
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "money",
+        title: "社團 App 除錯",
+        description:
+            "熱音社的活動報名 App 一直當機，社長急著找人修好。",
+        choices: [
+            {
+                text: "花時間找出根本原因",
+                money: 380,
+                energy: -30,
+                goal9: 10
+            },
+            {
+                text: "快速修補讓它能用",
+                money: 150,
+                energy: -12,
+                goal9: 4
+            },
+            {
+                text: "說超出能力範圍",
+                money: 0,
+                energy: 8
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "money",
+        title: "校外企業資料分析",
+        description:
+            "一家新創公司透過學校媒合，找學生幫忙分析用電行為數據。",
+        choices: [
+            {
+                text: "做完整分析報告",
+                money: 550,
+                energy: -40,
+                goal9: 15,
+                goal7: 5
+            },
+            {
+                text: "只做基本統計圖表",
+                money: 200,
+                energy: -15,
+                goal9: 6
+            },
+            {
+                text: "感覺太難，婉拒",
+                money: 0,
+                energy: 10
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "money",
+        title: "幫里辦公室架系統",
+        description:
+            "附近里辦公室想做一個簡單的線上預約系統，透過教授介紹來找你。",
+        choices: [
+            {
+                text: "幫忙做完整系統",
+                money: 480,
+                energy: -38,
+                goal11: 10,
+                goal9: 8
+            },
+            {
+                text: "用現成工具幫他設定",
+                money: 180,
+                energy: -12,
+                goal11: 5
+            },
+            {
+                text: "建議他找專業公司",
+                money: 0,
+                energy: 5
+            }
+        ]
+    },
+
+    {
+        category: "Development",
+        type: "money",
+        title: "拍攝科技社宣傳影片",
+        description:
+            "科技社想做一支招生宣傳短片，找你幫忙拍攝剪輯。",
+        choices: [
+            {
+                text: "認真拍完整影片",
+                money: 300,
+                energy: -28,
+                goal9: 8
+            },
+            {
+                text: "只幫忙剪輯素材",
+                money: 120,
+                energy: -10,
+                goal9: 3
+            },
+            {
+                text: "最近太忙推掉",
+                money: 0,
+                energy: 8
+            }
+        ]
     }
 
 ];
