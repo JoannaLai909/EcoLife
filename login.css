@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    background: #a9d8f0;
+}
+
+.login-page {
+    width: 100vw;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 45%),
+        rgba(45, 75, 95, 0.55);
+
+    padding: 30px;
+}
+
+.login-card {
+    width: 520px;
+    max-width: 92%;
+
+    background: white;
+    border-radius: 35px;
+    padding: 45px 55px;
+
+    text-align: center;
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.35),
+        0 0 120px rgba(255,255,255,0.18);
+}
+
+.login-card h1 {
+    font-size: 48px;
+    color: #114bb8;
+    margin-bottom: 16px;
+}
+
+.login-subtitle {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 34px;
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 22px;
+    color: #114bb8;
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 18px;
+
+    border: 3px solid #dceeff;
+    border-radius: 18px;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 20px;
+
+    outline: none;
+    background: #eef7ff;
+}
+
+.input-group input:focus {
+    border-color: #114bb8;
+    background: white;
+}
+
+.login-message {
+    min-height: 26px;
+    font-size: 17px;
+    color: #d9534f;
+    margin-bottom: 18px;
+}
+
+#loginBtn {
+    padding: 14px 44px;
+    border: none;
+    border-radius: 16px;
+
+    background: #114bb8;
+    color: white;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 24px;
+
+    cursor: pointer;
+    box-shadow: 0 6px 0 #0b347f;
+}
+
+#loginBtn:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .login-card {
+        padding: 35px 28px;
+    }
+
+    .login-card h1 {
+        font-size: 36px;
+    }
+
+    .login-subtitle {
+        font-size: 16px;
+    }
+
+    .input-group label {
+        font-size: 20px;
+    }
+
+    .input-group input {
+        font-size: 18px;
+    }
+}
