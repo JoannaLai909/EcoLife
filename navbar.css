@@ -55,7 +55,8 @@
   transition: all 0.2s ease;
 }
 
-.nav-links a::after {
+.nav-links a::after,
+.drop-btn::after {
   content: "";
   position: absolute;
   left: 0;
@@ -64,6 +65,11 @@
   height: 2px;
   background: #004aad;
   transition: width 0.3s;
+}
+
+.nav-links a:hover::after,
+.drop-btn:hover::after {
+  width: 100%;
 }
 
 .nav-links a:hover::after {
@@ -91,6 +97,8 @@
   color: #004aad;
   display: flex;
   align-items: center;
+  position: relative;
+  height: 40px;
 }
 
 .dropdown-content {
