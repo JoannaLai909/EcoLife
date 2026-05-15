@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     background: #a9d8f0;
 }
 
@@ -26,69 +26,71 @@ body {
 
 /* TUTORIAL */
 
-.tutorial-scene{
-    display:flex;
-    align-items:center;
-    gap:40px;
+.tutorial-scene {
+    display: flex;
+    align-items: center;
+    gap: 40px;
 }
 
-.tutorial-tiger{
-    width:260px;
-    filter:drop-shadow(0 16px 12px rgba(0,0,0,0.25));
+.tutorial-tiger {
+    width: 260px;
+    filter: drop-shadow(0 16px 12px rgba(0,0,0,0.25));
 }
 
-.tutorial-dialog {
-    width: 420px;
+.speech-bubble {
+    position: relative;
+
+    width: 620px;
+    min-height: 260px;
+
+    background: white;
+    border-radius: 35px;
+    padding: 55px 70px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 30px 70px rgba(0,0,0,0.35);
 }
 
-.speech-bubble p{
-    font-size:30px;
-    line-height:1.45;
-    text-align:center;
-    margin-bottom:34px;
+.speech-bubble p {
+    font-size: 30px;
+    line-height: 1.45;
+    text-align: center;
+    margin-bottom: 34px;
 }
 
-.speech-bubble{
-    position:relative;
-    width:620px;
-    min-height:260px;
-    background:white;
-    border-radius:35px;
-    padding:55px 70px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    box-shadow:0 30px 70px rgba(0,0,0,0.35);
-}
+.speech-bubble::before {
+    content: "";
 
-.speech-bubble::before{
+    position: absolute;
+    left: -55px;
+    top: 50%;
 
-    content:"";
+    transform: translateY(-50%);
 
-    position:absolute;
+    width: 0;
+    height: 0;
 
-    left:-55px;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:0;
-    height:0;
-
-    border-top:28px solid transparent;
-    border-bottom:28px solid transparent;
-    border-right:58px solid white;
+    border-top: 28px solid transparent;
+    border-bottom: 28px solid transparent;
+    border-right: 58px solid white;
 }
 
 #nextTutorialBtn {
     padding: 14px 34px;
+
     border: none;
     border-radius: 16px;
+
     background: #114bb8;
     color: white;
-    font-family: "Ahkio-Regular";
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 22px;
+
     cursor: pointer;
     box-shadow: 0 6px 0 #0b347f;
 }
@@ -97,7 +99,7 @@ body {
     transform: translateY(-2px);
 }
 
-.tutorial-dialog.pop {
+.speech-bubble.pop {
     animation: dialogPop 0.28s ease;
 }
 
@@ -237,21 +239,26 @@ body {
 
 @media (max-width: 900px) {
 
-    .tutorial-card {
+    .tutorial-scene {
         flex-direction: column;
-        padding: 30px;
+        gap: 24px;
     }
 
     .tutorial-tiger {
         width: 170px;
     }
 
-    .tutorial-dialog {
+    .speech-bubble {
         width: 90vw;
-        text-align: center;
+        min-height: 230px;
+        padding: 40px 28px;
     }
 
-    .tutorial-dialog p {
+    .speech-bubble::before {
+        display: none;
+    }
+
+    .speech-bubble p {
         font-size: 22px;
     }
 

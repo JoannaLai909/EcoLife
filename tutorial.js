@@ -1,3 +1,13 @@
+/* USER DATA */
+
+const currentUserName = localStorage.getItem("currentUserName");
+const currentUserId = localStorage.getItem("currentUserId");
+
+if (!currentUserName || !currentUserId) {
+    window.location.href = "login.html";
+}
+
+
 /* TUTORIAL */
 
 const tutorialTexts = [
@@ -11,12 +21,50 @@ let tutorialStep = 0;
 
 const tutorialText = document.getElementById("tutorialText");
 const nextTutorialBtn = document.getElementById("nextTutorialBtn");
-const tutorialDialog = document.querySelector(".tutorial-dialog");
+const tutorialDialog = document.getElementById("tutorialDialog");
 
 const tutorialCard = document.getElementById("tutorialCard");
 const categoryContainer = document.getElementById("categoryContainer");
+const categorySubtitle = document.getElementById("categorySubtitle");
 
-nextTutorialBtn.addEventListener("click", () => {
+const tutorialFinishedKey = "tutorialFinished_" + currentUserId;
+
+
+/* PAGE INITIAL STATE */
+
+window.addEventListener("load", function () {
+    const tutorialFinished = localStorage.getItem(tutorialFinishedKey);
+
+    if (tutorialFinished === "true") {
+        showCategorySection();
+    } else {
+        showTutorialSection();
+    }
+});
+
+
+function showTutorialSection() {
+    tutorialCard.style.display = "flex";
+    categoryContainer.style.display = "none";
+
+    tutorialStep = 0;
+    tutorialText.innerText = tutorialTexts[tutorialStep];
+    nextTutorialBtn.innerText = "Next";
+}
+
+
+function showCategorySection() {
+    tutorialCard.style.display = "none";
+    categoryContainer.style.display = "block";
+
+    categorySubtitle.innerText = 
+        "Welcome, " + currentUserName + "! Choose your SDG journey.";
+}
+
+
+/* NEXT TUTORIAL BUTTON */
+
+nextTutorialBtn.addEventListener("click", function () {
     tutorialStep++;
 
     if (tutorialStep < tutorialTexts.length) {
@@ -31,8 +79,8 @@ nextTutorialBtn.addEventListener("click", () => {
         }
 
     } else {
-        tutorialCard.style.display = "none";
-        categoryContainer.style.display = "block";
+        localStorage.setItem(tutorialFinishedKey, "true");
+        showCategorySection();
     }
 });
 
@@ -94,6 +142,9 @@ function selectCategory(categoryName) {
     localStorage.setItem("scenarioTitle", selectedCategory.scenarioTitle);
     localStorage.setItem("scenarioText", selectedCategory.scenarioText);
 
+    localStorage.setItem("currentUserName", currentUserName);
+    localStorage.setItem("currentUserId", currentUserId);
+
     window.location.href = "game.html";
 }
 
@@ -125,7 +176,7 @@ function selectRandomCategory() {
         </p>
     `;
 
-    categoryCards.forEach((card) => {
+    categoryCards.forEach(function (card) {
         card.classList.remove("selected-card");
 
         if (card.dataset.category === randomCategoryName) {
@@ -133,7 +184,7 @@ function selectRandomCategory() {
         }
     });
 
-    setTimeout(() => {
+    setTimeout(function () {
         selectCategory(randomCategoryName);
     }, 2500);
 }
@@ -141,8 +192,8 @@ function selectRandomCategory() {
 
 /* CLICK CATEGORY CARD */
 
-categoryCards.forEach((card) => {
-    card.addEventListener("click", () => {
+categoryCards.forEach(function (card) {
+    card.addEventListener("click", function () {
         const categoryName = card.dataset.category;
 
         if (categoryName === "Random") {
