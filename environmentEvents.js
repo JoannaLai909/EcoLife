@@ -1366,6 +1366,200 @@ const environmentEvents = [
             }
 
         ]
+    },
+    {
+        category: "Environment",
+        type: "money",
+        title: "舊書回收販售",
+        description: "你整理出一堆用不到的課本，決定拿去二手書店賣。",
+
+        choices: [
+            { text: "全部整理好拿去賣", money: 280, energy: -22, goal12: 10 },
+            { text: "只賣幾本比較新的", money: 120, energy: -8, goal12: 5 },
+            { text: "懶得整理先堆著", money: 0, energy: 8, goal12: -2 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "money",
+        title: "環保餐具團購",
+        description: "你幫同學們一起團購環保餐具，廠商給你折扣回饋。",
+
+        choices: [
+            { text: "認真統計並下單", money: 200, energy: -18, goal12: 12 },
+            { text: "只幫幾個朋友訂", money: 80, energy: -6, goal12: 5 },
+            { text: "覺得太麻煩取消", money: 0, energy: 8 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "money",
+        title: "校園回收分類工讀",
+        description: "學校招募學生協助整理回收物。",
+
+        choices: [
+            { text: "工作整個下午", money: 350, energy: -30, goal12: 12 },
+            { text: "只幫忙一小時", money: 100, energy: -8, goal12: 5 },
+            { text: "今天不想碰垃圾", money: 0, energy: 10 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "money",
+        title: "低碳市集攤位助手",
+        description: "低碳市集需要臨時攤位助手。",
+
+        choices: [
+            { text: "負責整天攤位", money: 420, energy: -35, goal13: 10 },
+            { text: "只幫忙下午", money: 180, energy: -15, goal13: 5 },
+            { text: "拒絕工讀邀請", money: 0, energy: 10 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "money",
+        title: "節能宿舍競賽獎金",
+        description: "宿舍舉辦節能競賽，省電最多的房間可以拿獎金。",
+
+        choices: [
+            { text: "認真控制用電", money: 300, energy: -18, goal13: 15 },
+            { text: "稍微注意一下", money: 100, energy: -6, goal13: 6 },
+            { text: "照樣開冷氣", money: 0, energy: 10, goal13: -6 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "money",
+        title: "二手衣整理工讀",
+        description: "二手衣店需要人幫忙整理衣物。",
+
+        choices: [
+            { text: "整理一整批衣服", money: 380, energy: -30, goal12: 10 },
+            { text: "只幫忙分類", money: 150, energy: -12, goal12: 5 },
+            { text: "不想整理衣服", money: 0, energy: 8 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "money",
+        title: "環保講座場務",
+        description: "環保講座需要學生協助報到與整理場地。",
+
+        choices: [
+            { text: "負責整場活動", money: 300, energy: -25, goal13: 8 },
+            { text: "只幫忙報到", money: 120, energy: -8, goal13: 4 },
+            { text: "今天想休息", money: 0, energy: 12 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "normal",
+        title: "宿舍飲水機漏水",
+        description: "你發現宿舍飲水機旁邊一直在滴水。",
+
+        choices: [
+            { text: "馬上通報修理", money: 0, energy: -6, goal6: 15 },
+            { text: "拿桶子先接水", money: 0, energy: -10, goal6: 10 },
+            { text: "反正不是我房間", money: 0, energy: 5, goal6: -5 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "normal",
+        title: "社團活動垃圾量",
+        description: "社團活動後留下很多飲料杯和便當盒。",
+
+        choices: [
+            { text: "留下來幫忙分類", money: 0, energy: -20, goal12: 18 },
+            { text: "提醒大家一起清", money: 0, energy: -8, goal12: 10 },
+            { text: "活動結束直接走", money: 0, energy: 8, goal12: -6 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "normal",
+        title: "校園落葉堆肥",
+        description: "學校想把落葉拿去做堆肥。",
+
+        choices: [
+            { text: "參加堆肥工作坊", money: 0, energy: -18, goal15: 15 },
+            { text: "幫忙收集落葉", money: 0, energy: -12, goal15: 10 },
+            { text: "覺得很髒不去", money: 0, energy: 8, goal15: -4 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "normal",
+        title: "外送包裝選擇",
+        description: "你點外送時看到可以選擇減少餐具。",
+
+        choices: [
+            { text: "選擇不要餐具", money: 0, energy: -2, goal12: 12 },
+            { text: "備註少一點包裝", money: 0, energy: -4, goal12: 8 },
+            { text: "什麼都不管", money: 0, energy: 5, goal12: -5 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "normal",
+        title: "宿舍冰箱清理",
+        description: "宿舍冰箱裡有很多快過期的食物。",
+
+        choices: [
+            { text: "整理並分享食物", money: 20, energy: -18, goal12: 15 },
+            { text: "只整理自己的東西", money: 0, energy: -6, goal12: 6 },
+            { text: "全部放到壞掉", money: 0, energy: 5, goal12: -8 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "normal",
+        title: "環境紀錄影片",
+        description: "同學想拍一支校園環境紀錄短片。",
+
+        choices: [
+            { text: "一起拍攝剪輯", money: 0, energy: -25, goal13: 12 },
+            { text: "只提供照片素材", money: 0, energy: -5, goal13: 5 },
+            { text: "覺得沒人會看", money: 0, energy: 8, goal13: -4 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "normal",
+        title: "水龍頭沒關緊",
+        description: "你經過廁所時發現水龍頭還在滴水。",
+
+        choices: [
+            { text: "順手關緊", money: 0, energy: -2, goal6: 12 },
+            { text: "通知清潔人員", money: 0, energy: -4, goal6: 8 },
+            { text: "假裝沒看到", money: 0, energy: 5, goal6: -5 }
+        ]
+    },
+
+    {
+        category: "Environment",
+        type: "normal",
+        title: "環保社淨山活動",
+        description: "環保社週末要去淨山，邀請你參加。",
+
+        choices: [
+            { text: "一起去淨山", money: 0, energy: -30, goal15: 20 },
+            { text: "幫忙準備物資", money: -30, energy: -10, goal15: 8 },
+            { text: "週末想躺平", money: 0, energy: 15, goal15: -5 }
+        ]
     }
 
 ];

@@ -1138,6 +1138,200 @@ const societyEvents = [
             }
 
         ]
+    },
+    {
+        category: "Society",
+        type: "money",
+        title: "圖書館櫃台工讀",
+        description: "圖書館臨時缺櫃台工讀生，問你能不能支援。",
+
+        choices: [
+            { text: "支援整個下午", money: 350, energy: -28, goal4: 8 },
+            { text: "只幫忙兩小時", money: 150, energy: -10, goal4: 4 },
+            { text: "今天想休息", money: 0, energy: 12 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "公益活動攝影",
+        description: "公益社團需要人幫活動拍照紀錄。",
+
+        choices: [
+            { text: "完整拍攝活動", money: 300, energy: -25, goal10: 8 },
+            { text: "只拍開場", money: 100, energy: -8, goal10: 3 },
+            { text: "相機沒電不接", money: 0, energy: 8 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "校園導覽工讀",
+        description: "學校開放日需要學生帶高中生參觀校園。",
+
+        choices: [
+            { text: "帶完整導覽", money: 280, energy: -22, goal4: 8 },
+            { text: "只介紹系館", money: 120, energy: -8, goal4: 4 },
+            { text: "怕生不想去", money: 0, energy: 10 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "社福機構文案工讀",
+        description: "社福機構需要人幫忙寫活動宣傳文案。",
+
+        choices: [
+            { text: "接下完整文案", money: 360, energy: -24, goal1: 8 },
+            { text: "只幫忙潤稿", money: 130, energy: -8, goal1: 4 },
+            { text: "沒有靈感", money: 0, energy: 8 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "健康講座場務",
+        description: "校園健康講座需要場務工讀生。",
+
+        choices: [
+            { text: "負責整場活動", money: 300, energy: -25, goal3: 8 },
+            { text: "只幫忙報到", money: 120, energy: -8, goal3: 3 },
+            { text: "太累不接", money: 0, energy: 12 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "偏鄉營隊助教",
+        description: "偏鄉營隊臨時需要大學生助教。",
+
+        choices: [
+            { text: "擔任整天助教", money: 450, energy: -35, goal4: 12, goal10: 5 },
+            { text: "只幫忙半天", money: 200, energy: -18, goal4: 6 },
+            { text: "路太遠不去", money: 0, energy: 10 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "校園問卷調查員",
+        description: "學生會需要人協助進行校園平權問卷調查。",
+
+        choices: [
+            { text: "認真訪問同學", money: 250, energy: -20, goal5: 8 },
+            { text: "只發線上表單", money: 80, energy: -5, goal5: 3 },
+            { text: "覺得尷尬不做", money: 0, energy: 8 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "社區共餐幫手",
+        description: "社區共餐活動需要人協助準備與收拾。",
+
+        choices: [
+            { text: "從準備到收拾都幫", money: 320, energy: -28, goal2: 8, goal10: 5 },
+            { text: "只幫忙端餐", money: 120, energy: -10, goal2: 4 },
+            { text: "今天不想出門", money: 0, energy: 12 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "校園安全巡查工讀",
+        description: "學校晚上需要學生協助巡查照明與安全死角。",
+
+        choices: [
+            { text: "參加整晚巡查", money: 380, energy: -30, goal3: 8, goal10: 5 },
+            { text: "只巡查一小時", money: 150, energy: -12, goal3: 4 },
+            { text: "晚上太可怕了", money: 0, energy: 10 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "money",
+        title: "公益市集收銀",
+        description: "公益市集需要人幫忙收銀與整理物資。",
+
+        choices: [
+            { text: "幫忙整天", money: 400, energy: -35, goal1: 8, goal2: 8 },
+            { text: "只幫忙下午", money: 180, energy: -15, goal1: 4 },
+            { text: "人太多不想去", money: 0, energy: 8 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "normal",
+        title: "同學的緊急求助",
+        description: "同學突然身體不舒服，問你能不能陪她去保健室。",
+
+        choices: [
+            { text: "馬上陪她去", money: 0, energy: -12, goal3: 15 },
+            { text: "幫她叫同學陪", money: 0, energy: -3, goal3: 8 },
+            { text: "假裝沒看到訊息", money: 0, energy: 5, goal3: -6 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "normal",
+        title: "班上的筆記共享",
+        description: "期中考前，有人提議大家共用雲端筆記。",
+
+        choices: [
+            { text: "上傳自己的整理", money: 0, energy: -18, goal4: 15 },
+            { text: "只看別人的筆記", money: 0, energy: 5, goal4: -3 },
+            { text: "幫忙整理格式", money: 0, energy: -8, goal4: 8 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "normal",
+        title: "宿舍公共空間",
+        description: "宿舍公共廚房被弄得很髒，大家都不想處理。",
+
+        choices: [
+            { text: "主動清理", money: 0, energy: -20, goal3: 8, goal10: 6 },
+            { text: "提醒大家輪流打掃", money: 0, energy: -8, goal10: 10 },
+            { text: "反正不是我弄的", money: 0, energy: 5, goal10: -5 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "normal",
+        title: "無聲的歧視玩笑",
+        description: "朋友開了一個讓某些族群不舒服的玩笑。",
+
+        choices: [
+            { text: "溫和提醒他", money: 0, energy: -10, goal10: 15 },
+            { text: "私下跟他說", money: 0, energy: -6, goal10: 10 },
+            { text: "跟著笑比較安全", money: 0, energy: 3, goal10: -8 }
+        ]
+    },
+
+    {
+        category: "Society",
+        type: "normal",
+        title: "校園心理健康週",
+        description: "學校舉辦心理健康週活動，鼓勵學生關心自己。",
+
+        choices: [
+            { text: "參加壓力管理工作坊", money: -30, energy: -8, goal3: 15 },
+            { text: "拿資料回去看", money: 0, energy: -3, goal3: 6 },
+            { text: "覺得自己沒問題", money: 0, energy: 5, goal3: -3 }
+        ]
     }
 
 ];
