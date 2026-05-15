@@ -8,16 +8,17 @@ body {
     font-family: "Ahkio-Regular";
     background: #a9d8f0;
     width: 100vw;
-    min-height: 100vh;
-    overflow: auto;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .game-page {
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     padding: 120px 40px 28px;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 /* TOP BAR */
