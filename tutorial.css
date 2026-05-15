@@ -11,17 +11,13 @@ body {
 
 .tutorial-page {
     min-height: 100vh;
-    padding-top: 120px;
-
+    padding: 120px 30px 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-
     background:
         radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 45%),
         rgba(45, 75, 95, 0.55);
-
-    padding: 30px;
 }
 
 /* TUTORIAL */
