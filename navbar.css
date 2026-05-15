@@ -136,6 +136,16 @@
   transform: translateY(0);
 }
 
+.dropdown::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: -30px;
+  width: 220px;
+  height: 16px;
+  background: transparent;
+}
+
 .dropdown:hover .dropdown-content {
   opacity: 1;
   visibility: visible;
