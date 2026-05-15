@@ -219,14 +219,18 @@ function loadEvent() {
 // ─────────────────────────────────────────────
 
 function handleChoice(choice) {
-    if (money + choice.money < 0) {
+
+    const moneyChange = choice.money ?? 0;
+    const energyChange = choice.energy ?? 0;
+
+    if (money + moneyChange < 0) {
         moneyPopup.classList.add("active");
         setTimeout(() => moneyPopup.classList.remove("active"), 1500);
         return;
     }
 
-    money  = Math.max(0, money  + choice.money);
-    energy = Math.max(0, energy + choice.energy);
+    money  = Math.max(0, money + moneyChange);
+    energy = Math.max(0, energy + energyChange);
 
     for (const key in choice) {
         if (key.startsWith("goal")) {
@@ -236,7 +240,6 @@ function handleChoice(choice) {
 
     updateProgress();
 
-    // 體力歸零 → 記錄次數，強制進入下一天
     if (energy <= 0) {
         energyDepletedCount++;
         energy = 0;
@@ -371,8 +374,13 @@ function determineEnding() {
     } else if (goalRatio >= 1.0) {
         ending = "win";          // ✅ 任務完成
 
-    } else if (goalRatio < 1.0 && otherGoalsTotal >= goalScore * 2) {
-        ending = "butterfly";    // 🌍 蝴蝶效應（隱藏）
+    }else if (
+        goalRatio < 1.0 &&
+        goalScore > 0 &&
+        otherGoalsTotal >= goalScore * 2 &&
+        otherGoalsTotal >= targetScore
+    ) {
+        ending = "butterfly";    // 🌍 蝴蝶效應（隱藏）                            
 
     } else if (energyDepletedCount >= 3) {
         ending = "exhausted";    // 😮‍💨 燃燒殆盡

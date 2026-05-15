@@ -2,7 +2,7 @@ const startBtn = document.getElementById("startBtn");
 
 if (startBtn) {
   startBtn.addEventListener("click", function() {
-    window.location.href = "tutorial.html";
+    window.location.href = "login.html";
   });
 }
 
