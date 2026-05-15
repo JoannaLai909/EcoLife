@@ -1,12 +1,18 @@
 const selectedCategory =
     localStorage.getItem("selectedCategory") || "Environment";
 
+
+/* =========================
+   CATEGORY GOALS
+========================= */
+
 const categoryGoals = {
     Environment: ["goal6", "goal12", "goal13", "goal14", "goal15"],
     Society: ["goal1", "goal2", "goal3", "goal4", "goal5", "goal10"],
     Development: ["goal7", "goal8", "goal9", "goal11"],
     Global: ["goal16", "goal17"]
 };
+
 
 const allEventPools = {
     Environment: environmentEvents,
@@ -15,10 +21,20 @@ const allEventPools = {
     Global: globalEvents
 };
 
-let allEvents = allEventPools[selectedCategory] || environmentEvents;
+
+const activeGoals =
+    categoryGoals[selectedCategory] || categoryGoals.Environment;
+
+
+let allEvents =
+    allEventPools[selectedCategory] || environmentEvents;
+
+
+/* =========================
+   GAME STATE
+========================= */
 
 let day = 1;
-let usedEventTitles = [];
 let actionsToday = 0;
 
 const maxActionsPerDay = 4;
@@ -26,14 +42,25 @@ const maxDays = 21;
 
 let money = 100;
 let energy = 80;
+
 let sdgScores = {};
 
+let usedEventKeys = [];
 
-/* ELEMENTS */
+let targetEvents = [];
+let fallbackEvents = [];
+
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const menuBtn = document.getElementById("menuBtn");
 const menuModal = document.getElementById("menuModal");
 const closeMenuBtn = document.getElementById("closeMenuBtn");
+const restartBtn = document.getElementById("restartBtn");
+const homeBtn = document.getElementById("homeBtn");
+
 const moneyPopup = document.getElementById("moneyPopup");
 
 const shopBtn = document.getElementById("shopBtn");
@@ -42,6 +69,7 @@ const shopCloseBtn = document.getElementById("shopCloseBtn");
 const shopBalance = document.getElementById("shopBalance");
 
 const goalBox = document.getElementById("goalBox");
+
 const goalPopup = document.getElementById("goalPopup");
 const closeGoalPopupBtn = document.getElementById("closeGoalPopupBtn");
 
@@ -51,38 +79,56 @@ const goalPopupSub = document.getElementById("goalPopupSub");
 const goalPopupDesc = document.getElementById("goalPopupDesc");
 
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
-menuBtn.addEventListener("click", () => {
-    menuModal.classList.add("active");
-});
+if (menuBtn) {
+    menuBtn.addEventListener("click", () => {
+        menuModal.classList.add("active");
+    });
+}
 
-closeMenuBtn.addEventListener("click", () => {
-    menuModal.classList.remove("active");
-});
+if (closeMenuBtn) {
+    closeMenuBtn.addEventListener("click", () => {
+        menuModal.classList.remove("active");
+    });
+}
 
-document.getElementById("restartBtn").addEventListener("click", () => {
-    location.reload();
-});
+if (restartBtn) {
+    restartBtn.addEventListener("click", () => {
+        location.reload();
+    });
+}
 
-document.getElementById("homeBtn").addEventListener("click", () => {
-    window.location.href = "entrance.html";
-});
-
-
-/* SHOP */
-
-shopBtn.addEventListener("click", () => {
-    shopBalance.innerText = `💰 ${money}`;
-    shopOverlay.classList.add("shop-open");
-});
-
-shopCloseBtn.addEventListener("click", () => {
-    shopOverlay.classList.remove("shop-open");
-});
+if (homeBtn) {
+    homeBtn.addEventListener("click", () => {
+        window.location.href = "entrance.html";
+    });
+}
 
 
-/* SDG COLORS */
+/* =========================
+   SHOP
+========================= */
+
+if (shopBtn) {
+    shopBtn.addEventListener("click", () => {
+        shopBalance.innerText = `💰 ${money}`;
+        shopOverlay.classList.add("shop-open");
+    });
+}
+
+if (shopCloseBtn) {
+    shopCloseBtn.addEventListener("click", () => {
+        shopOverlay.classList.remove("shop-open");
+    });
+}
+
+
+/* =========================
+   SDG COLORS
+========================= */
 
 const goalColors = {
     goal1: "#E5243B",
@@ -107,16 +153,29 @@ const goalColors = {
     goal17: "#19486A"
 };
 
-const activeGoals = categoryGoals[selectedCategory] || categoryGoals.Environment;
 
+/* =========================
+   EVENT CHECK FUNCTIONS
+========================= */
 
-/* CHECK WHETHER AN EVENT MATCHES A GOAL */
+function getEventKey(event) {
+    return event.title + "::" + event.description;
+}
+
 
 function eventHasPositiveGoal(event, goalKey) {
     return event.choices.some(choice => {
         return typeof choice[goalKey] === "number" && choice[goalKey] > 0;
     });
 }
+
+
+function eventHasAnyActiveGoal(event) {
+    return activeGoals.some(goal => {
+        return eventHasPositiveGoal(event, goal);
+    });
+}
+
 
 function eventHasMoneyGain(event) {
     return event.choices.some(choice => {
@@ -125,22 +184,53 @@ function eventHasMoneyGain(event) {
 }
 
 
-/* PICK TARGET GOAL BASED ON ACTUAL EVENTS */
-
-const availableTargetGoals = activeGoals.filter(goal => {
-    return allEvents.some(event => eventHasPositiveGoal(event, goal));
-});
-
-let targetGoal;
-
-if (availableTargetGoals.length > 0) {
-    targetGoal =
-        availableTargetGoals[
-            Math.floor(Math.random() * availableTargetGoals.length)
-        ];
-} else {
-    targetGoal = activeGoals[0];
+function shuffleArray(array) {
+    return [...array].sort(() => Math.random() - 0.5);
 }
+
+
+/* =========================
+   PICK TARGET GOAL
+========================= */
+
+function countEventsForGoal(goalKey) {
+    return allEvents.filter(event => {
+        return eventHasPositiveGoal(event, goalKey);
+    }).length;
+}
+
+
+function pickTargetGoal() {
+    const goalsWithEvents = activeGoals
+        .map(goal => {
+            return {
+                goal: goal,
+                count: countEventsForGoal(goal)
+            };
+        })
+        .filter(item => {
+            return item.count > 0;
+        });
+
+    if (goalsWithEvents.length === 0) {
+        return activeGoals[0];
+    }
+
+    const goodGoals = goalsWithEvents.filter(item => {
+        return item.count >= 4;
+    });
+
+    const candidates =
+        goodGoals.length > 0 ? goodGoals : goalsWithEvents;
+
+    const randomIndex =
+        Math.floor(Math.random() * candidates.length);
+
+    return candidates[randomIndex].goal;
+}
+
+
+const targetGoal = pickTargetGoal();
 
 const possibleScores = [30, 40, 50, 60];
 
@@ -149,16 +239,33 @@ const targetScore =
         Math.floor(Math.random() * possibleScores.length)
     ];
 
-let targetEvents = allEvents.filter(event => {
-    return eventHasPositiveGoal(event, targetGoal);
-});
 
-if (targetEvents.length === 0) {
-    targetEvents = [...allEvents];
+/* =========================
+   BUILD EVENT POOLS
+========================= */
+
+function buildEventPools() {
+    targetEvents = shuffleArray(
+        allEvents.filter(event => {
+            return eventHasPositiveGoal(event, targetGoal);
+        })
+    );
+
+    fallbackEvents = shuffleArray(
+        allEvents.filter(event => {
+            return !eventHasPositiveGoal(event, targetGoal) &&
+                   eventHasAnyActiveGoal(event);
+        })
+    );
 }
 
 
-/* UPDATE GOAL BOX */
+buildEventPools();
+
+
+/* =========================
+   UPDATE GOAL BOX
+========================= */
 
 function updateGoalBox() {
     goalBox.innerText =
@@ -166,13 +273,22 @@ function updateGoalBox() {
 }
 
 
-/* GET EVENT WITHOUT REPEAT */
+/* =========================
+   GET NEXT EVENT WITHOUT REPEAT
+========================= */
+
+function getUnusedEvents(eventList) {
+    return eventList.filter(event => {
+        return !usedEventKeys.includes(getEventKey(event));
+    });
+}
+
 
 function getNextEvent() {
-    let availableEvents = [...targetEvents];
+    let availableEvents = getUnusedEvents(targetEvents);
 
     if (money <= 50) {
-        const moneyEvents = targetEvents.filter(event => {
+        const moneyEvents = availableEvents.filter(event => {
             return event.type === "money" || eventHasMoneyGain(event);
         });
 
@@ -181,24 +297,12 @@ function getNextEvent() {
         }
     }
 
-    availableEvents = availableEvents.filter(event => {
-        return !usedEventTitles.includes(event.title);
-    });
+    if (availableEvents.length === 0) {
+        availableEvents = getUnusedEvents(fallbackEvents);
+    }
 
     if (availableEvents.length === 0) {
-        usedEventTitles = [];
-
-        availableEvents = [...targetEvents];
-
-        if (money <= 50) {
-            const moneyEvents = targetEvents.filter(event => {
-                return event.type === "money" || eventHasMoneyGain(event);
-            });
-
-            if (moneyEvents.length > 0) {
-                availableEvents = moneyEvents;
-            }
-        }
+        return null;
     }
 
     const randomIndex =
@@ -206,18 +310,25 @@ function getNextEvent() {
 
     const selectedEvent = availableEvents[randomIndex];
 
-    usedEventTitles.push(selectedEvent.title);
+    usedEventKeys.push(getEventKey(selectedEvent));
 
     return selectedEvent;
 }
 
 
-/* LOAD EVENT */
+/* =========================
+   LOAD EVENT
+========================= */
 
 function loadEvent() {
     updateGoalBox();
 
     const event = getNextEvent();
+
+    if (!event) {
+        endGameByNoMoreEvents();
+        return;
+    }
 
     document.getElementById("scenarioTitle").innerText = event.title;
     document.getElementById("scenarioDescription").innerText = event.description;
@@ -246,53 +357,7 @@ function loadEvent() {
         `;
 
         card.addEventListener("click", () => {
-            if (money + (choice.money || 0) < 0) {
-                moneyPopup.classList.add("active");
-
-                setTimeout(() => {
-                    moneyPopup.classList.remove("active");
-                }, 1500);
-
-                return;
-            }
-
-            money += choice.money || 0;
-            energy += choice.energy || 0;
-
-            money = Math.max(0, money);
-            energy = Math.max(0, energy);
-
-            if (energy <= 0) {
-                localStorage.setItem("resultType", "lose");
-                localStorage.setItem("money", money);
-                localStorage.setItem("energy", energy);
-                window.location.href = "result.html";
-                return;
-            }
-
-            for (let key in choice) {
-                if (key.startsWith("goal")) {
-                    if (!sdgScores[key]) {
-                        sdgScores[key] = 0;
-                    }
-
-                    sdgScores[key] += choice[key];
-                }
-            }
-
-            const isWin = updateProgress();
-
-            if (isWin) {
-                return;
-            }
-
-            actionsToday++;
-
-            if (actionsToday >= maxActionsPerDay || energy <= 0) {
-                nextDay();
-            } else {
-                loadEvent();
-            }
+            handleChoice(choice);
         });
 
         choicesSection.appendChild(card);
@@ -300,7 +365,64 @@ function loadEvent() {
 }
 
 
-/* UPDATE PROGRESS */
+/* =========================
+   HANDLE CHOICE
+========================= */
+
+function handleChoice(choice) {
+    if (money + (choice.money || 0) < 0) {
+        moneyPopup.classList.add("active");
+
+        setTimeout(() => {
+            moneyPopup.classList.remove("active");
+        }, 1500);
+
+        return;
+    }
+
+    money += choice.money || 0;
+    energy += choice.energy || 0;
+
+    money = Math.max(0, money);
+    energy = Math.max(0, energy);
+
+    if (energy <= 0) {
+        localStorage.setItem("resultType", "lose");
+        localStorage.setItem("money", money);
+        localStorage.setItem("energy", energy);
+        window.location.href = "result.html";
+        return;
+    }
+
+    for (let key in choice) {
+        if (key.startsWith("goal")) {
+            if (!sdgScores[key]) {
+                sdgScores[key] = 0;
+            }
+
+            sdgScores[key] += choice[key];
+        }
+    }
+
+    const isWin = updateProgress();
+
+    if (isWin) {
+        return;
+    }
+
+    actionsToday++;
+
+    if (actionsToday >= maxActionsPerDay) {
+        nextDay();
+    } else {
+        loadEvent();
+    }
+}
+
+
+/* =========================
+   UPDATE PROGRESS
+========================= */
 
 function updateProgress() {
     activeGoals.forEach(goal => {
@@ -325,7 +447,9 @@ function updateProgress() {
 }
 
 
-/* NEXT DAY */
+/* =========================
+   NEXT DAY
+========================= */
 
 function nextDay() {
     day++;
@@ -349,7 +473,27 @@ function nextDay() {
 }
 
 
-/* RENDER PROGRESS BARS */
+/* =========================
+   END WHEN NO UNIQUE EVENTS
+========================= */
+
+function endGameByNoMoreEvents() {
+    if ((sdgScores[targetGoal] || 0) >= targetScore) {
+        localStorage.setItem("resultType", "win");
+    } else {
+        localStorage.setItem("resultType", "lose");
+    }
+
+    localStorage.setItem("money", money);
+    localStorage.setItem("energy", energy);
+
+    window.location.href = "result.html";
+}
+
+
+/* =========================
+   RENDER PROGRESS BARS
+========================= */
 
 function renderProgressBars() {
     const progressList = document.getElementById("progressList");
@@ -370,7 +514,9 @@ function renderProgressBars() {
 }
 
 
-/* GOAL INFO CLICK POPUP */
+/* =========================
+   GOAL INFO CLICK POPUP
+========================= */
 
 const goalInfoData = {
     1: {
@@ -459,6 +605,7 @@ const goalInfoData = {
     }
 };
 
+
 function getGoalNumberFromBox() {
     const goalText = goalBox.innerText;
     const match = goalText.match(/Goal\s*(\d+)/i);
@@ -469,6 +616,7 @@ function getGoalNumberFromBox() {
 
     return 13;
 }
+
 
 function openGoalPopup() {
     const goalNumber = getGoalNumberFromBox();
@@ -486,22 +634,44 @@ function openGoalPopup() {
     goalPopup.classList.add("active");
 }
 
+
 function closeGoalPopup() {
     goalPopup.classList.remove("active");
 }
 
-goalBox.addEventListener("click", openGoalPopup);
 
-closeGoalPopupBtn.addEventListener("click", closeGoalPopup);
-
-goalPopup.addEventListener("click", function (event) {
-    if (event.target === goalPopup) {
-        closeGoalPopup();
-    }
-});
+if (goalBox) {
+    goalBox.addEventListener("click", openGoalPopup);
+}
 
 
-/* START GAME */
+if (closeGoalPopupBtn) {
+    closeGoalPopupBtn.addEventListener("click", closeGoalPopup);
+}
+
+
+if (goalPopup) {
+    goalPopup.addEventListener("click", function (event) {
+        if (event.target === goalPopup) {
+            closeGoalPopup();
+        }
+    });
+}
+
+
+/* =========================
+   DEBUG
+========================= */
+
+console.log("Selected Category:", selectedCategory);
+console.log("Target Goal:", targetGoal);
+console.log("Target Events:", targetEvents.map(event => event.title));
+console.log("Fallback Events:", fallbackEvents.map(event => event.title));
+
+
+/* =========================
+   START GAME
+========================= */
 
 renderProgressBars();
 loadEvent();

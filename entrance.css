@@ -133,34 +133,33 @@ p {
 }
 
 /* =========================
-   Info Sections
+   Shared Info Box Size
 ========================= */
 
-.info-section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.container {
+#why .info-box,
+#purpose .info-box {
   width: 90%;
   max-width: 1100px;
-  margin: 0 auto;
+  min-height: 360px;
+
+  padding: 75px 90px;
+
+  border-radius: 4px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+
+  text-align: left;
 }
 
-.info-section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* =========================
    Origin Section
 ========================= */
 
 #why {
-  min-height: 90vh;
+  min-height: 100vh;
   margin-top: 0;
-  padding: 80px 0;
+  padding: 120px 0;
+
   background: #E0E0E0;
 
   display: flex;
@@ -169,9 +168,12 @@ p {
 }
 
 #why .info-box {
-  background-image: url('image/paper.jpg');
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)),
+    url("image/paper.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 #why h2 {
@@ -182,23 +184,24 @@ p {
 
 #why p {
   max-width: 850px;
-  margin: 0 auto;
+  margin: 0;
   font-size: 28px;
   line-height: 1.7;
   color: #10233f;
+  text-align: left;
 }
+
 
 /* =========================
    Purpose Section
 ========================= */
 
 #purpose {
-  min-height: 80vh;
+  min-height: 100vh;
   margin-top: 0;
   padding: 120px 0;
-  background: #9ed8f2;
-  background-size: cover;
-  background-position: center;
+
+  background: #B9E5F8;
 
   display: flex;
   align-items: center;
@@ -206,16 +209,12 @@ p {
 }
 
 #purpose .info-box {
-  background: #bfecff;
-  background-size: 100% 100%;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)),
+    url("image/purpose-bg.png");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-color: transparent;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 80px;
-  color: white;
-
-  text-align: left;
 }
 
 #purpose h2 {
@@ -229,7 +228,7 @@ p {
   margin: 0;
   font-size: 28px;
   line-height: 1.7;
-  color: white;
+  color: #10233f;
   text-align: left;
 }
 
