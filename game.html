@@ -50,6 +50,10 @@
                     🛒 Shop
                 </button>
 
+                <button id="backpackBtn">
+                    🎒 Bag
+                </button>
+
             </div>
 
         </header>
@@ -78,6 +82,36 @@
 
                 <button id="closeMenuBtn">
                     Continue
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- DAILY MODAL -->
+        <div class="menu-modal" id="dailyModal">
+
+            <div class="menu-card">
+
+                <h2 id="dailyModalTitle">
+                    New Day
+                </h2>
+
+                <div id="rewardSection" style="display: none;">
+                    <p id="rewardMessage"></p>
+                </div>
+
+                <div id="goalSection">
+                    <p id="dailyModalMessage"></p>
+                    <div id="goalDetails" style="display: none;">
+                        <h3 id="goalTitle"></h3>
+                        <p id="goalDescription"></p>
+                    </div>
+                </div>
+
+                <button id="closeDailyBtn">
+                    OK
                 </button>
 
             </div>
@@ -125,6 +159,58 @@
         </div>
 
 
+        <!-- BUY CONFIRM MODAL -->
+        <div class="menu-modal" id="buyConfirmModal">
+
+            <div class="menu-card">
+
+                <h2 id="buyConfirmTitle">
+                    Purchase
+                </h2>
+
+                <p id="buyConfirmMessage" style="margin-bottom: 20px; font-size: 20px;"></p>
+
+                <button id="useNowBtn">
+                    Use Now
+                </button>
+
+                <button id="storeInBagBtn">
+                    Store in Bag
+                </button>
+
+                <button id="cancelBuyBtn" style="background: #f4f4f4; color: #666;">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- BACKPACK MODAL -->
+        <div class="shop-overlay" id="backpackOverlay">
+
+            <div class="shop-modal">
+
+                <div class="shop-header">
+
+                    <h2>
+                        My Backpack
+                    </h2>
+
+                    <button class="shop-close-btn" id="backpackCloseBtn">
+                        ×
+                    </button>
+
+                </div>
+
+                <div class="shop-grid" id="backpackGrid"></div>
+
+            </div>
+
+        </div>
+
+
         <div class="shop-toast" id="shopToast">
             Purchased!
         </div>
@@ -138,11 +224,16 @@
 
                 <div class="scenario-text">
 
-                    <h2 id="scenarioTitle">
-                        Weekend Activity
-                    </h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+                        <h2 id="scenarioTitle" style="margin-bottom: 0;">
+                            Weekend Activity
+                        </h2>
+                        <button id="rerollBtn" style="background: #ff9800; color: white; border: none; padding: 10px 18px; border-radius: 12px; cursor: pointer; font-family: 'Ahkio-Regular', Arial, sans-serif; font-size: 18px; white-space: nowrap; transition: 0.2s;">
+                            🎲 換一題 (💰 15)
+                        </button>
+                    </div>
 
-                    <p id="scenarioDescription">
+                    <p id="scenarioDescription" style="margin-top: 18px;">
                         Your friend invites you to join a beach cleanup activity.
                         What will you do?
                     </p>

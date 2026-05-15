@@ -1649,21 +1649,21 @@ const environmentEvents = [
                 text: "收集到滿再洗",
                 money: 20,
                 energy: -5,
-                goal12: 15
+                goal6: 15
             },
 
             {
                 text: "現在洗比較安心",
                 money: -20,
                 energy: 5,
-                goal12: -5
+                goal6: -5
             },
 
             {
                 text: "用手洗",
                 money: 0,
                 energy: -20,
-                goal12: 8
+                goal6: 8
             }
 
         ]
@@ -1721,21 +1721,21 @@ const environmentEvents = [
                 text: "陪她做",
                 money: 0,
                 energy: -25,
-                goal12: 12
+                goal15: 12
             },
 
             {
                 text: "去 IKEA 買新的",
                 money: -500,
                 energy: -5,
-                goal12: -8
+                goal15: -8
             },
 
             {
                 text: "直接丟掉",
                 money: 0,
                 energy: 5,
-                goal12: -5
+                goal15: -5
             }
 
         ]
@@ -1829,21 +1829,21 @@ const environmentEvents = [
                 text: "拿去回收",
                 money: 5,
                 energy: -8,
-                goal12: 15
+                goal15: 15
             },
 
             {
                 text: "直接丟垃圾桶",
                 money: 0,
                 energy: 2,
-                goal12: -10
+                goal15: -10
             },
 
             {
                 text: "放房間當裝飾",
                 money: 0,
                 energy: -5,
-                goal12: -5
+                goal15: -5
             }
 
         ]
@@ -1937,21 +1937,21 @@ const environmentEvents = [
                 text: "認真分類",
                 money: 0,
                 energy: -10,
-                goal12: 20
+                goal15: 20
             },
 
             {
                 text: "隨便亂丟",
                 money: 0,
                 energy: 5,
-                goal12: -8
+                goal15: -8
             },
 
             {
                 text: "幫室友一起分",
                 money: 0,
                 energy: -20,
-                goal12: 12
+                goal15: 12
             }
 
         ]
@@ -2369,21 +2369,21 @@ const environmentEvents = [
                 text: "使用購物袋",
                 money: 5,
                 energy: -2,
-                goal12: 15
+                goal13: 15
             },
 
             {
                 text: "直接買塑膠袋",
                 money: -5,
                 energy: 5,
-                goal12: -5
+                goal13: -5
             },
 
             {
                 text: "徒手抱回宿舍",
                 money: 0,
                 energy: -15,
-                goal12: 10
+                goal13: 10
             }
 
         ]
@@ -4951,21 +4951,21 @@ environmentEvents.push(
                 text: "公開反對並推廣購物袋",
                 money: 0,
                 energy: -20,
-                goal12: 20
+                goal14: 20
             },
 
             {
                 text: "自己拒絕塑膠袋",
                 money: 5,
                 energy: -3,
-                goal12: 10
+                goal14: 10
             },
 
             {
                 text: "趁優惠買一大疊",
                 money: -30,
                 energy: 5,
-                goal12: -12
+                goal14: -12
             }
 
         ]
@@ -5095,21 +5095,21 @@ environmentEvents.push(
                 text: "照地圖收集回收物",
                 money: 150,
                 energy: -25,
-                goal12: 18
+                goal14: 18
             },
 
             {
                 text: "只撿路上看到的瓶子",
                 money: 40,
                 energy: -8,
-                goal12: 8
+                goal14: 8
             },
 
             {
                 text: "把地圖拿去墊便當",
                 money: 0,
                 energy: 5,
-                goal12: -5
+                goal14: -5
             }
 
         ]
