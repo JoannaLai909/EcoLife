@@ -15,7 +15,7 @@ body {
 .game-page {
     width: 100vw;
     min-height: 100vh;
-    padding: 28px 40px;
+    padding: 120px 40px 28px;
     display: flex;
     flex-direction: column;
 }
@@ -662,7 +662,7 @@ body {
 @media (max-width: 900px) {
 
     .game-page {
-        padding: 20px;
+        padding: 110px 20px 20px;
     }
 
     .top-bar {
