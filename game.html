@@ -84,13 +84,17 @@
 
         </div>
 
+
         <!-- SHOP MODAL -->
         <div class="shop-overlay" id="shopOverlay">
 
             <div class="shop-modal">
 
                 <div class="shop-header">
-                    <h2>Eco Shop</h2>
+
+                    <h2>
+                        Eco Shop
+                    </h2>
 
                     <div class="shop-balance" id="shopBalance">
                         💰 100
@@ -99,11 +103,19 @@
                     <button class="shop-close-btn" id="shopCloseBtn">
                         ×
                     </button>
+
                 </div>
 
                 <div class="shop-tabs">
-                    <button class="shop-tab active">Items</button>
-                    <button class="shop-tab">Boosts</button>
+
+                    <button class="shop-tab active">
+                        Items
+                    </button>
+
+                    <button class="shop-tab">
+                        Boosts
+                    </button>
+
                 </div>
 
                 <div class="shop-grid" id="shopGrid"></div>
@@ -111,6 +123,7 @@
             </div>
 
         </div>
+
 
         <div class="shop-toast" id="shopToast">
             Purchased!
@@ -199,30 +212,71 @@
 
             <!-- RIGHT SIDE -->
             <aside class="progress-panel">
-                <h3>SDG Progress</h3>
+
+                <h3>
+                    SDG Progress
+                </h3>
 
                 <div id="progressList"></div>
+
             </aside>
 
         </main>
 
     </div>
 
-    <!-- MONEY POPUP -->
 
+    <!-- MONEY POPUP -->
     <div class="money-popup" id="moneyPopup">
+
         <div class="money-popup-card">
+
             <h2>
                 哈哈哈你的錢不夠！
             </h2>
+
         </div>
+
     </div>
 
-    <script src="environmentEvents.js"></script>
-    <script src="societyEvents.js"></script>
-    <script src="developmentEvents.js"></script>
-    <script src="globalEvents.js"></script>
 
+    <!-- GOAL INFO CLICK POPUP -->
+    <div id="goalPopup" class="goal-popup">
+
+        <div class="goal-popup-inner">
+
+            <button class="close-goal-popup" id="closeGoalPopupBtn">
+                ✕
+            </button>
+
+            <div class="goal-popup-header">
+
+                <div class="goal-popup-icon" id="goalPopupNumber">
+                    13
+                </div>
+
+                <div>
+                    <div class="goal-popup-title" id="goalPopupTitle">
+                        Goal 13
+                    </div>
+
+                    <div class="goal-popup-sub" id="goalPopupSub">
+                        Climate Action
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="goal-popup-desc" id="goalPopupDesc">
+                This goal focuses on reducing carbon emissions and taking action against climate change.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="events.js"></script>
     <script src="game.js"></script>
 
 </body>

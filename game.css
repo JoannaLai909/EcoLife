@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     background: #a9d8f0;
     width: 100vw;
     min-height: 100vh;
@@ -62,7 +62,7 @@ body {
     padding: 14px 22px;
     border-radius: 14px;
 
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 20px;
 
     cursor: pointer;
@@ -119,7 +119,7 @@ body {
     background: #e9f4ff;
     color: #114bb8;
 
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 22px;
 
     cursor: pointer;
@@ -148,6 +148,7 @@ body {
 
 .scenario-section {
     min-width: 0;
+    width: 100%;
 
     background: transparent;
     border-radius: 0;
@@ -156,19 +157,23 @@ body {
 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .scenario-text {
     width: 100%;
     max-width: 850px;
     padding: 10px 0 0 0;
+
+    margin: 0 auto;
+    text-align: left;
 }
 
 .scenario-text h2 {
     font-size: 46px;
     margin-bottom: 18px;
     color: #114bb8;
+    text-align: left;
 }
 
 .scenario-text p {
@@ -176,6 +181,8 @@ body {
     line-height: 1.5;
     letter-spacing: 1.2px;
     max-width: 850px;
+
+    text-align: left;
 }
 
 /* CHOICES */
@@ -186,9 +193,11 @@ body {
 
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
     gap: 20px;
 
-    margin-top: 28px;
+    margin: 28px auto 0 auto;
 }
 
 .choice-card {
@@ -206,6 +215,8 @@ body {
 
     box-shadow: none;
     backdrop-filter: blur(8px);
+
+    text-align: left;
 }
 
 .choice-card:hover {
@@ -224,6 +235,7 @@ body {
     margin-bottom: 12px;
     color: #114bb8;
     letter-spacing: 1.2px;
+    text-align: left;
 }
 
 .choice-card p {
@@ -231,11 +243,13 @@ body {
     line-height: 1.4;
     letter-spacing: 1.1px;
     margin-bottom: 16px;
+    text-align: left;
 }
 
 .effects {
     font-size: 16px;
     color: #333;
+    text-align: left;
 }
 
 /* RIGHT */
@@ -275,30 +289,31 @@ body {
     overflow: hidden;
 }
 
-.fill{
-    height:100%;
-    border-radius:999px;
-    background:#0A97D9;
-    transition:0.3s;
+.fill {
+    height: 100%;
+    border-radius: 999px;
+    background: #0A97D9;
+    transition: 0.3s;
 }
 
-#fill7{
-    width:0%;
-    background:#FCC30B;
+#fill7 {
+    width: 0%;
+    background: #FCC30B;
 }
 
-#fill13{
-    width:0%;
-    background:#3F7E44;
+#fill13 {
+    width: 0%;
+    background: #3F7E44;
 }
 
-#fill14{
-    width:0%;
-    background:#0A97D9;
+#fill14 {
+    width: 0%;
+    background: #0A97D9;
 }
 
-.money-popup{
+/* MONEY POPUP */
 
+.money-popup {
     position: fixed;
 
     top: 0;
@@ -316,24 +331,19 @@ body {
     backdrop-filter: blur(4px);
 
     opacity: 0;
-
     pointer-events: none;
 
     transition: 0.3s;
 
     z-index: 9999;
-
 }
 
-.money-popup.active{
-
+.money-popup.active {
     opacity: 1;
-
     pointer-events: auto;
-
 }
 
-.money-popup-card{
+.money-popup-card {
     background: white;
     padding: 50px 80px;
     border-radius: 35px;
@@ -341,17 +351,138 @@ body {
     text-align: center;
 }
 
-.money-popup-card h2{
+.money-popup-card h2 {
     font-size: 42px;
     color: #1748c7;
 }
 
+/* GOAL INFO CLICK POPUP */
 
-/* =============================================
-   EcoLife Simulator — 生態商店樣式（統一遊戲風格）
-   ============================================= */
+.goal-box {
+    cursor: pointer;
+    transition: 0.25s ease;
+}
 
-/* 商店按鈕（放在 top-bar 裡，與 menuBtn 一致） */
+.goal-box:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.16);
+}
+
+.goal-popup {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 0.25s ease;
+
+    z-index: 99999;
+}
+
+.goal-popup.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.goal-popup-inner {
+    position: relative;
+
+    width: 460px;
+    max-width: 90%;
+
+    background: white;
+    border-radius: 30px;
+    padding: 34px;
+
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+}
+
+.close-goal-popup {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #e9f4ff;
+    color: #114bb8;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 18px;
+
+    cursor: pointer;
+    transition: 0.2s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-goal-popup:hover {
+    background: #d3eaff;
+    transform: translateY(-2px);
+}
+
+.goal-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    margin-bottom: 24px;
+    padding-right: 36px;
+}
+
+.goal-popup-icon {
+    width: 72px;
+    height: 72px;
+
+    border-radius: 20px;
+
+    background: #114bb8;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 30px;
+}
+
+.goal-popup-title {
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 30px;
+    color: #114bb8;
+    margin-bottom: 6px;
+}
+
+.goal-popup-sub {
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 18px;
+    color: #333;
+}
+
+.goal-popup-desc {
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* SHOP BUTTON */
+
 #shopBtn {
     border: none;
     background: #114bb8;
@@ -360,7 +491,7 @@ body {
     padding: 14px 22px;
     border-radius: 14px;
 
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 20px;
 
     cursor: pointer;
@@ -371,7 +502,8 @@ body {
     background: #0d3f9c;
 }
 
-/* 遮罩（與 .menu-modal 一致） */
+/* SHOP OVERLAY */
+
 .shop-overlay {
     position: fixed;
     inset: 0;
@@ -389,7 +521,8 @@ body {
     display: flex;
 }
 
-/* 商店主視窗（與 .menu-card 同血統，但更寬） */
+/* SHOP MODAL */
+
 .shop-modal {
     width: 680px;
     max-width: 95%;
@@ -406,7 +539,8 @@ body {
     overflow: hidden;
 }
 
-/* 頂部標題列 */
+/* SHOP HEADER */
+
 .shop-header {
     display: flex;
     align-items: center;
@@ -417,7 +551,7 @@ body {
 
 .shop-header h2 {
     color: #114bb8;
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 36px;
 }
 
@@ -425,7 +559,7 @@ body {
     background: rgba(169, 216, 240, 0.4);
     padding: 10px 20px;
     border-radius: 14px;
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 18px;
     color: #114bb8;
 }
@@ -452,7 +586,8 @@ body {
     transform: translateY(-2px);
 }
 
-/* 分頁按鈕列 */
+/* SHOP TABS */
+
 .shop-tabs {
     display: flex;
     gap: 12px;
@@ -469,7 +604,7 @@ body {
     background: #e9f4ff;
     color: #114bb8;
 
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 18px;
 
     cursor: pointer;
@@ -486,7 +621,8 @@ body {
     color: white;
 }
 
-/* 道具格線 */
+/* SHOP GRID */
+
 .shop-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -495,7 +631,8 @@ body {
     padding-right: 4px;
 }
 
-/* 道具卡片（與 .choice-card 完全一致的視覺語言） */
+/* SHOP ITEM CARD */
+
 .shop-item-card {
     background: rgba(169, 216, 240, 0.25);
     border: 2px solid rgba(255, 255, 255, 0.65);
@@ -527,14 +664,14 @@ body {
 }
 
 .shop-item-name {
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 22px;
     color: #114bb8;
     letter-spacing: 1.2px;
 }
 
 .shop-item-desc {
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 15px;
     color: #333;
     line-height: 1.5;
@@ -543,7 +680,7 @@ body {
 }
 
 .shop-item-effect {
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 14px;
     color: #0d3f9c;
     background: rgba(169, 216, 240, 0.5);
@@ -562,12 +699,13 @@ body {
 }
 
 .shop-item-price {
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 18px;
     color: #114bb8;
 }
 
-/* 購買按鈕（與 #menuBtn 系列一致） */
+/* SHOP BUY BUTTON */
+
 .shop-buy-btn {
     border: none;
     background: #114bb8;
@@ -576,7 +714,7 @@ body {
     padding: 8px 18px;
     border-radius: 12px;
 
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 16px;
 
     cursor: pointer;
@@ -584,6 +722,7 @@ body {
 
     margin-left: auto;
 }
+
 .shop-buy-btn:hover:not(:disabled) {
     background: #0d3f9c;
     transform: translateY(-2px);
@@ -603,7 +742,8 @@ body {
     color: #888;
 }
 
-/* Toast 提示（風格與 money-popup 呼應） */
+/* SHOP TOAST */
+
 .shop-toast {
     position: fixed;
     bottom: 32px;
@@ -616,7 +756,7 @@ body {
     padding: 14px 30px;
     border-radius: 20px;
 
-    font-family: "Ahkio-Regular";
+    font-family: "Ahkio-Regular", Arial, sans-serif;
     font-size: 18px;
 
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -633,30 +773,6 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
-/* RWD */
-@media (max-width: 900px) {
-    .shop-modal {
-        padding: 24px;
-        border-radius: 22px;
-    }
-
-    .shop-header h2 {
-        font-size: 28px;
-    }
-
-    .shop-tab {
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    .shop-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .shop-item-name {
-        font-size: 20px;
-    }
-}
 /* RESPONSIVE */
 
 @media (max-width: 900px) {
@@ -677,7 +793,8 @@ body {
         padding: 12px 18px;
     }
 
-    #menuBtn {
+    #menuBtn,
+    #shopBtn {
         font-size: 18px;
         padding: 12px 18px;
     }
@@ -687,16 +804,40 @@ body {
         gap: 30px;
     }
 
+    .scenario-section {
+        align-items: center;
+    }
+
+    .scenario-text {
+        max-width: 100%;
+        text-align: left;
+    }
+
     .scenario-text h2 {
         font-size: 36px;
+        text-align: left;
     }
 
     .scenario-text p {
         font-size: 20px;
+        text-align: left;
     }
 
     .choices-section {
         flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+    }
+
+    .choice-card {
+        width: 100%;
+        text-align: left;
+    }
+
+    .choice-card h3,
+    .choice-card p,
+    .effects {
+        text-align: left;
     }
 
     .progress-panel {
@@ -713,6 +854,40 @@ body {
     }
 
     .menu-card button {
+        font-size: 20px;
+    }
+
+    .goal-popup-inner {
+        padding: 30px 24px;
+    }
+
+    .goal-popup-title {
+        font-size: 26px;
+    }
+
+    .goal-popup-desc {
+        font-size: 16px;
+    }
+
+    .shop-modal {
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .shop-header h2 {
+        font-size: 28px;
+    }
+
+    .shop-tab {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .shop-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-item-name {
         font-size: 20px;
     }
 }

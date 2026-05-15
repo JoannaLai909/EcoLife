@@ -10,28 +10,20 @@ const categoryGoals = {
 
 let events = [];
 
-if(selectedCategory === "Environment"){
-
+if (selectedCategory === "Environment") {
     events = [...environmentEvents];
-
 }
 
-else if(selectedCategory === "Society"){
-
+else if (selectedCategory === "Society") {
     events = [...societyEvents];
-
 }
 
-else if(selectedCategory === "Development"){
-
+else if (selectedCategory === "Development") {
     events = [...developmentEvents];
-
 }
 
-else if(selectedCategory === "Global"){
-
+else if (selectedCategory === "Global") {
     events = [...globalEvents];
-
 }
 
 /* RANDOM SHUFFLE */
@@ -58,19 +50,19 @@ const closeMenuBtn = document.getElementById("closeMenuBtn");
 const moneyPopup = document.getElementById("moneyPopup");
 
 menuBtn.addEventListener("click", () => {
-  menuModal.classList.add("active");
+    menuModal.classList.add("active");
 });
 
 closeMenuBtn.addEventListener("click", () => {
-  menuModal.classList.remove("active");
+    menuModal.classList.remove("active");
 });
 
 document.getElementById("restartBtn").addEventListener("click", () => {
-  location.reload();
+    location.reload();
 });
 
 document.getElementById("homeBtn").addEventListener("click", () => {
-  window.location.href = "entrance.html";
+    window.location.href = "entrance.html";
 });
 
 const shopBtn = document.getElementById("shopBtn");
@@ -87,9 +79,7 @@ shopCloseBtn.addEventListener("click", () => {
     shopOverlay.classList.remove("shop-open");
 });
 
-
 const goalColors = {
-
     goal1: "#E5243B",
     goal2: "#DDA63A",
     goal3: "#4C9F38",
@@ -110,7 +100,6 @@ const goalColors = {
 
     goal16: "#00689D",
     goal17: "#19486A"
-
 };
 
 const activeGoals = categoryGoals[selectedCategory];
@@ -127,21 +116,19 @@ const targetScore =
         Math.floor(Math.random() * possibleScores.length)
     ];
 
-
 function loadEvent() {
 
-    document.getElementById("goalBox")
-    .innerText =
-    `${targetGoal.replace("goal", "Goal ")} Score ≥ ${targetScore}`;
+    document.getElementById("goalBox").innerText =
+        `${targetGoal.replace("goal", "Goal ")} Score ≥ ${targetScore}`;
 
     let availableEvents = events;
 
-    if(money <= 50){
+    if (money <= 50) {
         const moneyEvents = events.filter(event =>
             event.type === "money"
         );
 
-        if(moneyEvents.length > 0){
+        if (moneyEvents.length > 0) {
             availableEvents = moneyEvents;
         }
     }
@@ -150,42 +137,37 @@ function loadEvent() {
         !usedEventTitles.includes(event.title)
     );
 
-    if(availableEvents.length === 0){
+    if (availableEvents.length === 0) {
         usedEventTitles = [];
         availableEvents = events;
     }
 
     const event =
-    availableEvents[
-        Math.floor(Math.random() * availableEvents.length)
-    ];
+        availableEvents[
+            Math.floor(Math.random() * availableEvents.length)
+        ];
 
     usedEventTitles.push(event.title);
 
-    document.getElementById("scenarioTitle")
-    .innerText = event.title;
+    document.getElementById("scenarioTitle").innerText = event.title;
 
-    document.getElementById("scenarioDescription")
-    .innerText = event.description;
+    document.getElementById("scenarioDescription").innerText = event.description;
 
-    document.getElementById("dayBox")
-    .innerText = `DAY ${day}`;
+    document.getElementById("dayBox").innerText = `DAY ${day}`;
 
-    document.getElementById("moneyBox")
-    .innerText = `💰 ${money}`;
+    document.getElementById("moneyBox").innerText = `💰 ${money}`;
 
-    document.getElementById("energyBox")
-    .innerText = `⚡ ${energy}`;
+    document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
     const choicesSection =
-    document.getElementById("choicesSection");
+        document.getElementById("choicesSection");
 
     choicesSection.innerHTML = "";
 
     event.choices.forEach(choice => {
 
         const card =
-        document.createElement("div");
+            document.createElement("div");
 
         card.classList.add("choice-card");
 
@@ -199,7 +181,7 @@ function loadEvent() {
         `;
 
         card.addEventListener("click", () => {
-            if(money + choice.money < 0){
+            if (money + choice.money < 0) {
                 moneyPopup.classList.add("active");
 
                 setTimeout(() => {
@@ -213,58 +195,52 @@ function loadEvent() {
             money = Math.max(0, money);
             energy = Math.max(0, energy);
 
-
-            if(energy <= 0){
+            if (energy <= 0) {
                 localStorage.setItem("resultType", "lose");
                 localStorage.setItem("money", money);
                 localStorage.setItem("energy", energy);
                 window.location.href = "result.html";
                 menuModal.classList.remove("active");
                 return;
-
             }
 
-            for(let key in choice){
+            for (let key in choice) {
 
-                if(key.startsWith("goal")){
+                if (key.startsWith("goal")) {
 
-                    if(!sdgScores[key]){
-
+                    if (!sdgScores[key]) {
                         sdgScores[key] = 0;
-
                     }
 
                     sdgScores[key] += choice[key];
-
                 }
-
             }
 
             const isWin = updateProgress();
 
-            if(isWin){
-
+            if (isWin) {
                 return;
-
             }
+
             actionsToday++;
             currentEvent++;
-            if(currentEvent >= events.length){
+
+            if (currentEvent >= events.length) {
                 events.sort(() => Math.random() - 0.5);
                 currentEvent = 0;
             }
-            if(actionsToday >= maxActionsPerDay || energy <= 0){
+
+            if (actionsToday >= maxActionsPerDay || energy <= 0) {
                 nextDay();
             }
-            else{
+
+            else {
                 loadEvent();
             }
         });
 
         choicesSection.appendChild(card);
-
     });
-
 }
 
 function updateProgress() {
@@ -272,32 +248,28 @@ function updateProgress() {
     activeGoals.forEach(goal => {
 
         const fill =
-        document.getElementById(`${goal}Fill`);
+            document.getElementById(`${goal}Fill`);
 
-        if(fill){
+        if (fill) {
 
             fill.style.width =
-            `${Math.min(sdgScores[goal] || 0, 100)}%`;
-
+                `${Math.min(sdgScores[goal] || 0, 100)}%`;
         }
-
     });
 
-    if((sdgScores[targetGoal] || 0) >= targetScore){
+    if ((sdgScores[targetGoal] || 0) >= targetScore) {
 
         localStorage.setItem("resultType", "win");
         localStorage.setItem("money", money);
         localStorage.setItem("energy", energy);
         window.location.href = "result.html";
         return true;
-
     }
 
     return false;
-
 }
 
-function nextDay(){
+function nextDay() {
 
     day++;
 
@@ -305,23 +277,24 @@ function nextDay(){
 
     energy = 80;
 
-    if(day > maxDays){
+    if (day > maxDays) {
 
-        if((sdgScores[targetGoal] || 0) >= targetScore){
+        if ((sdgScores[targetGoal] || 0) >= targetScore) {
             localStorage.setItem("resultType", "win");
         }
 
-        else{
+        else {
             localStorage.setItem("resultType", "lose");
         }
+
         localStorage.setItem("money", money);
         localStorage.setItem("energy", energy);
         window.location.href = "result.html";
         return;
     }
+
     loadEvent();
 }
-
 
 function renderProgressBars() {
     const progressList = document.getElementById("progressList");
@@ -334,7 +307,7 @@ function renderProgressBars() {
                 <span>${goal.replace("goal", "Goal ")}</span>
 
                 <div class="bar">
-                        <div class="fill" id="${goal}Fill" style="background:${goalColors[goal]}"></div>
+                    <div class="fill" id="${goal}Fill" style="background:${goalColors[goal]}"></div>
                 </div>
             </div>
         `;
@@ -345,4 +318,141 @@ renderProgressBars();
 loadEvent();
 updateProgress();
 
+/* GOAL INFO CLICK POPUP */
 
+const goalBox = document.getElementById("goalBox");
+const goalPopup = document.getElementById("goalPopup");
+const closeGoalPopupBtn = document.getElementById("closeGoalPopupBtn");
+
+const goalPopupNumber = document.getElementById("goalPopupNumber");
+const goalPopupTitle = document.getElementById("goalPopupTitle");
+const goalPopupSub = document.getElementById("goalPopupSub");
+const goalPopupDesc = document.getElementById("goalPopupDesc");
+
+const goalInfoData = {
+    1: {
+        title: "No Poverty",
+        desc: "This goal focuses on reducing poverty and helping people access basic resources and support."
+    },
+
+    2: {
+        title: "Zero Hunger",
+        desc: "This goal focuses on reducing hunger, improving food access, and supporting better nutrition."
+    },
+
+    3: {
+        title: "Good Health and Well-being",
+        desc: "This goal focuses on health, mental well-being, safety, and better daily life choices."
+    },
+
+    4: {
+        title: "Quality Education",
+        desc: "This goal focuses on learning opportunities, fair education, and helping others grow through knowledge."
+    },
+
+    5: {
+        title: "Gender Equality",
+        desc: "This goal focuses on fairness, respect, and equal opportunities for everyone."
+    },
+
+    6: {
+        title: "Clean Water and Sanitation",
+        desc: "This goal focuses on saving water, protecting water resources, and improving sanitation."
+    },
+
+    7: {
+        title: "Affordable and Clean Energy",
+        desc: "This goal focuses on clean energy, saving electricity, and using energy more wisely."
+    },
+
+    8: {
+        title: "Decent Work and Economic Growth",
+        desc: "This goal focuses on responsible work, fair income, and sustainable economic choices."
+    },
+
+    9: {
+        title: "Industry, Innovation and Infrastructure",
+        desc: "This goal focuses on innovation, technology, infrastructure, and creative problem-solving."
+    },
+
+    10: {
+        title: "Reduced Inequalities",
+        desc: "This goal focuses on fairness, inclusion, and reducing unequal treatment."
+    },
+
+    11: {
+        title: "Sustainable Cities and Communities",
+        desc: "This goal focuses on safer, smarter, and more sustainable communities."
+    },
+
+    12: {
+        title: "Responsible Consumption and Production",
+        desc: "This goal focuses on reducing waste, reusing resources, and making responsible daily choices."
+    },
+
+    13: {
+        title: "Climate Action",
+        desc: "This goal focuses on reducing carbon emissions and taking action against climate change."
+    },
+
+    14: {
+        title: "Life Below Water",
+        desc: "This goal focuses on protecting oceans, rivers, marine life, and water ecosystems."
+    },
+
+    15: {
+        title: "Life on Land",
+        desc: "This goal focuses on protecting forests, animals, plants, and land ecosystems."
+    },
+
+    16: {
+        title: "Peace, Justice and Strong Institutions",
+        desc: "This goal focuses on fairness, justice, peace, trust, and responsible decision-making."
+    },
+
+    17: {
+        title: "Partnerships for the Goals",
+        desc: "This goal focuses on teamwork, cooperation, and working with others to solve global problems."
+    }
+};
+
+function getGoalNumberFromBox() {
+    const goalText = goalBox.innerText;
+    const match = goalText.match(/Goal\s*(\d+)/i);
+
+    if (match) {
+        return Number(match[1]);
+    }
+
+    return 13;
+}
+
+function openGoalPopup() {
+    const goalNumber = getGoalNumberFromBox();
+    const goalData = goalInfoData[goalNumber];
+
+    if (!goalData) {
+        return;
+    }
+
+    goalPopupNumber.innerText = goalNumber;
+    goalPopupTitle.innerText = "Goal " + goalNumber;
+    goalPopupSub.innerText = goalData.title;
+    goalPopupDesc.innerText = goalData.desc;
+
+    goalPopup.classList.add("active");
+}
+
+function closeGoalPopup() {
+    goalPopup.classList.remove("active");
+}
+
+goalBox.addEventListener("click", openGoalPopup);
+
+closeGoalPopupBtn.addEventListener("click", closeGoalPopup);
+
+goalPopup.addEventListener("click", function (event) {
+    if (event.target === goalPopup) {
+        closeGoalPopup();
+    }
+});
