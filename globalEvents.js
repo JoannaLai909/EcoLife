@@ -1102,6 +1102,355 @@ const globalEvents = [
             }
 
         ]
+    },
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際論壇接待工讀",
+
+        description:
+        "國際論壇需要學生協助接待外國講者。",
+
+        choices: [
+
+            {
+                text: "負責全天接待",
+                money: 500,
+                energy: -35,
+                goal17: 10
+            },
+
+            {
+                text: "只幫忙上午",
+                money: 200,
+                energy: -12,
+                goal17: 5
+            },
+
+            {
+                text: "怕英文不好拒絕",
+                money: 0,
+                energy: 8
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "SDGs 海報設計",
+
+        description:
+        "國際學生社團徵求 SDGs 宣傳海報設計。",
+
+        choices: [
+
+            {
+                text: "接案設計",
+                money: 350,
+                energy: -20,
+                goal17: 8
+            },
+
+            {
+                text: "簡單幫忙排版",
+                money: 100,
+                energy: -6,
+                goal17: 3
+            },
+
+            {
+                text: "沒興趣",
+                money: 0,
+                energy: 5
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "外國交換生家教",
+
+        description:
+        "交換生 Judi希望找中文家教。",
+
+        choices: [
+
+            {
+                text: "每週固定教學",
+                money: 450,
+                energy: -25,
+                goal17: 12
+            },
+
+            {
+                text: "偶爾教一下",
+                money: 180,
+                energy: -8,
+                goal17: 5
+            },
+
+            {
+                text: "覺得麻煩",
+                money: 0,
+                energy: 8
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際展覽志工",
+
+        description:
+        "大型國際展覽正在招募工讀志工。",
+
+        choices: [
+
+            {
+                text: "參與整天活動",
+                money: 420,
+                energy: -30,
+                goal17: 10
+            },
+
+            {
+                text: "只排半天班",
+                money: 180,
+                energy: -12,
+                goal17: 5
+            },
+
+            {
+                text: "不參加",
+                money: 0,
+                energy: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際新聞翻譯",
+
+        description:
+        "教授需要學生協助翻譯國際新聞資料。",
+
+        choices: [
+
+            {
+                text: "完整翻譯文章",
+                money: 320,
+                energy: -18,
+                goal16: 8
+            },
+
+            {
+                text: "只翻部分內容",
+                money: 120,
+                energy: -6,
+                goal16: 3
+            },
+
+            {
+                text: "直接拒絕",
+                money: 0,
+                energy: 5
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "聯合國模擬會議",
+
+        description:
+        "模擬聯合國活動正在招募工作人員。",
+
+        choices: [
+
+            {
+                text: "擔任主持助理",
+                money: 380,
+                energy: -25,
+                goal16: 10
+            },
+
+            {
+                text: "只負責報到",
+                money: 150,
+                energy: -10,
+                goal16: 4
+            },
+
+            {
+                text: "太累不參加",
+                money: 0,
+                energy: 12
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際交流影片剪輯",
+
+        description:
+        "國際處需要 SDGs 宣傳影片剪輯。",
+
+        choices: [
+
+            {
+                text: "完整剪輯影片",
+                money: 500,
+                energy: -30,
+                goal17: 12
+            },
+
+            {
+                text: "只幫忙字幕",
+                money: 180,
+                energy: -8,
+                goal17: 5
+            },
+
+            {
+                text: "沒時間",
+                money: 0,
+                energy: 8
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際交換展攤位",
+
+        description:
+        "學校交換展需要學生顧攤位。",
+
+        choices: [
+
+            {
+                text: "顧整天攤位",
+                money: 300,
+                energy: -20,
+                goal17: 8
+            },
+
+            {
+                text: "只支援下午",
+                money: 120,
+                energy: -8,
+                goal17: 3
+            },
+
+            {
+                text: "直接回宿舍",
+                money: 0,
+                energy: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際晚會主持",
+
+        description:
+        "國際晚會缺一位英文主持人。",
+
+        choices: [
+
+            {
+                text: "接下主持",
+                money: 450,
+                energy: -28,
+                goal17: 10
+            },
+
+            {
+                text: "只幫忙暖場",
+                money: 180,
+                energy: -10,
+                goal17: 4
+            },
+
+            {
+                text: "怕出糗拒絕",
+                money: 0,
+                energy: 10
+            }
+
+        ]
+    },
+
+    {
+        category: "Global",
+
+        type: "money",
+
+        title: "國際學生導覽",
+
+        description:
+        "新來的國際學生需要校園導覽。",
+
+        choices: [
+
+            {
+                text: "完整帶隊導覽",
+                money: 250,
+                energy: -15,
+                goal17: 8
+            },
+
+            {
+                text: "只回答問題",
+                money: 80,
+                energy: -5,
+                goal17: 3
+            },
+
+            {
+                text: "裝忙離開",
+                money: 0,
+                energy: 5
+            }
+
+        ]
     }
 
 ];
