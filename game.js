@@ -32,8 +32,8 @@ else if (selectedCategory === "Society")      allEvents = [...societyEvents];
 else if (selectedCategory === "Development")  allEvents = [...developmentEvents];
 else if (selectedCategory === "Global")       allEvents = [...globalEvents];
 
-// Shuffle once, then take up to 15 unique events for this session
-allEvents = shuffle(allEvents).slice(0, 15);
+
+allEvents = shuffle(allEvents);
 
 // ─────────────────────────────────────────────
 //  GAME STATE
@@ -122,19 +122,37 @@ function refillQueue() {
 }
 
 function getNextEvent() {
-    if (eventQueue.length === 0) refillQueue();
-
-    if (money <= 50) {
-        const moneyIdx = eventQueue.findIndex(
-            e => e.type === "money" && e.title !== lastEventTitle
-        );
-        if (moneyIdx !== -1) {
-            const [event] = eventQueue.splice(moneyIdx, 1);
-            lastEventTitle = event.title;
-            return event;
-        }
+    if (eventQueue.length === 0) {
+        refillQueue();
     }
+    // 錢太少時，優先從整個題庫找 money 題
+    if (money <= 80) {
+        let moneyEvents = eventQueue.filter(
+            e => e.type === "money" &&
+            e.title !== lastEventTitle
+        );
+        // 如果目前 queue 沒有 money 題，就從 allEvents 重新找
+        if (moneyEvents.length === 0) {
+            moneyEvents = allEvents.filter(
+                e => e.type === "money" &&
+                e.title !== lastEventTitle
+            );
+        }
+        if (moneyEvents.length > 0) {
+            const randomMoneyEvent =
+                moneyEvents[
+                    Math.floor(Math.random() * moneyEvents.length)
+                ];
+            eventQueue =
+                eventQueue.filter(
+                    e => e.title !== randomMoneyEvent.title
+                );
+            lastEventTitle = randomMoneyEvent.title;
+            return randomMoneyEvent;
 
+        }
+
+    }
     const event = eventQueue.shift();
     lastEventTitle = event.title;
     return event;
