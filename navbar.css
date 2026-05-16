@@ -2,6 +2,11 @@
    Navbar
 ========================= */
 
+.navbar,
+.navbar * {
+    box-sizing: border-box;
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -9,18 +14,13 @@
   right: 0;
   width: 100%;
   z-index: 999;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding: 18px 60px;
-
+  padding: 18px 50px;
   background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(14px);
-
   box-shadow: 0 6px 20px rgba(0, 74, 173, 0.12);
-
   border-radius: 0;
 }
 
