@@ -749,10 +749,24 @@ body {
     color: white;
 }
 
+
+
+/* RESPONSIVE */
 @media (max-width: 900px) {
 
+    body {
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
     .game-page {
-        padding: 20px;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        padding: 110px 20px 30px;
+        overflow: visible;
     }
 
     .top-bar {
@@ -774,154 +788,7 @@ body {
     }
 
     .main-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .scenario-section {
-        align-items: center;
-    }
-
-    .scenario-text {
-        max-width: 100%;
-        text-align: left;
-    }
-
-    .scenario-text h2 {
-        font-size: 36px;
-        text-align: left;
-    }
-
-    .scenario-text p {
-        font-size: 20px;
-        text-align: left;
-    }
-
-    .choices-section {
-        flex-direction: column;
-        align-items: center;
-        max-width: 100%;
-    }
-
-    .choice-card {
-        width: 100%;
-        text-align: left;
-    }
-
-    .choice-card h3,
-    .choice-card p,
-    .effects {
-        text-align: left;
-    }
-
-    .progress-panel {
-        width: 100%;
-    }
-
-    .menu-card {
-        width: 320px;
-        padding: 28px;
-    }
-
-    .menu-card h2 {
-        font-size: 32px;
-    }
-
-    .menu-card button {
-        font-size: 20px;
-    }
-    }
-
-    /* DAILY MODAL SPECIFIC */
-    #rewardSection {
-    margin-bottom: 20px;
-    color: #2e7d32;
-    font-weight: bold;
-    background: #e8f5e9;
-    padding: 10px;
-    border-radius: 12px;
-    }
-
-    #dailyModalMessage {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #333;
-    }
-
-    #goalDetails {
-    background: #f0f7ff;
-    padding: 18px;
-    border-radius: 16px;
-    border: 1px solid #d0e7ff;
-    text-align: left;
-    }
-
-    #goalTitle {
-    color: #114bb8;
-    margin-bottom: 8px;
-    font-size: 24px;
-    }
-
-    #goalDescription {
-    font-size: 18px;
-    line-height: 1.4;
-    color: #444;
-    }
-    .goal-popup-inner {
-        padding: 30px 24px;
-    }
-
-    .goal-popup-title {
-        font-size: 26px;
-    }
-
-    .goal-popup-desc {
-        font-size: 16px;
-    }
-
-    .shop-modal {
-        padding: 24px;
-        border-radius: 22px;
-    }
-
-    .shop-header h2 {
-        font-size: 28px;
-    }
-
-    .shop-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .shop-item-name {
-        font-size: 20px;
-    }
-
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-
-    .game-page {
-        padding: 110px 20px 20px;
-    }
-
-    .top-bar {
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .day-box,
-    .goal-box,
-    .status-box {
-        font-size: 16px;
-        padding: 12px 18px;
-    }
-
-    #menuBtn {
-        font-size: 18px;
-        padding: 12px 18px;
-    }
-
-    .main-content {
+        display: grid;
         grid-template-columns: 1fr;
         gap: 30px;
     }
