@@ -381,15 +381,13 @@ function loadEvent() {
         card.innerHTML = `
             <h3>${choice.text}</h3>
             <div class="effects">
-                💰 ${moneyChange} <br>
-                ⚡ ${energyChange}
+                💰 ${choice.money || 0} <br>
+                ⚡ ${choice.energy || 0}
             </div>
         `;
         card.addEventListener("click", () => handleChoice(choice));
         choicesSection.appendChild(card);
-
     });
-
 }
 
 // ─────────────────────────────────────────────
@@ -414,7 +412,6 @@ function handleChoice(choice) {
         moneyPopup.classList.add("active");
         setTimeout(() => moneyPopup.classList.remove("active"), 1500);
         return;
-
     }
 
     money  = Math.max(0, money + moneyChange);
@@ -441,12 +438,9 @@ function handleChoice(choice) {
 
     if (actionsToday >= maxActionsPerDay) {
         nextDay();
-    }
-
-    else {
+    } else {
         loadEvent();
     }
-
 }
 
 // ─────────────────────────────────────────────
@@ -480,7 +474,6 @@ function updateProgress(deltas = {}) {
                 deltaSpan.style.opacity = "0";
             }, 1500);
         }
-
     });
 }
 
@@ -594,9 +587,7 @@ function checkWeeklyGoal(week) {
 // ─────────────────────────────────────────────
 
 function nextDay() {
-
     day++;
-
     actionsToday = 0;
     energy = MAX_ENERGY;
 
@@ -611,11 +602,9 @@ function nextDay() {
     if (day > maxDays) {
         checkWeeklyGoal(3); 
         return;
-
     }
 
     loadEvent();
-
 }
 
 // ─────────────────────────────────────────────
@@ -740,10 +729,6 @@ function endGameByNoMoreEvents() {
     determineEnding();
 }
 
-// ─────────────────────────────────────────────
-//  RENDER PROGRESS BARS
-// ─────────────────────────────────────────────
-
 function renderProgressBars() {
     const progressList = document.getElementById("progressList");
     progressList.innerHTML = "";
@@ -764,12 +749,9 @@ function renderProgressBars() {
                 <div class="bar">
                     <div class="fill" id="${goal}Fill" style="background:${goalColors[goal]}; width: ${percent}%;"></div>
                 </div>
-
             </div>
         `;
-
     });
-
 }
 
 // ─────────────────────────────────────────────
