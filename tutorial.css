@@ -11,7 +11,7 @@ body {
 
 .tutorial-page {
     min-height: 100vh;
-    padding: 121px 30px 30px;
+    padding: 120px 30px 30px;
     display: flex;
     justify-content: center;
     align-items: center;
