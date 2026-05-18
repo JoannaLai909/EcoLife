@@ -747,7 +747,7 @@ const societyEvents = [
 
         type: "normal",
 
-        title: "松義霖的急救課",
+        title: "松宜霖的急救課",
 
         description:
         "松宜霖報名了 CPR 急救課，問你要不要一起去。",
