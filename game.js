@@ -76,9 +76,8 @@ let rerollCount         = 0;
 let fastChoices         = 0;
 
 const maxActionsPerDay  = 4;
-const maxDays           = 21;
-let MAX_ENERGY          = 80;
-
+const maxDays           = 10;   // 總共 10 天
+let MAX_ENERGY          = 80;   // 可被獎勵永久提升
 
 // ── Queue state ──────────────────────────────
 
@@ -160,11 +159,11 @@ backpackCloseBtn.addEventListener("click", () => {
 });
 
 rerollBtn.addEventListener("click", () => {
-    if (money >= 15) {
-        money -= 15;
+    if (money >= 75) {
+        money -= 75;
         rerollCount++;
         loadEvent();
-        showToast("已更換題目 (💰 -15)");
+        showToast("已更換題目 (💰 -75)");
     } else {
         moneyPopup.classList.add("active");
         setTimeout(() => moneyPopup.classList.remove("active"), 1500);
@@ -179,29 +178,15 @@ rerollBtn.addEventListener("click", () => {
 let pendingItem = null;
 
 const shopItems = [
-    {
-        id: "coffee",
-        name: "熱咖啡",
-        price: 30,
-        energy: 20,
-        desc: "提升 20 體力",
-        icon: "☕"
-    },
-    {
-        id: "energy_drink",
-        name: "提神飲料",
-        price: 50,
-        energy: 40,
-        desc: "提升 40 體力",
-        icon: "🥤"
-    }
+    { id: "coffee", name: "熱咖啡", price: 150, energy: 20, desc: "提升 20 體力", icon: "☕" },
+    { id: "energy_drink", name: "提神飲料", price: 250, energy: 40, desc: "提升 40 體力", icon: "🥤" }
 ];
 
 activeGoals.forEach(goal => {
     shopItems.push({
         id: `potion_${goal}`,
         name: `${goal.replace("goal", "SDG ")} 藥水`,
-        price: 45,
+        price: 225,
         goalKey: goal,
         desc: `隨機提升 ${goal.replace("goal", "Goal ")} 分數 1~8 分`,
         icon: "🧪"
@@ -244,9 +229,8 @@ function useItem(item) {
     let effectMsg = "";
 
     if (item.energy) {
-        const oldEnergy = energy;
-        energy = Math.min(MAX_ENERGY, energy + item.energy);
-        effectMsg = `體力提升了 ${energy - oldEnergy} (目前: ${energy}⚡)`;
+        energy += item.energy;
+        effectMsg = `體力提升了 ${item.energy} (目前: ${energy}⚡)`;
     }
 
     if (item.goalKey) {
@@ -557,8 +541,7 @@ function loadEvent() {
 
     document.getElementById("goalBox").innerText =
         `${currentWeeklyGoal.goal.replace("goal", "Goal ")} Score ≥ ${currentWeeklyGoal.target}`;
-
-    document.getElementById("dayBox").innerText    = `${day}-${actionsToday + 1}`;
+    document.getElementById("dayBox").innerText    = `Day ${day}-${actionsToday + 1}`;
     document.getElementById("moneyBox").innerText  = `💰 ${money}`;
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
@@ -675,13 +658,12 @@ function updateProgress(deltas = {}) {
         const deltaSpan = document.getElementById(`${goal}Delta`);
 
         if (fill) {
-            const score = Math.min(sdgScores[goal] || 0, 250);
-            const percent = (score / 250) * 100;
-
+            const score = Math.min(sdgScores[goal] || 0, 100);
+            const percent = (score / 100) * 100;
             fill.style.width = `${percent}%`;
 
             if (text) {
-                text.innerText = `${score} / 250`;
+                text.innerText = `${score} / 100`;
             }
         }
 
@@ -710,14 +692,9 @@ function setWeeklyGoal(week) {
 
     const goalIndex = Math.floor(Math.random() * activeGoals.length);
     currentWeeklyGoal.goal = activeGoals[goalIndex];
-
-    if (week === 1) {
-        currentWeeklyGoal.target = 50;
-    } else if (week === 2) {
-        currentWeeklyGoal.target = 160;
-    } else if (week === 3) {
-        currentWeeklyGoal.target = 225;
-    }
+    
+    if (week === 1) currentWeeklyGoal.target = 30;
+    else if (week === 2) currentWeeklyGoal.target = 80;
 
     currentWeeklyGoal.achieved = false;
 
@@ -748,13 +725,11 @@ function showWeeklyGoalModal() {
     const goalDesc = document.getElementById("goalDescription");
     const rewardSection = document.getElementById("rewardSection");
 
-    title.innerText = `第 ${currentWeeklyGoal.week} 週目標`;
-    msg.innerText = "本週你的努力方向是（達標會有小驚喜喔！）：";
-
+    title.innerText = `第 ${currentWeeklyGoal.week === 1 ? '一' : '二'} 階段目標`;
+    msg.innerText = "本階段你的努力方向是（達標會有小驚喜喔！）：";
     details.style.display = "block";
     goalTitle.innerText = `${currentWeeklyGoal.goal.replace("goal", "Goal ")}`;
-    goalDesc.innerText = `本週結束前，請將此項進度提升至 ${currentWeeklyGoal.target}。`;
-
+    goalDesc.innerText = `階段結束前，請將此項進度提升至 ${currentWeeklyGoal.target}。`;
     rewardSection.style.display = "none";
 
     modal.classList.add("active");
@@ -804,14 +779,13 @@ function checkWeeklyGoal(week) {
     const rewardSection = document.getElementById("rewardSection");
     const rewardText = document.getElementById("rewardMessage");
 
-    title.innerText = `第 ${week} 週結算`;
-
+    title.innerText = `第 ${week === 1 ? '一' : '二'} 階段結算`;
     if (success) {
-        msg.innerText = "🎉 恭喜！你達成了本週目標！";
+        msg.innerText = "🎉 恭喜！你達成了階段目標！";
         rewardSection.style.display = "block";
         rewardText.innerText = rewardMsg;
     } else {
-        msg.innerText = "❌ 很遺憾，你未能達成本週目標。";
+        msg.innerText = "❌ 很遺憾，你未能達成階段目標。";
         rewardSection.style.display = "none";
     }
 
@@ -827,16 +801,9 @@ function checkWeeklyGoal(week) {
     const nextStep = () => {
         modal.classList.remove("active");
         closeBtn.removeEventListener("click", nextStep);
-
-        if (day === 8 && week === 1) {
-            setWeeklyGoal(2);
-        } else if (day === 15 && week === 2) {
-            setWeeklyGoal(3);
-        } else if (day > maxDays && week === 3) {
-            determineEnding();
-        } else {
-            loadEvent();
-        }
+        if (day === 6 && week === 1) setWeeklyGoal(2);
+        else if (day > maxDays && week === 2) determineEnding();
+        else loadEvent();
     };
 
     closeBtn.addEventListener("click", nextStep);
@@ -852,16 +819,13 @@ function nextDay() {
     actionsToday = 0;
     energy = MAX_ENERGY;
 
-    if (day === 8) {
+    if (day === 6) {
         checkWeeklyGoal(1);
-        return;
-    } else if (day === 15) {
-        checkWeeklyGoal(2);
-        return;
+        return; 
     }
 
     if (day > maxDays) {
-        checkWeeklyGoal(3);
+        checkWeeklyGoal(2); 
         return;
     }
 
@@ -900,86 +864,140 @@ function determineEnding() {
         endingTitle = "🎰 蝴蝶效應受害者";
         endingText = "每題都亂選。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點，巴西某隻蝴蝶正在為你負責。";
     }
-    else if ((sdgScores["goal15"] || 0) >= 225) {
+    // 2. High Goal Special Wins (Specific Goals >= 90)
+    else if ((sdgScores["goal15"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🌲 樹木他媽的感謝你";
         endingText = "全球樹木集體開口說話，選你當樹界代言人，年薪是一百萬顆橡實。";
     }
-    else if ((sdgScores["goal7"] || 0) >= 225) {
+    else if ((sdgScores["goal7"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "⚡ 人體充電寶";
         endingText = "潔淨能源過剩，政府把多餘的電直接存進你體內，你現在會發光。";
     }
-    else if ((sdgScores["goal2"] || 0) >= 225) {
+    else if ((sdgScores["goal2"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🍚 米其林零星主廚";
         endingText = "消除飢餓成功，但你太執著於食物，最後開了一家「剩食餐廳」，評審給了零顆星，卻大排長龍。";
     }
-    else if ((sdgScores["goal10"] || 0) >= 225) {
+    else if ((sdgScores["goal10"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🤝 平等到怪";
         endingText = "你把所有不平等都消除了，包括左右腳的長度差，全人類現在走路都一樣奇怪。";
     }
-    else if ((sdgScores["goal14"] || 0) >= 225) {
+    else if ((sdgScores["goal14"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🔱 海洋最強守護者";
         endingText = "對海洋貢獻卓著，珊瑚礁恢復色彩，你被尊稱為海王。";
     }
-    else if ((sdgScores["goal4"] || 0) >= 225) {
+    else if ((sdgScores["goal4"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "📚 偏鄉教育之光";
         endingText = "偏鄉學生感謝你的付出，但叮嚀你也要顧好自己的課業。";
     }
-    else if ((sdgScores["goal2"] || 0) < 50 && (sdgScores["goal15"] || 0) < 50) {
+    // 3. Low Goal Special Loses (Specific Goals < 20)
+    else if ((sdgScores["goal2"] || 0) < 20 && (sdgScores["goal15"] || 0) < 20) {
         endingType = "lose";
         endingTitle = "🐄 被牛盯上";
         endingText = "農業崩潰、生態瓦解，全球僅存的最後一頭牛找到了你，牠只是靜靜地看著你，什麼都沒說。";
     }
-    else if ((sdgScores["goal13"] || 0) < 25) {
+    else if ((sdgScores["goal13"] || 0) < 10) {
         endingType = "lose";
         endingTitle = "🐧 南極移民";
         endingText = "地球太熱了，你被迫搬去南極，和企鵝合租，牠不分攤水電費。";
     }
-    else if ((sdgScores["goal14"] || 0) < 25) {
+    else if ((sdgScores["goal14"] || 0) < 10) {
         endingType = "lose";
         endingTitle = "🐟 變成魚";
         endingText = "海洋生態崩潰，宇宙決定讓你親身體驗，你現在是一條吳郭魚。";
     }
-    else if (avgScore < 75) {
+    // 4. Average Score Based Endings (User Requested)
+    else if (avgScore < 30) {
         endingType = "lose";
         endingTitle = "🛸 外星人綁架結局";
-        endingText = "因為對地球問題太消極，平均分數低於 75 分，你被外星人抓走進行再教育。";
+        endingText = "因為對地球問題太消極，平均分數低於 30 分，你被外星人抓走進行再教育。";
     }
-    else if (avgScore > 200) {
+    else if (avgScore > 80) {
         endingType = "perfect";
         endingTitle = "🏆 永續發展領袖";
-        endingText = "平均分數高於 200 分！各面向平衡發展，你成為了社區的領袖。";
+        endingText = "平均分數高於 80 分！各面向平衡發展，你成為了社區的領袖。";
     }
     else {
         endingType = "normal";
         endingTitle = "🌟 冒險結束";
-        endingText = "一段平凡但圓滿的旅程（平均分在 75～200 之間）。";
+        endingText = "一段平凡但圓滿的旅程（平均分在 30～80 之間）。";
     }
 
     saveResult(endingType, endingTitle, endingText);
 }
 
+function updateLeaderboard(resultType) {
+
+    const currentUserName =
+        localStorage.getItem("currentUserName") || "Unknown Player";
+
+    const currentUserId =
+        localStorage.getItem("currentUserId") || "Unknown ID";
+
+    const selectedCategory =
+        localStorage.getItem("selectedCategory") || "Environment";
+
+    const scores =
+        activeGoals.map(goal => sdgScores[goal] || 0);
+
+    const totalScore =
+        scores.reduce((sum, score) => sum + score, 0);
+
+    const averageScore =
+        Math.round(totalScore / activeGoals.length);
+
+    let leaderboard =
+        JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    const existingPlayerIndex =
+        leaderboard.findIndex(player => player.id === currentUserId);
+
+    const newRecord = {
+        name: currentUserName,
+        id: currentUserId,
+        category: selectedCategory,
+        score: averageScore,
+        result: resultType,
+        date: new Date().toLocaleDateString()
+    };
+
+    if (existingPlayerIndex === -1) {
+
+        leaderboard.push(newRecord);
+
+    } else {
+
+        if (averageScore > leaderboard[existingPlayerIndex].score) {
+            leaderboard[existingPlayerIndex] = newRecord;
+        }
+
+    }
+
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    leaderboard = leaderboard.slice(0, 10);
+
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
 
 // ─────────────────────────────────────────────
 //  SAVE RESULT & REDIRECT
 // ─────────────────────────────────────────────
 
-function saveResult(type, title = "", text = "") {
-    localStorage.setItem("resultType",           type);
-    localStorage.setItem("endingTitle",          title);
-    localStorage.setItem("endingText",           text);
-    localStorage.setItem("money",                money);
-    localStorage.setItem("energy",               energy);
-    localStorage.setItem("energyDepletedCount",  energyDepletedCount);
-    localStorage.setItem("targetGoal",           targetGoal);
-    localStorage.setItem("targetScore",          targetScore);
-    localStorage.setItem("sdgScores",            JSON.stringify(sdgScores));
-
+function saveResult(type) {
+    updateLeaderboard(type);
+    localStorage.setItem("resultType", type);
+    localStorage.setItem("money", money);
+    localStorage.setItem("energy", energy);
+    localStorage.setItem("energyDepletedCount", energyDepletedCount);
+    localStorage.setItem("targetGoal", targetGoal);
+    localStorage.setItem("targetScore", targetScore);
+    localStorage.setItem("sdgScores", JSON.stringify(sdgScores));
     menuModal.classList.remove("active");
 
     window.location.href = "result.html";
@@ -1000,9 +1018,8 @@ function renderProgressBars() {
     progressList.innerHTML = "";
 
     activeGoals.forEach(goal => {
-        const score = Math.min(sdgScores[goal] || 0, 250);
-        const percent = (score / 250) * 100;
-
+        const score = Math.min(sdgScores[goal] || 0, 100);
+        const percent = (score / 100) * 100;
         progressList.innerHTML += `
             <div class="progress-item" style="position: relative;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1010,7 +1027,7 @@ function renderProgressBars() {
 
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span id="${goal}Delta" style="font-weight: bold; font-size: 14px; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateY(5px);"></span>
-                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 250</span>
+                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 100</span>
                     </div>
                 </div>
 
@@ -1230,6 +1247,5 @@ if (goalPopupElement) {
 renderProgressBars();
 refillQueue();
 updateProgress();
-
+// Initialize first week - this will call showWeeklyGoalModal and then loadEvent
 setWeeklyGoal(1);
-//11111
