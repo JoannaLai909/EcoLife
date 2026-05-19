@@ -26,6 +26,7 @@ const goalColors = {
     goal16: "#00689D", goal17: "#19486A"
 };
 
+
 // ─────────────────────────────────────────────
 //  LOAD EVENTS BY CATEGORY
 // ─────────────────────────────────────────────
@@ -37,8 +38,8 @@ else if (selectedCategory === "Society")      allEvents = [...societyEvents];
 else if (selectedCategory === "Development")  allEvents = [...developmentEvents];
 else if (selectedCategory === "Global")       allEvents = [...globalEvents];
 
-
 allEvents = shuffle(allEvents);
+
 
 // ─────────────────────────────────────────────
 //  GAME STATE
@@ -50,9 +51,10 @@ let money               = 100;
 let energy              = 80;
 let sdgScores           = {};
 let backpack            = [];
-let energyDepletedCount = 0;   // 體力歸零次數（用於精疲力竭結局）
+let energyDepletedCount = 0;
 let midGoalRewarded     = false;
-let hasAdvisorCard      = false; // 顧問卡：可跳過一次選項
+let hasAdvisorCard      = false;
+
 
 // Weekly Goal State
 let currentWeeklyGoal = {
@@ -63,7 +65,8 @@ let currentWeeklyGoal = {
 };
 
 let targetGoal = "";
-let targetScore = 0;
+let targetScore = "";
+
 
 // New Tracking Variables for Endings
 let startTime           = Date.now();
@@ -77,10 +80,21 @@ const maxDays           = 10;   // 總共 10 天
 let MAX_ENERGY          = 80;   // 可被獎勵永久提升
 
 // ── Queue state ──────────────────────────────
+
 let eventQueue     = [];
 let lastEventTitle = null;
 
-const activeGoals    = categoryGoals[selectedCategory];
+/*
+  控制當週目標題目的出現節奏。
+  目的：
+  1. 讓當週目標題目比較早出現
+  2. 避免連續太多題都是同一個 Goal
+*/
+let weeklyGoalStreak = 0;
+let weeklyActionCount = 0;
+
+const activeGoals = categoryGoals[selectedCategory];
+
 
 // ─────────────────────────────────────────────
 //  DOM REFERENCES
@@ -111,6 +125,7 @@ const backpackGrid     = document.getElementById("backpackGrid");
 
 const rerollBtn        = document.getElementById("rerollBtn");
 
+
 // ─────────────────────────────────────────────
 //  UI LISTENERS
 // ─────────────────────────────────────────────
@@ -119,6 +134,7 @@ menuBtn.addEventListener("click", () => menuModal.classList.add("active"));
 closeMenuBtn.addEventListener("click", () => menuModal.classList.remove("active"));
 
 document.getElementById("restartBtn").addEventListener("click", () => location.reload());
+
 document.getElementById("homeBtn").addEventListener("click", () => {
     window.location.href = "entrance.html";
 });
@@ -128,13 +144,19 @@ shopBtn.addEventListener("click", () => {
     renderShop();
     shopOverlay.classList.add("shop-open");
 });
-shopCloseBtn.addEventListener("click", () => shopOverlay.classList.remove("shop-open"));
+
+shopCloseBtn.addEventListener("click", () => {
+    shopOverlay.classList.remove("shop-open");
+});
 
 backpackBtn.addEventListener("click", () => {
     renderBackpack();
     backpackOverlay.classList.add("shop-open");
 });
-backpackCloseBtn.addEventListener("click", () => backpackOverlay.classList.remove("shop-open"));
+
+backpackCloseBtn.addEventListener("click", () => {
+    backpackOverlay.classList.remove("shop-open");
+});
 
 rerollBtn.addEventListener("click", () => {
     if (money >= 75) {
@@ -148,6 +170,7 @@ rerollBtn.addEventListener("click", () => {
     }
 });
 
+
 // ─────────────────────────────────────────────
 //  SHOP & BACKPACK LOGIC
 // ─────────────────────────────────────────────
@@ -159,7 +182,6 @@ const shopItems = [
     { id: "energy_drink", name: "提神飲料", price: 250, energy: 40, desc: "提升 40 體力", icon: "🥤" }
 ];
 
-// Add SDG potions based on category
 activeGoals.forEach(goal => {
     shopItems.push({
         id: `potion_${goal}`,
@@ -173,64 +195,93 @@ activeGoals.forEach(goal => {
 
 function renderShop() {
     shopGrid.innerHTML = "";
+
     shopItems.forEach(item => {
         const card = document.createElement("div");
         card.className = "shop-card";
+
         card.innerHTML = `
             <div style="font-size: 40px; margin-bottom: 10px;">${item.icon}</div>
             <h3>${item.name}</h3>
             <p>${item.desc}</p>
             <div class="price">💰 ${item.price}</div>
         `;
+
         card.addEventListener("click", () => {
             if (money >= item.price) {
                 pendingItem = item;
+
                 buyConfirmTitle.innerText = `購買 ${item.name}`;
                 buyConfirmMessage.innerText = `花費 💰 ${item.price}，您想現在使用還是放入背包？`;
+
                 buyConfirmModal.classList.add("active");
             } else {
                 moneyPopup.classList.add("active");
                 setTimeout(() => moneyPopup.classList.remove("active"), 1500);
             }
         });
+
         shopGrid.appendChild(card);
     });
 }
 
 function useItem(item) {
     let effectMsg = "";
+
     if (item.energy) {
         energy += item.energy;
         effectMsg = `體力提升了 ${item.energy} (目前: ${energy}⚡)`;
     }
+
     if (item.goalKey) {
-        const gain = (Math.floor(Math.random() * 4) + 1) + (Math.floor(Math.random() * 4) + 1);
+        const gain =
+            (Math.floor(Math.random() * 4) + 1) +
+            (Math.floor(Math.random() * 4) + 1);
+
         sdgScores[item.goalKey] = (sdgScores[item.goalKey] || 0) + gain;
         updateProgress();
-        effectMsg = `${item.goalKey.replace("goal", "Goal ")} 進度提升了 ${gain} (目前: ${sdgScores[item.goalKey]})`;
+
+        effectMsg =
+            `${item.goalKey.replace("goal", "Goal ")} 進度提升了 ${gain} ` +
+            `(目前: ${sdgScores[item.goalKey]})`;
     }
+
     document.getElementById("moneyBox").innerText  = `💰 ${money}`;
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
+
     showToast(`使用了 ${item.name}！\n${effectMsg}`);
 }
 
 function showToast(msg) {
     const toast = document.getElementById("shopToast");
+
     if (!toast) {
         alert(msg);
         return;
     }
+
     toast.innerText = msg;
-    toast.classList.add("active");
-    setTimeout(() => toast.classList.remove("active"), 3000);
+
+    /*
+      你的 CSS 是 .shop-toast.show，
+      所以這裡要用 show，不要用 active。
+    */
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
 }
 
 useNowBtn.addEventListener("click", () => {
     if (pendingItem) {
         money -= pendingItem.price;
+
         useItem(pendingItem);
+
         buyConfirmModal.classList.remove("active");
         shopBalance.innerText = `💰 ${money}`;
+
         pendingItem = null;
     }
 });
@@ -239,9 +290,12 @@ storeInBagBtn.addEventListener("click", () => {
     if (pendingItem) {
         money -= pendingItem.price;
         backpack.push({ ...pendingItem });
+
         buyConfirmModal.classList.remove("active");
         shopBalance.innerText = `💰 ${money}`;
+
         showToast(`已將 ${pendingItem.name} 放入背包`);
+
         pendingItem = null;
     }
 });
@@ -253,27 +307,36 @@ cancelBuyBtn.addEventListener("click", () => {
 
 function renderBackpack() {
     backpackGrid.innerHTML = "";
+
     if (backpack.length === 0) {
-        backpackGrid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; font-size: 20px;'>背包是空的</p>";
+        backpackGrid.innerHTML =
+            "<p style='grid-column: 1/-1; text-align: center; font-size: 20px;'>背包是空的</p>";
         return;
     }
+
     backpack.forEach((item, index) => {
         const card = document.createElement("div");
         card.className = "shop-card";
+
         card.innerHTML = `
             <div style="font-size: 40px; margin-bottom: 10px;">${item.icon}</div>
             <h3>${item.name}</h3>
             <p>${item.desc}</p>
-            <button class="use-item-btn" style="width: 100%; padding: 8px; margin-top: 10px; background: #114bb8; color: white; border: none; border-radius: 8px; cursor: pointer;">使用</button>
+            <button class="use-item-btn" style="width: 100%; padding: 8px; margin-top: 10px; background: #114bb8; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                使用
+            </button>
         `;
+
         card.querySelector(".use-item-btn").addEventListener("click", () => {
             useItem(item);
             backpack.splice(index, 1);
             renderBackpack();
         });
+
         backpackGrid.appendChild(card);
     });
 }
+
 
 // ─────────────────────────────────────────────
 //  UTILITY: FISHER-YATES SHUFFLE
@@ -281,12 +344,15 @@ function renderBackpack() {
 
 function shuffle(arr) {
     const a = [...arr];
+
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [a[i], a[j]] = [a[j], a[i]];
     }
+
     return a;
 }
+
 
 // ─────────────────────────────────────────────
 //  QUEUE-BASED EVENT PICKER
@@ -294,48 +360,172 @@ function shuffle(arr) {
 
 function refillQueue() {
     let newQueue = shuffle(allEvents);
-    if (lastEventTitle && newQueue.length > 1 && newQueue[0].title === lastEventTitle) {
+
+    if (
+        lastEventTitle &&
+        newQueue.length > 1 &&
+        newQueue[0].title === lastEventTitle
+    ) {
         newQueue.push(newQueue.shift());
     }
+
     eventQueue = newQueue;
+}
+
+/*
+  判斷某一題是否與「當週目標」有關。
+  例如本週是 goal3，只要某個 choice 裡面有 goal3 加減分，
+  這題就算是 goal3 相關題。
+*/
+function eventMatchesWeeklyGoal(event) {
+    if (!event || !currentWeeklyGoal.goal) {
+        return false;
+    }
+
+    if (!event.choices || !Array.isArray(event.choices)) {
+        return false;
+    }
+
+    return event.choices.some(choice => {
+        return choice[currentWeeklyGoal.goal] !== undefined;
+    });
+}
+
+/*
+  從 eventQueue 裡面挑出符合條件的題目。
+  挑到後會從 queue 裡移除，避免同一輪一直重複。
+*/
+function pickEventFromQueue(conditionFunction) {
+    const candidates = eventQueue.filter(event => {
+        return conditionFunction(event) &&
+               event.title !== lastEventTitle;
+    });
+
+    if (candidates.length === 0) {
+        return null;
+    }
+
+    const selectedEvent =
+        candidates[Math.floor(Math.random() * candidates.length)];
+
+    eventQueue = eventQueue.filter(event => {
+        return event.title !== selectedEvent.title;
+    });
+
+    return selectedEvent;
+}
+
+/*
+  控制當週目標題目的出現機率。
+  一週 7 天，每天 4 題，所以一週約 28 題。
+
+  前 8 題：比較高機率出現當週目標題
+  中間 10 題：中等機率
+  後面題目：降低機率，避免太集中
+*/
+function getWeeklyGoalChance() {
+    if (weeklyActionCount < 8) {
+        return 0.65;
+    }
+
+    if (weeklyActionCount < 18) {
+        return 0.45;
+    }
+
+    return 0.25;
 }
 
 function getNextEvent() {
     if (eventQueue.length === 0) {
         refillQueue();
     }
-    // 錢太少時，優先從整個題庫找 money 題
+
+    /*
+      錢太少時，優先出現 money 題。
+      這個優先權比當週目標高，避免玩家因為錢太少卡住。
+    */
     if (money <= 80) {
-        let moneyEvents = eventQueue.filter(
-            e => e.type === "money" &&
-            e.title !== lastEventTitle
-        );
-        // 如果目前 queue 沒有 money 題，就從 allEvents 重新找
-        if (moneyEvents.length === 0) {
-            moneyEvents = allEvents.filter(
-                e => e.type === "money" &&
-                e.title !== lastEventTitle
-            );
-        }
-        if (moneyEvents.length > 0) {
-            const randomMoneyEvent =
-                moneyEvents[
-                    Math.floor(Math.random() * moneyEvents.length)
-                ];
-            eventQueue =
-                eventQueue.filter(
-                    e => e.title !== randomMoneyEvent.title
-                );
-            lastEventTitle = randomMoneyEvent.title;
-            return randomMoneyEvent;
+        let moneyEvent = pickEventFromQueue(event => {
+            return event.type === "money";
+        });
 
+        if (!moneyEvent) {
+            const moneyEvents = allEvents.filter(event => {
+                return event.type === "money" &&
+                       event.title !== lastEventTitle;
+            });
+
+            if (moneyEvents.length > 0) {
+                moneyEvent =
+                    moneyEvents[Math.floor(Math.random() * moneyEvents.length)];
+            }
         }
 
+        if (moneyEvent) {
+            lastEventTitle = moneyEvent.title;
+            weeklyGoalStreak = 0;
+            weeklyActionCount++;
+            return moneyEvent;
+        }
     }
-    const event = eventQueue.shift();
-    lastEventTitle = event.title;
-    return event;
+
+    /*
+      優先挑當週目標相關題，但最多連續出現 2 題。
+      這樣可以讓目標題比較早出現，但不會太集中。
+    */
+    const weeklyChance = getWeeklyGoalChance();
+
+    const shouldPreferWeeklyGoal =
+        Math.random() < weeklyChance &&
+        weeklyGoalStreak < 2;
+
+    if (shouldPreferWeeklyGoal) {
+        const weeklyGoalEvent = pickEventFromQueue(eventMatchesWeeklyGoal);
+
+        if (weeklyGoalEvent) {
+            lastEventTitle = weeklyGoalEvent.title;
+            weeklyGoalStreak++;
+            weeklyActionCount++;
+            return weeklyGoalEvent;
+        }
+    }
+
+    /*
+      一般題目：
+      先刻意挑「非當週目標題」，讓題目保持混合。
+    */
+    let normalEvent = pickEventFromQueue(event => {
+        return !eventMatchesWeeklyGoal(event);
+    });
+
+    /*
+      如果非當週目標題都沒有了，就退回一般 queue。
+    */
+    if (!normalEvent) {
+        normalEvent = eventQueue.shift();
+    }
+
+    /*
+      如果 queue 真的空了，就重新補題。
+    */
+    if (!normalEvent) {
+        refillQueue();
+        normalEvent = eventQueue.shift();
+    }
+
+    lastEventTitle = normalEvent.title;
+
+    if (eventMatchesWeeklyGoal(normalEvent)) {
+        weeklyGoalStreak++;
+    } else {
+        weeklyGoalStreak = 0;
+    }
+
+    weeklyActionCount++;
+
+    return normalEvent;
 }
+
 
 // ─────────────────────────────────────────────
 //  LOAD & DISPLAY AN EVENT
@@ -343,6 +533,11 @@ function getNextEvent() {
 
 function loadEvent() {
     const event = getNextEvent();
+
+    if (!event) {
+        endGameByNoMoreEvents();
+        return;
+    }
 
     document.getElementById("goalBox").innerText =
         `${currentWeeklyGoal.goal.replace("goal", "Goal ")} Score ≥ ${currentWeeklyGoal.target}`;
@@ -356,20 +551,22 @@ function loadEvent() {
     const choicesSection = document.getElementById("choicesSection");
     choicesSection.innerHTML = "";
 
-    // 顧問卡按鈕（如果持有的話顯示）
     if (hasAdvisorCard) {
         const advisorBtn = document.createElement("button");
         advisorBtn.id = "advisorCardBtn";
         advisorBtn.innerText = "🃏 使用顧問卡（跳過此題）";
+
         advisorBtn.addEventListener("click", () => {
             hasAdvisorCard = false;
             actionsToday++;
+
             if (actionsToday >= maxActionsPerDay) {
                 nextDay();
             } else {
                 loadEvent();
             }
         });
+
         choicesSection.appendChild(advisorBtn);
     }
 
@@ -384,24 +581,30 @@ function loadEvent() {
                 ⚡ ${choice.energy || 0}
             </div>
         `;
+
         card.addEventListener("click", () => handleChoice(choice));
+
         choicesSection.appendChild(card);
     });
 }
+
 
 // ─────────────────────────────────────────────
 //  HANDLE A CHOICE
 // ─────────────────────────────────────────────
 
 function handleChoice(choice) {
-    // Tracking for endings
     const currentTime = Date.now();
     const idleGap = currentTime - lastActionTime;
-    if (idleGap > maxIdleGap) maxIdleGap = idleGap;
+
+    if (idleGap > maxIdleGap) {
+        maxIdleGap = idleGap;
+    }
 
     if (currentTime - lastActionTime < 1000) {
         fastChoices++;
     }
+
     lastActionTime = currentTime;
 
     const moneyChange = choice.money ?? 0;
@@ -417,6 +620,7 @@ function handleChoice(choice) {
     energy = Math.max(0, energy + energyChange);
 
     const deltas = {};
+
     for (const key in choice) {
         if (key.startsWith("goal")) {
             sdgScores[key] = (sdgScores[key] || 0) + choice[key];
@@ -442,6 +646,7 @@ function handleChoice(choice) {
     }
 }
 
+
 // ─────────────────────────────────────────────
 //  PROGRESS BARS
 // ─────────────────────────────────────────────
@@ -456,6 +661,7 @@ function updateProgress(deltas = {}) {
             const score = Math.min(sdgScores[goal] || 0, 100);
             const percent = (score / 100) * 100;
             fill.style.width = `${percent}%`;
+
             if (text) {
                 text.innerText = `${score} / 100`;
             }
@@ -464,11 +670,11 @@ function updateProgress(deltas = {}) {
         if (deltaSpan && deltas[goal]) {
             const val = deltas[goal];
             const sign = val > 0 ? "+" : "";
+
             deltaSpan.innerText = `${sign}${val}`;
             deltaSpan.style.color = val > 0 ? "#2e7d32" : "#d32f2f";
             deltaSpan.style.opacity = "1";
-            
-            // Fade out after a moment
+
             setTimeout(() => {
                 deltaSpan.style.opacity = "0";
             }, 1500);
@@ -476,12 +682,14 @@ function updateProgress(deltas = {}) {
     });
 }
 
+
 // ─────────────────────────────────────────────
 //  WEEKLY GOAL LOGIC
 // ─────────────────────────────────────────────
 
 function setWeeklyGoal(week) {
     currentWeeklyGoal.week = week;
+
     const goalIndex = Math.floor(Math.random() * activeGoals.length);
     currentWeeklyGoal.goal = activeGoals[goalIndex];
     
@@ -489,7 +697,14 @@ function setWeeklyGoal(week) {
     else if (week === 2) currentWeeklyGoal.target = 80;
 
     currentWeeklyGoal.achieved = false;
-    
+
+    /*
+      每一週開始時，重置當週目標題目的出現控制。
+      不然第二週、第三週會沿用上一週的出題計數。
+    */
+    weeklyGoalStreak = 0;
+    weeklyActionCount = 0;
+
     targetGoal = currentWeeklyGoal.goal;
     targetScore = currentWeeklyGoal.target;
 
@@ -498,8 +713,11 @@ function setWeeklyGoal(week) {
 
 function showWeeklyGoalModal() {
     const modal = document.getElementById("dailyModal");
-    if (!modal) return;
-    
+
+    if (!modal) {
+        return;
+    }
+
     const title = document.getElementById("dailyModalTitle");
     const msg = document.getElementById("dailyModalMessage");
     const details = document.getElementById("goalDetails");
@@ -517,31 +735,40 @@ function showWeeklyGoalModal() {
     modal.classList.add("active");
 
     const closeBtn = document.getElementById("closeDailyBtn");
+
     const nextStep = () => {
         modal.classList.remove("active");
         closeBtn.removeEventListener("click", nextStep);
-        loadEvent(); 
+        loadEvent();
     };
+
     closeBtn.addEventListener("click", nextStep);
 }
 
 function checkWeeklyGoal(week) {
     const goalScore = sdgScores[currentWeeklyGoal.goal] || 0;
     const success = goalScore >= currentWeeklyGoal.target;
-    
+
     let rewardMsg = "";
+
     if (success) {
         const rewardType = Math.random() > 0.5 ? "money" : "stat";
+
         if (rewardType === "money") {
             const amount = 30 + Math.floor(Math.random() * 21);
             money += amount;
             rewardMsg = `💰 獲得獎勵金：${amount}`;
         } else {
-            const randomGoal = activeGoals[Math.floor(Math.random() * activeGoals.length)];
+            const randomGoal =
+                activeGoals[Math.floor(Math.random() * activeGoals.length)];
+
             const amount = 10 + Math.floor(Math.random() * 6);
+
             sdgScores[randomGoal] = (sdgScores[randomGoal] || 0) + amount;
             updateProgress();
-            rewardMsg = `📈 ${randomGoal.replace("goal", "Goal ")} 進度提升了 ${amount}`;
+
+            rewardMsg =
+                `📈 ${randomGoal.replace("goal", "Goal ")} 進度提升了 ${amount}`;
         }
     }
 
@@ -561,14 +788,16 @@ function checkWeeklyGoal(week) {
         msg.innerText = "❌ 很遺憾，你未能達成階段目標。";
         rewardSection.style.display = "none";
     }
+
     details.style.display = "none";
 
     document.getElementById("moneyBox").innerText  = `💰 ${money}`;
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
     modal.classList.add("active");
-    
+
     const closeBtn = document.getElementById("closeDailyBtn");
+
     const nextStep = () => {
         modal.classList.remove("active");
         closeBtn.removeEventListener("click", nextStep);
@@ -576,8 +805,10 @@ function checkWeeklyGoal(week) {
         else if (day > maxDays && week === 2) determineEnding();
         else loadEvent();
     };
+
     closeBtn.addEventListener("click", nextStep);
 }
+
 
 // ─────────────────────────────────────────────
 //  NEXT DAY
@@ -601,20 +832,23 @@ function nextDay() {
     loadEvent();
 }
 
+
 // ─────────────────────────────────────────────
-//  ENDING SYSTEM（6 種結局）
+//  ENDING SYSTEM
 // ─────────────────────────────────────────────
 
 function determineEnding() {
     const totalTime = Date.now() - startTime;
+
     const goalScoresArray = activeGoals.map(g => sdgScores[g] || 0);
-    const avgScore = goalScoresArray.reduce((a, b) => a + b, 0) / activeGoals.length;
+
+    const avgScore =
+        goalScoresArray.reduce((a, b) => a + b, 0) / activeGoals.length;
 
     let endingType = "";
     let endingTitle = "";
     let endingText = "";
 
-    // 1. Behavior Easter Eggs
     if (maxIdleGap > 180000) {
         endingType = "normal";
         endingTitle = "🛋️ 什麼都沒做";
@@ -765,8 +999,10 @@ function saveResult(type) {
     localStorage.setItem("targetScore", targetScore);
     localStorage.setItem("sdgScores", JSON.stringify(sdgScores));
     menuModal.classList.remove("active");
+
     window.location.href = "result.html";
 }
+
 
 // ─────────────────────────────────────────────
 //  RENDER PROGRESS BARS
@@ -778,6 +1014,7 @@ function endGameByNoMoreEvents() {
 
 function renderProgressBars() {
     const progressList = document.getElementById("progressList");
+
     progressList.innerHTML = "";
 
     activeGoals.forEach(goal => {
@@ -787,6 +1024,7 @@ function renderProgressBars() {
             <div class="progress-item" style="position: relative;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>${goal.replace("goal", "Goal ")}</span>
+
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span id="${goal}Delta" style="font-weight: bold; font-size: 14px; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateY(5px);"></span>
                         <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 100</span>
@@ -800,6 +1038,207 @@ function renderProgressBars() {
         `;
     });
 }
+
+
+// ─────────────────────────────────────────────
+//  GOAL BOX CLICK POPUP
+// ─────────────────────────────────────────────
+
+const gameSdgData = [
+    {
+        id: 1,
+        title: "No Poverty",
+        description: "End poverty in all its forms everywhere. Ensure equal rights to economic resources, basic services, and social protection.",
+        color: "#E5243B"
+    },
+    {
+        id: 2,
+        title: "Zero Hunger",
+        description: "End hunger, achieve food security and improved nutrition, and promote sustainable agriculture for all.",
+        color: "#DDA63A"
+    },
+    {
+        id: 3,
+        title: "Good Health and Well-Being",
+        description: "Ensure healthy lives and promote well-being for all at all ages, reducing mortality and ending epidemics.",
+        color: "#4C9F38"
+    },
+    {
+        id: 4,
+        title: "Quality Education",
+        description: "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.",
+        color: "#C5192D"
+    },
+    {
+        id: 5,
+        title: "Gender Equality",
+        description: "Achieve gender equality and empower all women and girls by eliminating discrimination and violence.",
+        color: "#FF3A21"
+    },
+    {
+        id: 6,
+        title: "Clean Water and Sanitation",
+        description: "Ensure availability and sustainable management of water and sanitation for all people worldwide.",
+        color: "#26BDE2"
+    },
+    {
+        id: 7,
+        title: "Affordable and Clean Energy",
+        description: "Ensure access to affordable, reliable, sustainable, and modern energy for all globally.",
+        color: "#FCC30B"
+    },
+    {
+        id: 8,
+        title: "Decent Work and Economic Growth",
+        description: "Promote sustained, inclusive, and sustainable economic growth, full employment, and decent work for all.",
+        color: "#A21942"
+    },
+    {
+        id: 9,
+        title: "Industry, Innovation and Infrastructure",
+        description: "Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.",
+        color: "#FD6925"
+    },
+    {
+        id: 10,
+        title: "Reduced Inequalities",
+        description: "Reduce inequality within and among countries by promoting social, economic, and political inclusion.",
+        color: "#DD1367"
+    },
+    {
+        id: 11,
+        title: "Sustainable Cities and Communities",
+        description: "Make cities and human settlements inclusive, safe, resilient, and sustainable for all inhabitants.",
+        color: "#FD9D24"
+    },
+    {
+        id: 12,
+        title: "Responsible Consumption and Production",
+        description: "Ensure sustainable consumption and production patterns through efficient resource use and waste reduction.",
+        color: "#BF8B2E"
+    },
+    {
+        id: 13,
+        title: "Climate Action",
+        description: "Take urgent action to combat climate change and its impacts by strengthening resilience and awareness.",
+        color: "#3F7E44"
+    },
+    {
+        id: 14,
+        title: "Life Below Water",
+        description: "Conserve and sustainably use the oceans, seas, and marine resources for sustainable development.",
+        color: "#0A97D9"
+    },
+    {
+        id: 15,
+        title: "Life on Land",
+        description: "Protect, restore, and promote sustainable use of terrestrial ecosystems and halt biodiversity loss.",
+        color: "#56C02B"
+    },
+    {
+        id: 16,
+        title: "Peace, Justice and Strong Institutions",
+        description: "Promote peaceful and inclusive societies, provide access to justice, and build effective institutions.",
+        color: "#00689D"
+    },
+    {
+        id: 17,
+        title: "Partnerships for the Goals",
+        description: "Strengthen the means of implementation and revitalize the global partnership for sustainable development.",
+        color: "#19486A"
+    }
+];
+
+function getCurrentGoalNumber() {
+    const goalBox = document.getElementById("goalBox");
+
+    if (!goalBox) {
+        return null;
+    }
+
+    const goalText = goalBox.innerText;
+    const match = goalText.match(/Goal\s*(\d+)/);
+
+    if (match) {
+        return Number(match[1]);
+    }
+
+    return null;
+}
+
+function showGoalPopup() {
+    const currentGoalNumber = getCurrentGoalNumber();
+
+    if (!currentGoalNumber) {
+        return;
+    }
+
+    const goal = gameSdgData.find(item => item.id === currentGoalNumber);
+
+    if (!goal) {
+        return;
+    }
+
+    const goalPopup = document.getElementById("goalPopup");
+    const goalPopupNumber = document.getElementById("goalPopupNumber");
+    const goalPopupTitle = document.getElementById("goalPopupTitle");
+    const goalPopupSub = document.getElementById("goalPopupSub");
+    const goalPopupDesc = document.getElementById("goalPopupDesc");
+
+    if (
+        !goalPopup ||
+        !goalPopupNumber ||
+        !goalPopupTitle ||
+        !goalPopupSub ||
+        !goalPopupDesc
+    ) {
+        return;
+    }
+
+    goalPopupNumber.innerText = goal.id;
+    goalPopupTitle.innerText = `Goal ${goal.id}`;
+    goalPopupSub.innerText = goal.title;
+    goalPopupDesc.innerText = goal.description;
+
+    goalPopupNumber.style.background = goal.color;
+
+    goalPopup.classList.add("active");
+}
+
+function closeGoalPopup() {
+    const goalPopup = document.getElementById("goalPopup");
+
+    if (goalPopup) {
+        goalPopup.classList.remove("active");
+    }
+}
+
+const goalBoxElement = document.getElementById("goalBox");
+const goalPopupElement = document.getElementById("goalPopup");
+const closeGoalPopupButton = document.getElementById("closeGoalPopupBtn");
+
+if (goalBoxElement) {
+    goalBoxElement.addEventListener("click", function (event) {
+        event.stopPropagation();
+        showGoalPopup();
+    });
+}
+
+if (closeGoalPopupButton) {
+    closeGoalPopupButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        closeGoalPopup();
+    });
+}
+
+if (goalPopupElement) {
+    goalPopupElement.addEventListener("click", function (event) {
+        if (event.target === goalPopupElement) {
+            closeGoalPopup();
+        }
+    });
+}
+
 
 // ─────────────────────────────────────────────
 //  INIT
