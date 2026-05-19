@@ -313,7 +313,7 @@ if (rerollBtn) {
             rerollCount++;
             updateStatusBars();
             loadEvent();
-            showToast("已更換題目 (💰 -15)");
+            showToast("已更換題目 (💰 -75)");
         } else {
             moneyPopup.classList.add("active");
             setTimeout(() => moneyPopup.classList.remove("active"), 1500);

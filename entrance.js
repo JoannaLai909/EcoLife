@@ -49,3 +49,73 @@ if (featureBtn && subDropdown) {
         subDropdown.classList.toggle("active");
     });
 }
+
+function renderLeaderboard() {
+
+    const leaderboardList =
+        document.getElementById("leaderboardList");
+
+    if (!leaderboardList) {
+        return;
+    }
+
+    const leaderboard =
+        JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    if (leaderboard.length === 0) {
+
+        leaderboardList.innerHTML = `
+            <div class="empty-leaderboard">
+                No records yet. Start playing to join the leaderboard!
+            </div>
+        `;
+
+        return;
+    }
+
+    leaderboardList.innerHTML = "";
+
+    leaderboard.forEach((player, index) => {
+
+        const row =
+            document.createElement("div");
+
+        row.classList.add("leaderboard-row");
+
+        row.innerHTML = `
+            <div class="leaderboard-rank">
+                #${index + 1}
+            </div>
+
+            <div class="leaderboard-player">
+                <div class="leaderboard-name">
+                    ${player.name}
+                </div>
+
+                <div class="leaderboard-id">
+                    ID: ${player.id}
+                </div>
+            </div>
+
+            <div class="leaderboard-score">
+                ${player.score}
+            </div>
+
+            <div class="leaderboard-category">
+                ${player.category}
+            </div>
+        `;
+
+        leaderboardList.appendChild(row);
+
+    });
+
+}
+
+window.addEventListener("load", function() {
+
+    if (window.renderCloudLeaderboard) {
+        window.renderCloudLeaderboard();
+    }
+
+});
