@@ -658,12 +658,13 @@ function updateProgress(deltas = {}) {
         const deltaSpan = document.getElementById(`${goal}Delta`);
 
         if (fill) {
-            const score = Math.min(sdgScores[goal] || 0, 100);
-            const percent = (score / 100) * 100;
+            const score = Math.min(sdgScores[goal] || 0, 1000);
+            const percent = (score / 1000) * 100;
+
             fill.style.width = `${percent}%`;
 
             if (text) {
-                text.innerText = `${score} / 100`;
+                text.innerText = `${score} / 1000`;
             }
         }
 
@@ -681,7 +682,6 @@ function updateProgress(deltas = {}) {
         }
     });
 }
-
 
 // ─────────────────────────────────────────────
 //  WEEKLY GOAL LOGIC
@@ -1056,8 +1056,9 @@ function renderProgressBars() {
     progressList.innerHTML = "";
 
     activeGoals.forEach(goal => {
-        const score = Math.min(sdgScores[goal] || 0, 100);
-        const percent = (score / 100) * 100;
+        const score = Math.min(sdgScores[goal] || 0, 1000);
+        const percent = (score / 1000) * 100;
+
         progressList.innerHTML += `
             <div class="progress-item" style="position: relative;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1065,7 +1066,7 @@ function renderProgressBars() {
 
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span id="${goal}Delta" style="font-weight: bold; font-size: 14px; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateY(5px);"></span>
-                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 100</span>
+                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 1000</span>
                     </div>
                 </div>
 
