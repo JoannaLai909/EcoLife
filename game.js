@@ -988,9 +988,47 @@ function updateLeaderboard(resultType) {
 // ─────────────────────────────────────────────
 //  SAVE RESULT & REDIRECT
 // ─────────────────────────────────────────────
+async function saveScoreToCloud(resultType) {
 
-function saveResult(type) {
-    updateLeaderboard(type);
+    if (!window.updateCloudLeaderboard) {
+        return;
+    }
+
+    const currentUserName =
+        localStorage.getItem("currentUserName") || "Unknown Player";
+
+    const currentUserId =
+        localStorage.getItem("currentUserId") || "Unknown ID";
+
+    const category =
+        localStorage.getItem("selectedCategory") || selectedCategory;
+
+    const scores =
+        activeGoals.map(goal =>
+            Math.max(0, sdgScores[goal] || 0)
+        );
+
+    const totalScore =
+        scores.reduce((sum, score) => sum + score, 0);
+
+    const averageScore =
+        Math.round(totalScore / activeGoals.length);
+
+    const playerData = {
+        name: currentUserName,
+        id: currentUserId,
+        category: category,
+        score: averageScore,
+        result: resultType,
+        date: new Date().toLocaleDateString()
+    };
+
+    await window.updateCloudLeaderboard(playerData);
+
+}
+
+async function saveResult(type) {
+    await saveScoreToCloud(type);
     localStorage.setItem("resultType", type);
     localStorage.setItem("money", money);
     localStorage.setItem("energy", energy);
