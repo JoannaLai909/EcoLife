@@ -790,6 +790,32 @@ p {
     color: white;
 }
 
+.leaderboard-tiger {
+    width: 230px;
+    max-width: 45%;
+    height: auto;
+
+    display: block;
+    margin: 0 auto 10px auto;
+
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,0.18));
+
+    animation: leaderboardTigerFloat 2.4s ease-in-out infinite;
+}
+
+@keyframes leaderboardTigerFloat {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
 /* RWD */
 
 @media (max-width: 768px) {
