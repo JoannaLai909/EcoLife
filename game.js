@@ -703,20 +703,73 @@ function determineEnding() {
     saveResult(endingType, endingTitle, endingText);
 }
 
+function updateLeaderboard(resultType) {
+
+    const currentUserName =
+        localStorage.getItem("currentUserName") || "Unknown Player";
+
+    const currentUserId =
+        localStorage.getItem("currentUserId") || "Unknown ID";
+
+    const selectedCategory =
+        localStorage.getItem("selectedCategory") || "Environment";
+
+    const scores =
+        activeGoals.map(goal => sdgScores[goal] || 0);
+
+    const totalScore =
+        scores.reduce((sum, score) => sum + score, 0);
+
+    const averageScore =
+        Math.round(totalScore / activeGoals.length);
+
+    let leaderboard =
+        JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    const existingPlayerIndex =
+        leaderboard.findIndex(player => player.id === currentUserId);
+
+    const newRecord = {
+        name: currentUserName,
+        id: currentUserId,
+        category: selectedCategory,
+        score: averageScore,
+        result: resultType,
+        date: new Date().toLocaleDateString()
+    };
+
+    if (existingPlayerIndex === -1) {
+
+        leaderboard.push(newRecord);
+
+    } else {
+
+        if (averageScore > leaderboard[existingPlayerIndex].score) {
+            leaderboard[existingPlayerIndex] = newRecord;
+        }
+
+    }
+
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    leaderboard = leaderboard.slice(0, 10);
+
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
+
 // ─────────────────────────────────────────────
 //  SAVE RESULT & REDIRECT
 // ─────────────────────────────────────────────
 
-function saveResult(type, title = "", text = "") {
-    localStorage.setItem("resultType",           type);
-    localStorage.setItem("endingTitle",          title);
-    localStorage.setItem("endingText",           text);
-    localStorage.setItem("money",                money);
-    localStorage.setItem("energy",               energy);
-    localStorage.setItem("energyDepletedCount",  energyDepletedCount);
-    localStorage.setItem("targetGoal",           targetGoal);
-    localStorage.setItem("targetScore",          targetScore);
-    localStorage.setItem("sdgScores",            JSON.stringify(sdgScores));
+function saveResult(type) {
+    updateLeaderboard(type);
+    localStorage.setItem("resultType", type);
+    localStorage.setItem("money", money);
+    localStorage.setItem("energy", energy);
+    localStorage.setItem("energyDepletedCount", energyDepletedCount);
+    localStorage.setItem("targetGoal", targetGoal);
+    localStorage.setItem("targetScore", targetScore);
+    localStorage.setItem("sdgScores", JSON.stringify(sdgScores));
     menuModal.classList.remove("active");
     window.location.href = "result.html";
 }
