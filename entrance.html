@@ -90,6 +90,26 @@
                 Top players ranked by average SDG score.
             </p>
 
+            <div class="leaderboard-tabs">
+
+                <button class="leaderboard-tab active" data-category="Environment">
+                    Environment
+                </button>
+
+                <button class="leaderboard-tab" data-category="Society">
+                    Society
+                </button>
+
+                <button class="leaderboard-tab" data-category="Development">
+                    Development
+                </button>
+
+                <button class="leaderboard-tab" data-category="Global">
+                    Global
+                </button>
+
+            </div>
+
             <div class="leaderboard-list" id="leaderboardList">
 
                 <div class="empty-leaderboard">
@@ -120,7 +140,7 @@
     window.addEventListener("scroll", revealSections);
     window.addEventListener("load", revealSections);
   </script>
-  
+
   <script type="module" src="firebase-leaderboard.js"></script>
   <script src="entrance.js"></script>
 
