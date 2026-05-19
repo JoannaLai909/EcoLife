@@ -112,4 +112,10 @@ function renderLeaderboard() {
 
 }
 
-window.addEventListener("load", renderLeaderboard);
+window.addEventListener("load", function() {
+
+    if (window.renderCloudLeaderboard) {
+        window.renderCloudLeaderboard();
+    }
+
+});
