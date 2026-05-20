@@ -989,20 +989,21 @@ function updateLeaderboard(resultType) {
     const selectedCategory =
         localStorage.getItem("selectedCategory") || "Environment";
 
-    const scores =
-        activeGoals.map(goal => sdgScores[goal] || 0);
+    const scores = activeGoals.map(goal => {
+        return Math.min(sdgScores[goal] || 0, MAX_GOAL_SCORE);
+    });
 
     const totalScore =
         scores.reduce((sum, score) => sum + score, 0);
 
     const averageScore =
-        Math.round(totalScore / activeGoals.length);
+        Math.min(
+            MAX_GOAL_SCORE,
+            Math.round(totalScore / activeGoals.length)
+        );
 
     let leaderboard =
         JSON.parse(localStorage.getItem("leaderboard")) || [];
-
-    const existingPlayerIndex =
-        leaderboard.findIndex(player => player.id === currentUserId);
 
     const newRecord = {
         name: currentUserName,
@@ -1013,12 +1014,16 @@ function updateLeaderboard(resultType) {
         date: new Date().toLocaleDateString()
     };
 
+    const existingPlayerIndex =
+        leaderboard.findIndex(player => {
+            return player.id === currentUserId &&
+                   player.category === selectedCategory;
+        });
+
     if (existingPlayerIndex === -1) {
         leaderboard.push(newRecord);
     } else {
-        if (averageScore > leaderboard[existingPlayerIndex].score) {
-            leaderboard[existingPlayerIndex] = newRecord;
-        }
+        leaderboard[existingPlayerIndex] = newRecord;
     }
 
     leaderboard.sort((a, b) => b.score - a.score);
