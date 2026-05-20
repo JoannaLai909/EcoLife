@@ -428,7 +428,7 @@ const environmentEvents = [
         type: "normal",
         title: "柔苡的陽台菜園",
         description:
-            "柔苡想在宿舍陽台種菜，但她連花盆要不要排隊都安排好了。",
+            "柔苡想在宿舍陽台種菜，而且她連花盆要不要排隊都安排好了。",
         choices: [
             {
                 text: "一起種陽台小菜園",
