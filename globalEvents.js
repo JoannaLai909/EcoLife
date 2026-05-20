@@ -152,7 +152,7 @@ const globalEvents = [
         title: "假新聞轉發",
 
         description:
-        "朋友傳來一篇來源不明的國際新聞。",
+        "可云傳來一篇來源不明的國際新聞。",
 
         choices: [
 
@@ -260,7 +260,7 @@ const globalEvents = [
         title: "國際連署活動",
 
         description:
-        "朋友邀你參與國際人權連署。",
+        "Judi 邀你參與國際人權連署。",
 
         choices: [
 
@@ -755,7 +755,7 @@ const globalEvents = [
         title: "國際和平連署",
 
         description:
-        "朋友邀你參與反戰和平連署。",
+        "扇煦邀請你參與反戰和平連署。",
 
         choices: [
 

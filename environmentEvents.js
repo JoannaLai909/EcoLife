@@ -221,10 +221,10 @@ const environmentEvents = [
 
         type: "normal",
 
-        title: "松義霖的咖啡癮",
+        title: "乃辭的咖啡癮",
 
         description:
-        "松義霖問你要不要用內用杯。",
+        "乃辭問你要不要用內用杯。",
 
         choices: [
 
@@ -368,7 +368,7 @@ const environmentEvents = [
         title: "YouBike 競速",
 
         description:
-        "松義霖約你騎 YouBike 去趕早八。",
+        "松宜霖約你騎 YouBike 去趕早八。",
 
         choices: [
 

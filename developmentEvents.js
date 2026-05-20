@@ -260,10 +260,10 @@ const developmentEvents = [
 
         type: "normal",
 
-        title: "昕昕的智慧家電",
+        title: "乃辭的智慧家電",
 
         description:
-        "昕昕想買智慧節電插座。",
+        "乃辭想買智慧節電插座。",
 
         choices: [
 
@@ -1135,7 +1135,7 @@ const developmentEvents = [
         title: "修電腦打工",
 
         description:
-        "同學電腦突然壞掉，問你能不能幫忙修。",
+        "昕昕電腦突然壞掉，問你能不能幫忙修。",
 
         choices: [
 

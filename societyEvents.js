@@ -224,10 +224,10 @@ const societyEvents = [
 
         type: "normal",
 
-        title: "松義霖的志工時數",
+        title: "松宜霖的志工時數",
 
         description:
-        "松義霖問你要不要一起去當課輔志工。",
+        "松宜霖問你要不要一起去當課輔志工。",
 
         choices: [
 
@@ -406,10 +406,10 @@ const societyEvents = [
 
         type: "normal",
 
-        title: "安娜的社團招生",
+        title: "扇煦的社團招生",
 
         description:
-        "安娜的公益社團缺人，她拜託你幫忙招生。",
+        "扇煦的公益社團缺人，她拜託你幫忙招生。",
 
         choices: [
 
@@ -683,7 +683,7 @@ const societyEvents = [
 
         type: "normal",
 
-        title: "師皇家的學習小組",
+        title: "右廷的學習小組",
 
         description:
         "右廷想成立期中考互助讀書會。",
@@ -747,7 +747,7 @@ const societyEvents = [
 
         type: "normal",
 
-        title: "松義霖的急救課",
+        title: "松宜霖的急救課",
 
         description:
         "松宜霖報名了 CPR 急救課，問你要不要一起去。",
