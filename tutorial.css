@@ -24,7 +24,7 @@ body {
 /* TUTORIAL */
 
 .tutorial-scene {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 40px;
 }
