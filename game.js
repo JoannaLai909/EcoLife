@@ -1054,10 +1054,13 @@ async function updateLeaderboard(resultType) {
 //  SAVE RESULT & REDIRECT
 // ─────────────────────────────────────────────
 
-async function saveResult(type) {
+async function saveResult(type, title, text) {
     await updateLeaderboard(type);
 
     localStorage.setItem("resultType", type);
+    localStorage.setItem("endingTitle", title);
+    localStorage.setItem("endingText", text);
+
     localStorage.setItem("money", money);
     localStorage.setItem("energy", energy);
     localStorage.setItem("energyDepletedCount", energyDepletedCount);
