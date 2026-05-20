@@ -26,6 +26,7 @@ const goalColors = {
     goal16: "#00689D", goal17: "#19486A"
 };
 
+
 // ─────────────────────────────────────────────
 //  LOAD EVENTS BY CATEGORY
 // ─────────────────────────────────────────────
@@ -37,8 +38,8 @@ else if (selectedCategory === "Society")      allEvents = [...societyEvents];
 else if (selectedCategory === "Development")  allEvents = [...developmentEvents];
 else if (selectedCategory === "Global")       allEvents = [...globalEvents];
 
-
 allEvents = shuffle(allEvents);
+
 
 // ─────────────────────────────────────────────
 //  GAME STATE
@@ -50,9 +51,10 @@ let money               = 100;
 let energy              = 80;
 let sdgScores           = {};
 let backpack            = [];
-let energyDepletedCount = 0;   // 體力歸零次數（用於精疲力竭結局）
+let energyDepletedCount = 0;
 let midGoalRewarded     = false;
-let hasAdvisorCard      = false; // 顧問卡：可跳過一次選項
+let hasAdvisorCard      = false;
+
 
 // Weekly Goal State
 let currentWeeklyGoal = {
@@ -63,7 +65,8 @@ let currentWeeklyGoal = {
 };
 
 let targetGoal = "";
-let targetScore = 0;
+let targetScore = "";
+
 
 // New Tracking Variables for Endings
 let startTime           = Date.now();
@@ -73,14 +76,20 @@ let rerollCount         = 0;
 let fastChoices         = 0;
 
 const maxActionsPerDay  = 4;
-const maxDays           = 21;   // 總共 21 天
-let MAX_ENERGY          = 80;   // 可被獎勵永久提升
+const maxDays           = 10;
+let MAX_ENERGY          = 80;
+
 
 // ── Queue state ──────────────────────────────
+
 let eventQueue     = [];
 let lastEventTitle = null;
 
-const activeGoals    = categoryGoals[selectedCategory];
+let weeklyGoalStreak = 0;
+let weeklyActionCount = 0;
+
+const activeGoals = categoryGoals[selectedCategory];
+
 
 // ─────────────────────────────────────────────
 //  DOM REFERENCES
@@ -111,6 +120,7 @@ const backpackGrid     = document.getElementById("backpackGrid");
 
 const rerollBtn        = document.getElementById("rerollBtn");
 
+
 // ─────────────────────────────────────────────
 //  UI LISTENERS
 // ─────────────────────────────────────────────
@@ -119,6 +129,7 @@ menuBtn.addEventListener("click", () => menuModal.classList.add("active"));
 closeMenuBtn.addEventListener("click", () => menuModal.classList.remove("active"));
 
 document.getElementById("restartBtn").addEventListener("click", () => location.reload());
+
 document.getElementById("homeBtn").addEventListener("click", () => {
     window.location.href = "entrance.html";
 });
@@ -128,25 +139,32 @@ shopBtn.addEventListener("click", () => {
     renderShop();
     shopOverlay.classList.add("shop-open");
 });
-shopCloseBtn.addEventListener("click", () => shopOverlay.classList.remove("shop-open"));
+
+shopCloseBtn.addEventListener("click", () => {
+    shopOverlay.classList.remove("shop-open");
+});
 
 backpackBtn.addEventListener("click", () => {
     renderBackpack();
     backpackOverlay.classList.add("shop-open");
 });
-backpackCloseBtn.addEventListener("click", () => backpackOverlay.classList.remove("shop-open"));
+
+backpackCloseBtn.addEventListener("click", () => {
+    backpackOverlay.classList.remove("shop-open");
+});
 
 rerollBtn.addEventListener("click", () => {
-    if (money >= 15) {
-        money -= 15;
+    if (money >= 75) {
+        money -= 75;
         rerollCount++;
         loadEvent();
-        showToast("已更換題目 (💰 -15)");
+        showToast("已更換題目 (💰 -75)");
     } else {
         moneyPopup.classList.add("active");
         setTimeout(() => moneyPopup.classList.remove("active"), 1500);
     }
 });
+
 
 // ─────────────────────────────────────────────
 //  SHOP & BACKPACK LOGIC
@@ -155,16 +173,15 @@ rerollBtn.addEventListener("click", () => {
 let pendingItem = null;
 
 const shopItems = [
-    { id: "coffee", name: "熱咖啡", price: 30, energy: 20, desc: "提升 20 體力", icon: "☕" },
-    { id: "energy_drink", name: "提神飲料", price: 50, energy: 40, desc: "提升 40 體力", icon: "🥤" }
+    { id: "coffee", name: "熱咖啡", price: 150, energy: 20, desc: "提升 20 體力", icon: "☕" },
+    { id: "energy_drink", name: "提神飲料", price: 250, energy: 40, desc: "提升 40 體力", icon: "🥤" }
 ];
 
-// Add SDG potions based on category
 activeGoals.forEach(goal => {
     shopItems.push({
         id: `potion_${goal}`,
         name: `${goal.replace("goal", "SDG ")} 藥水`,
-        price: 45,
+        price: 225,
         goalKey: goal,
         desc: `隨機提升 ${goal.replace("goal", "Goal ")} 分數 1~8 分`,
         icon: "🧪"
@@ -173,65 +190,88 @@ activeGoals.forEach(goal => {
 
 function renderShop() {
     shopGrid.innerHTML = "";
+
     shopItems.forEach(item => {
         const card = document.createElement("div");
         card.className = "shop-card";
+
         card.innerHTML = `
             <div style="font-size: 40px; margin-bottom: 10px;">${item.icon}</div>
             <h3>${item.name}</h3>
             <p>${item.desc}</p>
             <div class="price">💰 ${item.price}</div>
         `;
+
         card.addEventListener("click", () => {
             if (money >= item.price) {
                 pendingItem = item;
+
                 buyConfirmTitle.innerText = `購買 ${item.name}`;
                 buyConfirmMessage.innerText = `花費 💰 ${item.price}，您想現在使用還是放入背包？`;
+
                 buyConfirmModal.classList.add("active");
             } else {
                 moneyPopup.classList.add("active");
                 setTimeout(() => moneyPopup.classList.remove("active"), 1500);
             }
         });
+
         shopGrid.appendChild(card);
     });
 }
 
 function useItem(item) {
     let effectMsg = "";
+
     if (item.energy) {
-        const oldEnergy = energy;
-        energy = Math.min(MAX_ENERGY, energy + item.energy);
-        effectMsg = `體力提升了 ${energy - oldEnergy} (目前: ${energy}⚡)`;
+        energy += item.energy;
+        effectMsg = `體力提升了 ${item.energy} (目前: ${energy}⚡)`;
     }
+
     if (item.goalKey) {
-        const gain = (Math.floor(Math.random() * 4) + 1) + (Math.floor(Math.random() * 4) + 1);
+        const gain =
+            (Math.floor(Math.random() * 4) + 1) +
+            (Math.floor(Math.random() * 4) + 1);
+
         sdgScores[item.goalKey] = (sdgScores[item.goalKey] || 0) + gain;
         updateProgress();
-        effectMsg = `${item.goalKey.replace("goal", "Goal ")} 進度提升了 ${gain} (目前: ${sdgScores[item.goalKey]})`;
+
+        effectMsg =
+            `${item.goalKey.replace("goal", "Goal ")} 進度提升了 ${gain} ` +
+            `(目前: ${sdgScores[item.goalKey]})`;
     }
+
     document.getElementById("moneyBox").innerText  = `💰 ${money}`;
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
+
     showToast(`使用了 ${item.name}！\n${effectMsg}`);
 }
 
 function showToast(msg) {
     const toast = document.getElementById("shopToast");
+
     if (!toast) {
         alert(msg);
         return;
     }
+
     toast.innerText = msg;
-    toast.classList.add("active");
-    setTimeout(() => toast.classList.remove("active"), 3000);
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
 }
 
 useNowBtn.addEventListener("click", () => {
     if (pendingItem) {
         money -= pendingItem.price;
+
         useItem(pendingItem);
+
         buyConfirmModal.classList.remove("active");
         shopBalance.innerText = `💰 ${money}`;
+
         pendingItem = null;
     }
 });
@@ -240,9 +280,12 @@ storeInBagBtn.addEventListener("click", () => {
     if (pendingItem) {
         money -= pendingItem.price;
         backpack.push({ ...pendingItem });
+
         buyConfirmModal.classList.remove("active");
         shopBalance.innerText = `💰 ${money}`;
+
         showToast(`已將 ${pendingItem.name} 放入背包`);
+
         pendingItem = null;
     }
 });
@@ -254,27 +297,36 @@ cancelBuyBtn.addEventListener("click", () => {
 
 function renderBackpack() {
     backpackGrid.innerHTML = "";
+
     if (backpack.length === 0) {
-        backpackGrid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; font-size: 20px;'>背包是空的</p>";
+        backpackGrid.innerHTML =
+            "<p style='grid-column: 1/-1; text-align: center; font-size: 20px;'>背包是空的</p>";
         return;
     }
+
     backpack.forEach((item, index) => {
         const card = document.createElement("div");
         card.className = "shop-card";
+
         card.innerHTML = `
             <div style="font-size: 40px; margin-bottom: 10px;">${item.icon}</div>
             <h3>${item.name}</h3>
             <p>${item.desc}</p>
-            <button class="use-item-btn" style="width: 100%; padding: 8px; margin-top: 10px; background: #114bb8; color: white; border: none; border-radius: 8px; cursor: pointer;">使用</button>
+            <button class="use-item-btn" style="width: 100%; padding: 8px; margin-top: 10px; background: #114bb8; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                使用
+            </button>
         `;
+
         card.querySelector(".use-item-btn").addEventListener("click", () => {
             useItem(item);
             backpack.splice(index, 1);
             renderBackpack();
         });
+
         backpackGrid.appendChild(card);
     });
 }
+
 
 // ─────────────────────────────────────────────
 //  UTILITY: FISHER-YATES SHUFFLE
@@ -282,12 +334,15 @@ function renderBackpack() {
 
 function shuffle(arr) {
     const a = [...arr];
+
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [a[i], a[j]] = [a[j], a[i]];
     }
+
     return a;
 }
+
 
 // ─────────────────────────────────────────────
 //  QUEUE-BASED EVENT PICKER
@@ -295,48 +350,137 @@ function shuffle(arr) {
 
 function refillQueue() {
     let newQueue = shuffle(allEvents);
-    if (lastEventTitle && newQueue.length > 1 && newQueue[0].title === lastEventTitle) {
+
+    if (
+        lastEventTitle &&
+        newQueue.length > 1 &&
+        newQueue[0].title === lastEventTitle
+    ) {
         newQueue.push(newQueue.shift());
     }
+
     eventQueue = newQueue;
+}
+
+function eventMatchesWeeklyGoal(event) {
+    if (!event || !currentWeeklyGoal.goal) {
+        return false;
+    }
+
+    if (!event.choices || !Array.isArray(event.choices)) {
+        return false;
+    }
+
+    return event.choices.some(choice => {
+        return choice[currentWeeklyGoal.goal] !== undefined;
+    });
+}
+
+function pickEventFromQueue(conditionFunction) {
+    const candidates = eventQueue.filter(event => {
+        return conditionFunction(event) &&
+               event.title !== lastEventTitle;
+    });
+
+    if (candidates.length === 0) {
+        return null;
+    }
+
+    const selectedEvent =
+        candidates[Math.floor(Math.random() * candidates.length)];
+
+    eventQueue = eventQueue.filter(event => {
+        return event.title !== selectedEvent.title;
+    });
+
+    return selectedEvent;
+}
+
+function getWeeklyGoalChance() {
+    if (weeklyActionCount < 8) {
+        return 0.65;
+    }
+
+    if (weeklyActionCount < 18) {
+        return 0.45;
+    }
+
+    return 0.25;
 }
 
 function getNextEvent() {
     if (eventQueue.length === 0) {
         refillQueue();
     }
-    // 錢太少時，優先從整個題庫找 money 題
+
     if (money <= 80) {
-        let moneyEvents = eventQueue.filter(
-            e => e.type === "money" &&
-            e.title !== lastEventTitle
-        );
-        // 如果目前 queue 沒有 money 題，就從 allEvents 重新找
-        if (moneyEvents.length === 0) {
-            moneyEvents = allEvents.filter(
-                e => e.type === "money" &&
-                e.title !== lastEventTitle
-            );
-        }
-        if (moneyEvents.length > 0) {
-            const randomMoneyEvent =
-                moneyEvents[
-                    Math.floor(Math.random() * moneyEvents.length)
-                ];
-            eventQueue =
-                eventQueue.filter(
-                    e => e.title !== randomMoneyEvent.title
-                );
-            lastEventTitle = randomMoneyEvent.title;
-            return randomMoneyEvent;
+        let moneyEvent = pickEventFromQueue(event => {
+            return event.type === "money";
+        });
 
+        if (!moneyEvent) {
+            const moneyEvents = allEvents.filter(event => {
+                return event.type === "money" &&
+                       event.title !== lastEventTitle;
+            });
+
+            if (moneyEvents.length > 0) {
+                moneyEvent =
+                    moneyEvents[Math.floor(Math.random() * moneyEvents.length)];
+            }
         }
 
+        if (moneyEvent) {
+            lastEventTitle = moneyEvent.title;
+            weeklyGoalStreak = 0;
+            weeklyActionCount++;
+            return moneyEvent;
+        }
     }
-    const event = eventQueue.shift();
-    lastEventTitle = event.title;
-    return event;
+
+    const weeklyChance = getWeeklyGoalChance();
+
+    const shouldPreferWeeklyGoal =
+        Math.random() < weeklyChance &&
+        weeklyGoalStreak < 2;
+
+    if (shouldPreferWeeklyGoal) {
+        const weeklyGoalEvent = pickEventFromQueue(eventMatchesWeeklyGoal);
+
+        if (weeklyGoalEvent) {
+            lastEventTitle = weeklyGoalEvent.title;
+            weeklyGoalStreak++;
+            weeklyActionCount++;
+            return weeklyGoalEvent;
+        }
+    }
+
+    let normalEvent = pickEventFromQueue(event => {
+        return !eventMatchesWeeklyGoal(event);
+    });
+
+    if (!normalEvent) {
+        normalEvent = eventQueue.shift();
+    }
+
+    if (!normalEvent) {
+        refillQueue();
+        normalEvent = eventQueue.shift();
+    }
+
+    lastEventTitle = normalEvent.title;
+
+    if (eventMatchesWeeklyGoal(normalEvent)) {
+        weeklyGoalStreak++;
+    } else {
+        weeklyGoalStreak = 0;
+    }
+
+    weeklyActionCount++;
+
+    return normalEvent;
 }
+
 
 // ─────────────────────────────────────────────
 //  LOAD & DISPLAY AN EVENT
@@ -345,9 +489,14 @@ function getNextEvent() {
 function loadEvent() {
     const event = getNextEvent();
 
+    if (!event) {
+        endGameByNoMoreEvents();
+        return;
+    }
+
     document.getElementById("goalBox").innerText =
         `${currentWeeklyGoal.goal.replace("goal", "Goal ")} Score ≥ ${currentWeeklyGoal.target}`;
-    document.getElementById("dayBox").innerText    = `${day}-${actionsToday + 1}`;
+    document.getElementById("dayBox").innerText    = `Day ${day}-${actionsToday + 1}`;
     document.getElementById("moneyBox").innerText  = `💰 ${money}`;
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
@@ -357,20 +506,22 @@ function loadEvent() {
     const choicesSection = document.getElementById("choicesSection");
     choicesSection.innerHTML = "";
 
-    // 顧問卡按鈕（如果持有的話顯示）
     if (hasAdvisorCard) {
         const advisorBtn = document.createElement("button");
         advisorBtn.id = "advisorCardBtn";
         advisorBtn.innerText = "🃏 使用顧問卡（跳過此題）";
+
         advisorBtn.addEventListener("click", () => {
             hasAdvisorCard = false;
             actionsToday++;
+
             if (actionsToday >= maxActionsPerDay) {
                 nextDay();
             } else {
                 loadEvent();
             }
         });
+
         choicesSection.appendChild(advisorBtn);
     }
 
@@ -385,24 +536,30 @@ function loadEvent() {
                 ⚡ ${choice.energy || 0}
             </div>
         `;
+
         card.addEventListener("click", () => handleChoice(choice));
+
         choicesSection.appendChild(card);
     });
 }
+
 
 // ─────────────────────────────────────────────
 //  HANDLE A CHOICE
 // ─────────────────────────────────────────────
 
 function handleChoice(choice) {
-    // Tracking for endings
     const currentTime = Date.now();
     const idleGap = currentTime - lastActionTime;
-    if (idleGap > maxIdleGap) maxIdleGap = idleGap;
+
+    if (idleGap > maxIdleGap) {
+        maxIdleGap = idleGap;
+    }
 
     if (currentTime - lastActionTime < 1000) {
         fastChoices++;
     }
+
     lastActionTime = currentTime;
 
     const moneyChange = choice.money ?? 0;
@@ -418,6 +575,7 @@ function handleChoice(choice) {
     energy = Math.max(0, energy + energyChange);
 
     const deltas = {};
+
     for (const key in choice) {
         if (key.startsWith("goal")) {
             sdgScores[key] = (sdgScores[key] || 0) + choice[key];
@@ -443,6 +601,7 @@ function handleChoice(choice) {
     }
 }
 
+
 // ─────────────────────────────────────────────
 //  PROGRESS BARS
 // ─────────────────────────────────────────────
@@ -454,22 +613,23 @@ function updateProgress(deltas = {}) {
         const deltaSpan = document.getElementById(`${goal}Delta`);
 
         if (fill) {
-            const score = Math.min(sdgScores[goal] || 0, 250);
-            const percent = (score / 250) * 100;
+            const score = Math.min(sdgScores[goal] || 0, 100);
+            const percent = (score / 100) * 100;
             fill.style.width = `${percent}%`;
+
             if (text) {
-                text.innerText = `${score} / 250`;
+                text.innerText = `${score} / 100`;
             }
         }
 
         if (deltaSpan && deltas[goal]) {
             const val = deltas[goal];
             const sign = val > 0 ? "+" : "";
+
             deltaSpan.innerText = `${sign}${val}`;
             deltaSpan.style.color = val > 0 ? "#2e7d32" : "#d32f2f";
             deltaSpan.style.opacity = "1";
-            
-            // Fade out after a moment
+
             setTimeout(() => {
                 deltaSpan.style.opacity = "0";
             }, 1500);
@@ -477,21 +637,25 @@ function updateProgress(deltas = {}) {
     });
 }
 
+
 // ─────────────────────────────────────────────
 //  WEEKLY GOAL LOGIC
 // ─────────────────────────────────────────────
 
 function setWeeklyGoal(week) {
     currentWeeklyGoal.week = week;
+
     const goalIndex = Math.floor(Math.random() * activeGoals.length);
     currentWeeklyGoal.goal = activeGoals[goalIndex];
-    
-    if (week === 1) currentWeeklyGoal.target = 50;
-    else if (week === 2) currentWeeklyGoal.target = 160;
-    else if (week === 3) currentWeeklyGoal.target = 225;
+
+    if (week === 1) currentWeeklyGoal.target = 30;
+    else if (week === 2) currentWeeklyGoal.target = 80;
 
     currentWeeklyGoal.achieved = false;
-    
+
+    weeklyGoalStreak = 0;
+    weeklyActionCount = 0;
+
     targetGoal = currentWeeklyGoal.goal;
     targetScore = currentWeeklyGoal.target;
 
@@ -500,8 +664,11 @@ function setWeeklyGoal(week) {
 
 function showWeeklyGoalModal() {
     const modal = document.getElementById("dailyModal");
-    if (!modal) return;
-    
+
+    if (!modal) {
+        return;
+    }
+
     const title = document.getElementById("dailyModalTitle");
     const msg = document.getElementById("dailyModalMessage");
     const details = document.getElementById("goalDetails");
@@ -509,41 +676,50 @@ function showWeeklyGoalModal() {
     const goalDesc = document.getElementById("goalDescription");
     const rewardSection = document.getElementById("rewardSection");
 
-    title.innerText = `第 ${currentWeeklyGoal.week} 週目標`;
-    msg.innerText = "本週你的努力方向是（達標會有小驚喜喔！）：";
+    title.innerText = `第 ${currentWeeklyGoal.week === 1 ? '一' : '二'} 階段目標`;
+    msg.innerText = "本階段你的努力方向是（達標會有小驚喜喔！）：";
     details.style.display = "block";
     goalTitle.innerText = `${currentWeeklyGoal.goal.replace("goal", "Goal ")}`;
-    goalDesc.innerText = `本週結束前，請將此項進度提升至 ${currentWeeklyGoal.target}。`;
+    goalDesc.innerText = `階段結束前，請將此項進度提升至 ${currentWeeklyGoal.target}。`;
     rewardSection.style.display = "none";
 
     modal.classList.add("active");
 
     const closeBtn = document.getElementById("closeDailyBtn");
+
     const nextStep = () => {
         modal.classList.remove("active");
         closeBtn.removeEventListener("click", nextStep);
-        loadEvent(); 
+        loadEvent();
     };
+
     closeBtn.addEventListener("click", nextStep);
 }
 
 function checkWeeklyGoal(week) {
     const goalScore = sdgScores[currentWeeklyGoal.goal] || 0;
     const success = goalScore >= currentWeeklyGoal.target;
-    
+
     let rewardMsg = "";
+
     if (success) {
         const rewardType = Math.random() > 0.5 ? "money" : "stat";
+
         if (rewardType === "money") {
             const amount = 30 + Math.floor(Math.random() * 21);
             money += amount;
             rewardMsg = `💰 獲得獎勵金：${amount}`;
         } else {
-            const randomGoal = activeGoals[Math.floor(Math.random() * activeGoals.length)];
+            const randomGoal =
+                activeGoals[Math.floor(Math.random() * activeGoals.length)];
+
             const amount = 10 + Math.floor(Math.random() * 6);
+
             sdgScores[randomGoal] = (sdgScores[randomGoal] || 0) + amount;
             updateProgress();
-            rewardMsg = `📈 ${randomGoal.replace("goal", "Goal ")} 進度提升了 ${amount}`;
+
+            rewardMsg =
+                `📈 ${randomGoal.replace("goal", "Goal ")} 進度提升了 ${amount}`;
         }
     }
 
@@ -554,33 +730,42 @@ function checkWeeklyGoal(week) {
     const rewardSection = document.getElementById("rewardSection");
     const rewardText = document.getElementById("rewardMessage");
 
-    title.innerText = `第 ${week} 週結算`;
+    title.innerText = `第 ${week === 1 ? '一' : '二'} 階段結算`;
+
     if (success) {
-        msg.innerText = "🎉 恭喜！你達成了本週目標！";
+        msg.innerText = "🎉 恭喜！你達成了階段目標！";
         rewardSection.style.display = "block";
         rewardText.innerText = rewardMsg;
     } else {
-        msg.innerText = "❌ 很遺憾，你未能達成完本週目標。";
+        msg.innerText = "❌ 很遺憾，你未能達成階段目標。";
         rewardSection.style.display = "none";
     }
+
     details.style.display = "none";
 
     document.getElementById("moneyBox").innerText  = `💰 ${money}`;
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
     modal.classList.add("active");
-    
+
     const closeBtn = document.getElementById("closeDailyBtn");
+
     const nextStep = () => {
         modal.classList.remove("active");
         closeBtn.removeEventListener("click", nextStep);
-        if (day === 8 && week === 1) setWeeklyGoal(2);
-        else if (day === 15 && week === 2) setWeeklyGoal(3);
-        else if (day > maxDays && week === 3) determineEnding();
-        else loadEvent();
+
+        if (day === 6 && week === 1) {
+            setWeeklyGoal(2);
+        } else if (day > maxDays && week === 2) {
+            determineEnding();
+        } else {
+            loadEvent();
+        }
     };
+
     closeBtn.addEventListener("click", nextStep);
 }
+
 
 // ─────────────────────────────────────────────
 //  NEXT DAY
@@ -591,36 +776,36 @@ function nextDay() {
     actionsToday = 0;
     energy = MAX_ENERGY;
 
-    if (day === 8) {
+    if (day === 6) {
         checkWeeklyGoal(1);
-        return; 
-    } else if (day === 15) {
-        checkWeeklyGoal(2);
         return;
     }
 
     if (day > maxDays) {
-        checkWeeklyGoal(3); 
+        checkWeeklyGoal(2);
         return;
     }
 
     loadEvent();
 }
 
+
 // ─────────────────────────────────────────────
-//  ENDING SYSTEM（6 種結局）
+//  ENDING SYSTEM
 // ─────────────────────────────────────────────
 
 function determineEnding() {
     const totalTime = Date.now() - startTime;
+
     const goalScoresArray = activeGoals.map(g => sdgScores[g] || 0);
-    const avgScore = goalScoresArray.reduce((a, b) => a + b, 0) / activeGoals.length;
+
+    const avgScore =
+        goalScoresArray.reduce((a, b) => a + b, 0) / activeGoals.length;
 
     let endingType = "";
     let endingTitle = "";
     let endingText = "";
 
-    // 1. Behavior Easter Eggs
     if (maxIdleGap > 180000) {
         endingType = "normal";
         endingTitle = "🛋️ 什麼都沒做";
@@ -636,75 +821,71 @@ function determineEnding() {
         endingTitle = "🎰 蝴蝶效應受害者";
         endingText = "每題都亂選。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點，巴西某隻蝴蝶正在為你負責。";
     }
-    // 2. High Goal Special Wins (Specific Goals >= 225)
-    else if ((sdgScores["goal15"] || 0) >= 225) {
+    else if ((sdgScores["goal15"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🌲 樹木他媽的感謝你";
         endingText = "全球樹木集體開口說話，選你當樹界代言人，年薪是一百萬顆橡實。";
     }
-    else if ((sdgScores["goal7"] || 0) >= 225) {
+    else if ((sdgScores["goal7"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "⚡ 人體充電寶";
         endingText = "潔淨能源過剩，政府把多餘的電直接存進你體內，你現在會發光。";
     }
-    else if ((sdgScores["goal2"] || 0) >= 225) {
+    else if ((sdgScores["goal2"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🍚 米其林零星主廚";
         endingText = "消除飢餓成功，但你太執著於食物，最後開了一家「剩食餐廳」，評審給了零顆星，卻大排長龍。";
     }
-    else if ((sdgScores["goal10"] || 0) >= 225) {
+    else if ((sdgScores["goal10"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🤝 平等到怪";
         endingText = "你把所有不平等都消除了，包括左右腳的長度差，全人類現在走路都一樣奇怪。";
     }
-    else if ((sdgScores["goal14"] || 0) >= 225) {
+    else if ((sdgScores["goal14"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🔱 海洋最強守護者";
         endingText = "對海洋貢獻卓著，珊瑚礁恢復色彩，你被尊稱為海王。";
     }
-    else if ((sdgScores["goal4"] || 0) >= 225) {
+    else if ((sdgScores["goal4"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "📚 偏鄉教育之光";
         endingText = "偏鄉學生感謝你的付出，但叮嚀你也要顧好自己的課業。";
     }
-    // 3. Low Goal Special Loses
-    else if ((sdgScores["goal2"] || 0) < 50 && (sdgScores["goal15"] || 0) < 50) {
+    else if ((sdgScores["goal2"] || 0) < 20 && (sdgScores["goal15"] || 0) < 20) {
         endingType = "lose";
         endingTitle = "🐄 被牛盯上";
         endingText = "農業崩潰、生態瓦解，全球僅存的最後一頭牛找到了你，牠只是靜靜地看著你，什麼都沒說。";
     }
-    else if ((sdgScores["goal13"] || 0) < 25) {
+    else if ((sdgScores["goal13"] || 0) < 10) {
         endingType = "lose";
         endingTitle = "🐧 南極移民";
         endingText = "地球太熱了，你被迫搬去南極，和企鵝合租，牠不分攤水電費。";
     }
-    else if ((sdgScores["goal14"] || 0) < 25) {
+    else if ((sdgScores["goal14"] || 0) < 10) {
         endingType = "lose";
         endingTitle = "🐟 變成魚";
         endingText = "海洋生態崩潰，宇宙決定讓你親身體驗，你現在是一條吳郭魚。";
     }
-    // 4. Average Score Based Endings (User Requested)
-    else if (avgScore < 75) {
+    else if (avgScore < 30) {
         endingType = "lose";
         endingTitle = "🛸 外星人綁架結局";
-        endingText = "因為對地球問題太消極，平均分數低於 75 分，你被外星人抓走進行再教育。";
+        endingText = "因為對地球問題太消極，平均分數低於 30 分，你被外星人抓走進行再教育。";
     }
-    else if (avgScore > 200) {
+    else if (avgScore > 80) {
         endingType = "perfect";
         endingTitle = "🏆 永續發展領袖";
-        endingText = "平均分數高於 200 分！各面向平衡發展，你成為了社區的領袖。";
+        endingText = "平均分數高於 80 分！各面向平衡發展，你成為了社區的領袖。";
     }
     else {
         endingType = "normal";
         endingTitle = "🌟 冒險結束";
-        endingText = "一段平凡但圓滿的旅程（平均分在 75～200 之間）。";
+        endingText = "一段平凡但圓滿的旅程（平均分在 30～80 之間）。";
     }
 
     saveResult(endingType, endingTitle, endingText);
 }
 
 function updateLeaderboard(resultType) {
-
     const currentUserName =
         localStorage.getItem("currentUserName") || "Unknown Player";
 
@@ -739,15 +920,11 @@ function updateLeaderboard(resultType) {
     };
 
     if (existingPlayerIndex === -1) {
-
         leaderboard.push(newRecord);
-
     } else {
-
         if (averageScore > leaderboard[existingPlayerIndex].score) {
             leaderboard[existingPlayerIndex] = newRecord;
         }
-
     }
 
     leaderboard.sort((a, b) => b.score - a.score);
@@ -757,50 +934,13 @@ function updateLeaderboard(resultType) {
     localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 }
 
+
 // ─────────────────────────────────────────────
 //  SAVE RESULT & REDIRECT
 // ─────────────────────────────────────────────
-async function saveScoreToCloud(resultType) {
 
-    if (!window.updateCloudLeaderboard) {
-        return;
-    }
-
-    const currentUserName =
-        localStorage.getItem("currentUserName") || "Unknown Player";
-
-    const currentUserId =
-        localStorage.getItem("currentUserId") || "Unknown ID";
-
-    const category =
-        localStorage.getItem("selectedCategory") || selectedCategory;
-
-    const scores =
-        activeGoals.map(goal =>
-            Math.max(0, sdgScores[goal] || 0)
-        );
-
-    const totalScore =
-        scores.reduce((sum, score) => sum + score, 0);
-
-    const averageScore =
-        Math.round(totalScore / activeGoals.length);
-
-    const playerData = {
-        name: currentUserName,
-        id: currentUserId,
-        category: category,
-        score: averageScore,
-        result: resultType,
-        date: new Date().toLocaleDateString()
-    };
-
-    await window.updateCloudLeaderboard(playerData);
-
-}
-
-async function saveResult(type) {
-    await saveScoreToCloud(type);
+function saveResult(type) {
+    updateLeaderboard(type);
     localStorage.setItem("resultType", type);
     localStorage.setItem("money", money);
     localStorage.setItem("energy", energy);
@@ -809,8 +949,10 @@ async function saveResult(type) {
     localStorage.setItem("targetScore", targetScore);
     localStorage.setItem("sdgScores", JSON.stringify(sdgScores));
     menuModal.classList.remove("active");
+
     window.location.href = "result.html";
 }
+
 
 // ─────────────────────────────────────────────
 //  RENDER PROGRESS BARS
@@ -822,18 +964,22 @@ function endGameByNoMoreEvents() {
 
 function renderProgressBars() {
     const progressList = document.getElementById("progressList");
+
     progressList.innerHTML = "";
 
     activeGoals.forEach(goal => {
-        const score = Math.min(sdgScores[goal] || 0, 250);
-        const percent = (score / 250) * 100;
+        const score = Math.min(sdgScores[goal] || 0, 100);
+        const percent = (score / 100) * 100;
+        const goalNumber = goal.replace("goal", "");
+
         progressList.innerHTML += `
-            <div class="progress-item" style="position: relative;">
+            <div class="progress-item clickable-progress-goal" data-goal="${goalNumber}" style="position: relative;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>${goal.replace("goal", "Goal ")}</span>
+
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span id="${goal}Delta" style="font-weight: bold; font-size: 14px; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateY(5px);"></span>
-                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 250</span>
+                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 100</span>
                     </div>
                 </div>
 
@@ -843,7 +989,228 @@ function renderProgressBars() {
             </div>
         `;
     });
+
+    bindProgressGoalClickEvents();
 }
+
+
+// ─────────────────────────────────────────────
+//  GOAL INFO POPUP
+// ─────────────────────────────────────────────
+
+const gameSdgData = [
+    {
+        id: 1,
+        title: "No Poverty",
+        description: "End poverty in all its forms everywhere. Ensure equal rights to economic resources, basic services, and social protection.",
+        color: "#E5243B"
+    },
+    {
+        id: 2,
+        title: "Zero Hunger",
+        description: "End hunger, achieve food security and improved nutrition, and promote sustainable agriculture for all.",
+        color: "#DDA63A"
+    },
+    {
+        id: 3,
+        title: "Good Health and Well-Being",
+        description: "Ensure healthy lives and promote well-being for all at all ages, reducing mortality and ending epidemics.",
+        color: "#4C9F38"
+    },
+    {
+        id: 4,
+        title: "Quality Education",
+        description: "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.",
+        color: "#C5192D"
+    },
+    {
+        id: 5,
+        title: "Gender Equality",
+        description: "Achieve gender equality and empower all women and girls by eliminating discrimination and violence.",
+        color: "#FF3A21"
+    },
+    {
+        id: 6,
+        title: "Clean Water and Sanitation",
+        description: "Ensure availability and sustainable management of water and sanitation for all people worldwide.",
+        color: "#26BDE2"
+    },
+    {
+        id: 7,
+        title: "Affordable and Clean Energy",
+        description: "Ensure access to affordable, reliable, sustainable, and modern energy for all globally.",
+        color: "#FCC30B"
+    },
+    {
+        id: 8,
+        title: "Decent Work and Economic Growth",
+        description: "Promote sustained, inclusive, and sustainable economic growth, full employment, and decent work for all.",
+        color: "#A21942"
+    },
+    {
+        id: 9,
+        title: "Industry, Innovation and Infrastructure",
+        description: "Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.",
+        color: "#FD6925"
+    },
+    {
+        id: 10,
+        title: "Reduced Inequalities",
+        description: "Reduce inequality within and among countries by promoting social, economic, and political inclusion.",
+        color: "#DD1367"
+    },
+    {
+        id: 11,
+        title: "Sustainable Cities and Communities",
+        description: "Make cities and human settlements inclusive, safe, resilient, and sustainable for all inhabitants.",
+        color: "#FD9D24"
+    },
+    {
+        id: 12,
+        title: "Responsible Consumption and Production",
+        description: "Ensure sustainable consumption and production patterns through efficient resource use and waste reduction.",
+        color: "#BF8B2E"
+    },
+    {
+        id: 13,
+        title: "Climate Action",
+        description: "Take urgent action to combat climate change and its impacts by strengthening resilience and awareness.",
+        color: "#3F7E44"
+    },
+    {
+        id: 14,
+        title: "Life Below Water",
+        description: "Conserve and sustainably use the oceans, seas, and marine resources for sustainable development.",
+        color: "#0A97D9"
+    },
+    {
+        id: 15,
+        title: "Life on Land",
+        description: "Protect, restore, and promote sustainable use of terrestrial ecosystems and halt biodiversity loss.",
+        color: "#56C02B"
+    },
+    {
+        id: 16,
+        title: "Peace, Justice and Strong Institutions",
+        description: "Promote peaceful and inclusive societies, provide access to justice, and build effective institutions.",
+        color: "#00689D"
+    },
+    {
+        id: 17,
+        title: "Partnerships for the Goals",
+        description: "Strengthen the means of implementation and revitalize the global partnership for sustainable development.",
+        color: "#19486A"
+    }
+];
+
+function getCurrentGoalNumber() {
+    const goalBox = document.getElementById("goalBox");
+
+    if (!goalBox) {
+        return null;
+    }
+
+    const goalText = goalBox.innerText;
+    const match = goalText.match(/Goal\s*(\d+)/);
+
+    if (match) {
+        return Number(match[1]);
+    }
+
+    return null;
+}
+
+function showGoalPopupByNumber(goalNumber) {
+    const goal = gameSdgData.find(item => item.id === Number(goalNumber));
+
+    if (!goal) {
+        return;
+    }
+
+    const goalPopup = document.getElementById("goalPopup");
+    const goalPopupNumber = document.getElementById("goalPopupNumber");
+    const goalPopupTitle = document.getElementById("goalPopupTitle");
+    const goalPopupSub = document.getElementById("goalPopupSub");
+    const goalPopupDesc = document.getElementById("goalPopupDesc");
+
+    if (
+        !goalPopup ||
+        !goalPopupNumber ||
+        !goalPopupTitle ||
+        !goalPopupSub ||
+        !goalPopupDesc
+    ) {
+        return;
+    }
+
+    goalPopupNumber.innerText = goal.id;
+    goalPopupTitle.innerText = `Goal ${goal.id}`;
+    goalPopupSub.innerText = goal.title;
+    goalPopupDesc.innerText = goal.description;
+
+    goalPopupNumber.style.background = goal.color;
+
+    goalPopup.classList.add("active");
+}
+
+function showCurrentWeeklyGoalPopup() {
+    const currentGoalNumber = getCurrentGoalNumber();
+
+    if (!currentGoalNumber) {
+        return;
+    }
+
+    showGoalPopupByNumber(currentGoalNumber);
+}
+
+function closeGoalPopup() {
+    const goalPopup = document.getElementById("goalPopup");
+
+    if (goalPopup) {
+        goalPopup.classList.remove("active");
+    }
+}
+
+function bindProgressGoalClickEvents() {
+    const progressGoalItems = document.querySelectorAll(".clickable-progress-goal");
+
+    progressGoalItems.forEach(function (item) {
+        item.addEventListener("click", function (event) {
+            event.stopPropagation();
+
+            const goalNumber = item.dataset.goal;
+
+            showGoalPopupByNumber(goalNumber);
+        });
+    });
+}
+
+const goalBoxElement = document.getElementById("goalBox");
+const goalPopupElement = document.getElementById("goalPopup");
+const closeGoalPopupButton = document.getElementById("closeGoalPopupBtn");
+
+if (goalBoxElement) {
+    goalBoxElement.addEventListener("click", function (event) {
+        event.stopPropagation();
+        showCurrentWeeklyGoalPopup();
+    });
+}
+
+if (closeGoalPopupButton) {
+    closeGoalPopupButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        closeGoalPopup();
+    });
+}
+
+if (goalPopupElement) {
+    goalPopupElement.addEventListener("click", function (event) {
+        if (event.target === goalPopupElement) {
+            closeGoalPopup();
+        }
+    });
+}
+
 
 // ─────────────────────────────────────────────
 //  INIT
@@ -852,5 +1219,4 @@ function renderProgressBars() {
 renderProgressBars();
 refillQueue();
 updateProgress();
-// Initialize first week - this will call showWeeklyGoalModal and then loadEvent
 setWeeklyGoal(1);

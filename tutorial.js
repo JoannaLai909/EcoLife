@@ -32,7 +32,7 @@ const tutorialFinishedKey = "tutorialFinished_" + currentUserId;
 
 /* PAGE INITIAL STATE */
 
-window.addEventListener("load", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const tutorialFinished = localStorage.getItem(tutorialFinishedKey);
 
     if (tutorialFinished === "true") {
@@ -57,7 +57,7 @@ function showCategorySection() {
     tutorialCard.style.display = "none";
     categoryContainer.style.display = "block";
 
-    categorySubtitle.innerText = 
+    categorySubtitle.innerText =
         "Welcome, " + currentUserName + "! Choose your SDG journey.";
 }
 
