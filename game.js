@@ -74,11 +74,15 @@ let lastActionTime      = Date.now();
 let maxIdleGap          = 0;
 let rerollCount         = 0;
 let fastChoices         = 0;
+let acceptedChoiceCount = 0;
 
 const maxActionsPerDay  = 4;
 const maxDays           = 10;
 let MAX_ENERGY          = 80;
 const MAX_GOAL_SCORE    = 100;
+
+const IDLE_ENDING_LIMIT = 600000; // 10 minutes
+const FAST_CHOICE_LIMIT = 20;
 
 
 // ── Queue state ──────────────────────────────
@@ -563,6 +567,9 @@ function loadEvent() {
         return;
     }
 
+    // 每一題出現時，才開始計算玩家反應時間
+    lastActionTime = Date.now();
+
     document.getElementById("goalBox").innerText =
         `${currentWeeklyGoal.goal.replace("goal", "Goal ")} Score ≥ ${currentWeeklyGoal.target}`;
     document.getElementById("dayBox").innerText    = `Day ${day}-${actionsToday + 1}`;
@@ -625,7 +632,7 @@ function handleChoice(choice) {
         maxIdleGap = idleGap;
     }
 
-    if (currentTime - lastActionTime < 1000) {
+    if (idleGap < 1000) {
         fastChoices++;
     }
 
@@ -639,6 +646,8 @@ function handleChoice(choice) {
         setTimeout(() => moneyPopup.classList.remove("active"), 1500);
         return;
     }
+
+    acceptedChoiceCount++;
 
     money  = Math.max(0, money + moneyChange);
     energy = Math.max(0, energy + energyChange);
@@ -897,20 +906,20 @@ function determineEnding() {
     let endingTitle = "";
     let endingText = "";
 
-    if (maxIdleGap > 180000) {
+    if (acceptedChoiceCount <= 2 && totalTime > IDLE_ENDING_LIMIT) {
         endingType = "normal";
         endingTitle = "🛋️ 什麼都沒做";
-        endingText = "系統偵測到你在發呆，判定你已經進入「冥想狀態」，頒給你「最佳靜態環保行動獎」，因為你沒有消耗任何能源。";
+        endingText = "系統偵測到你幾乎沒有進行任何選擇，判定你進入了「冥想狀態」，頒給你「最佳靜態環保行動獎」。";
+    }
+    else if (fastChoices >= FAST_CHOICE_LIMIT || rerollCount > 15) {
+        endingType = "normal";
+        endingTitle = "🎰 蝴蝶效應受害者";
+        endingText = "你幾乎每題都快速決定。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點，巴西某隻蝴蝶正在為你負責。";
     }
     else if (totalTime < 60000) {
         endingType = "win";
         endingTitle = "🕰️ 速通傳說";
         endingText = "你跑得太快，SDGs 還沒反應過來，聯合國決定讓你去當下一屆奧運火炬手，項目是「永續跑步」。";
-    }
-    else if (fastChoices > 50 || rerollCount > 15) {
-        endingType = "normal";
-        endingTitle = "🎰 蝴蝶效應受害者";
-        endingText = "每題都亂選。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點，巴西某隻蝴蝶正在為你負責。";
     }
     else if ((sdgScores["goal15"] || 0) >= 90) {
         endingType = "win";
