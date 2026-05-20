@@ -76,20 +76,15 @@ let rerollCount         = 0;
 let fastChoices         = 0;
 
 const maxActionsPerDay  = 4;
-const maxDays           = 10;   // 總共 10 天
-let MAX_ENERGY          = 80;   // 可被獎勵永久提升
+const maxDays           = 10;
+let MAX_ENERGY          = 80;
+
 
 // ── Queue state ──────────────────────────────
 
 let eventQueue     = [];
 let lastEventTitle = null;
 
-/*
-  控制當週目標題目的出現節奏。
-  目的：
-  1. 讓當週目標題目比較早出現
-  2. 避免連續太多題都是同一個 Goal
-*/
 let weeklyGoalStreak = 0;
 let weeklyActionCount = 0;
 
@@ -261,11 +256,6 @@ function showToast(msg) {
     }
 
     toast.innerText = msg;
-
-    /*
-      你的 CSS 是 .shop-toast.show，
-      所以這裡要用 show，不要用 active。
-    */
     toast.classList.add("show");
 
     setTimeout(() => {
@@ -372,11 +362,6 @@ function refillQueue() {
     eventQueue = newQueue;
 }
 
-/*
-  判斷某一題是否與「當週目標」有關。
-  例如本週是 goal3，只要某個 choice 裡面有 goal3 加減分，
-  這題就算是 goal3 相關題。
-*/
 function eventMatchesWeeklyGoal(event) {
     if (!event || !currentWeeklyGoal.goal) {
         return false;
@@ -391,10 +376,6 @@ function eventMatchesWeeklyGoal(event) {
     });
 }
 
-/*
-  從 eventQueue 裡面挑出符合條件的題目。
-  挑到後會從 queue 裡移除，避免同一輪一直重複。
-*/
 function pickEventFromQueue(conditionFunction) {
     const candidates = eventQueue.filter(event => {
         return conditionFunction(event) &&
@@ -415,14 +396,6 @@ function pickEventFromQueue(conditionFunction) {
     return selectedEvent;
 }
 
-/*
-  控制當週目標題目的出現機率。
-  一週 7 天，每天 4 題，所以一週約 28 題。
-
-  前 8 題：比較高機率出現當週目標題
-  中間 10 題：中等機率
-  後面題目：降低機率，避免太集中
-*/
 function getWeeklyGoalChance() {
     if (weeklyActionCount < 8) {
         return 0.65;
@@ -440,10 +413,6 @@ function getNextEvent() {
         refillQueue();
     }
 
-    /*
-      錢太少時，優先出現 money 題。
-      這個優先權比當週目標高，避免玩家因為錢太少卡住。
-    */
     if (money <= 80) {
         let moneyEvent = pickEventFromQueue(event => {
             return event.type === "money";
@@ -469,10 +438,6 @@ function getNextEvent() {
         }
     }
 
-    /*
-      優先挑當週目標相關題，但最多連續出現 2 題。
-      這樣可以讓目標題比較早出現，但不會太集中。
-    */
     const weeklyChance = getWeeklyGoalChance();
 
     const shouldPreferWeeklyGoal =
@@ -490,24 +455,14 @@ function getNextEvent() {
         }
     }
 
-    /*
-      一般題目：
-      先刻意挑「非當週目標題」，讓題目保持混合。
-    */
     let normalEvent = pickEventFromQueue(event => {
         return !eventMatchesWeeklyGoal(event);
     });
 
-    /*
-      如果非當週目標題都沒有了，就退回一般 queue。
-    */
     if (!normalEvent) {
         normalEvent = eventQueue.shift();
     }
 
-    /*
-      如果 queue 真的空了，就重新補題。
-    */
     if (!normalEvent) {
         refillQueue();
         normalEvent = eventQueue.shift();
@@ -658,13 +613,12 @@ function updateProgress(deltas = {}) {
         const deltaSpan = document.getElementById(`${goal}Delta`);
 
         if (fill) {
-            const score = Math.min(sdgScores[goal] || 0, 1000);
-            const percent = (score / 1000) * 100;
-
+            const score = Math.min(sdgScores[goal] || 0, 100);
+            const percent = (score / 100) * 100;
             fill.style.width = `${percent}%`;
 
             if (text) {
-                text.innerText = `${score} / 1000`;
+                text.innerText = `${score} / 100`;
             }
         }
 
@@ -683,6 +637,7 @@ function updateProgress(deltas = {}) {
     });
 }
 
+
 // ─────────────────────────────────────────────
 //  WEEKLY GOAL LOGIC
 // ─────────────────────────────────────────────
@@ -692,16 +647,12 @@ function setWeeklyGoal(week) {
 
     const goalIndex = Math.floor(Math.random() * activeGoals.length);
     currentWeeklyGoal.goal = activeGoals[goalIndex];
-    
+
     if (week === 1) currentWeeklyGoal.target = 30;
     else if (week === 2) currentWeeklyGoal.target = 80;
 
     currentWeeklyGoal.achieved = false;
 
-    /*
-      每一週開始時，重置當週目標題目的出現控制。
-      不然第二週、第三週會沿用上一週的出題計數。
-    */
     weeklyGoalStreak = 0;
     weeklyActionCount = 0;
 
@@ -780,6 +731,7 @@ function checkWeeklyGoal(week) {
     const rewardText = document.getElementById("rewardMessage");
 
     title.innerText = `第 ${week === 1 ? '一' : '二'} 階段結算`;
+
     if (success) {
         msg.innerText = "🎉 恭喜！你達成了階段目標！";
         rewardSection.style.display = "block";
@@ -801,9 +753,14 @@ function checkWeeklyGoal(week) {
     const nextStep = () => {
         modal.classList.remove("active");
         closeBtn.removeEventListener("click", nextStep);
-        if (day === 6 && week === 1) setWeeklyGoal(2);
-        else if (day > maxDays && week === 2) determineEnding();
-        else loadEvent();
+
+        if (day === 6 && week === 1) {
+            setWeeklyGoal(2);
+        } else if (day > maxDays && week === 2) {
+            determineEnding();
+        } else {
+            loadEvent();
+        }
     };
 
     closeBtn.addEventListener("click", nextStep);
@@ -821,11 +778,11 @@ function nextDay() {
 
     if (day === 6) {
         checkWeeklyGoal(1);
-        return; 
+        return;
     }
 
     if (day > maxDays) {
-        checkWeeklyGoal(2); 
+        checkWeeklyGoal(2);
         return;
     }
 
@@ -864,7 +821,6 @@ function determineEnding() {
         endingTitle = "🎰 蝴蝶效應受害者";
         endingText = "每題都亂選。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點，巴西某隻蝴蝶正在為你負責。";
     }
-    // 2. High Goal Special Wins (Specific Goals >= 90)
     else if ((sdgScores["goal15"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🌲 樹木他媽的感謝你";
@@ -895,7 +851,6 @@ function determineEnding() {
         endingTitle = "📚 偏鄉教育之光";
         endingText = "偏鄉學生感謝你的付出，但叮嚀你也要顧好自己的課業。";
     }
-    // 3. Low Goal Special Loses (Specific Goals < 20)
     else if ((sdgScores["goal2"] || 0) < 20 && (sdgScores["goal15"] || 0) < 20) {
         endingType = "lose";
         endingTitle = "🐄 被牛盯上";
@@ -911,7 +866,6 @@ function determineEnding() {
         endingTitle = "🐟 變成魚";
         endingText = "海洋生態崩潰，宇宙決定讓你親身體驗，你現在是一條吳郭魚。";
     }
-    // 4. Average Score Based Endings (User Requested)
     else if (avgScore < 30) {
         endingType = "lose";
         endingTitle = "🛸 外星人綁架結局";
@@ -932,7 +886,6 @@ function determineEnding() {
 }
 
 function updateLeaderboard(resultType) {
-
     const currentUserName =
         localStorage.getItem("currentUserName") || "Unknown Player";
 
@@ -967,15 +920,11 @@ function updateLeaderboard(resultType) {
     };
 
     if (existingPlayerIndex === -1) {
-
         leaderboard.push(newRecord);
-
     } else {
-
         if (averageScore > leaderboard[existingPlayerIndex].score) {
             leaderboard[existingPlayerIndex] = newRecord;
         }
-
     }
 
     leaderboard.sort((a, b) => b.score - a.score);
@@ -985,50 +934,13 @@ function updateLeaderboard(resultType) {
     localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 }
 
+
 // ─────────────────────────────────────────────
 //  SAVE RESULT & REDIRECT
 // ─────────────────────────────────────────────
-async function saveScoreToCloud(resultType) {
 
-    if (!window.updateCloudLeaderboard) {
-        return;
-    }
-
-    const currentUserName =
-        localStorage.getItem("currentUserName") || "Unknown Player";
-
-    const currentUserId =
-        localStorage.getItem("currentUserId") || "Unknown ID";
-
-    const category =
-        localStorage.getItem("selectedCategory") || selectedCategory;
-
-    const scores =
-        activeGoals.map(goal =>
-            Math.max(0, sdgScores[goal] || 0)
-        );
-
-    const totalScore =
-        scores.reduce((sum, score) => sum + score, 0);
-
-    const averageScore =
-        Math.round(totalScore / activeGoals.length);
-
-    const playerData = {
-        name: currentUserName,
-        id: currentUserId,
-        category: category,
-        score: averageScore,
-        result: resultType,
-        date: new Date().toLocaleDateString()
-    };
-
-    await window.updateCloudLeaderboard(playerData);
-
-}
-
-async function saveResult(type) {
-    await saveScoreToCloud(type);
+function saveResult(type) {
+    updateLeaderboard(type);
     localStorage.setItem("resultType", type);
     localStorage.setItem("money", money);
     localStorage.setItem("energy", energy);
@@ -1056,17 +968,18 @@ function renderProgressBars() {
     progressList.innerHTML = "";
 
     activeGoals.forEach(goal => {
-        const score = Math.min(sdgScores[goal] || 0, 1000);
-        const percent = (score / 1000) * 100;
+        const score = Math.min(sdgScores[goal] || 0, 100);
+        const percent = (score / 100) * 100;
+        const goalNumber = goal.replace("goal", "");
 
         progressList.innerHTML += `
-            <div class="progress-item" style="position: relative;">
+            <div class="progress-item clickable-progress-goal" data-goal="${goalNumber}" style="position: relative;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>${goal.replace("goal", "Goal ")}</span>
 
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span id="${goal}Delta" style="font-weight: bold; font-size: 14px; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateY(5px);"></span>
-                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 1000</span>
+                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 100</span>
                     </div>
                 </div>
 
@@ -1076,11 +989,13 @@ function renderProgressBars() {
             </div>
         `;
     });
+
+    bindProgressGoalClickEvents();
 }
 
 
 // ─────────────────────────────────────────────
-//  GOAL BOX CLICK POPUP
+//  GOAL INFO POPUP
 // ─────────────────────────────────────────────
 
 const gameSdgData = [
@@ -1205,14 +1120,8 @@ function getCurrentGoalNumber() {
     return null;
 }
 
-function showGoalPopup() {
-    const currentGoalNumber = getCurrentGoalNumber();
-
-    if (!currentGoalNumber) {
-        return;
-    }
-
-    const goal = gameSdgData.find(item => item.id === currentGoalNumber);
+function showGoalPopupByNumber(goalNumber) {
+    const goal = gameSdgData.find(item => item.id === Number(goalNumber));
 
     if (!goal) {
         return;
@@ -1244,12 +1153,36 @@ function showGoalPopup() {
     goalPopup.classList.add("active");
 }
 
+function showCurrentWeeklyGoalPopup() {
+    const currentGoalNumber = getCurrentGoalNumber();
+
+    if (!currentGoalNumber) {
+        return;
+    }
+
+    showGoalPopupByNumber(currentGoalNumber);
+}
+
 function closeGoalPopup() {
     const goalPopup = document.getElementById("goalPopup");
 
     if (goalPopup) {
         goalPopup.classList.remove("active");
     }
+}
+
+function bindProgressGoalClickEvents() {
+    const progressGoalItems = document.querySelectorAll(".clickable-progress-goal");
+
+    progressGoalItems.forEach(function (item) {
+        item.addEventListener("click", function (event) {
+            event.stopPropagation();
+
+            const goalNumber = item.dataset.goal;
+
+            showGoalPopupByNumber(goalNumber);
+        });
+    });
 }
 
 const goalBoxElement = document.getElementById("goalBox");
@@ -1259,7 +1192,7 @@ const closeGoalPopupButton = document.getElementById("closeGoalPopupBtn");
 if (goalBoxElement) {
     goalBoxElement.addEventListener("click", function (event) {
         event.stopPropagation();
-        showGoalPopup();
+        showCurrentWeeklyGoalPopup();
     });
 }
 
@@ -1286,5 +1219,4 @@ if (goalPopupElement) {
 renderProgressBars();
 refillQueue();
 updateProgress();
-// Initialize first week - this will call showWeeklyGoalModal and then loadEvent
 setWeeklyGoal(1);

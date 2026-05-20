@@ -279,6 +279,15 @@ body {
 
 .progress-item {
     margin-bottom: 22px;
+    padding: 8px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.progress-item:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-2px);
 }
 
 .progress-item span {
