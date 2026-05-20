@@ -454,7 +454,6 @@ function getNextEvent() {
         refillQueue();
     }
 
-    // 如果錢太少，優先出補錢題，但仍然跳過已滿分 Goal 的題目
     if (money <= 80) {
         let moneyEvent = pickEventFromQueue(event => {
             return event.type === "money";
@@ -498,12 +497,10 @@ function getNextEvent() {
         }
     }
 
-    // 一般題目：優先選不是 Weekly Goal 的題目，而且不能影響已滿分 Goal
     let normalEvent = pickEventFromQueue(event => {
         return !eventMatchesWeeklyGoal(event);
     });
 
-    // 如果找不到一般題，就從目前 queue 裡找任何可用題
     if (!normalEvent) {
         const availableEvents = eventQueue.filter(event => {
             return eventIsAvailable(event);
@@ -519,7 +516,6 @@ function getNextEvent() {
         }
     }
 
-    // 如果 queue 裡真的沒有可用題，重新洗牌後再找一次
     if (!normalEvent) {
         refillQueue();
 
@@ -537,7 +533,6 @@ function getNextEvent() {
         }
     }
 
-    // 如果所有剩下題目都會碰到已滿分 Goal，則結束遊戲
     if (!normalEvent) {
         return null;
     }
@@ -891,7 +886,9 @@ function nextDay() {
 function determineEnding() {
     const totalTime = Date.now() - startTime;
 
-    const goalScoresArray = activeGoals.map(g => sdgScores[g] || 0);
+    const goalScoresArray = activeGoals.map(g => {
+        return Math.min(sdgScores[g] || 0, MAX_GOAL_SCORE);
+    });
 
     const avgScore =
         goalScoresArray.reduce((a, b) => a + b, 0) / activeGoals.length;
@@ -979,7 +976,7 @@ function determineEnding() {
     saveResult(endingType, endingTitle, endingText);
 }
 
-function updateLeaderboard(resultType) {
+async function updateLeaderboard(resultType) {
     const currentUserName =
         localStorage.getItem("currentUserName") || "Unknown Player";
 
@@ -1002,9 +999,6 @@ function updateLeaderboard(resultType) {
             Math.round(totalScore / activeGoals.length)
         );
 
-    let leaderboard =
-        JSON.parse(localStorage.getItem("leaderboard")) || [];
-
     const newRecord = {
         name: currentUserName,
         id: currentUserId,
@@ -1013,6 +1007,9 @@ function updateLeaderboard(resultType) {
         result: resultType,
         date: new Date().toLocaleDateString()
     };
+
+    let leaderboard =
+        JSON.parse(localStorage.getItem("leaderboard")) || [];
 
     const existingPlayerIndex =
         leaderboard.findIndex(player => {
@@ -1027,10 +1024,20 @@ function updateLeaderboard(resultType) {
     }
 
     leaderboard.sort((a, b) => b.score - a.score);
-
     leaderboard = leaderboard.slice(0, 10);
 
     localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+    if (typeof window.addLeaderboardRecord === "function") {
+        try {
+            await window.addLeaderboardRecord(newRecord);
+            console.log("Leaderboard saved to Firebase:", newRecord);
+        } catch (error) {
+            console.error("Failed to save leaderboard to Firebase:", error);
+        }
+    } else {
+        console.warn("window.addLeaderboardRecord is not available. Firebase leaderboard was not updated.");
+    }
 }
 
 
@@ -1038,8 +1045,9 @@ function updateLeaderboard(resultType) {
 //  SAVE RESULT & REDIRECT
 // ─────────────────────────────────────────────
 
-function saveResult(type) {
-    updateLeaderboard(type);
+async function saveResult(type) {
+    await updateLeaderboard(type);
+
     localStorage.setItem("resultType", type);
     localStorage.setItem("money", money);
     localStorage.setItem("energy", energy);
@@ -1047,7 +1055,10 @@ function saveResult(type) {
     localStorage.setItem("targetGoal", targetGoal);
     localStorage.setItem("targetScore", targetScore);
     localStorage.setItem("sdgScores", JSON.stringify(sdgScores));
-    menuModal.classList.remove("active");
+
+    if (menuModal) {
+        menuModal.classList.remove("active");
+    }
 
     window.location.href = "result.html";
 }
