@@ -234,9 +234,12 @@ const developmentEvents = [
     {
         category: "Development",
         type: "normal",
-        title: "依林的深夜資料中心",
+
+        title: "乃辭的智慧家電",
+
         description:
-            "依林晚上睡不著，發現學校資料中心半夜還在高耗電運作。",
+        "乃辭想買智慧節電插座。",
+
         choices: [
             {
                 text: "陪她整理節能建議",

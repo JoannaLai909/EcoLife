@@ -201,7 +201,8 @@ const globalEvents = [
         type: "normal",
         title: "柔苡的國際人權連署",
         description:
-            "柔苡傳來一份國際人權連署，還提醒你不要只看標題就亂簽。",
+        "Judi 邀你參與國際人權連署。",
+
         choices: [
             {
                 text: "閱讀內容後參與連署",
@@ -482,7 +483,8 @@ const globalEvents = [
         type: "normal",
         title: "安娜的災難募款海報",
         description:
-            "某國發生重大地震，安娜想做一張募款海報，但她不知道怎麼寫才不會太煽情。",
+        "扇煦邀請你參與反戰和平連署。",
+
         choices: [
             {
                 text: "幫她整理可信募款資訊",
