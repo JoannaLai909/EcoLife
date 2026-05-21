@@ -131,3 +131,27 @@ window.renderCloudLeaderboard = function() {
     renderCategory(currentCategory);
 
 };
+
+function startLeaderboardWhenReady() {
+
+    if (document.readyState === "loading") {
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if (window.renderCloudLeaderboard) {
+                window.renderCloudLeaderboard();
+            }
+
+        });
+
+    } else {
+
+        if (window.renderCloudLeaderboard) {
+            window.renderCloudLeaderboard();
+        }
+
+    }
+
+}
+
+startLeaderboardWhenReady();
