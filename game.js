@@ -895,91 +895,122 @@ function nextDay() {
 function determineEnding() {
     const totalTime = Date.now() - startTime;
 
-    const goalScoresArray = activeGoals.map(g => {
-        return Math.min(sdgScores[g] || 0, MAX_GOAL_SCORE);
+    const goalScoresArray = activeGoals.map(goal => {
+        return Math.min(sdgScores[goal] || 0, MAX_GOAL_SCORE);
     });
 
-    const avgScore =
-        goalScoresArray.reduce((a, b) => a + b, 0) / activeGoals.length;
+    const totalScore = goalScoresArray.reduce((a, b) => a + b, 0);
+
+    const avgScore = totalScore / activeGoals.length;
+
+    const completedGoalCount = activeGoals.filter(goal => {
+        return (sdgScores[goal] || 0) >= MAX_GOAL_SCORE;
+    }).length;
+
+    const allActiveGoalsMaxed = activeGoals.every(goal => {
+        return (sdgScores[goal] || 0) >= MAX_GOAL_SCORE;
+    });
+
+    const veryLowGoalCount = activeGoals.filter(goal => {
+        return (sdgScores[goal] || 0) < 20;
+    }).length;
 
     let endingType = "";
     let endingTitle = "";
     let endingText = "";
 
-    if (acceptedChoiceCount <= 2 && totalTime > IDLE_ENDING_LIMIT) {
+    /*
+       1. 成就型結局優先
+       避免玩家明明高分，卻被後面的失敗條件蓋掉
+    */
+    if (allActiveGoalsMaxed || avgScore >= 90) {
+        endingType = "perfect";
+        endingTitle = "🏆 永續發展領袖";
+        endingText = "所有 SDG 指標都達到高度發展，你成功打造出兼顧環境、社會與資源管理的永續生活模式。";
+    }
+    else if (completedGoalCount >= 2 || avgScore >= 75) {
+        endingType = "win";
+        endingTitle = "🌟 雙目標達成者";
+        endingText = "你成功讓多個 SDG 目標達到滿分，展現出穩定且有效的永續行動力。";
+    }
+
+    /*
+       2. 特殊行為結局
+       這些只在玩家沒有達到高分成就時觸發
+    */
+    else if (acceptedChoiceCount <= 2 && totalTime > IDLE_ENDING_LIMIT) {
         endingType = "normal";
         endingTitle = "🛋️ 什麼都沒做";
-        endingText = "系統偵測到你幾乎沒有進行任何選擇，判定你進入了「冥想狀態」，頒給你「最佳靜態環保行動獎」。";
+        endingText = "系統偵測到你幾乎沒有進行任何選擇，判定你進入了冥想狀態，頒給你最佳靜態環保行動獎。";
     }
     else if (fastChoices >= FAST_CHOICE_LIMIT || rerollCount > 15) {
         endingType = "normal";
         endingTitle = "🎰 蝴蝶效應受害者";
-        endingText = "你幾乎每題都快速決定。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點，巴西某隻蝴蝶正在為你負責。";
+        endingText = "你幾乎每題都快速決定。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點。";
     }
-    else if (totalTime < 60000) {
-        endingType = "win";
-        endingTitle = "🕰️ 速通傳說";
-        endingText = "你跑得太快，SDGs 還沒反應過來，聯合國決定讓你去當下一屆奧運火炬手，項目是「永續跑步」。";
-    }
-    else if ((sdgScores["goal15"] || 0) >= 90) {
+
+    /*
+       3. 類別專屬好結局
+       只檢查 activeGoals 裡真的有的 goal
+    */
+    else if (activeGoals.includes("goal15") && (sdgScores["goal15"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "🌲 樹木感謝你";
-        endingText = "全球樹木集體開口說話，選你當樹界代言人，年薪是一百萬顆橡實。";
+        endingText = "你成功守護陸域生態，全球樹木集體選你當樹界代言人。";
     }
-    else if ((sdgScores["goal7"] || 0) >= 90) {
+    else if (activeGoals.includes("goal7") && (sdgScores["goal7"] || 0) >= 90) {
         endingType = "win";
         endingTitle = "⚡ 人體行動電源";
-        endingText = "潔淨能源過剩，政府把多餘的電直接存進你體內，你現在會發光。";
+        endingText = "你推動潔淨能源成果卓著，現在連你的生活方式都開始發光。";
     }
-    else if ((sdgScores["goal2"] || 0) >= 90) {
+    else if (activeGoals.includes("goal2") && (sdgScores["goal2"] || 0) >= 90) {
         endingType = "win";
-        endingTitle = "🍚 米其林零星主廚";
-        endingText = "消除飢餓成功，但你太執著於食物，最後開了一家「剩食餐廳」，評審給了零顆星，卻大排長龍。";
+        endingTitle = "🍚 剩食餐廳主廚";
+        endingText = "你成功改善糧食與飢餓問題，最後開了一家剩食餐廳，意外大受歡迎。";
     }
-    else if ((sdgScores["goal10"] || 0) >= 90) {
+    else if (activeGoals.includes("goal10") && (sdgScores["goal10"] || 0) >= 90) {
         endingType = "win";
-        endingTitle = "🤝 平等到怪";
-        endingText = "你把所有不平等都消除了，包括左右腳的長度差，全人類現在走路都一樣奇怪。";
+        endingTitle = "🤝 平等推進者";
+        endingText = "你努力減少不平等，讓更多人獲得公平的機會與資源。";
     }
-    else if ((sdgScores["goal14"] || 0) >= 90) {
+    else if (activeGoals.includes("goal14") && (sdgScores["goal14"] || 0) >= 90) {
         endingType = "win";
-        endingTitle = "🔱 海洋最強守護者";
-        endingText = "對海洋貢獻卓著，珊瑚礁恢復色彩，你被尊稱為海王。";
+        endingTitle = "🔱 海洋守護者";
+        endingText = "你對海洋保育貢獻卓著，珊瑚礁恢復色彩，海洋生態逐漸復原。";
     }
-    else if ((sdgScores["goal4"] || 0) >= 90) {
+    else if (activeGoals.includes("goal4") && (sdgScores["goal4"] || 0) >= 90) {
         endingType = "win";
-        endingTitle = "📚 偏鄉教育之光";
-        endingText = "偏鄉學生感謝你的付出，但叮嚀你也要顧好自己的課業。";
+        endingTitle = "📚 教育之光";
+        endingText = "你讓更多人獲得學習機會，也讓教育成為改變生活的重要力量。";
     }
-    else if ((sdgScores["goal2"] || 0) < 20 && (sdgScores["goal15"] || 0) < 20) {
+
+    /*
+       4. 失敗結局
+       只根據 activeGoals 判斷，不要拿未出現的 goal 來扣玩家
+    */
+    else if (veryLowGoalCount >= 2 || avgScore < 30) {
         endingType = "lose";
-        endingTitle = "🐄 被牛盯上";
-        endingText = "農業崩潰、生態瓦解，全球僅存的最後一頭牛找到了你，牠只是靜靜地看著你，什麼都沒說。";
+        endingTitle = "🛸 外星人再教育";
+        endingText = "你的永續指標明顯偏低，外星人決定帶你去參加地球責任補習班。";
     }
-    else if ((sdgScores["goal13"] || 0) < 10) {
+    else if (activeGoals.includes("goal13") && (sdgScores["goal13"] || 0) < 10) {
         endingType = "lose";
         endingTitle = "🐧 南極移民";
-        endingText = "地球太熱了，你被迫搬去南極，和企鵝合租，牠不分攤水電費。";
+        endingText = "你忽略氣候行動，地球變得太熱，只好搬去南極和企鵝合租。";
     }
-    else if ((sdgScores["goal14"] || 0) < 10) {
+    else if (activeGoals.includes("goal14") && (sdgScores["goal14"] || 0) < 10) {
         endingType = "lose";
         endingTitle = "🐟 變成魚";
-        endingText = "海洋生態崩潰，宇宙決定讓你親身體驗，你現在是一條吳郭魚。";
+        endingText = "你忽略海洋生態，最後被宇宙安排親自體驗海洋危機。";
     }
-    else if (avgScore < 30) {
-        endingType = "lose";
-        endingTitle = "🛸 外星人綁架結局";
-        endingText = "因為對地球問題太消極，平均分數低於 30 分，你被外星人抓走進行再教育。";
-    }
-    else if (avgScore > 80) {
-        endingType = "perfect";
-        endingTitle = "🏆 永續發展領袖";
-        endingText = "平均分數高於 80 分！各面向平衡發展，你成為了社區的領袖。";
-    }
+
+    /*
+       5. 普通結局
+    */
     else {
         endingType = "normal";
-        endingTitle = "🌟 冒險結束";
-        endingText = "一段平凡但圓滿的旅程（平均分在 30～80 之間）。";
+        endingTitle = "🌱 穩定前進";
+        endingText = "你的永續生活有明顯進展，但仍有幾個目標需要更多努力。";
     }
 
     saveResult(endingType, endingTitle, endingText);
