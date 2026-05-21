@@ -923,12 +923,12 @@ function determineEnding() {
     }
     else if ((sdgScores["goal15"] || 0) >= 90) {
         endingType = "win";
-        endingTitle = "🌲 樹木他媽的感謝你";
+        endingTitle = "🌲 樹木感謝你";
         endingText = "全球樹木集體開口說話，選你當樹界代言人，年薪是一百萬顆橡實。";
     }
     else if ((sdgScores["goal7"] || 0) >= 90) {
         endingType = "win";
-        endingTitle = "⚡ 人體充電寶";
+        endingTitle = "⚡ 人體行動電源";
         endingText = "潔淨能源過剩，政府把多餘的電直接存進你體內，你現在會發光。";
     }
     else if ((sdgScores["goal2"] || 0) >= 90) {
