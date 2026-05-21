@@ -74,10 +74,15 @@ let lastActionTime      = Date.now();
 let maxIdleGap          = 0;
 let rerollCount         = 0;
 let fastChoices         = 0;
+let acceptedChoiceCount = 0;
 
 const maxActionsPerDay  = 4;
 const maxDays           = 10;
 let MAX_ENERGY          = 80;
+const MAX_GOAL_SCORE    = 100;
+
+const IDLE_ENDING_LIMIT = 600000; // 10 minutes
+const FAST_CHOICE_LIMIT = 20;
 
 
 // ── Queue state ──────────────────────────────
@@ -233,7 +238,11 @@ function useItem(item) {
             (Math.floor(Math.random() * 4) + 1) +
             (Math.floor(Math.random() * 4) + 1);
 
-        sdgScores[item.goalKey] = (sdgScores[item.goalKey] || 0) + gain;
+        sdgScores[item.goalKey] = Math.min(
+            MAX_GOAL_SCORE,
+            (sdgScores[item.goalKey] || 0) + gain
+        );
+
         updateProgress();
 
         effectMsg =
@@ -362,12 +371,48 @@ function refillQueue() {
     eventQueue = newQueue;
 }
 
+function isGoalMaxed(goalKey) {
+    return (sdgScores[goalKey] || 0) >= MAX_GOAL_SCORE;
+}
+
+function getAffectedGoalsFromChoice(choice) {
+    return Object.keys(choice).filter(key => key.startsWith("goal"));
+}
+
+function eventAffectsMaxedGoal(event) {
+    if (!event || !event.choices || !Array.isArray(event.choices)) {
+        return false;
+    }
+
+    return event.choices.some(choice => {
+        const affectedGoals = getAffectedGoalsFromChoice(choice);
+
+        return affectedGoals.some(goal => {
+            return isGoalMaxed(goal);
+        });
+    });
+}
+
+function eventIsAvailable(event) {
+    return event &&
+           event.title !== lastEventTitle &&
+           !eventAffectsMaxedGoal(event);
+}
+
 function eventMatchesWeeklyGoal(event) {
     if (!event || !currentWeeklyGoal.goal) {
         return false;
     }
 
+    if (isGoalMaxed(currentWeeklyGoal.goal)) {
+        return false;
+    }
+
     if (!event.choices || !Array.isArray(event.choices)) {
+        return false;
+    }
+
+    if (eventAffectsMaxedGoal(event)) {
         return false;
     }
 
@@ -379,7 +424,7 @@ function eventMatchesWeeklyGoal(event) {
 function pickEventFromQueue(conditionFunction) {
     const candidates = eventQueue.filter(event => {
         return conditionFunction(event) &&
-               event.title !== lastEventTitle;
+               eventIsAvailable(event);
     });
 
     if (candidates.length === 0) {
@@ -421,7 +466,7 @@ function getNextEvent() {
         if (!moneyEvent) {
             const moneyEvents = allEvents.filter(event => {
                 return event.type === "money" &&
-                       event.title !== lastEventTitle;
+                       eventIsAvailable(event);
             });
 
             if (moneyEvents.length > 0) {
@@ -442,7 +487,8 @@ function getNextEvent() {
 
     const shouldPreferWeeklyGoal =
         Math.random() < weeklyChance &&
-        weeklyGoalStreak < 2;
+        weeklyGoalStreak < 2 &&
+        !isGoalMaxed(currentWeeklyGoal.goal);
 
     if (shouldPreferWeeklyGoal) {
         const weeklyGoalEvent = pickEventFromQueue(eventMatchesWeeklyGoal);
@@ -460,12 +506,39 @@ function getNextEvent() {
     });
 
     if (!normalEvent) {
-        normalEvent = eventQueue.shift();
+        const availableEvents = eventQueue.filter(event => {
+            return eventIsAvailable(event);
+        });
+
+        if (availableEvents.length > 0) {
+            normalEvent =
+                availableEvents[Math.floor(Math.random() * availableEvents.length)];
+
+            eventQueue = eventQueue.filter(event => {
+                return event.title !== normalEvent.title;
+            });
+        }
     }
 
     if (!normalEvent) {
         refillQueue();
-        normalEvent = eventQueue.shift();
+
+        const availableEvents = eventQueue.filter(event => {
+            return eventIsAvailable(event);
+        });
+
+        if (availableEvents.length > 0) {
+            normalEvent =
+                availableEvents[Math.floor(Math.random() * availableEvents.length)];
+
+            eventQueue = eventQueue.filter(event => {
+                return event.title !== normalEvent.title;
+            });
+        }
+    }
+
+    if (!normalEvent) {
+        return null;
     }
 
     lastEventTitle = normalEvent.title;
@@ -493,6 +566,9 @@ function loadEvent() {
         endGameByNoMoreEvents();
         return;
     }
+
+    // 每一題出現時，才開始計算玩家反應時間
+    lastActionTime = Date.now();
 
     document.getElementById("goalBox").innerText =
         `${currentWeeklyGoal.goal.replace("goal", "Goal ")} Score ≥ ${currentWeeklyGoal.target}`;
@@ -556,7 +632,7 @@ function handleChoice(choice) {
         maxIdleGap = idleGap;
     }
 
-    if (currentTime - lastActionTime < 1000) {
+    if (idleGap < 1000) {
         fastChoices++;
     }
 
@@ -571,6 +647,8 @@ function handleChoice(choice) {
         return;
     }
 
+    acceptedChoiceCount++;
+
     money  = Math.max(0, money + moneyChange);
     energy = Math.max(0, energy + energyChange);
 
@@ -578,7 +656,11 @@ function handleChoice(choice) {
 
     for (const key in choice) {
         if (key.startsWith("goal")) {
-            sdgScores[key] = (sdgScores[key] || 0) + choice[key];
+            sdgScores[key] = Math.min(
+                MAX_GOAL_SCORE,
+                (sdgScores[key] || 0) + choice[key]
+            );
+
             deltas[key] = choice[key];
         }
     }
@@ -613,12 +695,12 @@ function updateProgress(deltas = {}) {
         const deltaSpan = document.getElementById(`${goal}Delta`);
 
         if (fill) {
-            const score = Math.min(sdgScores[goal] || 0, 100);
-            const percent = (score / 100) * 100;
+            const score = Math.min(sdgScores[goal] || 0, MAX_GOAL_SCORE);
+            const percent = (score / MAX_GOAL_SCORE) * 100;
             fill.style.width = `${percent}%`;
 
             if (text) {
-                text.innerText = `${score} / 100`;
+                text.innerText = `${score} / ${MAX_GOAL_SCORE}`;
             }
         }
 
@@ -645,8 +727,14 @@ function updateProgress(deltas = {}) {
 function setWeeklyGoal(week) {
     currentWeeklyGoal.week = week;
 
-    const goalIndex = Math.floor(Math.random() * activeGoals.length);
-    currentWeeklyGoal.goal = activeGoals[goalIndex];
+    const availableGoals = activeGoals.filter(goal => !isGoalMaxed(goal));
+
+    if (availableGoals.length > 0) {
+        const goalIndex = Math.floor(Math.random() * availableGoals.length);
+        currentWeeklyGoal.goal = availableGoals[goalIndex];
+    } else {
+        currentWeeklyGoal.goal = activeGoals[Math.floor(Math.random() * activeGoals.length)];
+    }
 
     if (week === 1) currentWeeklyGoal.target = 30;
     else if (week === 2) currentWeeklyGoal.target = 80;
@@ -710,16 +798,26 @@ function checkWeeklyGoal(week) {
             money += amount;
             rewardMsg = `💰 獲得獎勵金：${amount}`;
         } else {
-            const randomGoal =
-                activeGoals[Math.floor(Math.random() * activeGoals.length)];
+            const availableGoals = activeGoals.filter(goal => !isGoalMaxed(goal));
 
-            const amount = 10 + Math.floor(Math.random() * 6);
+            if (availableGoals.length > 0) {
+                const randomGoal =
+                    availableGoals[Math.floor(Math.random() * availableGoals.length)];
 
-            sdgScores[randomGoal] = (sdgScores[randomGoal] || 0) + amount;
-            updateProgress();
+                const amount = 10 + Math.floor(Math.random() * 6);
 
-            rewardMsg =
-                `📈 ${randomGoal.replace("goal", "Goal ")} 進度提升了 ${amount}`;
+                sdgScores[randomGoal] = Math.min(
+                    MAX_GOAL_SCORE,
+                    (sdgScores[randomGoal] || 0) + amount
+                );
+
+                updateProgress();
+
+                rewardMsg =
+                    `📈 ${randomGoal.replace("goal", "Goal ")} 進度提升了 ${amount}`;
+            } else {
+                rewardMsg = "📈 所有 Goal 都已達滿分！";
+            }
         }
     }
 
@@ -797,7 +895,9 @@ function nextDay() {
 function determineEnding() {
     const totalTime = Date.now() - startTime;
 
-    const goalScoresArray = activeGoals.map(g => sdgScores[g] || 0);
+    const goalScoresArray = activeGoals.map(g => {
+        return Math.min(sdgScores[g] || 0, MAX_GOAL_SCORE);
+    });
 
     const avgScore =
         goalScoresArray.reduce((a, b) => a + b, 0) / activeGoals.length;
@@ -806,20 +906,20 @@ function determineEnding() {
     let endingTitle = "";
     let endingText = "";
 
-    if (maxIdleGap > 180000) {
+    if (acceptedChoiceCount <= 2 && totalTime > IDLE_ENDING_LIMIT) {
         endingType = "normal";
         endingTitle = "🛋️ 什麼都沒做";
-        endingText = "系統偵測到你在發呆，判定你已經進入「冥想狀態」，頒給你「最佳靜態環保行動獎」，因為你沒有消耗任何能源。";
+        endingText = "系統偵測到你幾乎沒有進行任何選擇，判定你進入了「冥想狀態」，頒給你「最佳靜態環保行動獎」。";
+    }
+    else if (fastChoices >= FAST_CHOICE_LIMIT || rerollCount > 15) {
+        endingType = "normal";
+        endingTitle = "🎰 蝴蝶效應受害者";
+        endingText = "你幾乎每題都快速決定。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點，巴西某隻蝴蝶正在為你負責。";
     }
     else if (totalTime < 60000) {
         endingType = "win";
         endingTitle = "🕰️ 速通傳說";
         endingText = "你跑得太快，SDGs 還沒反應過來，聯合國決定讓你去當下一屆奧運火炬手，項目是「永續跑步」。";
-    }
-    else if (fastChoices > 50 || rerollCount > 15) {
-        endingType = "normal";
-        endingTitle = "🎰 蝴蝶效應受害者";
-        endingText = "每題都亂選。系統偵測到你的混亂能量，判定你是蝴蝶效應的起點，巴西某隻蝴蝶正在為你負責。";
     }
     else if ((sdgScores["goal15"] || 0) >= 90) {
         endingType = "win";
@@ -1059,8 +1159,8 @@ function renderProgressBars() {
     progressList.innerHTML = "";
 
     activeGoals.forEach(goal => {
-        const score = Math.min(sdgScores[goal] || 0, 100);
-        const percent = (score / 100) * 100;
+        const score = Math.min(sdgScores[goal] || 0, MAX_GOAL_SCORE);
+        const percent = (score / MAX_GOAL_SCORE) * 100;
         const goalNumber = goal.replace("goal", "");
 
         progressList.innerHTML += `
@@ -1070,7 +1170,7 @@ function renderProgressBars() {
 
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span id="${goal}Delta" style="font-weight: bold; font-size: 14px; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateY(5px);"></span>
-                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / 100</span>
+                        <span id="${goal}Text" style="font-weight: bold; color: #114bb8;">${score} / ${MAX_GOAL_SCORE}</span>
                     </div>
                 </div>
 
