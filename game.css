@@ -703,10 +703,11 @@ body {
     transition: opacity 0.25s, transform 0.25s;
     z-index: 99999;
     pointer-events: none;
-    white-space: nowrap;
+    white-space: pre-wrap;
+    text-align: center;
 }
 
-.shop-toast.show {
+.shop-toast.active {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
