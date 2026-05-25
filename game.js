@@ -55,6 +55,9 @@ let energyDepletedCount = 0;
 let midGoalRewarded     = false;
 let hasAdvisorCard      = false;
 
+const GAME_STATE_KEY = "ecolifeCurrentGameState";
+let currentEventObject = null;
+let shouldSaveGameOnLeave = true;
 
 // Weekly Goal State
 let currentWeeklyGoal = {
@@ -125,6 +128,98 @@ const backpackGrid     = document.getElementById("backpackGrid");
 
 const rerollBtn        = document.getElementById("rerollBtn");
 
+// ─────────────────────────────────────────────
+//  GAME STATE MANAGEMENT
+// ─────────────────────────────────────────────
+function saveGameState() {
+
+    if (!shouldSaveGameOnLeave) {
+        return;
+    }
+
+    const gameState = {
+        selectedCategory: selectedCategory,
+
+        day: day,
+        actionsToday: actionsToday,
+        money: money,
+        energy: energy,
+        sdgScores: sdgScores,
+        backpack: backpack,
+        energyDepletedCount: energyDepletedCount,
+        hasAdvisorCard: hasAdvisorCard,
+
+        currentWeeklyGoal: currentWeeklyGoal,
+        targetGoal: targetGoal,
+        targetScore: targetScore,
+
+        eventQueue: eventQueue,
+        lastEventTitle: lastEventTitle,
+        currentEventObject: currentEventObject,
+
+        weeklyGoalStreak: weeklyGoalStreak,
+        weeklyActionCount: weeklyActionCount,
+
+        maxIdleGap: maxIdleGap,
+        rerollCount: rerollCount,
+        fastChoices: fastChoices,
+        acceptedChoiceCount: acceptedChoiceCount,
+
+        elapsedTime: Date.now() - startTime
+    };
+
+    sessionStorage.setItem(GAME_STATE_KEY, JSON.stringify(gameState));
+}
+
+
+function loadGameState() {
+
+    const savedState =
+        sessionStorage.getItem(GAME_STATE_KEY);
+
+    if (!savedState) {
+        return false;
+    }
+
+    const gameState =
+        JSON.parse(savedState);
+
+    day = gameState.day ?? 1;
+    actionsToday = gameState.actionsToday ?? 0;
+    money = gameState.money ?? 100;
+    energy = gameState.energy ?? 80;
+
+    sdgScores = gameState.sdgScores || {};
+    backpack = gameState.backpack || [];
+    energyDepletedCount = gameState.energyDepletedCount || 0;
+    hasAdvisorCard = gameState.hasAdvisorCard || false;
+
+    currentWeeklyGoal = gameState.currentWeeklyGoal || currentWeeklyGoal;
+    targetGoal = gameState.targetGoal || "";
+    targetScore = gameState.targetScore || "";
+
+    eventQueue = gameState.eventQueue || [];
+    lastEventTitle = gameState.lastEventTitle || null;
+    currentEventObject = gameState.currentEventObject || null;
+
+    weeklyGoalStreak = gameState.weeklyGoalStreak || 0;
+    weeklyActionCount = gameState.weeklyActionCount || 0;
+
+    maxIdleGap = gameState.maxIdleGap || 0;
+    rerollCount = gameState.rerollCount || 0;
+    fastChoices = gameState.fastChoices || 0;
+    acceptedChoiceCount = gameState.acceptedChoiceCount || 0;
+
+    startTime = Date.now() - (gameState.elapsedTime || 0);
+    lastActionTime = Date.now();
+
+    return true;
+}
+
+
+function clearGameState() {
+    sessionStorage.removeItem(GAME_STATE_KEY);
+}
 
 // ─────────────────────────────────────────────
 //  UI LISTENERS
@@ -133,9 +228,15 @@ const rerollBtn        = document.getElementById("rerollBtn");
 menuBtn.addEventListener("click", () => menuModal.classList.add("active"));
 closeMenuBtn.addEventListener("click", () => menuModal.classList.remove("active"));
 
-document.getElementById("restartBtn").addEventListener("click", () => location.reload());
+document.getElementById("restartBtn").addEventListener("click", () => {
+    shouldSaveGameOnLeave = false;
+    clearGameState();
+    location.reload();
+});
 
 document.getElementById("homeBtn").addEventListener("click", () => {
+    shouldSaveGameOnLeave = false;
+    clearGameState();
     window.location.href = "entrance.html";
 });
 
@@ -254,6 +355,8 @@ function useItem(item) {
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
     showToast(`使用了 ${item.name}！\n${effectMsg}`);
+
+    saveGameState();
 }
 
 function showToast(msg) {
@@ -559,37 +662,53 @@ function getNextEvent() {
 //  LOAD & DISPLAY AN EVENT
 // ─────────────────────────────────────────────
 
-function loadEvent() {
-    const event = getNextEvent();
+function displayEvent(event) {
 
     if (!event) {
         endGameByNoMoreEvents();
         return;
     }
 
-    // 每一題出現時，才開始計算玩家反應時間
+    currentEventObject = event;
+
     lastActionTime = Date.now();
 
     document.getElementById("goalBox").innerText =
         `${currentWeeklyGoal.goal.replace("goal", "Goal ")} Score ≥ ${currentWeeklyGoal.target}`;
-    document.getElementById("dayBox").innerText    = `Day ${day}-${actionsToday + 1}`;
-    document.getElementById("moneyBox").innerText  = `💰 ${money}`;
-    document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
-    document.getElementById("scenarioTitle").innerText       = event.title;
-    document.getElementById("scenarioDescription").innerText = event.description;
+    document.getElementById("dayBox").innerText =
+        `Day ${day}-${actionsToday + 1}`;
 
-    const choicesSection = document.getElementById("choicesSection");
+    document.getElementById("moneyBox").innerText =
+        `💰 ${money}`;
+
+    document.getElementById("energyBox").innerText =
+        `⚡ ${energy}`;
+
+    document.getElementById("scenarioTitle").innerText =
+        event.title;
+
+    document.getElementById("scenarioDescription").innerText =
+        event.description;
+
+    const choicesSection =
+        document.getElementById("choicesSection");
+
     choicesSection.innerHTML = "";
 
     if (hasAdvisorCard) {
-        const advisorBtn = document.createElement("button");
+
+        const advisorBtn =
+            document.createElement("button");
+
         advisorBtn.id = "advisorCardBtn";
         advisorBtn.innerText = "🃏 使用顧問卡（跳過此題）";
 
         advisorBtn.addEventListener("click", () => {
             hasAdvisorCard = false;
             actionsToday++;
+
+            saveGameState();
 
             if (actionsToday >= maxActionsPerDay) {
                 nextDay();
@@ -602,7 +721,10 @@ function loadEvent() {
     }
 
     event.choices.forEach(choice => {
-        const card = document.createElement("div");
+
+        const card =
+            document.createElement("div");
+
         card.classList.add("choice-card");
 
         card.innerHTML = `
@@ -616,7 +738,20 @@ function loadEvent() {
         card.addEventListener("click", () => handleChoice(choice));
 
         choicesSection.appendChild(card);
+
     });
+
+    saveGameState();
+}
+
+
+function loadEvent() {
+
+    const event =
+        getNextEvent();
+
+    displayEvent(event);
+
 }
 
 
@@ -666,6 +801,7 @@ function handleChoice(choice) {
     }
 
     updateProgress(deltas);
+    saveGameState();
 
     if (energy <= 0) {
         energyDepletedCount++;
@@ -875,6 +1011,8 @@ function nextDay() {
     actionsToday = 0;
     energy = MAX_ENERGY;
 
+    saveGameState();
+
     if (day === 6) {
         checkWeeklyGoal(1);
         return;
@@ -1040,6 +1178,9 @@ async function saveResult(type, endingTitle, endingText) {
     localStorage.setItem("targetGoal", targetGoal);
     localStorage.setItem("targetScore", targetScore);
     localStorage.setItem("sdgScores", JSON.stringify(sdgScores));
+
+    shouldSaveGameOnLeave = false;
+    clearGameState();
 
     menuModal.classList.remove("active");
 
@@ -1304,12 +1445,27 @@ if (goalPopupElement) {
     });
 }
 
+window.addEventListener("beforeunload", function () {
+    saveGameState();
+});
 
 // ─────────────────────────────────────────────
 //  INIT
 // ─────────────────────────────────────────────
 
+const hasSavedGame =
+    loadGameState();
+
 renderProgressBars();
-refillQueue();
 updateProgress();
-setWeeklyGoal(1);
+
+if (hasSavedGame && currentEventObject) {
+
+    displayEvent(currentEventObject);
+
+} else {
+
+    refillQueue();
+    setWeeklyGoal(1);
+
+}
