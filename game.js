@@ -756,7 +756,30 @@ function loadEvent() {
 
 }
 
+function toNumber(value) {
+    if (value === undefined || value === null) {
+        return 0;
+    }
 
+    if (typeof value === "number") {
+        return value;
+    }
+
+    return Number(String(value).replace("+", "").trim()) || 0;
+}
+
+
+function getGoalDeltas(choice) {
+    const deltas = {};
+
+    for (const key in choice) {
+        if (key.startsWith("goal")) {
+            deltas[key] = toNumber(choice[key]);
+        }
+    }
+
+    return deltas;
+}
 // ─────────────────────────────────────────────
 //  HANDLE A CHOICE
 // ─────────────────────────────────────────────
@@ -775,8 +798,8 @@ function handleChoice(choice) {
 
     lastActionTime = currentTime;
 
-    const moneyChange = choice.money ?? 0;
-    const energyChange = choice.energy ?? 0;
+    const moneyChange = toNumber(choice.money);
+    const energyChange = toNumber(choice.energy);
 
     if (money + moneyChange < 0) {
         moneyPopup.classList.add("active");
@@ -789,21 +812,21 @@ function handleChoice(choice) {
     money = Math.max(0, money + moneyChange);
     energy = Math.max(0, energy + energyChange);
 
-    const deltas = {};
+    const deltas = getGoalDeltas(choice);
 
-    for (const key in choice) {
-        if (key.startsWith("goal")) {
-            const oldScore = sdgScores[key] || 0;
+    for (const goal in deltas) {
+        const oldScore = sdgScores[goal] || 0;
+        const change = deltas[goal];
 
-            const newScore = Math.min(
-                MAX_GOAL_SCORE,
-                oldScore + choice[key]
-            );
-
-            sdgScores[key] = newScore;
-            deltas[key] = choice[key];
-        }
+        sdgScores[goal] = Math.min(
+            MAX_GOAL_SCORE,
+            Math.max(0, oldScore + change)
+        );
     }
+
+    console.log("choice:", choice);
+    console.log("deltas:", deltas);
+    console.log("sdgScores:", sdgScores);
 
     document.getElementById("moneyBox").innerText = `💰 ${money}`;
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
