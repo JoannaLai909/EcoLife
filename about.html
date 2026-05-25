@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>About EcoLife</title>
-    <link href="https://db.onlinewebfonts.com/c/b7c46534c8a2d55edd840bf49383777d?family=Ahkio-Regular"
-      rel="stylesheet">
+    <title>About Us - EcoLife Simulator</title>
+
+    <link href="https://db.onlinewebfonts.com/c/b7c46534c8a2d55edd840bf49383777d?family=Ahkio-Regular" rel="stylesheet">
+
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="entrance.css">
 </head>
 
-<body>
+<body class="about-page">
 
     <nav class="navbar">
 
@@ -17,212 +17,218 @@
             EcoLife Simulator
         </a>
 
-        <div class="nav-links">
+        <ul class="nav-links">
 
-            <a href="entrance.html#sdgs">
-                SDGs
-            </a>
+            <li>
+                <a href="entrance.html#sdgs">SDGs</a>
+            </li>
 
-            <div class="dropdown">
+            <li class="dropdown">
+                <a href="#" class="drop-btn">About Us</a>
 
-                <div class="drop-btn">
-                    About Us
+                <ul class="dropdown-content">
+
+                    <a href="about.html#why">Origin</a>
+                    <a href="about.html#purpose">Purpose</a>
+
+                    <div class="sub-dropdown">
+                        <button class="feature-btn" type="button">
+                            Features ▸
+                        </button>
+
+                        <ul class="sub-dropdown-content">
+                            <li>
+                                <a href="about.html#visualfeedback">Visual Feedback</a>
+                            </li>
+
+                            <li>
+                                <a href="about.html#replayability">Replayability</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="about.html#feedback">Problem Feedback</a>
+
+                </ul>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <section id="why" class="info-section first-section">
+
+        <div class="info-box">
+
+            <h2>
+                Origin
+            </h2>
+
+            <p>
+                EcoLife Simulator was created to help players understand sustainability through everyday choices.
+                Instead of only reading about environmental and social issues, users can experience how different
+                decisions affect resources, communities, and long-term outcomes.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section id="purpose" class="info-section">
+
+        <div class="info-box">
+
+            <h2>
+                Purpose
+            </h2>
+
+            <p>
+                The purpose of this project is to connect the Sustainable Development Goals with interactive learning.
+                Through game-based decision making, EcoLife Simulator encourages users to think about responsible
+                consumption, environmental protection, social balance, and sustainable development in a more engaging way.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section id="visualfeedback" class="visualfeedback-section">
+
+        <div class="visualfeedback-left">
+
+            <h2>
+                Visual Feedback
+            </h2>
+
+            <p>
+                EcoLife Simulator provides visual feedback to help players understand the results of their decisions.
+                Scores, progress bars, and ending images allow users to clearly see how their choices influence different
+                sustainability goals.
+            </p>
+
+        </div>
+
+        <div class="visualfeedback-right">
+
+            <div class="bar-chart">
+
+                <div class="legend">
+
+                    <span>
+                        <span class="dot blue"></span>
+                        Environment
+                    </span>
+
+                    <span>
+                        <span class="dot purple"></span>
+                        Society
+                    </span>
+
+                    <span>
+                        <span class="dot orange"></span>
+                        Development
+                    </span>
+
+                    <span>
+                        <span class="dot yellow"></span>
+                        Global
+                    </span>
+
                 </div>
 
-                <div class="dropdown-content">
+                <div class="bar-row">
+                    <div class="label">ECO</div>
+                    <div class="bar blue-bar" style="width: 88%;"></div>
+                </div>
 
-                    <a href="#why">Origin</a>
-                    <a href="#purpose">Purpose</a>
-                    <a href="#visualfeedback">Visual Feedback</a>
-                    <a href="#replayability">Replayability</a>
-                    <a href="#feedback">Problem Feedback</a>
+                <div class="bar-row">
+                    <div class="label">SOC</div>
+                    <div class="bar purple-bar" style="width: 72%;"></div>
+                </div>
 
+                <div class="bar-row">
+                    <div class="label">DEV</div>
+                    <div class="bar orange-bar" style="width: 65%;"></div>
+                </div>
+
+                <div class="bar-row">
+                    <div class="label">GLB</div>
+                    <div class="bar yellow-bar" style="width: 80%;"></div>
                 </div>
 
             </div>
 
         </div>
 
-    </nav>
+    </section>
 
-    <div class="about-page">
+    <section id="replayability" class="replay-section">
 
-        <section id="why" class="info-section first-section">
+        <div class="replay-text">
 
-            <div class="container">
+            <h2>
+                Replayability
+            </h2>
 
-                <div class="info-box">
+            <p>
+                Different strategies lead to different endings, encouraging users to try again and explore new paths.
+                By replaying the game, players can compare outcomes and learn how better decisions create more balanced
+                and sustainable results.
+            </p>
 
-                    <h2>
-                        Origin
-                    </h2>
+        </div>
 
-                    <p>
-                        Inspired by the choice mechanics of Examinee Simulator,
-                        but we replaced “exam score” with “SDG progress” to show how daily choices affect sustainability.
-                    </p>
+        <div class="tiger-area">
 
-                </div>
+            <img
+                src="image/tiger_ending_1_transparent.png"
+                alt="Tiger Ending 1"
+                class="tiger tiger-top"
+            >
 
-            </div>
+            <img
+                src="image/tiger_ending_2_transparent.png"
+                alt="Tiger Ending 2"
+                class="tiger tiger-bottom"
+            >
 
-        </section>
+            <img
+                src="image/tiger_ending_3_transparent.png"
+                alt="Tiger Ending 3"
+                class="tiger tiger-right"
+            >
 
-        <section id="purpose" class="info-section">
+        </div>
 
-            <div class="container">
+    </section>
 
-                <div class="info-box">
+    <section id="feedback" class="feedback-section">
 
-                    <h2>
-                        Purpose
-                    </h2>
+        <div class="feedback-container">
 
-                    <p>
-                        EcoLife Simulator helps users understand how daily choices can affect people,
-                        the environment, and the future.
-                    </p>
+            <h2>
+                Problem Feedback
+            </h2>
 
-                    <a href="purpose.html" class="more-btn">
-                        Learn More →
-                    </a>
+            <p class="feedback-subtitle">
+                Found a bug or have a suggestion?<br>
+                Please send us your feedback through the form.
+            </p>
 
-                </div>
+            <a
+                href="https://forms.gle/9KvttkmWDjKgB47AG8"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="feedback-google-btn"
+            >
+                Open Feedback Form
+            </a>
 
-            </div>
+        </div>
 
-        </section>
+    </section>
 
-        <section id="visualfeedback" class="visualfeedback-section">
-
-            <div class="visualfeedback-left">
-
-                <h2>
-                    Visual<br>feedback
-                </h2>
-
-                <p>
-                    We use progress bars to show<br>
-                    real-time SDG advancement,<br>
-                    so users can clearly see their<br>
-                    progress.
-                </p>
-
-            </div>
-
-            <div class="visualfeedback-right">
-
-                <div class="bar-chart">
-
-                    <div class="legend">
-                        <span><i class="dot blue"></i> goal1</span>
-                        <span><i class="dot purple"></i> goal7</span>
-                        <span><i class="dot orange"></i> goal13</span>
-                        <span><i class="dot yellow"></i> goal15</span>
-                    </div>
-
-                    <div class="bar-row">
-                        <span class="label">goal1</span>
-                        <div class="bar blue-bar" style="width: 55%;"></div>
-                    </div>
-
-                    <div class="bar-row">
-                        <span class="label">goal7</span>
-                        <div class="bar purple-bar" style="width: 30%;"></div>
-                    </div>
-
-                    <div class="bar-row">
-                        <span class="label">goal13</span>
-                        <div class="bar orange-bar" style="width: 82%;"></div>
-                    </div>
-
-                    <div class="bar-row">
-                        <span class="label">goal15</span>
-                        <div class="bar yellow-bar" style="width: 45%;"></div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <section id="replayability" class="replay-section">
-
-            <div class="replay-text">
-
-                <h2>
-                    Replayability
-                </h2>
-
-                <p>
-                    Different strategies will lead to<br>
-                    different endings, encouraging<br>
-                    users to try again.
-                </p>
-
-            </div>
-
-            <div class="tiger-area">
-
-                <img src="image/tiger_ending_1_transparent.png" class="tiger tiger-top" alt="Tiger Ending 1">
-
-                <img src="image/tiger_ending_2_transparent.png" class="tiger tiger-bottom" alt="Tiger Ending 2">
-
-                <img src="image/tiger_ending_3_transparent.png" class="tiger tiger-right" alt="Tiger Ending 3">
-
-            </div>
-
-        </section>
-
-        <section id="feedback" class="feedback-section">
-
-            <div class="feedback-container">
-
-                <h2>
-                    Problem Feedback
-                </h2>
-
-                <p class="feedback-subtitle">
-                    Found a bug or have a suggestion?<br>
-                    Please send us your feedback through the form.
-                </p>
-
-                <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSf9xbyRLR6QxIdV9GsZCVmLryowrFpoWWyrpnHVjjainSAbBw/viewform?usp=header"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="feedback-google-btn"
-                >
-                    Open Feedback Form
-                </a>
-
-            </div>
-
-        </section>
-
-    </div>
-
-    <script>
-        function revealSections() {
-            const sections = document.querySelectorAll(
-                ".info-section, .visualfeedback-section, .replay-section, .feedback-section"
-            );
-
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-
-                if (rect.top < window.innerHeight - 100) {
-                    section.classList.add("show");
-                }
-            });
-        }
-
-        window.addEventListener("scroll", revealSections);
-        window.addEventListener("load", revealSections);
-    </script>
-
-    <script src="continue-game.js"></script>
+    <script src="entrance.js"></script>
 
 </body>
 </html>
