@@ -24,7 +24,7 @@
 
         <div class="nav-links">
 
-            <a href="sdgs_introduction.html">
+            <a href="sdgs_introduction.html?from=game">
                 SDGs
             </a>
 
@@ -36,10 +36,10 @@
 
                 <div class="dropdown-content">
 
-                    <a href="about.html#why">Origin</a>
-                    <a href="about.html#purpose">Purpose</a>
-                    <a href="about.html#visualfeedback">Visual Feedback</a>
-                    <a href="about.html#replayability">Replayability</a>
+                    <a href="about.html?from=game#why">Origin</a>
+                    <a href="about.html?from=game#purpose">Purpose</a>
+                    <a href="about.html?from=game#visualfeedback">Visual Feedback</a>
+                    <a href="about.html?from=game#replayability">Replayability</a>
 
                 </div>
 
@@ -230,6 +230,17 @@
 
             </div>
 
+        </div>
+
+        <!-- LOTTERY MODAL -->
+        <div class="shop-overlay" id="lotteryOverlay">
+            <div class="shop-modal" style="max-width: 600px; width: 95%; height: 95vh; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                <div class="shop-header" style="padding: 20px 20px 10px 20px;">
+                    <h2>Lucky Lottery</h2>
+                    <button class="shop-close-btn" id="lotteryCloseBtn">×</button>
+                </div>
+                <iframe id="lotteryIframe" src="lottery.html" style="flex: 1; border: none; width: 100%;"></iframe>
+            </div>
         </div>
 
 

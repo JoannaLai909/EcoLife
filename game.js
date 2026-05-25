@@ -55,6 +55,9 @@ let energyDepletedCount = 0;
 let midGoalRewarded     = false;
 let hasAdvisorCard      = false;
 
+const GAME_STATE_KEY = "ecolifeCurrentGameState";
+let currentEventObject = null;
+let shouldSaveGameOnLeave = true;
 
 // Weekly Goal State
 let currentWeeklyGoal = {
@@ -123,8 +126,104 @@ const backpackOverlay  = document.getElementById("backpackOverlay");
 const backpackCloseBtn = document.getElementById("backpackCloseBtn");
 const backpackGrid     = document.getElementById("backpackGrid");
 
+const lotteryOverlay   = document.getElementById("lotteryOverlay");
+const lotteryCloseBtn   = document.getElementById("lotteryCloseBtn");
+const lotteryIframe    = document.getElementById("lotteryIframe");
+
 const rerollBtn        = document.getElementById("rerollBtn");
 
+// ─────────────────────────────────────────────
+//  GAME STATE MANAGEMENT
+// ─────────────────────────────────────────────
+function saveGameState() {
+
+    if (!shouldSaveGameOnLeave) {
+        return;
+    }
+
+    const gameState = {
+        selectedCategory: selectedCategory,
+
+        day: day,
+        actionsToday: actionsToday,
+        money: money,
+        energy: energy,
+        sdgScores: sdgScores,
+        backpack: backpack,
+        energyDepletedCount: energyDepletedCount,
+        hasAdvisorCard: hasAdvisorCard,
+
+        currentWeeklyGoal: currentWeeklyGoal,
+        targetGoal: targetGoal,
+        targetScore: targetScore,
+
+        eventQueue: eventQueue,
+        lastEventTitle: lastEventTitle,
+        currentEventObject: currentEventObject,
+
+        weeklyGoalStreak: weeklyGoalStreak,
+        weeklyActionCount: weeklyActionCount,
+
+        maxIdleGap: maxIdleGap,
+        rerollCount: rerollCount,
+        fastChoices: fastChoices,
+        acceptedChoiceCount: acceptedChoiceCount,
+
+        elapsedTime: Date.now() - startTime
+    };
+
+    sessionStorage.setItem(GAME_STATE_KEY, JSON.stringify(gameState));
+}
+
+
+function loadGameState() {
+
+    const savedState =
+        sessionStorage.getItem(GAME_STATE_KEY);
+
+    if (!savedState) {
+        return false;
+    }
+
+    const gameState =
+        JSON.parse(savedState);
+
+    day = gameState.day ?? 1;
+    actionsToday = gameState.actionsToday ?? 0;
+    money = gameState.money ?? 100;
+    energy = gameState.energy ?? 80;
+
+    sdgScores = gameState.sdgScores || {};
+    backpack = gameState.backpack || [];
+    energyDepletedCount = gameState.energyDepletedCount || 0;
+    hasAdvisorCard = gameState.hasAdvisorCard || false;
+
+    currentWeeklyGoal = gameState.currentWeeklyGoal || currentWeeklyGoal;
+    targetGoal = gameState.targetGoal || "";
+    targetScore = gameState.targetScore || "";
+
+    eventQueue = gameState.eventQueue || [];
+    lastEventTitle = gameState.lastEventTitle || null;
+    currentEventObject = gameState.currentEventObject || null;
+
+    weeklyGoalStreak = gameState.weeklyGoalStreak || 0;
+    weeklyActionCount = gameState.weeklyActionCount || 0;
+
+    maxIdleGap = gameState.maxIdleGap || 0;
+    rerollCount = gameState.rerollCount || 0;
+    fastChoices = gameState.fastChoices || 0;
+    acceptedChoiceCount = gameState.acceptedChoiceCount || 0;
+
+    startTime = Date.now() - (gameState.elapsedTime || 0);
+    lastActionTime = Date.now();
+
+    return true;
+}
+
+
+function clearGameState() {
+    sessionStorage.removeItem(GAME_STATE_KEY);
+}
 
 // ─────────────────────────────────────────────
 //  UI LISTENERS
@@ -133,9 +232,15 @@ const rerollBtn        = document.getElementById("rerollBtn");
 menuBtn.addEventListener("click", () => menuModal.classList.add("active"));
 closeMenuBtn.addEventListener("click", () => menuModal.classList.remove("active"));
 
-document.getElementById("restartBtn").addEventListener("click", () => location.reload());
+document.getElementById("restartBtn").addEventListener("click", () => {
+    shouldSaveGameOnLeave = false;
+    clearGameState();
+    location.reload();
+});
 
 document.getElementById("homeBtn").addEventListener("click", () => {
+    shouldSaveGameOnLeave = false;
+    clearGameState();
     window.location.href = "entrance.html";
 });
 
@@ -158,6 +263,8 @@ backpackCloseBtn.addEventListener("click", () => {
     backpackOverlay.classList.remove("shop-open");
 });
 
+lotteryCloseBtn.addEventListener("click", () => lotteryOverlay.classList.remove("shop-open"));
+
 rerollBtn.addEventListener("click", () => {
     if (money >= 75) {
         money -= 75;
@@ -176,10 +283,12 @@ rerollBtn.addEventListener("click", () => {
 // ─────────────────────────────────────────────
 
 let pendingItem = null;
+let currentLotteryPrize = null;
 
 const shopItems = [
     { id: "coffee", name: "熱咖啡", price: 150, energy: 20, desc: "提升 20 體力", icon: "☕" },
-    { id: "energy_drink", name: "提神飲料", price: 250, energy: 40, desc: "提升 40 體力", icon: "🥤" }
+    { id: "energy_drink", name: "提神飲料", price: 250, energy: 40, desc: "提升 40 體力", icon: "🥤" },
+    { id: "lottery_ticket", name: "抽獎券", price: 100, desc: "有機會抽到商店裡的所有物品！(1/3 機率落空)", icon: "🎫" }
 ];
 
 activeGoals.forEach(goal => {
@@ -228,6 +337,32 @@ function renderShop() {
 function useItem(item) {
     let effectMsg = "";
 
+    if (item.id === "lottery_ticket") {
+        const rand = Math.random();
+        if (rand < 1 / 3) {
+            currentLotteryPrize = { name: "再接再厲獎", win: false };
+        } else {
+            // 排除抽獎券本身的獎池
+            const pool = shopItems.filter(i => i.id !== "lottery_ticket");
+            const prize = pool[Math.floor(Math.random() * pool.length)];
+            currentLotteryPrize = { ...prize, win: true };
+        }
+
+        // Open Lottery Modal
+        lotteryOverlay.classList.add("shop-open");
+        
+        // Reset iframe and send prize after it loads
+        lotteryIframe.contentWindow.location.reload();
+        lotteryIframe.onload = () => {
+            lotteryIframe.contentWindow.postMessage({ 
+                type: 'SET_PRIZE', 
+                prize: currentLotteryPrize.name,
+                isWin: currentLotteryPrize.win
+            }, '*');
+        };
+        return;
+    }
+
     if (item.energy) {
         energy += item.energy;
         effectMsg = `體力提升了 ${item.energy} (目前: ${energy}⚡)`;
@@ -254,6 +389,8 @@ function useItem(item) {
     document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
     showToast(`使用了 ${item.name}！\n${effectMsg}`);
+
+    saveGameState();
 }
 
 function showToast(msg) {
@@ -271,6 +408,27 @@ function showToast(msg) {
         toast.classList.remove("show");
     }, 3000);
 }
+
+// Handle messages from lottery iframe
+window.addEventListener('message', (event) => {
+    if (event.data.type === 'LOTTERY_DONE') {
+        lotteryOverlay.classList.remove("shop-open");
+        
+        if (currentLotteryPrize) {
+            if (currentLotteryPrize.win) {
+                showToast(`恭喜！你抽到了 ${currentLotteryPrize.name}！\n(已放入背包)`);
+                backpack.push({ ...currentLotteryPrize });
+                renderBackpack();
+            } else {
+                showToast("再接再厲！這次什麼都沒抽到。");
+            }
+            currentLotteryPrize = null;
+        }
+        
+        document.getElementById("moneyBox").innerText  = `💰 ${money}`;
+        document.getElementById("energyBox").innerText = `⚡ ${energy}`;
+    }
+});
 
 useNowBtn.addEventListener("click", () => {
     if (pendingItem) {
@@ -292,10 +450,12 @@ storeInBagBtn.addEventListener("click", () => {
 
         buyConfirmModal.classList.remove("active");
         shopBalance.innerText = `💰 ${money}`;
-
+        document.getElementById("moneyBox").innerText = `💰 ${money}`;
         showToast(`已將 ${pendingItem.name} 放入背包`);
 
         pendingItem = null;
+
+        saveGameState();
     }
 });
 
@@ -559,37 +719,53 @@ function getNextEvent() {
 //  LOAD & DISPLAY AN EVENT
 // ─────────────────────────────────────────────
 
-function loadEvent() {
-    const event = getNextEvent();
+function displayEvent(event) {
 
     if (!event) {
         endGameByNoMoreEvents();
         return;
     }
 
-    // 每一題出現時，才開始計算玩家反應時間
+    currentEventObject = event;
+
     lastActionTime = Date.now();
 
     document.getElementById("goalBox").innerText =
         `${currentWeeklyGoal.goal.replace("goal", "Goal ")} Score ≥ ${currentWeeklyGoal.target}`;
-    document.getElementById("dayBox").innerText    = `Day ${day}-${actionsToday + 1}`;
-    document.getElementById("moneyBox").innerText  = `💰 ${money}`;
-    document.getElementById("energyBox").innerText = `⚡ ${energy}`;
 
-    document.getElementById("scenarioTitle").innerText       = event.title;
-    document.getElementById("scenarioDescription").innerText = event.description;
+    document.getElementById("dayBox").innerText =
+        `Day ${day}-${actionsToday + 1}`;
 
-    const choicesSection = document.getElementById("choicesSection");
+    document.getElementById("moneyBox").innerText =
+        `💰 ${money}`;
+
+    document.getElementById("energyBox").innerText =
+        `⚡ ${energy}`;
+
+    document.getElementById("scenarioTitle").innerText =
+        event.title;
+
+    document.getElementById("scenarioDescription").innerText =
+        event.description;
+
+    const choicesSection =
+        document.getElementById("choicesSection");
+
     choicesSection.innerHTML = "";
 
     if (hasAdvisorCard) {
-        const advisorBtn = document.createElement("button");
+
+        const advisorBtn =
+            document.createElement("button");
+
         advisorBtn.id = "advisorCardBtn";
         advisorBtn.innerText = "🃏 使用顧問卡（跳過此題）";
 
         advisorBtn.addEventListener("click", () => {
             hasAdvisorCard = false;
             actionsToday++;
+
+            saveGameState();
 
             if (actionsToday >= maxActionsPerDay) {
                 nextDay();
@@ -602,7 +778,10 @@ function loadEvent() {
     }
 
     event.choices.forEach(choice => {
-        const card = document.createElement("div");
+
+        const card =
+            document.createElement("div");
+
         card.classList.add("choice-card");
 
         card.innerHTML = `
@@ -616,10 +795,53 @@ function loadEvent() {
         card.addEventListener("click", () => handleChoice(choice));
 
         choicesSection.appendChild(card);
+
     });
+
+    saveGameState();
 }
 
 
+function loadEvent() {
+
+    const event =
+        getNextEvent();
+
+    displayEvent(event);
+
+}
+
+function toNumber(value) {
+    if (value === undefined || value === null) {
+        return 0;
+    }
+
+    if (typeof value === "number") {
+        return value;
+    }
+
+    return Number(String(value).replace("+", "").trim()) || 0;
+}
+
+function clampScore(value) {
+    return Math.min(
+        MAX_GOAL_SCORE,
+        Math.max(0, toNumber(value))
+    );
+}
+
+
+function getGoalDeltas(choice) {
+    const deltas = {};
+
+    for (const key in choice) {
+        if (key.startsWith("goal")) {
+            deltas[key] = toNumber(choice[key]);
+        }
+    }
+
+    return deltas;
+}
 // ─────────────────────────────────────────────
 //  HANDLE A CHOICE
 // ─────────────────────────────────────────────
@@ -638,8 +860,8 @@ function handleChoice(choice) {
 
     lastActionTime = currentTime;
 
-    const moneyChange = choice.money ?? 0;
-    const energyChange = choice.energy ?? 0;
+    const moneyChange = toNumber(choice.money);
+    const energyChange = toNumber(choice.energy);
 
     if (money + moneyChange < 0) {
         moneyPopup.classList.add("active");
@@ -649,32 +871,41 @@ function handleChoice(choice) {
 
     acceptedChoiceCount++;
 
-    money  = Math.max(0, money + moneyChange);
+    money = Math.max(0, money + moneyChange);
     energy = Math.max(0, energy + energyChange);
 
-    const deltas = {};
+    const deltas = getGoalDeltas(choice);
 
-    for (const key in choice) {
-        if (key.startsWith("goal")) {
-            sdgScores[key] = Math.min(
-                MAX_GOAL_SCORE,
-                (sdgScores[key] || 0) + choice[key]
-            );
+    for (const goal in deltas) {
+        const oldScore = sdgScores[goal] || 0;
+        const change = deltas[goal];
 
-            deltas[key] = choice[key];
-        }
+        sdgScores[goal] = clampScore(oldScore + change);
     }
 
+    console.log("choice:", choice);
+    console.log("deltas:", deltas);
+    console.log("sdgScores:", sdgScores);
+
+    document.getElementById("moneyBox").innerText = `💰 ${money}`;
+    document.getElementById("energyBox").innerText = `⚡ ${energy}`;
+
+    renderProgressBars();
     updateProgress(deltas);
 
     if (energy <= 0) {
         energyDepletedCount++;
         energy = 0;
+
+        saveGameState();
+
         nextDay();
         return;
     }
 
     actionsToday++;
+
+    saveGameState();
 
     if (actionsToday >= maxActionsPerDay) {
         nextDay();
@@ -695,8 +926,9 @@ function updateProgress(deltas = {}) {
         const deltaSpan = document.getElementById(`${goal}Delta`);
 
         if (fill) {
-            const score = Math.min(sdgScores[goal] || 0, MAX_GOAL_SCORE);
+            const score = clampScore(sdgScores[goal] || 0);
             const percent = (score / MAX_GOAL_SCORE) * 100;
+
             fill.style.width = `${percent}%`;
 
             if (text) {
@@ -754,6 +986,7 @@ function showWeeklyGoalModal() {
     const modal = document.getElementById("dailyModal");
 
     if (!modal) {
+        loadEvent();
         return;
     }
 
@@ -873,6 +1106,8 @@ function nextDay() {
     day++;
     actionsToday = 0;
     energy = MAX_ENERGY;
+
+    saveGameState();
 
     if (day === 6) {
         checkWeeklyGoal(1);
@@ -1016,144 +1251,45 @@ function determineEnding() {
     saveResult(endingType, endingTitle, endingText);
 }
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+async function saveScoreToCloud(resultType) {
 
-import {
-    getDatabase,
-    ref,
-    get,
-    set,
-    query,
-    orderByChild,
-    limitToLast,
-    onValue
-} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+    if (!window.updateCloudLeaderboard) {
+        console.log("Firebase leaderboard function not loaded.");
+        return;
+    }
 
+    const currentUserName =
+        localStorage.getItem("currentUserName") || "Unknown Player";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCUmLUiV7xqPmzRnsvw-v6Pu3QXdJ7lhVs",
-    authDomain: "ecolife-fae52.firebaseapp.com",
-    databaseURL: "https://ecolife-fae52-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "ecolife-fae52",
-    storageBucket: "ecolife-fae52.firebasestorage.app",
-    messagingSenderId: "469824988864",
-    appId: "1:469824988864:web:19067f345d1eb1aa756f25",
-    measurementId: "G-6FDZ9HKSG3"
-};
+    const currentUserId =
+        localStorage.getItem("currentUserId") || "Unknown ID";
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+    const category =
+        localStorage.getItem("selectedCategory") || selectedCategory;
 
+    const scores =
+        activeGoals.map(goal =>
+            Math.max(0, sdgScores[goal] || 0)
+        );
 
-/* 避免 ID 裡面有 Firebase 不允許的符號 */
-function cleanId(id) {
-    return String(id).replace(/[.#$/[\]]/g, "_");
+    const totalScore =
+        scores.reduce((sum, score) => sum + score, 0);
+
+    const averageScore =
+        Math.round(totalScore / activeGoals.length);
+
+    const playerData = {
+        name: currentUserName,
+        id: currentUserId,
+        category: category,
+        score: averageScore,
+        result: resultType,
+        date: new Date().toLocaleDateString()
+    };
+
+    await window.updateCloudLeaderboard(playerData);
 }
 
-
-/* 遊戲結束後更新排行榜 */
-window.updateCloudLeaderboard = async function(playerData) {
-    const safeId = cleanId(playerData.id);
-    const category = playerData.category || "Environment";
-    const playerRef = ref(
-        db,
-        "leaderboard/" + category + "/" + safeId
-    );
-    const oldSnapshot = await get(playerRef);
-    if (!oldSnapshot.exists()) {
-        await set(playerRef, playerData);
-        return;
-    }
-    const oldData = oldSnapshot.val();
-    if (playerData.score > oldData.score) {
-        await set(playerRef, playerData);
-
-    }
-
-};
-
-
-/* 首頁即時顯示排行榜 */
-window.renderCloudLeaderboard = function() {
-    const leaderboardList =
-        document.getElementById("leaderboardList");
-    const leaderboardTabs =
-        document.querySelectorAll(".leaderboard-tab");
-    if (!leaderboardList) {
-        return;
-    }
-    let currentCategory = "Environment";
-    function renderCategory(category) {
-        const categoryRef =
-            query(
-                ref(db, "leaderboard/" + category),
-                orderByChild("score"),
-                limitToLast(10)
-            );
-        onValue(categoryRef, function(snapshot) {
-            if (!snapshot.exists()) {
-                leaderboardList.innerHTML = `
-                    <div class="empty-leaderboard">
-                        No records yet in ${category}. Start playing to join the leaderboard!
-                    </div>
-                `;
-                return;
-            }
-            const players = [];
-            snapshot.forEach(function(childSnapshot) {
-                players.push(childSnapshot.val());
-            });
-            players.sort((a, b) => b.score - a.score);
-            leaderboardList.innerHTML = "";
-            players.forEach(function(player, index) {
-                const row =
-                    document.createElement("div");
-                row.classList.add("leaderboard-row");
-                row.innerHTML = `
-                    <div class="leaderboard-rank">
-                        #${index + 1}
-                    </div>
-                    <div class="leaderboard-player">
-                        <div class="leaderboard-name">
-                            ${player.name}
-                        </div>
-                        <div class="leaderboard-id">
-                            ID: ${player.id}
-                        </div>
-                    </div>
-                    <div class="leaderboard-score">
-                        ${player.score}
-                    </div>
-                    <div class="leaderboard-category">
-                        ${player.category}
-                    </div>
-                `;
-                leaderboardList.appendChild(row);
-            });
-        });
-    }
-    leaderboardTabs.forEach(function(tab) {
-        tab.addEventListener("click", function() {
-            leaderboardTabs.forEach(function(otherTab) {
-                otherTab.classList.remove("active");
-            });
-            tab.classList.add("active");
-            currentCategory =
-                tab.dataset.category;
-            renderCategory(currentCategory);
-
-        });
-
-    });
-
-    renderCategory(currentCategory);
-
-};
-
-
-// ─────────────────────────────────────────────
-//  SAVE RESULT & REDIRECT
-// ─────────────────────────────────────────────
 
 async function saveResult(type, endingTitle, endingText) {
 
@@ -1169,6 +1305,9 @@ async function saveResult(type, endingTitle, endingText) {
     localStorage.setItem("targetGoal", targetGoal);
     localStorage.setItem("targetScore", targetScore);
     localStorage.setItem("sdgScores", JSON.stringify(sdgScores));
+
+    shouldSaveGameOnLeave = false;
+    clearGameState();
 
     menuModal.classList.remove("active");
 
@@ -1190,7 +1329,7 @@ function renderProgressBars() {
     progressList.innerHTML = "";
 
     activeGoals.forEach(goal => {
-        const score = Math.min(sdgScores[goal] || 0, MAX_GOAL_SCORE);
+        const score = clampScore(sdgScores[goal] || 0);
         const percent = (score / MAX_GOAL_SCORE) * 100;
         const goalNumber = goal.replace("goal", "");
 
@@ -1433,12 +1572,27 @@ if (goalPopupElement) {
     });
 }
 
+window.addEventListener("beforeunload", function () {
+    saveGameState();
+});
 
 // ─────────────────────────────────────────────
 //  INIT
 // ─────────────────────────────────────────────
 
+const hasSavedGame =
+    loadGameState();
+
 renderProgressBars();
-refillQueue();
 updateProgress();
-setWeeklyGoal(1);
+
+if (hasSavedGame && currentEventObject) {
+
+    displayEvent(currentEventObject);
+
+} else {
+
+    refillQueue();
+    setWeeklyGoal(1);
+
+}

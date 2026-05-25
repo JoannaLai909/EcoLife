@@ -11,13 +11,13 @@ const globalEvents = [
                 text: "一起參加交流活動",
                 money: -5,
                 energy: -10,
-                goal17: 12
+                goal17: 8
             },
             {
                 text: "線上參加比較安全",
                 money: 0,
                 energy: -4,
-                goal17: 6
+                goal17: 5
             },
             {
                 text: "太尷尬了不想去",
@@ -39,13 +39,13 @@ const globalEvents = [
                 text: "理性提醒不要仇恨發言",
                 money: 0,
                 energy: -10,
-                goal16: 12
+                goal16: 8
             },
             {
                 text: "檢舉惡意留言",
                 money: 0,
                 energy: -5,
-                goal16: 8
+                goal16: 4
             },
             {
                 text: "跟胡尼克一起加入混戰",
@@ -95,7 +95,7 @@ const globalEvents = [
                 text: "一起加入研究團隊",
                 money: 0,
                 energy: -20,
-                goal17: 15
+                goal17: 10
             },
             {
                 text: "只參加重要會議",
@@ -151,7 +151,7 @@ const globalEvents = [
                 text: "陪她一起報名",
                 money: -100,
                 energy: -25,
-                goal17: 15
+                goal17: 12
             },
             {
                 text: "幫忙整理志工資料",
@@ -292,7 +292,7 @@ const globalEvents = [
                 text: "認真體驗不同文化",
                 money: -30,
                 energy: -12,
-                goal17: 15
+                goal17: 10
             },
             {
                 text: "和交換生聊天交流",
@@ -348,7 +348,7 @@ const globalEvents = [
                 text: "積極協調分工",
                 money: 0,
                 energy: -35,
-                goal17: 18
+                goal17: 12
             },
             {
                 text: "負責自己的部分",
@@ -432,7 +432,7 @@ const globalEvents = [
                 text: "支持公平貿易商品",
                 money: -80,
                 energy: 3,
-                goal17: 15
+                goal17: 12
             },
             {
                 text: "了解生產者權益",
