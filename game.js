@@ -399,6 +399,8 @@ storeInBagBtn.addEventListener("click", () => {
         showToast(`已將 ${pendingItem.name} 放入背包`);
 
         pendingItem = null;
+
+        saveGameState();
     }
 });
 
@@ -784,33 +786,44 @@ function handleChoice(choice) {
 
     acceptedChoiceCount++;
 
-    money  = Math.max(0, money + moneyChange);
+    money = Math.max(0, money + moneyChange);
     energy = Math.max(0, energy + energyChange);
 
     const deltas = {};
 
     for (const key in choice) {
         if (key.startsWith("goal")) {
-            sdgScores[key] = Math.min(
+            const oldScore = sdgScores[key] || 0;
+
+            const newScore = Math.min(
                 MAX_GOAL_SCORE,
-                (sdgScores[key] || 0) + choice[key]
+                oldScore + choice[key]
             );
 
+            sdgScores[key] = newScore;
             deltas[key] = choice[key];
         }
     }
 
+    document.getElementById("moneyBox").innerText = `💰 ${money}`;
+    document.getElementById("energyBox").innerText = `⚡ ${energy}`;
+
+    renderProgressBars();
     updateProgress(deltas);
-    saveGameState();
 
     if (energy <= 0) {
         energyDepletedCount++;
         energy = 0;
+
+        saveGameState();
+
         nextDay();
         return;
     }
 
     actionsToday++;
+
+    saveGameState();
 
     if (actionsToday >= maxActionsPerDay) {
         nextDay();
