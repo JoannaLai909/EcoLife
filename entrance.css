@@ -654,6 +654,191 @@ p {
 .first-section {
     padding-top: 140px;
 }
+
+/* =========================
+   Leaderboard Section
+========================= */
+
+.leaderboard-section {
+    width: 100%;
+    min-height: 80vh;
+
+    background: #9ed8f2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 100px 30px;
+}
+
+.leaderboard-container {
+    width: 900px;
+    max-width: 95%;
+
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+
+    border-radius: 36px;
+    padding: 45px 55px;
+
+    box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+
+    text-align: center;
+}
+
+.leaderboard-container h2 {
+    font-size: 58px;
+    color: #004aad;
+    margin-bottom: 12px;
+}
+
+.leaderboard-subtitle {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 35px;
+}
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.leaderboard-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 140px;
+    align-items: center;
+
+    background: white;
+    border-radius: 22px;
+
+    padding: 18px 24px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.leaderboard-rank {
+    font-size: 28px;
+    color: #114bb8;
+}
+
+.leaderboard-player {
+    text-align: left;
+}
+
+.leaderboard-name {
+    font-size: 24px;
+    color: #114bb8;
+    margin-bottom: 4px;
+}
+
+.leaderboard-id {
+    font-size: 14px;
+    color: #666;
+}
+
+.leaderboard-score {
+    font-size: 28px;
+    color: #1748c7;
+}
+
+.leaderboard-category {
+    font-size: 16px;
+    color: #333;
+}
+
+.empty-leaderboard {
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+
+    color: #666;
+    font-size: 20px;
+}
+
+.leaderboard-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.leaderboard-tab {
+    border: none;
+    background: #e9f4ff;
+    color: #114bb8;
+
+    padding: 12px 20px;
+    border-radius: 16px;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 18px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.leaderboard-tab:hover {
+    transform: translateY(-2px);
+    background: #d3eaff;
+}
+
+.leaderboard-tab.active {
+    background: #114bb8;
+    color: white;
+}
+
+.leaderboard-tiger {
+    width: 230px;
+    max-width: 45%;
+    height: auto;
+
+    display: block;
+    margin: 0 auto 10px auto;
+
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,0.18));
+
+    animation: leaderboardTigerFloat 2.4s ease-in-out infinite;
+}
+
+@keyframes leaderboardTigerFloat {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+/* RWD */
+
+@media (max-width: 768px) {
+
+    .leaderboard-container {
+        padding: 35px 24px;
+    }
+
+    .leaderboard-container h2 {
+        font-size: 42px;
+    }
+
+    .leaderboard-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .leaderboard-player {
+        text-align: center;
+    }
+
+}
 /* =========================
    Responsive
 ========================= */

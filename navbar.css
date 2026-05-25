@@ -208,6 +208,35 @@
   pointer-events: auto;
 }
 
+.back-to-game-btn {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+
+    z-index: 99999;
+
+    border: none;
+    background: #114bb8;
+    color: white;
+
+    padding: 14px 26px;
+    border-radius: 18px;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.22);
+    transition: 0.2s;
+}
+
+.back-to-game-btn:hover {
+    transform: translateY(-3px);
+    background: #0d3f9c;
+}
+
 /* =========================
    Navbar Responsive
 ========================= */
@@ -233,5 +262,12 @@
   .dropdown-content a,
   .feature-btn {
     font-size: 14px;
+  }
+
+  .back-to-game-btn {
+    right: 18px;
+    bottom: 18px;
+    font-size: 16px;
+    padding: 12px 20px;
   }
 }
