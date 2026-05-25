@@ -1017,3 +1017,244 @@ p {
     bottom: 40px;
   }
 }
+
+/* =========================
+   Problem Feedback Section
+========================= */
+
+.feedback-section {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #B9E5F8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 120px 30px;
+}
+
+.feedback-container {
+    width: 850px;
+    max-width: 95%;
+
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+
+    border-radius: 36px;
+    padding: 55px 60px;
+
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.16);
+
+    text-align: center;
+}
+
+.feedback-container h2 {
+    font-size: 56px;
+    color: #004aad;
+    margin: 0 0 18px;
+}
+
+.feedback-subtitle {
+    font-size: 21px;
+    color: #333;
+    line-height: 1.6;
+    margin: 0 auto 38px;
+    max-width: 650px;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.feedback-field {
+    text-align: left;
+}
+
+.feedback-field label {
+    display: block;
+
+    color: #004aad;
+
+    font-size: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.feedback-field input,
+.feedback-field select,
+.feedback-field textarea {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    border-radius: 18px;
+    padding: 16px 18px;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 18px;
+
+    background: #ffffff;
+    color: #10233f;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.feedback-field textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.feedback-submit-btn {
+    align-self: center;
+
+    border: none;
+    cursor: pointer;
+
+    color: white;
+    background: linear-gradient(135deg, #ff7a18, #ffb347);
+
+    padding: 14px 34px;
+    border-radius: 16px;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+
+    box-shadow: 0 5px 0 #c85c00;
+
+    transition: all 0.15s ease;
+}
+
+.feedback-submit-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+}
+
+.feedback-submit-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #c85c00;
+}
+
+.feedback-success {
+    display: none;
+
+    margin-top: 10px;
+    padding: 16px 20px;
+
+    background: #ffffff;
+    color: #004aad;
+
+    border-radius: 18px;
+
+    font-size: 18px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.feedback-success.show {
+    display: block;
+}
+
+/* =========================
+   Problem Feedback Section
+========================= */
+
+.feedback-section {
+    width: 100%;
+    min-height: 70vh;
+
+    background: #B9E5F8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 100px 30px;
+}
+
+.feedback-container {
+    width: 800px;
+    max-width: 95%;
+
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+
+    border-radius: 36px;
+    padding: 55px 60px;
+
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.16);
+
+    text-align: center;
+}
+
+.feedback-container h2 {
+    font-size: 56px;
+    color: #004aad;
+    margin: 0 0 18px;
+}
+
+.feedback-subtitle {
+    font-size: 22px;
+    color: #333;
+    line-height: 1.6;
+    margin: 0 auto 38px;
+    max-width: 620px;
+}
+
+.feedback-google-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    color: white;
+    background: linear-gradient(135deg, #ff7a18, #ffb347);
+
+    padding: 14px 34px;
+    border-radius: 16px;
+
+    font-family: "Ahkio-Regular", Arial, sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+
+    box-shadow: 0 5px 0 #c85c00;
+
+    transition: all 0.15s ease;
+}
+
+.feedback-google-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+}
+
+.feedback-google-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #c85c00;
+}
+
+/* RWD */
+@media (max-width: 768px) {
+    .feedback-section {
+        padding: 80px 20px;
+    }
+
+    .feedback-container {
+        padding: 40px 24px;
+    }
+
+    .feedback-container h2 {
+        font-size: 40px;
+    }
+
+    .feedback-subtitle {
+        font-size: 18px;
+    }
+
+    .feedback-google-btn {
+        font-size: 17px;
+        padding: 12px 26px;
+    }
+}

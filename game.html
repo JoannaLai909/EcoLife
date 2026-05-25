@@ -234,9 +234,17 @@
             </div>
 
 
-            <div class="shop-toast" id="shopToast">
-                Purchased!
+        <!-- LOTTERY MODAL -->
+        <div class="shop-overlay" id="lotteryOverlay">
+            <div class="shop-modal" style="max-width: 600px; width: 95%; height: 95vh; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                <div class="shop-header" style="padding: 20px 20px 10px 20px;">
+                    <h2>Lucky Lottery</h2>
+                    <button class="shop-close-btn" id="lotteryCloseBtn">×</button>
+                </div>
+                <iframe id="lotteryIframe" src="lottery.html" style="flex: 1; border: none; width: 100%;"></iframe>
             </div>
+        </div>
+
 
 
             <!-- MAIN CONTENT -->
@@ -400,6 +408,12 @@
         <script src="game.js"></script>
     </main>
 
+    <script type="module" src="firebase-leaderboard.js"></script>
+    <script src="environmentEvents.js"></script>
+    <script src="societyEvents.js"></script>
+    <script src="developmentEvents.js"></script>
+    <script src="globalEvents.js"></script>
+    <script src="game.js?v=10"></script>
 
 </body>
 </html>
