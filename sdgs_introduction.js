@@ -316,8 +316,13 @@ document.querySelector(".sdg-card").addEventListener("click", function (e) {
 });
 
 
-/* Check whether player is currently in a game */
+/* Check whether player entered this page from game */
 const GAME_STATE_KEY = "ecolifeCurrentGameState";
+
+function cameFromGame() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("from") === "game";
+}
 
 function hasActiveGameState() {
     const savedGame = sessionStorage.getItem(GAME_STATE_KEY);
@@ -347,7 +352,7 @@ function setupBackButton() {
         return;
     }
 
-    if (hasActiveGameState()) {
+    if (cameFromGame() && hasActiveGameState()) {
 
         nextBtn.innerText = "← Back to Game";
         nextBtn.style.display = "block";
@@ -358,7 +363,7 @@ function setupBackButton() {
 
     } else {
 
-        nextBtn.innerText = "BACK";
+        nextBtn.innerText = "HOME";
 
         nextBtn.addEventListener("click", function () {
             window.location.href = "entrance.html";
