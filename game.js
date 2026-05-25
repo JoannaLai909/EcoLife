@@ -126,6 +126,10 @@ const backpackOverlay  = document.getElementById("backpackOverlay");
 const backpackCloseBtn = document.getElementById("backpackCloseBtn");
 const backpackGrid     = document.getElementById("backpackGrid");
 
+const lotteryOverlay   = document.getElementById("lotteryOverlay");
+const lotteryCloseBtn   = document.getElementById("lotteryCloseBtn");
+const lotteryIframe    = document.getElementById("lotteryIframe");
+
 const rerollBtn        = document.getElementById("rerollBtn");
 
 // ─────────────────────────────────────────────
@@ -259,6 +263,8 @@ backpackCloseBtn.addEventListener("click", () => {
     backpackOverlay.classList.remove("shop-open");
 });
 
+lotteryCloseBtn.addEventListener("click", () => lotteryOverlay.classList.remove("shop-open"));
+
 rerollBtn.addEventListener("click", () => {
     if (money >= 75) {
         money -= 75;
@@ -277,10 +283,12 @@ rerollBtn.addEventListener("click", () => {
 // ─────────────────────────────────────────────
 
 let pendingItem = null;
+let currentLotteryPrize = null;
 
 const shopItems = [
     { id: "coffee", name: "熱咖啡", price: 150, energy: 20, desc: "提升 20 體力", icon: "☕" },
-    { id: "energy_drink", name: "提神飲料", price: 250, energy: 40, desc: "提升 40 體力", icon: "🥤" }
+    { id: "energy_drink", name: "提神飲料", price: 250, energy: 40, desc: "提升 40 體力", icon: "🥤" },
+    { id: "lottery_ticket", name: "抽獎券", price: 100, desc: "有機會抽到商店裡的所有物品！(1/3 機率落空)", icon: "🎫" }
 ];
 
 activeGoals.forEach(goal => {
@@ -329,6 +337,32 @@ function renderShop() {
 function useItem(item) {
     let effectMsg = "";
 
+    if (item.id === "lottery_ticket") {
+        const rand = Math.random();
+        if (rand < 1 / 3) {
+            currentLotteryPrize = { name: "再接再厲獎", win: false };
+        } else {
+            // 排除抽獎券本身的獎池
+            const pool = shopItems.filter(i => i.id !== "lottery_ticket");
+            const prize = pool[Math.floor(Math.random() * pool.length)];
+            currentLotteryPrize = { ...prize, win: true };
+        }
+
+        // Open Lottery Modal
+        lotteryOverlay.classList.add("shop-open");
+        
+        // Reset iframe and send prize after it loads
+        lotteryIframe.contentWindow.location.reload();
+        lotteryIframe.onload = () => {
+            lotteryIframe.contentWindow.postMessage({ 
+                type: 'SET_PRIZE', 
+                prize: currentLotteryPrize.name,
+                isWin: currentLotteryPrize.win
+            }, '*');
+        };
+        return;
+    }
+
     if (item.energy) {
         energy += item.energy;
         effectMsg = `體力提升了 ${item.energy} (目前: ${energy}⚡)`;
@@ -375,6 +409,27 @@ function showToast(msg) {
     }, 3000);
 }
 
+// Handle messages from lottery iframe
+window.addEventListener('message', (event) => {
+    if (event.data.type === 'LOTTERY_DONE') {
+        lotteryOverlay.classList.remove("shop-open");
+        
+        if (currentLotteryPrize) {
+            if (currentLotteryPrize.win) {
+                showToast(`恭喜！你抽到了 ${currentLotteryPrize.name}！\n(已放入背包)`);
+                backpack.push({ ...currentLotteryPrize });
+                renderBackpack();
+            } else {
+                showToast("再接再厲！這次什麼都沒抽到。");
+            }
+            currentLotteryPrize = null;
+        }
+        
+        document.getElementById("moneyBox").innerText  = `💰 ${money}`;
+        document.getElementById("energyBox").innerText = `⚡ ${energy}`;
+    }
+});
+
 useNowBtn.addEventListener("click", () => {
     if (pendingItem) {
         money -= pendingItem.price;
@@ -395,7 +450,7 @@ storeInBagBtn.addEventListener("click", () => {
 
         buyConfirmModal.classList.remove("active");
         shopBalance.innerText = `💰 ${money}`;
-
+        document.getElementById("moneyBox").innerText = `💰 ${money}`;
         showToast(`已將 ${pendingItem.name} 放入背包`);
 
         pendingItem = null;
