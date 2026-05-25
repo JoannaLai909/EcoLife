@@ -285,21 +285,44 @@ rerollBtn.addEventListener("click", () => {
 let pendingItem = null;
 let currentLotteryPrize = null;
 
+const sdgPotionData = {
+    goal1:  { name: "暴富幻覺液", icon: "💰", desc: "喝下去會夢到自己中樂透，醒來發現錢真的變多了" },
+    goal2:  { name: "永不飢渴神湯", icon: "🍚", desc: "喝一口就飽三天，副作用是會一直想到滷肉飯" },
+    goal3:  { name: "不老傳說精華", icon: "💊", desc: "據說是用某個活了200歲老人的汗水製成，不要細想" },
+    goal4:  { name: "考試滿分靈藥", icon: "📖", desc: "喝完會突然想念書，但只限今天" },
+    goal5:  { name: "平權覺醒注射液", icon: "👊", desc: "喝下去會對所有不公平的事情產生強烈的皺眉反應" },
+    goal6:  { name: "純淨山泉Max", icon: "🚿", desc: "味道是水，但比水更水，水界的天花板" },
+    goal7:  { name: "雷神借我一用汁", icon: "⚡", desc: "喝完背後會發光，請勿在黑暗中嚇人" },
+    goal8:  { name: "打工魂燃燒液", icon: "💼", desc: "喝完會突然很想上班，療效持續四小時" },
+    goal9:  { name: "工程師腦漿萃取", icon: "🔧", desc: "成分不明，但喝完會想蓋橋" },
+    goal10: { name: "公平正義果昔", icon: "⚖️", desc: "口感酸甜，代表社會本來就不容易" },
+    goal11: { name: "都更加速貼片液", icon: "🏙️", desc: "喝完會開始嫌棄自己住的地方" },
+    goal12: { name: "購物剋制滴劑", icon: "🛍️", desc: "滴三滴在舌下，可抑制衝動消費衝動，效果因人而異" },
+    goal13: { name: "地球退燒水", icon: "🌡️", desc: "溫度喝起來涼涼的，地球喝了應該也會好一點" },
+    goal14: { name: "珊瑚礁限定精釀", icon: "🐠", desc: "魚類一致好評，人類喝了會開始聽得懂魚語" },
+    goal15: { name: "葉綠素特調", icon: "🌿", desc: "顏色是綠色，成分是綠色，連瓶子也是綠色" },
+    goal16: { name: "和平鴿眼淚精華", icon: "🕊️", desc: "鴿子自願捐的，非常珍貴，請勿浪費" },
+    goal17: { name: "外交官社交補帖", icon: "🌐", desc: "喝完會突然很想認識新朋友，並邀請他們一起解決世界問題" }
+};
+
 const shopItems = [
-    { id: "coffee", name: "熱咖啡", price: 150, energy: 20, desc: "提升 20 體力", icon: "☕" },
-    { id: "energy_drink", name: "提神飲料", price: 250, energy: 40, desc: "提升 40 體力", icon: "🥤" },
-    { id: "lottery_ticket", name: "抽獎券", price: 100, desc: "有機會抽到商店裡的所有物品！(1/3 機率落空)", icon: "🎫" }
+    { id: "coffee", name: "世界末日特調", price: 150, energy: 20, desc: "在地球快完蛋的時候還能喝杯熱咖啡，是一種浪漫。喝完體力+20，心情也會好一點點。", icon: "☕" },
+    { id: "energy_drink", name: "過勞特許認證飲", price: 250, energy: 40, desc: "勞動部強烈不建議，但效果拔群。附贈一張「我知道這樣不好」的免責聲明書。", icon: "🥤" },
+    { id: "lottery_ticket", name: "抽獎券", price: 100, desc: "可能抽到稀有藥水，也可能抽到空氣。抽到空氣的話，我們認為那也是一種禮物。", icon: "🎫" }
 ];
 
 activeGoals.forEach(goal => {
-    shopItems.push({
-        id: `potion_${goal}`,
-        name: `${goal.replace("goal", "SDG ")} 藥水`,
-        price: 225,
-        goalKey: goal,
-        desc: `隨機提升 ${goal.replace("goal", "Goal ")} 分數 1~8 分`,
-        icon: "🧪"
-    });
+    const data = sdgPotionData[goal];
+    if (data) {
+        shopItems.push({
+            id: `potion_${goal}`,
+            name: data.name,
+            price: 225,
+            goalKey: goal,
+            desc: data.desc,
+            icon: data.icon
+        });
+    }
 });
 
 function renderShop() {
@@ -378,9 +401,16 @@ function useItem(item) {
             (sdgScores[item.goalKey] || 0) + gain
         );
 
+        // Special effect for Goal 1: Increase money
+        if (item.goalKey === "goal1") {
+            const moneyGain = 50 + Math.floor(Math.random() * 51);
+            money += moneyGain;
+            effectMsg = `錢財增加了 ${moneyGain}！\n`;
+        }
+
         updateProgress();
 
-        effectMsg =
+        effectMsg +=
             `${item.goalKey.replace("goal", "Goal ")} 進度提升了 ${gain} ` +
             `(目前: ${sdgScores[item.goalKey]})`;
     }
@@ -402,10 +432,10 @@ function showToast(msg) {
     }
 
     toast.innerText = msg;
-    toast.classList.add("show");
+    toast.classList.add("active");
 
     setTimeout(() => {
-        toast.classList.remove("show");
+        toast.classList.remove("active");
     }, 3000);
 }
 

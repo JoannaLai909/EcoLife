@@ -14,103 +14,109 @@
     <!-- CSS -->
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="sdgs_introduction.css">
+    <link rel="stylesheet" href="footer.css">
 </head>
 
 <body>
+    <main class="page-content">
+        <!-- NAVBAR -->
+        <nav class="navbar">
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-
-        <a href="entrance.html" class="logo">
-            EcoLife SImulator
-        </a>
-
-        <div class="nav-links">
-
-            <a href="entrance.html#sdgs">
-                SDGs
+            <a href="entrance.html" class="logo">
+                EcoLife SImulator
             </a>
 
-            <div class="dropdown">
+            <div class="nav-links">
 
-                <div class="drop-btn">
-                    About Us
-                </div>
-
-                <div class="dropdown-content">
-
-                    <a href="about.html#why">Origin</a>
-                    <a href="about.html#purpose">Purpose</a>
-                    <a href="about.html#visualfeedback">Visual Feedback</a>
-                    <a href="about.html#replayability">Replayability</a>
-
-                </div>
-
-            </div>
-
-        </div>
-    </nav>
-    
-    <div class="container">
-
-        <div class="hero">
-            <h1>SDGs</h1>
-            <p>SUSTAINABLE DEVELOPMENT GOALS</p>
-
-            <button class="cta-button" id="exploreBtn">
-                Explore the Goals
-            </button>
-        </div>
-
-        <div class="sdg-grid" id="sdgGrid"></div>
-
-        <div id="sdgShowcase" class="sdg-modal">
-            <div class="sdg-card">
-                <div class="goal-number" id="showGoalNumber">1</div>
-                <h2 id="showGoalTitle">Goal 1</h2>
-                <p id="showGoalDesc"></p>
-
-                <a id="showMoreBtn" class="show-more-btn" href="#" target="_blank">
-                    More info
+                <a href="entrance.html#sdgs">
+                    SDGs
                 </a>
+
+                <div class="dropdown">
+
+                    <div class="drop-btn">
+                        About Us
+                    </div>
+
+                    <div class="dropdown-content">
+
+                        <a href="about.html#why">Origin</a>
+                        <a href="about.html#purpose">Purpose</a>
+                        <a href="about.html#visualfeedback">Visual Feedback</a>
+                        <a href="about.html#replayability">Replayability</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </nav>
+        
+        <div class="container">
+
+            <div class="hero">
+                <h1>SDGs</h1>
+                <p>SUSTAINABLE DEVELOPMENT GOALS</p>
+
+                <button class="cta-button" id="exploreBtn">
+                    Explore the Goals
+                </button>
+            </div>
+
+            <div class="sdg-grid" id="sdgGrid"></div>
+
+            <div id="sdgShowcase" class="sdg-modal">
+                <div class="sdg-card">
+                    <div class="goal-number" id="showGoalNumber">1</div>
+                    <h2 id="showGoalTitle">Goal 1</h2>
+                    <p id="showGoalDesc"></p>
+
+                    <a id="showMoreBtn" class="show-more-btn" href="#" target="_blank">
+                        More info
+                    </a>
+                </div>
+            </div>
+
+            <div class="info-tip">
+                ✨ Tap any icon to see details
+            </div>
+
+        </div>
+
+        <!-- Popup -->
+        <div id="sdgPopup" class="sdg-popup">
+            <div class="popup-inner">
+
+                <button class="close-popup" id="closePopupBtn">✕</button>
+
+                <div class="popup-header">
+                    <div class="popup-icon">
+                        <img src="" alt="" id="popupImg">
+                    </div>
+
+                    <div>
+                        <div class="popup-title" id="popupTitle"></div>
+                        <div class="popup-sub" id="popupSub"></div>
+                    </div>
+                </div>
+
+                <div class="popup-desc" id="popupDesc"></div>
+
             </div>
         </div>
 
-        <div class="info-tip">
-            ✨ Tap any icon to see details
-        </div>
+        <!-- Back Button -->
+        <button id="nextBtn">
+            BACK
+        </button>
 
-    </div>
-
-    <!-- Popup -->
-    <div id="sdgPopup" class="sdg-popup">
-        <div class="popup-inner">
-
-            <button class="close-popup" id="closePopupBtn">✕</button>
-
-            <div class="popup-header">
-                <div class="popup-icon">
-                    <img src="" alt="" id="popupImg">
-                </div>
-
-                <div>
-                    <div class="popup-title" id="popupTitle"></div>
-                    <div class="popup-sub" id="popupSub"></div>
-                </div>
-            </div>
-
-            <div class="popup-desc" id="popupDesc"></div>
-
-        </div>
-    </div>
-
-    <!-- Back Button -->
-    <button id="nextBtn">
-        BACK
-    </button>
-
-    <!-- JS -->
-    <script src="sdgs_introduction.js"></script>
+        <!-- JS -->
+        <script src="sdgs_introduction.js"></script>
+    </main>
+    
+    <footer class="copyright-footer">
+        Copyright © EcoLife All rights reserved.
+    </footer>
 
 </body>
 </html>

@@ -7,34 +7,37 @@
 
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="entrance.css">
+    <link rel="stylesheet" href="footer.css">
 </head>
 
-<body class="about-page">
+<body>
+    <main class="page-content">
+            <nav class="navbar">
 
-    <nav class="navbar">
+            <a href="entrance.html" class="logo">
+                EcoLife SImulator
+            </a>
 
-        <a href="entrance.html" class="logo">
-            EcoLife Simulator
-        </a>
+            <div class="nav-links">
 
-        <ul class="nav-links">
+                <a href="entrance.html#sdgs">
+                    SDGs
+                </a>
 
-            <li>
-                <a href="entrance.html#sdgs">SDGs</a>
-            </li>
+                <div class="dropdown">
 
-            <li class="dropdown">
-                <a href="#" class="drop-btn">About Us</a>
+                    <div class="drop-btn">
+                        About Us
+                    </div>
 
-                <ul class="dropdown-content">
+                    <div class="dropdown-content">
 
-                    <a href="about.html#why">Origin</a>
-                    <a href="about.html#purpose">Purpose</a>
+                        <a href="#why">Origin</a>
+                        <a href="#purpose">Purpose</a>
+                        <a href="#visualfeedback">Visual Feedback</a>
+                        <a href="#replayability">Replayability</a>
 
-                    <div class="sub-dropdown">
-                        <button class="feature-btn" type="button">
-                            Features ▸
-                        </button>
+                    </div>
 
                         <ul class="sub-dropdown-content">
                             <li>
@@ -110,99 +113,72 @@
 
         <div class="visualfeedback-right">
 
-            <div class="bar-chart">
+                <div class="visualfeedback-right">
+                <div class="bar-chart">
 
-                <div class="legend">
+                    <div class="legend">
+                    <span><i class="dot blue"></i> goal1</span>
+                    <span><i class="dot purple"></i> goal7</span>
+                    <span><i class="dot orange"></i> goal13</span>
+                    <span><i class="dot yellow"></i> goal15</span>
+                    </div>
 
-                    <span>
-                        <span class="dot blue"></span>
-                        Environment
-                    </span>
+                    <div class="bar-row">
+                    <span class="label">goal1</span>
+                    <div class="bar blue-bar" style="width: 55%;"></div>
+                    </div>
 
-                    <span>
-                        <span class="dot purple"></span>
-                        Society
-                    </span>
+                    <div class="bar-row">
+                    <span class="label">goal7</span>
+                    <div class="bar purple-bar" style="width: 30%;"></div>
+                    </div>
 
-                    <span>
-                        <span class="dot orange"></span>
-                        Development
-                    </span>
+                    <div class="bar-row">
+                    <span class="label">goal13</span>
+                    <div class="bar orange-bar" style="width: 82%;"></div>
+                    </div>
 
-                    <span>
-                        <span class="dot yellow"></span>
-                        Global
-                    </span>
+                    <div class="bar-row">
+                    <span class="label">goal15</span>
+                    <div class="bar yellow-bar" style="width: 45%;"></div>
+                    </div>
 
                 </div>
-
-                <div class="bar-row">
-                    <div class="label">ECO</div>
-                    <div class="bar blue-bar" style="width: 88%;"></div>
                 </div>
 
-                <div class="bar-row">
-                    <div class="label">SOC</div>
-                    <div class="bar purple-bar" style="width: 72%;"></div>
+            </section>
+
+            <section id="replayability" class="replay-section">
+                <div class="replay-text">
+                    <h2>Replayability</h2>
+                    <p>
+                    Different strategies will lead to<br>
+                    different endings, encouraging<br>
+                    users to try again.
+                    </p>
                 </div>
 
-                <div class="bar-row">
-                    <div class="label">DEV</div>
-                    <div class="bar orange-bar" style="width: 65%;"></div>
+                <div class="tiger-area">
+                    <img src="image/tiger_ending_1_transparent.png" class="tiger tiger-top">
+                    <img src="image/tiger_ending_2_transparent.png" class="tiger tiger-bottom">
+                    <img src="image/tiger_ending_3_transparent.png" class="tiger tiger-right">
                 </div>
-
-                <div class="bar-row">
-                    <div class="label">GLB</div>
-                    <div class="bar yellow-bar" style="width: 80%;"></div>
-                </div>
-
-            </div>
-
+            </section>
         </div>
 
-    </section>
+        <script>
+            function revealSections() {
+                const sections = document.querySelectorAll(
+                ".info-section, .visualfeedback-section, .replay-section"
+                );
 
-    <section id="replayability" class="replay-section">
-
-        <div class="replay-text">
-
-            <h2>
-                Replayability
-            </h2>
-
-            <p>
-                Different strategies lead to different endings, encouraging users to try again and explore new paths.
-                By replaying the game, players can compare outcomes and learn how better decisions create more balanced
-                and sustainable results.
-            </p>
-
-        </div>
-
-        <div class="tiger-area">
-
-            <img
-                src="image/tiger_ending_1_transparent.png"
-                alt="Tiger Ending 1"
-                class="tiger tiger-top"
-            >
-
-            <img
-                src="image/tiger_ending_2_transparent.png"
-                alt="Tiger Ending 2"
-                class="tiger tiger-bottom"
-            >
-
-            <img
-                src="image/tiger_ending_3_transparent.png"
-                alt="Tiger Ending 3"
-                class="tiger tiger-right"
-            >
-
-        </div>
-
-    </section>
+                sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
 
     <script src="entrance.js"></script>
 
+    <footer class="copyright-footer">
+        Copyright © EcoLife All rights reserved.
+    </footer>
 </body>
 </html>
