@@ -11,226 +11,228 @@
     <link href="https://db.onlinewebfonts.com/c/b7c46534c8a2d55edd840bf49383777d?family=Ahkio-Regular" rel="stylesheet">
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="footer.css">
 </head>
 
 <body>
+    <main class="page-content">
+        <!-- NAVBAR -->
+        <nav class="navbar">
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-
-        <a href="entrance.html" class="logo">
-            EcoLife Simulator
-        </a>
-
-        <div class="nav-links">
-
-            <a href="sdgs_introduction.html?from=game">
-                SDGs
+            <a href="entrance.html" class="logo">
+                EcoLife Simulator
             </a>
 
-            <div class="dropdown">
+            <div class="nav-links">
 
-                <div class="drop-btn">
-                    About Us
-                </div>
+                <a href="sdgs_introduction.html?from=game">
+                    SDGs
+                </a>
 
-                <div class="dropdown-content">
+                <div class="dropdown">
 
-                    <a href="about.html?from=game#why">Origin</a>
-                    <a href="about.html?from=game#purpose">Purpose</a>
-                    <a href="about.html?from=game#visualfeedback">Visual Feedback</a>
-                    <a href="about.html?from=game#replayability">Replayability</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </nav>
-
-    <div class="game-page">
-
-        <!-- TOP BAR -->
-        <header class="top-bar">
-
-            <div class="day-box" id="dayBox">
-                DAY 1
-            </div>
-
-            <div class="goal-box" id="goalBox">
-                Goal 13 Score ≥ 100
-            </div>
-
-            <div class="status-box">
-
-                <div class="status-item" id="moneyBox">
-                    💰 100
-                </div>
-
-                <div class="status-item" id="energyBox">
-                    ⚡ 80
-                </div>
-
-            </div>
-
-            <div class="game-menu">
-
-                <button id="menuBtn">
-                    ☰ Menu
-                </button>
-
-                <button id="shopBtn">
-                    🛒 Shop
-                </button>
-
-                <button id="backpackBtn">
-                    🎒 Bag
-                </button>
-
-            </div>
-
-        </header>
-
-
-        <!-- MENU MODAL -->
-        <div class="menu-modal" id="menuModal">
-
-            <div class="menu-card">
-
-                <h2>
-                    Game Menu
-                </h2>
-
-                <button id="pauseBtn">
-                    Pause
-                </button>
-
-                <button id="restartBtn">
-                    Restart
-                </button>
-
-                <button id="homeBtn">
-                    Home
-                </button>
-
-                <button id="closeMenuBtn">
-                    Continue
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- DAILY MODAL -->
-        <div class="menu-modal" id="dailyModal">
-
-            <div class="menu-card">
-
-                <h2 id="dailyModalTitle">
-                    New Day
-                </h2>
-
-                <div id="rewardSection" style="display: none;">
-                    <p id="rewardMessage"></p>
-                </div>
-
-                <div id="goalSection">
-                    <p id="dailyModalMessage"></p>
-                    <div id="goalDetails" style="display: none;">
-                        <h3 id="goalTitle"></h3>
-                        <p id="goalDescription"></p>
+                    <div class="drop-btn">
+                        About Us
                     </div>
-                </div>
 
-                <button id="closeDailyBtn">
-                    OK
-                </button>
+                    <div class="dropdown-content">
+
+                        <a href="about.html?from=game#why">Origin</a>
+                        <a href="about.html?from=game#purpose">Purpose</a>
+                        <a href="about.html?from=game#visualfeedback">Visual Feedback</a>
+                        <a href="about.html?from=game#replayability">Replayability</a>
+
+                    </div>
+
+                </div>
 
             </div>
 
-        </div>
+        </nav>
 
+        <div class="game-page">
 
-        <!-- SHOP MODAL -->
-        <div class="shop-overlay" id="shopOverlay">
+            <!-- TOP BAR -->
+            <header class="top-bar">
 
-            <div class="shop-modal">
+                <div class="day-box" id="dayBox">
+                    DAY 1
+                </div>
 
-                <div class="shop-header">
+                <div class="goal-box" id="goalBox">
+                    Goal 13 Score ≥ 100
+                </div>
 
-                    <h2>
-                        Eco Shop
-                    </h2>
+                <div class="status-box">
 
-                    <div class="shop-balance" id="shopBalance">
+                    <div class="status-item" id="moneyBox">
                         💰 100
                     </div>
 
-                    <button class="shop-close-btn" id="shopCloseBtn">
-                        ×
+                    <div class="status-item" id="energyBox">
+                        ⚡ 80
+                    </div>
+
+                </div>
+
+                <div class="game-menu">
+
+                    <button id="menuBtn">
+                        ☰ Menu
+                    </button>
+
+                    <button id="shopBtn">
+                        🛒 Shop
+                    </button>
+
+                    <button id="backpackBtn">
+                        🎒 Bag
                     </button>
 
                 </div>
 
-                <div class="shop-grid" id="shopGrid"></div>
-
-            </div>
-
-        </div>
+            </header>
 
 
-        <!-- BUY CONFIRM MODAL -->
-        <div class="menu-modal" id="buyConfirmModal">
+            <!-- MENU MODAL -->
+            <div class="menu-modal" id="menuModal">
 
-            <div class="menu-card">
-
-                <h2 id="buyConfirmTitle">
-                    Purchase
-                </h2>
-
-                <p id="buyConfirmMessage" style="margin-bottom: 20px; font-size: 20px;"></p>
-
-                <button id="useNowBtn">
-                    Use Now
-                </button>
-
-                <button id="storeInBagBtn">
-                    Store in Bag
-                </button>
-
-                <button id="cancelBuyBtn" style="background: #f4f4f4; color: #666;">
-                    Cancel
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- BACKPACK MODAL -->
-        <div class="shop-overlay" id="backpackOverlay">
-
-            <div class="shop-modal">
-
-                <div class="shop-header">
+                <div class="menu-card">
 
                     <h2>
-                        My Backpack
+                        Game Menu
                     </h2>
 
-                    <button class="shop-close-btn" id="backpackCloseBtn">
-                        ×
+                    <button id="pauseBtn">
+                        Pause
+                    </button>
+
+                    <button id="restartBtn">
+                        Restart
+                    </button>
+
+                    <button id="homeBtn">
+                        Home
+                    </button>
+
+                    <button id="closeMenuBtn">
+                        Continue
                     </button>
 
                 </div>
 
-                <div class="shop-grid" id="backpackGrid"></div>
+            </div>
+
+
+            <!-- DAILY MODAL -->
+            <div class="menu-modal" id="dailyModal">
+
+                <div class="menu-card">
+
+                    <h2 id="dailyModalTitle">
+                        New Day
+                    </h2>
+
+                    <div id="rewardSection" style="display: none;">
+                        <p id="rewardMessage"></p>
+                    </div>
+
+                    <div id="goalSection">
+                        <p id="dailyModalMessage"></p>
+                        <div id="goalDetails" style="display: none;">
+                            <h3 id="goalTitle"></h3>
+                            <p id="goalDescription"></p>
+                        </div>
+                    </div>
+
+                    <button id="closeDailyBtn">
+                        OK
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
+
+            <!-- SHOP MODAL -->
+            <div class="shop-overlay" id="shopOverlay">
+
+                <div class="shop-modal">
+
+                    <div class="shop-header">
+
+                        <h2>
+                            Eco Shop
+                        </h2>
+
+                        <div class="shop-balance" id="shopBalance">
+                            💰 100
+                        </div>
+
+                        <button class="shop-close-btn" id="shopCloseBtn">
+                            ×
+                        </button>
+
+                    </div>
+
+                    <div class="shop-grid" id="shopGrid"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUY CONFIRM MODAL -->
+            <div class="menu-modal" id="buyConfirmModal">
+
+                <div class="menu-card">
+
+                    <h2 id="buyConfirmTitle">
+                        Purchase
+                    </h2>
+
+                    <p id="buyConfirmMessage" style="margin-bottom: 20px; font-size: 20px;"></p>
+
+                    <button id="useNowBtn">
+                        Use Now
+                    </button>
+
+                    <button id="storeInBagBtn">
+                        Store in Bag
+                    </button>
+
+                    <button id="cancelBuyBtn" style="background: #f4f4f4; color: #666;">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- BACKPACK MODAL -->
+            <div class="shop-overlay" id="backpackOverlay">
+
+                <div class="shop-modal">
+
+                    <div class="shop-header">
+
+                        <h2>
+                            My Backpack
+                        </h2>
+
+                        <button class="shop-close-btn" id="backpackCloseBtn">
+                            ×
+                        </button>
+
+                    </div>
+
+                    <div class="shop-grid" id="backpackGrid"></div>
+
+                </div>
+
+            </div>
+
 
         <!-- LOTTERY MODAL -->
         <div class="shop-overlay" id="lotteryOverlay">
@@ -244,159 +246,167 @@
         </div>
 
 
-        <div class="shop-toast" id="shopToast">
-            Purchased!
-        </div>
 
+            <!-- MAIN CONTENT -->
+            <main class="main-content">
 
-        <!-- MAIN CONTENT -->
-        <main class="main-content">
+                <!-- LEFT SIDE -->
+                <section class="scenario-section">
 
-            <!-- LEFT SIDE -->
-            <section class="scenario-section">
+                    <div class="scenario-text">
 
-                <div class="scenario-text">
-
-                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
-                        <h2 id="scenarioTitle" style="margin-bottom: 0;">
-                            Weekend Activity
-                        </h2>
-                        <button id="rerollBtn" style="background: #ff9800; color: white; border: none; padding: 10px 18px; border-radius: 12px; cursor: pointer; font-family: 'Ahkio-Regular', Arial, sans-serif; font-size: 18px; white-space: nowrap; transition: 0.2s;">
-                            🎲 換一題 (💰 75)
-                        </button>
-                    </div>
-
-                    <p id="scenarioDescription" style="margin-top: 18px;">
-                        Your friend invites you to join a beach cleanup activity.
-                        What will you do?
-                    </p>
-
-                </div>
-
-
-                <section class="choices-section" id="choicesSection">
-
-                    <div class="choice-card">
-
-                        <h3>
-                            Beach Cleanup
-                        </h3>
-
-                        <p>
-                            Help protect marine life.
-                        </p>
-
-                        <div class="effects">
-                            ⚡ -15 <br>
-                            🌍 Goal14 +10
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+                            <h2 id="scenarioTitle" style="margin-bottom: 0;">
+                                Weekend Activity
+                            </h2>
+                            <button id="rerollBtn" style="background: #ff9800; color: white; border: none; padding: 10px 18px; border-radius: 12px; cursor: pointer; font-family: 'Ahkio-Regular', Arial, sans-serif; font-size: 18px; white-space: nowrap; transition: 0.2s;">
+                                🎲 換一題 (💰 75)
+                            </button>
                         </div>
 
-                    </div>
-
-
-                    <div class="choice-card">
-
-                        <h3>
-                            Tree Planting
-                        </h3>
-
-                        <p>
-                            Join a community planting event.
+                        <p id="scenarioDescription" style="margin-top: 18px;">
+                            Your friend invites you to join a beach cleanup activity.
+                            What will you do?
                         </p>
 
-                        <div class="effects">
-                            ⚡ -10 <br>
-                            🌍 Goal13 +8
-                        </div>
-
                     </div>
 
 
-                    <div class="choice-card">
+                    <section class="choices-section" id="choicesSection">
 
-                        <h3>
-                            Buy Eco Products
-                        </h3>
+                        <div class="choice-card">
 
-                        <p>
-                            Support sustainable products.
-                        </p>
+                            <h3>
+                                Beach Cleanup
+                            </h3>
 
-                        <div class="effects">
-                            💰 -20 <br>
-                            🌍 Goal12 +5
+                            <p>
+                                Help protect marine life.
+                            </p>
+
+                            <div class="effects">
+                                ⚡ -15 <br>
+                                🌍 Goal14 +10
+                            </div>
+
                         </div>
 
-                    </div>
+
+                        <div class="choice-card">
+
+                            <h3>
+                                Tree Planting
+                            </h3>
+
+                            <p>
+                                Join a community planting event.
+                            </p>
+
+                            <div class="effects">
+                                ⚡ -10 <br>
+                                🌍 Goal13 +8
+                            </div>
+
+                        </div>
+
+
+                        <div class="choice-card">
+
+                            <h3>
+                                Buy Eco Products
+                            </h3>
+
+                            <p>
+                                Support sustainable products.
+                            </p>
+
+                            <div class="effects">
+                                💰 -20 <br>
+                                🌍 Goal12 +5
+                            </div>
+
+                        </div>
+
+                    </section>
 
                 </section>
 
-            </section>
 
+                <!-- RIGHT SIDE -->
+                <aside class="progress-panel">
 
-            <!-- RIGHT SIDE -->
-            <aside class="progress-panel">
+                    <h3>
+                        SDG Progress
+                    </h3>
 
-                <h3>
-                    SDG Progress
-                </h3>
+                    <div id="progressList"></div>
 
-                <div id="progressList"></div>
+                </aside>
 
-            </aside>
-
-        </main>
-
-    </div>
-
-
-    <!-- MONEY POPUP -->
-    <div class="money-popup" id="moneyPopup">
-
-        <div class="money-popup-card">
-
-            <h2>
-                哈哈哈你的錢不夠！
-            </h2>
+            </main>
 
         </div>
 
-    </div>
 
-    <!-- GOAL INFO CLICK POPUP -->
-    <div id="goalPopup" class="goal-popup">
+        <!-- MONEY POPUP -->
+        <div class="money-popup" id="moneyPopup">
 
-        <div class="goal-popup-inner">
+            <div class="money-popup-card">
 
-            <button class="close-goal-popup" id="closeGoalPopupBtn">
-                ✕
-            </button>
+                <h2>
+                    哈哈哈你的錢不夠！
+                </h2>
 
-            <div class="goal-popup-header">
-
-                <div class="goal-popup-icon" id="goalPopupNumber">
-                    13
-                </div>
-
-                <div>
-                    <div class="goal-popup-title" id="goalPopupTitle">
-                        Goal 13
-                    </div>
-
-                    <div class="goal-popup-sub" id="goalPopupSub">
-                        Climate Action
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="goal-popup-desc" id="goalPopupDesc">
-                This goal focuses on reducing carbon emissions and taking action against climate change.
             </div>
 
         </div>
 
-    </div>
+        <!-- GOAL INFO CLICK POPUP -->
+        <div id="goalPopup" class="goal-popup">
+
+            <div class="goal-popup-inner">
+
+                <button class="close-goal-popup" id="closeGoalPopupBtn">
+                    ✕
+                </button>
+
+                <div class="goal-popup-header">
+
+                    <div class="goal-popup-icon" id="goalPopupNumber">
+                        13
+                    </div>
+
+                    <div>
+                        <div class="goal-popup-title" id="goalPopupTitle">
+                            Goal 13
+                        </div>
+
+                        <div class="goal-popup-sub" id="goalPopupSub">
+                            Climate Action
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="goal-popup-desc" id="goalPopupDesc">
+                    This goal focuses on reducing carbon emissions and taking action against climate change.
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer class="copyright-footer">
+            Copyright © EcoLife All rights reserved.
+        </footer>
+
+        <script type="module" src="firebase-leaderboard.js"></script>
+        <script src="environmentEvents.js"></script>
+        <script src="societyEvents.js"></script>
+        <script src="developmentEvents.js"></script>
+        <script src="globalEvents.js"></script>
+        <script src="game.js"></script>
+    </main>
 
     <script type="module" src="firebase-leaderboard.js"></script>
     <script src="environmentEvents.js"></script>
