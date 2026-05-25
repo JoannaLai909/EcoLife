@@ -1,48 +1,55 @@
 const startBtn = document.getElementById("startBtn");
 
 if (startBtn) {
-  startBtn.addEventListener("click", function() {
-    window.location.href = "login.html";
-  });
+    startBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        window.location.href = "login.html";
+    });
 }
 
 function revealOnScroll() {
-  const elements = document.querySelectorAll(".reveal");
+    const elements = document.querySelectorAll(".reveal");
 
-  elements.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
+    elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
 
-    const isVisible = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2;
+        const isVisible =
+            rect.top < windowHeight * 0.8 &&
+            rect.bottom > windowHeight * 0.2;
 
-    if (isVisible) {
-      el.classList.add("show");
-    } else {
-      el.classList.remove("show");
-    }
-  });
+        if (isVisible) {
+            el.classList.add("show");
+        } else {
+            el.classList.remove("show");
+        }
+    });
 }
 
 function revealSections() {
-  const sections = document.querySelectorAll(".info-section, .visualfeedback-section");
+    const sections = document.querySelectorAll(
+        ".info-section, .visualfeedback-section, .leaderboard-section, .feedback-section"
+    );
 
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
 
-    if (rect.top < window.innerHeight * 0.75) {
-      section.classList.add("show");
-    }
-  });
+        if (rect.top < window.innerHeight * 0.75) {
+            section.classList.add("show");
+        }
+    });
 }
 
 window.addEventListener("scroll", revealSections);
-
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealSections);
+window.addEventListener("load", revealOnScroll);
 
 const featureBtn = document.querySelector(".feature-btn");
 const subDropdown = document.querySelector(".sub-dropdown");
 
 if (featureBtn && subDropdown) {
-    featureBtn.addEventListener("click", (event) => {
+    featureBtn.addEventListener("click", function(event) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -50,8 +57,13 @@ if (featureBtn && subDropdown) {
     });
 }
 
-function renderLeaderboard() {
+document.addEventListener("click", function(event) {
+    if (subDropdown && !subDropdown.contains(event.target)) {
+        subDropdown.classList.remove("active");
+    }
+});
 
+function renderLeaderboard() {
     const leaderboardList =
         document.getElementById("leaderboardList");
 
@@ -63,7 +75,6 @@ function renderLeaderboard() {
         JSON.parse(localStorage.getItem("leaderboard")) || [];
 
     if (leaderboard.length === 0) {
-
         leaderboardList.innerHTML = `
             <div class="empty-leaderboard">
                 No records yet. Start playing to join the leaderboard!
@@ -76,7 +87,6 @@ function renderLeaderboard() {
     leaderboardList.innerHTML = "";
 
     leaderboard.forEach((player, index) => {
-
         const row =
             document.createElement("div");
 
@@ -107,15 +117,7 @@ function renderLeaderboard() {
         `;
 
         leaderboardList.appendChild(row);
-
     });
-
 }
 
-window.addEventListener("load", function() {
-
-    if (window.renderCloudLeaderboard) {
-        window.renderCloudLeaderboard();
-    }
-
-});
+renderLeaderboard();
