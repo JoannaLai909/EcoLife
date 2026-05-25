@@ -1258,3 +1258,32 @@ p {
         padding: 12px 26px;
     }
 }
+
+/* =========================
+   Feedback Page
+========================= */
+
+.feedback-page-section {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #B9E5F8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 140px 30px 80px;
+}
+
+.feedback-footer {
+    width: 100%;
+    background: #9ed8f2;
+    color: white;
+
+    text-align: center;
+    padding: 18px 0;
+
+    font-size: 14px;
+    letter-spacing: 1px;
+}

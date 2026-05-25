@@ -50,45 +50,68 @@
                         </ul>
                     </div>
 
-        </nav>
-        <div class="about-page">
-            <section id="why" class="info-section first-section">
-                <div class="container"> 
-                    <div class="info-box">
-                    <h2>Origin</h2>
-                    <p>
-                        Inspired by the choice mechanics of Examinee Simulator,
-                        but we replaced “exam score” with “SDG progress” to show how daily choices affect sustainability.
-                    </p>
-                    </div>
-                </div>
-            </section>
+                    <a href="feedback.html">Problem Feedback</a>
 
-            <section id="purpose" class="info-section">
-                <div class="container"> 
-                    <div class="info-box">
-                    <h2>Purpose</h2>
-                    <p>
-                        EcoLife Simulator helps users understand how daily choices can affect people,
-                        the environment, and the future.
-                    </p>
-                    <a href="purpose.html" class="more-btn">Learn More →</a>
-                    </div>
-                </div>
-            </section>
+                </ul>
+            </li>
 
-            
-            <section id="visualfeedback" class="visualfeedback-section">
+        </ul>
 
-                <div class="visualfeedback-left">
-                <h2>Visual<br>feedback</h2>
-                <p>
-                    We use progress bars to show<br>
-                    real-time SDG advancement,<br>
-                    so users can clearly see their<br>
-                    progress.
-                </p>
-                </div>
+    </nav>
+
+    <section id="why" class="info-section first-section">
+
+        <div class="info-box">
+
+            <h2>
+                Origin
+            </h2>
+
+            <p>
+                EcoLife Simulator was created to help players understand sustainability through everyday choices.
+                Instead of only reading about environmental and social issues, users can experience how different
+                decisions affect resources, communities, and long-term outcomes.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section id="purpose" class="info-section">
+
+        <div class="info-box">
+
+            <h2>
+                Purpose
+            </h2>
+
+            <p>
+                The purpose of this project is to connect the Sustainable Development Goals with interactive learning.
+                Through game-based decision making, EcoLife Simulator encourages users to think about responsible
+                consumption, environmental protection, social balance, and sustainable development in a more engaging way.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section id="visualfeedback" class="visualfeedback-section">
+
+        <div class="visualfeedback-left">
+
+            <h2>
+                Visual Feedback
+            </h2>
+
+            <p>
+                EcoLife Simulator provides visual feedback to help players understand the results of their decisions.
+                Scores, progress bars, and ending images allow users to clearly see how their choices influence different
+                sustainability goals.
+            </p>
+
+        </div>
+
+        <div class="visualfeedback-right">
 
                 <div class="visualfeedback-right">
                 <div class="bar-chart">
@@ -152,18 +175,7 @@
                 sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
 
-                if (rect.top < window.innerHeight - 100) {
-                    section.classList.add("show");
-                }
-                });
-            }
-
-            window.addEventListener("scroll", revealSections);
-            window.addEventListener("load", revealSections);
-        </script>
-
-        <script src="continue-game.js"></script>
-    </main>
+    <script src="entrance.js"></script>
 
     <footer class="copyright-footer">
         Copyright © EcoLife All rights reserved.
