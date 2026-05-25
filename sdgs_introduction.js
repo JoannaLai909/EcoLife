@@ -316,11 +316,61 @@ document.querySelector(".sdg-card").addEventListener("click", function (e) {
 });
 
 
-/* Back to entrance page */
-nextBtn.addEventListener("click", function () {
-    window.location.href = "entrance.html";
-});
+/* Check whether player is currently in a game */
+const GAME_STATE_KEY = "ecolifeCurrentGameState";
+
+function hasActiveGameState() {
+    const savedGame = sessionStorage.getItem(GAME_STATE_KEY);
+
+    if (!savedGame) {
+        return false;
+    }
+
+    try {
+        const gameState = JSON.parse(savedGame);
+
+        return gameState &&
+               gameState.day !== undefined &&
+               gameState.money !== undefined &&
+               gameState.energy !== undefined;
+
+    } catch (error) {
+        return false;
+    }
+}
+
+
+/* Setup back button */
+function setupBackButton() {
+
+    if (!nextBtn) {
+        return;
+    }
+
+    if (hasActiveGameState()) {
+
+        nextBtn.innerText = "← Back to Game";
+        nextBtn.style.display = "block";
+
+        nextBtn.addEventListener("click", function () {
+            window.location.href = "game.html";
+        });
+
+    } else {
+
+        nextBtn.innerText = "BACK";
+
+        nextBtn.addEventListener("click", function () {
+            window.location.href = "entrance.html";
+        });
+
+        observeInfoTip();
+
+    }
+
+}
+
 
 /* Start */
 buildIconGrid();
-observeInfoTip();
+setupBackButton();
