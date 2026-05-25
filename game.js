@@ -768,6 +768,13 @@ function toNumber(value) {
     return Number(String(value).replace("+", "").trim()) || 0;
 }
 
+function clampScore(value) {
+    return Math.min(
+        MAX_GOAL_SCORE,
+        Math.max(0, toNumber(value))
+    );
+}
+
 
 function getGoalDeltas(choice) {
     const deltas = {};
@@ -818,10 +825,7 @@ function handleChoice(choice) {
         const oldScore = sdgScores[goal] || 0;
         const change = deltas[goal];
 
-        sdgScores[goal] = Math.min(
-            MAX_GOAL_SCORE,
-            Math.max(0, oldScore + change)
-        );
+        sdgScores[goal] = clampScore(oldScore + change);
     }
 
     console.log("choice:", choice);
@@ -867,8 +871,9 @@ function updateProgress(deltas = {}) {
         const deltaSpan = document.getElementById(`${goal}Delta`);
 
         if (fill) {
-            const score = Math.min(sdgScores[goal] || 0, MAX_GOAL_SCORE);
+            const score = clampScore(sdgScores[goal] || 0);
             const percent = (score / MAX_GOAL_SCORE) * 100;
+
             fill.style.width = `${percent}%`;
 
             if (text) {
@@ -1238,7 +1243,7 @@ function renderProgressBars() {
     progressList.innerHTML = "";
 
     activeGoals.forEach(goal => {
-        const score = Math.min(sdgScores[goal] || 0, MAX_GOAL_SCORE);
+        const score = clampScore(sdgScores[goal] || 0);
         const percent = (score / MAX_GOAL_SCORE) * 100;
         const goalNumber = goal.replace("goal", "");
 
